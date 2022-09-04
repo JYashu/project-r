@@ -26,7 +26,7 @@ interface OuterProps {
 }
 
 export const withState = withFormik<OuterProps, Values>({
-  displayName: 'MTBAccountLinkingForm',
+  displayName: 'Giphy',
   handleSubmit: (values, { props, setSubmitting, setFieldValue }) => {
     const { onSubmit } = props;
     setSubmitting(true);

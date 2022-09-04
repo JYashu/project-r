@@ -25,7 +25,7 @@ const initialValues = (): Values => {
 };
 
 export const withState = withFormik<OuterProps, Values>({
-  displayName: 'MTBAccountLinkingForm',
+  displayName: 'Test',
   handleSubmit: (values, { props, setSubmitting, setFieldValue }) => {
     setSubmitting(true);
   },
