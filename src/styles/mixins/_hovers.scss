@@ -1,0 +1,271 @@
+@mixin zoom-hover($scale: 1.02) {
+  &:hover {
+    //filter: drop-shadow(5px 10px 5px rgba(10, 40, 55, 0.12));
+    @include transform(scale($scale));
+    transition: 0.4s;
+  }
+}
+
+@mixin efeito-div-hover {
+  @include box-level-4;
+
+  color: #020e26;
+  background-color: #fff;
+  transition: 0.4s;
+  transform: translate(0);
+  overflow: hidden;
+  box-shadow: 0 4px 0 0 map-get($colors, lawyer);
+
+  &:hover {
+    color: #fff;
+  }
+
+  &::before {
+    @include border-radius(50%);
+
+    content: '';
+    position: absolute;
+    top: -75px;
+    left: -45px;
+    z-index: -1;
+    background: rgb(22, 24, 23);
+    background: linear-gradient(
+      129deg,
+      rgba(22, 24, 23, 0.6979167) 2%,
+      rgba(246, 124, 2, 0.9500175070028011) 61%
+    );
+    width: 150px;
+    height: 150px;
+    transition: 0.4s;
+  }
+
+  &:hover::before {
+    @include transform(scale(6));
+  }
+}
+
+// base: { overlay, details }
+@mixin overlay-div-hover {
+  position: relative;
+  width: fit-content;
+  margin: auto;
+  overflow: hidden;
+
+  > .overlay {
+    background: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    -webkit-transition: all 0.4s ease-in-out 0s;
+    -moz-transition: all 0.4s ease-in-out 0s;
+    transition: all 0.4s ease-in-out 0s;
+  }
+
+  > .details {
+    @include type-style-city;
+
+    position: absolute;
+    text-align: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 100%;
+    left: 50%;
+    top: 50%;
+    opacity: 0;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    -moz-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+  }
+
+  &:hover {
+    > .overlay {
+      opacity: 1;
+    }
+
+    > .details {
+      @include type-style-city;
+
+      color: #fff;
+      left: 50%;
+      top: 50%;
+      opacity: 1;
+    }
+  }
+}
+
+// base: { inner: { back: { child }, front: {child} } }
+@mixin flip-div-hover {
+  & {
+    background-color: transparent;
+    perspective: 1000px;
+  }
+
+  & .inner {
+    @include center-horizontally;
+
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+  }
+
+  &:hover .inner {
+    transform: rotateY(180deg);
+  }
+
+  & .front,
+  .back {
+    // @include center-vertically;
+
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+
+  & .front {
+    background-image: linear-gradient(45deg, #6f04d9, #d9048e);
+  }
+
+  & .back {
+    background-image: linear-gradient(315deg, #6f04d9, #d9048e);
+    color: #fff;
+    transform: rotateY(180deg);
+  }
+
+  & .front .child {
+    @include center-on-div;
+  }
+
+  & .back .child {
+    @include center-on-div;
+  }
+}
+
+@mixin underline-text-hover {
+  // TODO: FOHTMIW without child div
+  position: absolute;
+  content: '';
+  width: 0%;
+  height: 4px;
+  background-color: #f5f5f5;
+  left: 50%;
+  bottom: -10px;
+  transition: all 0.4s ease-in-out;
+
+  &:hover::after {
+    width: 100%;
+    left: 0;
+  }
+}
+
+@mixin card-div-hover($width: 100px) {
+  & {
+    @include border-radius(10px);
+
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: $width;
+    height: $width;
+    margin: auto;
+
+    > .card {
+      @include border-radius(10px);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: $width;
+      height: $width;
+      margin: auto;
+    }
+
+    > .one {
+      background: #540d6e;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 4;
+    }
+
+    > .two {
+      background: #ee4266;
+      position: absolute;
+      right: 0;
+      z-index: 3;
+      transform: rotate(-10deg) translate(8px, 8px);
+    }
+
+    > .three {
+      background: #ffd23f;
+      position: absolute;
+      left: 0;
+      z-index: 2;
+      transform: rotate(10deg) translate(-5px, 7px);
+    }
+
+    > .four {
+      background: #00ffff;
+      position: absolute;
+      left: 0;
+      z-index: 1;
+      transform: rotate(-15deg) translate(-5px, 7px);
+    }
+
+    > .move {
+      transition: all 0.2s cubic-bezier(0.5, 0.4, 0.1, 0.1);
+    }
+  }
+
+  &:hover {
+    > .two {
+      transform: rotate(-5deg) translateX($width) scale(0.9);
+    }
+    > .three {
+      transform: rotate(5deg) translateX(-$width) scale(0.9);
+    }
+    > .four {
+      transform: rotate(-5deg) translateY($width) scale(0.9);
+    }
+  }
+}
+
+@mixin grid-overlay {
+  // TODO: try it out with picture tag
+  & {
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    display: inline-grid;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    --_g: conic-gradient(at 50% 25%, rgb(0 0 0/68%) 75%, #0000, 0) no-repeat;
+    background: var(--_g) 0 calc(34% - var(--_p, 0%)) / 50.1% 400%,
+      var(--_g) 100% calc(100% - var(--_p, 0%)) / 50.1% 400%;
+    transition: 0.5s linear;
+  }
+
+  &:hover::after {
+    --_p: 134%;
+  }
+}

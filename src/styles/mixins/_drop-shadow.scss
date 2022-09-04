@@ -1,0 +1,27 @@
+@mixin box-level-1 {
+  @include border-radius(4px);
+
+  box-shadow: 0 0 3px 0 rgba(10, 40, 55, 0.14),
+    0 1px 1px 0 rgba(10, 40, 55, 0.14);
+}
+
+@mixin box-level-2 {
+  @include border-radius(4px);
+
+  box-shadow: 0 0 1px 1px rgba(10, 40, 55, 0.08),
+    0 4px 6px 1px rgba(10, 40, 55, 0.1);
+}
+
+@mixin box-level-3 {
+  @include border-radius(4px);
+
+  box-shadow: 0 0 2px 1px rgba(10, 40, 55, 0.05),
+    0 6px 10px 2px rgba(10, 40, 55, 0.12);
+}
+
+@mixin box-level-4 {
+  @include border-radius(4px);
+
+  box-shadow: 0 0 8px 2px rgba(10, 40, 55, 0.05),
+    0 16px 24px 0 rgba(10, 40, 55, 0.14);
+}

@@ -1,0 +1,61 @@
+$colors: (
+  header-bg: #2a2961,
+  header-text: #d1d1ef,
+  nav-focus: #a0caca,
+  button-dark: #105e47,
+  sidebar-background: #2a2961,
+  sidebar-highlight: linear-gradient(90deg, #4d4d80 0%, #b6b4f400 100%),
+  sidebar-highlight-rigth: linear-gradient(270deg, #4d4d80 0%, #b6b4f400 100%),
+  //
+  lawyer: #097d88,
+  checking: #5450aa,
+  personal: #3babc8,
+  lawyer-dark: #095b67,
+  lawyer-light: #6bb1b7,
+  associate: #89eabf,
+  associate-dark: #569c88,
+  associate-light: #b8f2d8,
+  suspect: #0a2837,
+  victim: #fff,
+  prosecutor: #56656a,
+  judge: #0c5e67,
+  witness-1: #91c2ac,
+  witness-2: #e8f3ee,
+  witness-3: #f1efe5,
+  witness-4: #fbf9f8,
+  juror-1: #425c65,
+  juror-2: #7e9095,
+  juror-3: #adbdbd,
+  juror-4: #eaefef,
+  juror-5: #eff3f3,
+  juror-6: #4f4f4f,
+  approved: #05bb7a,
+  pending: #604706,
+  rejected: #ef532f,
+  informative: #0f73e5,
+  invalid: #e30a0a,
+  case-1: #985db4,
+  case-2: #3babc8,
+  case-3: #cdd717,
+  case-4: #b4623b,
+  case-5: #5450aa,
+  sidebar-hamburger: #0a2937,
+  sidebar-badge: #147d88,
+  check-done: #05bb7a,
+  tile-CategoryType: #384e56,
+
+  matter-name: #092937,
+  matter-id: #145c67,
+);
+
+$intent-colors: (
+  cancel: map-get($colors, juror-4),
+  destructive: map-get($colors, rejected),
+  primary: map-get($colors, lawyer),
+);
+
+:export {
+  @each $key, $value in $colors {
+    #{unquote($key)}: $value;
+  }
+}

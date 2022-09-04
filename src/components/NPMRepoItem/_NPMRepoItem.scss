@@ -1,0 +1,36 @@
+@import '../../styles/lib';
+
+$base-class: npm-repo-item;
+
+/* stylelint-disable property-no-unknown */
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  $this: &;
+
+  @include box-level-2;
+
+  min-height: 140px;
+  padding: 0;
+  position: relative;
+
+  &__container {
+    @include box-level-4;
+    @include efeito-div-hover;
+
+    // box-shadow: 0 4px 0 0 map-get($colors, lawyer);
+  }
+
+  &__item {
+    @include box-level-3;
+
+    min-height: 140px;
+  }
+
+  &__details {
+    height: 100%;
+    padding: 2em;
+  }
+}

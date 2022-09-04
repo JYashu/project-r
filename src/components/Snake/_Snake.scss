@@ -1,0 +1,41 @@
+@import '../../styles/lib';
+
+$base-class: snale;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  @include center-on-screen;
+
+  &__content {
+    display: flex;
+    flex-direction: row;
+    // border: 1px solid black;
+  }
+
+  &__instructions {
+    @include type-style-city;
+
+    padding: map-get($spacing, l);
+    // border: 1px solid black;
+    max-width: 280px;
+  }
+
+  &__heading {
+    @include type-style-heading;
+    margin-bottom: 10px;
+  }
+
+  &__note {
+    @include border-radius(6px);
+    border: 1px solid map-get($colors, header-bg);
+    padding: 10px;
+    margin: 10px 0;
+  }
+
+  &__first-instruction {
+    margin-top: 10px;
+  }
+}

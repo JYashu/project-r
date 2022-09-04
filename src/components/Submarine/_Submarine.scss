@@ -1,0 +1,808 @@
+@import '../../styles/lib';
+
+$base-class: submarine;
+
+:export {
+  baseClass: $base-class;
+}
+
+//colors
+$bgColor: #130560;
+$subMarineColor: #e30449;
+$lightShadowColor: #ef689e;
+$lightShadowColor2: #c6003d;
+$lightShadowColor3: #e92d77;
+$darkShadowColor: #a10532;
+$periscopeColor: #f0f78b;
+$propellerColor: #f7e349;
+$propellerColor2: #f7ac08;
+$windowLightColor: #c9e5d9;
+$lightColor: #817e97;
+$seaGroundColor1: #0c0051;
+$seaGroundColor2: #08003b;
+//sizes
+
+.#{$base-class} {
+  background: #130560;
+  position: relative;
+  overflow: hidden;
+
+  &__seaContainer {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background: #130560;
+    overflow: hidden;
+  }
+  &__submarine__container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 200px;
+    @include transform(translate(-50%, -50%));
+  }
+  &__submarine__body {
+    @include border-radius(50px);
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 250px;
+    height: 80px;
+    background: $subMarineColor;
+    @include transform(translate(-50%, -50%));
+  }
+  &__submarine__propeller {
+    position: absolute;
+    left: 80%;
+    top: 50%;
+    width: 30px;
+    height: 50px;
+    @include transform(translate(0%, -50%));
+    perspective: 600px;
+  }
+  &__propeller__perspective {
+    width: 100%;
+    height: 100%;
+    transition: transform 1s;
+
+    transform-style: preserve-3d;
+    animation: rotateInfinite 1s linear infinite;
+    cursor: pointer;
+  }
+  &__submarine__propeller-parts {
+    position: absolute;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    top: 0%;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+  }
+  &__darkOne {
+    top: 0%;
+    background: $propellerColor2;
+    @include transform(rotateY(180deg) rotateX(225deg));
+  }
+  &__lightOne {
+    top: 0%;
+    background: $propellerColor;
+    @include transform(rotateX(45deg));
+  }
+  &__submarine__sail {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    width: 90px;
+    height: 50px;
+    @include transform(translate(-50%, -100%));
+    background: $lightShadowColor2;
+    clip-path: polygon(0% 0%, 70% 0%, 100% 100%, 0% 100%);
+  }
+
+  &__submarine__sail-shadow {
+    @include border-radius(5px);
+
+    position: absolute;
+    width: 160%;
+    height: 10%;
+    background: $darkShadowColor;
+  }
+  &__dark1 {
+    left: 0%;
+    top: 0%;
+    @include transform(translate(0%, -33%));
+  }
+  &__dark2 {
+    left: 0%;
+    top: 50%;
+  }
+  &__light1 {
+    left: 20%;
+    top: 20%;
+    width: 50%;
+    background: $lightShadowColor;
+  }
+  &__submarine__window {
+    @include border-radius(100%);
+
+    width: 25px;
+    height: 25px;
+    background-image: linear-gradient(45deg, $windowLightColor, #fff);
+    border: 8px solid $darkShadowColor;
+    z-index: 10;
+    animation: shadow-change 1s linear infinite;
+  }
+  &__one,
+  &__two {
+    position: absolute;
+    top: 50%;
+    @include transform(translate(-50%, -50%));
+  }
+  &__one {
+    left: 40%;
+  }
+  &__two {
+    left: 20%;
+  }
+
+  &__submarine__shadow-dark {
+    @include border-radius(5px);
+
+    position: absolute;
+    left: 70%;
+    top: 50%;
+    width: 70px;
+    height: 10px;
+    @include transform(translate(-50%, -50%));
+    background: $darkShadowColor;
+  }
+  &__submarine__shadow-light {
+    @include border-radius(5px);
+
+    position: absolute;
+    left: 35%;
+    top: 13%;
+    width: 100px;
+    height: 6px;
+    @include transform(translate(-50%, -50%));
+    background: $lightShadowColor;
+  }
+  &__submarine__shadow-arcLight {
+    @include border-radius(50%);
+
+    position: absolute;
+    top: 65%;
+    left: 80%;
+    width: 20px;
+    height: 20px;
+    background: $lightShadowColor;
+  }
+  &__submarine__periscope {
+    position: absolute;
+    top: 0%;
+    left: 40%;
+    width: 20px;
+    height: 50px;
+    border-right: 10px solid $lightShadowColor3;
+    border-top: 10px solid $lightShadowColor2;
+    border-left: 0px solid transparent;
+    border-bottom: 0px solid transparent;
+    border-top-right-radius: 10px;
+  }
+  &__submarine__periscope-glass {
+    position: absolute;
+    left: 40%;
+    top: 0%;
+    width: 5px;
+    height: 15px;
+    background: $propellerColor2;
+    @include transform(translate(-50%, -15%));
+  }
+  &__light {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 500px;
+    height: 100px;
+    background: linear-gradient(to left, $lightColor, $bgColor);
+    clip-path: polygon(0% 0%, 50% 45%, 50% 55%, 0% 100%);
+
+    @include transform(translate(-18%, -45%));
+  }
+  &__bubbles__container {
+    position: absolute;
+    top: 50%;
+    left: 55%;
+    width: 100px;
+    height: 50px;
+    @include transform(translate(100%, -50%));
+  }
+  &__bubbles {
+    @include border-radius(100%);
+
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    left: 5%;
+    top: 5%;
+    background: #fff;
+    opacity: 0.8;
+  }
+  $bubble-class: bubble;
+
+  @for $i from 1 through 4 {
+    &__#{$bubble-class}-#{$i} {
+      top: 15% * ($i + 1-1);
+      left: 1%;
+      opacity: 0;
+      animation: move-right 1s infinite linear;
+      animation-delay: 0.25s * $i;
+    }
+  }
+  &__ground__container {
+    position: absolute;
+    top: 75%;
+    left: 0%;
+    width: 100%;
+    height: 25%;
+    background: $seaGroundColor2;
+    margin-top: 20px;
+  }
+  &__ground1 {
+    top: 75%;
+    height: 100%;
+    background: $seaGroundColor1;
+  }
+  &__ground2 {
+    position: absolute;
+    top: 35%;
+    width: 100%;
+    height: 100%;
+    background: $seaGroundColor2;
+  }
+
+  &__ground span {
+    @include border-radius(100%);
+
+    position: absolute;
+    width: 60px;
+    height: 60px;
+  }
+  &__ground1 span {
+    background: $seaGroundColor1;
+  }
+  &__ground2 span {
+    @include border-radius(100%);
+
+    background: $seaGroundColor2;
+    width: 80px;
+    height: 80px;
+    @include transform(translateY(30%));
+  }
+
+  $ground-class: up;
+  @for $i from 1 through 20 {
+    &__#{$ground-class}-#{$i} {
+      left: -10% * ($i + -1);
+      top: -20px * ($i * 0.1);
+      animation: moveThegroundRight $i + 2s infinite linear;
+    }
+  }
+
+  &__cont {
+    position: relative;
+    top: 50%;
+    height: 0;
+  }
+  //animation
+
+  @keyframes shadow-change {
+    0%,
+    100% {
+      background-image: linear-gradient(
+        45deg,
+        $windowLightColor 0%,
+        $windowLightColor 20%,
+        #fff 21%,
+        #fff 39%,
+        $windowLightColor 40%,
+        #fff 41%,
+        #fff 59%,
+        $windowLightColor 60%
+      );
+    }
+    20% {
+      background-image: linear-gradient(
+        45deg,
+        $windowLightColor 20%,
+        $windowLightColor 40%,
+        #fff 41%,
+        #fff 59%,
+        $windowLightColor 60%,
+        #fff 61%,
+        #fff 79%,
+        $windowLightColor 80%
+      );
+    }
+    40% {
+      background-image: linear-gradient(
+        45deg,
+        $windowLightColor 40%,
+        $windowLightColor 60%,
+        #fff 61%,
+        #fff 79%,
+        $windowLightColor 80%,
+        #fff 81%,
+        #fff 99%,
+        $windowLightColor 0%
+      );
+    }
+    60% {
+      background-image: linear-gradient(
+        45deg,
+        $windowLightColor 60%,
+        $windowLightColor 80%,
+        #fff 81%,
+        #fff 99%,
+        $windowLightColor 0%,
+        #fff 1%,
+        #fff 19%,
+        $windowLightColor 20%
+      );
+    }
+    80% {
+      background-image: linear-gradient(
+        45deg,
+        $windowLightColor 80%,
+        $windowLightColor 0%,
+        #fff 1%,
+        #fff 19%,
+        $windowLightColor 20%,
+        #fff 21%,
+        #fff 39%,
+        $windowLightColor 40%
+      );
+    }
+  }
+
+  @keyframes move-right {
+    0% {
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.4;
+      @include transform(translate(10%, 10%));
+    }
+    50% {
+      opacity: 0.2;
+      @include transform(translate(450%, 25%));
+    }
+    80% {
+      opacity: 0;
+      @include transform(translateX(555%));
+    }
+    100% {
+      opacity: 0;
+      left: 0%;
+      top: 0%;
+    }
+  }
+  @keyframes rotateInfinite {
+    0% {
+      @include transform(rotateX(0deg));
+    }
+    50% {
+      @include transform(rotateX(180deg));
+    }
+    100% {
+      @include transform(rotateX(360deg));
+    }
+  }
+  @keyframes moveThegroundRight {
+    90% {
+      opacity: 1;
+      left: 100%;
+    }
+    95%,
+    100% {
+      left: 1050%;
+      opacity: 0;
+    }
+  }
+
+  $color1: #306d85;
+  $color2: #d93a54;
+
+  // body {
+  //
+  // }
+
+  // *,
+  // *:before,
+  // *:after {
+  //   box-sizing: border-box;
+  // }
+
+  &__sea {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background: #130560;
+    overflow: hidden;
+    margin: 40px auto 0 auto;
+    // background-color: #306d85;
+  }
+
+  .bubble {
+    @include border-radius(50%);
+
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    background-color: lighten(#306d85, 25%);
+    opacity: 0.9;
+    animation: bubble1-h-movement 1s ease-in infinite,
+      bubble1-v-movement 300ms ease-in-out infinite alternate,
+      bubble-scale-movement 300ms ease-in-out infinite alternate;
+
+    &:after {
+      @include border-radius(50%);
+
+      position: absolute;
+      content: '';
+      width: 7px;
+      height: 7px;
+      background-color: lighten(#306d85, 25%);
+      opacity: 0.9;
+    }
+    &:after {
+      top: -20;
+      left: 100px;
+      width: 9px;
+      height: 9px;
+    }
+  }
+
+  .circle-wrapper {
+    @include border-radius(50%);
+
+    position: relative;
+    background: linear-gradient(darken(#306d85, 3%), darken(#306d85, 12%));
+    width: 300px;
+    height: 300px;
+    margin: 10px auto 0 auto;
+    overflow: hidden;
+    z-index: 0;
+    padding: 0 50px 0 50px;
+    border: 6px solid lighten(#306d85, 10%);
+  }
+
+  &__submarine-wrapper {
+    height: 0;
+    width: 0;
+    margin: 0 0 0 600px;
+    animation: diving 3s ease-in-out infinite,
+      diving-rotate 3s ease-in-out infinite;
+  }
+  &__submarine-body {
+    @include border-radius(40px);
+
+    width: 150px;
+    height: 80px;
+    position: absolute;
+    margin-top: 50px;
+    left: 25px;
+    background-color: #d93a54;
+    background: linear-gradient(#d93a54, darken(#d93a54, 10%));
+  }
+
+  &__engine {
+    @include border-radius(50%);
+
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    margin-top: 32px;
+    left: 53px;
+    background-color: darken(#d93a54, 10%);
+    border: 5px solid #d93a54;
+
+    &:after,
+    &:before {
+      @include border-radius(2px);
+
+      position: absolute;
+      content: '';
+      background-color: white;
+      animation: spin 900ms linear infinite;
+      opacity: 0.8;
+    }
+    &:after {
+      top: 8px;
+      width: 20px;
+      height: 4px;
+    }
+    &:before {
+      left: 8px;
+      width: 4px;
+      height: 20px;
+    }
+  }
+
+  &__window {
+    @include border-radius(50%);
+
+    width: 37px;
+    height: 37px;
+    position: absolute;
+    margin-top: 23px;
+    right: 18px;
+    background: linear-gradient(darken(#306d85, 13%), darken(#306d85, 18%));
+    border: 3px solid #d93a54;
+
+    &:after {
+      @include border-radius(50%);
+
+      content: '';
+      position: absolute;
+      margin-top: 3px;
+      margin-left: 3px;
+      width: 25px;
+      height: 25px;
+      background-color: transparent;
+      opacity: 0.8;
+      border-top: 3px solid white;
+      @include transform(rotate(-45deg));
+    }
+  }
+
+  &__light-a {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 40px 150px 40px;
+    border-color: transparent transparent lighten(#306d85, 5%) transparent;
+    @include transform(rotate(-50deg));
+    top: 40px;
+    left: 99%;
+
+    &:after {
+      @include border-radius(5px);
+
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 13px;
+      background-color: darken(#d93a54, 5%);
+      margin-left: -10px;
+    }
+  }
+
+  &__helix {
+    @include border-radius(7px);
+
+    width: 30px;
+    height: 70px;
+    position: absolute;
+    margin-top: 55px;
+    left: 0;
+    background-color: #d93a54;
+
+    &:after {
+      @include border-radius(3px);
+
+      content: '';
+      position: absolute;
+      margin-top: 5px;
+      margin-left: 7px;
+      width: 17px;
+      height: 60px;
+      background-color: transparent;
+      opacity: 0.8;
+      background: linear-gradient(
+        to bottom,
+        #d93a54,
+        #d93a54 50%,
+        lighten(#d93a54, 15%) 50%,
+        lighten(#d93a54, 15%)
+      );
+      background-size: 100% 20px;
+      animation: helix-movement 110ms linear infinite;
+    }
+  }
+
+  &__hat {
+    @include border-radius(10px 10px 0 0);
+
+    width: 65px;
+    height: 25px;
+    position: absolute;
+    margin-top: 26px;
+    left: 70px;
+    background-color: #d93a54;
+    background: linear-gradient(#d93a54, darken(#d93a54, 3%));
+  }
+
+  &__periscope {
+    @include border-radius(5px 5px 0 0);
+
+    position: absolute;
+    width: 7px;
+    height: 20px;
+    background-color: #d93a54;
+    margin-top: -27px;
+    margin-left: 32px;
+
+    &:after,
+    &:before {
+      @include border-radius(5px);
+
+      content: '';
+      position: absolute;
+      width: 15px;
+      height: 7px;
+      background-color: #d93a54;
+    }
+  }
+
+  &__leds-wrapper {
+    @include border-radius(10px);
+
+    width: 53px;
+    height: 13px;
+    position: relative;
+    top: 7px;
+    left: 7px;
+    background-color: #d93a54;
+    background: linear-gradient(darken(#d93a54, 12%), darken(#d93a54, 16%));
+  }
+
+  &__leds {
+    @include border-radius(50%);
+
+    position: absolute;
+    margin-top: 4px;
+    margin-left: 7px;
+    width: 5px;
+    height: 5px;
+    background-color: white;
+    animation: leds-off 500ms linear infinite;
+
+    &:after,
+    &:before {
+      @include border-radius(50%);
+
+      content: '';
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background-color: white;
+    }
+    &:after {
+      margin-top: 0px;
+      margin-left: 17px;
+    }
+    &:before {
+      margin-top: 0px;
+      margin-left: 34px;
+    }
+  }
+}
+
+@keyframes spin {
+  100% {
+    @include transform(rotate(360deg));
+  }
+}
+
+@keyframes leds-off {
+  100% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes helix-movement {
+  100% {
+    background: linear-gradient(
+      to bottom,
+      lighten(#d93a54, 15%) 50%,
+      lighten(#d93a54, 15%),
+      #d93a54,
+      #d93a54 50%
+    );
+    background-size: 100% 20px;
+  }
+}
+
+@keyframes diving {
+  0% {
+    margin-top: 5px;
+  }
+  50% {
+    margin-top: 15px;
+  }
+
+  100% {
+    margin-top: 5px;
+  }
+}
+
+@keyframes diving-rotate {
+  0% {
+    @include transform(rotate(0deg));
+  }
+  50% {
+    @include transform(rotate(3deg));
+  }
+  75% {
+    @include transform(rotate(-2deg));
+  }
+  100% {
+    @include transform(rotate(0deg));
+  }
+}
+
+@keyframes bubble1-h-movement {
+  0% {
+    margin-left: 80%;
+  }
+  100% {
+    margin-left: -100%;
+  }
+}
+
+@keyframes bubble2-h-movement {
+  0% {
+    margin-left: 65%;
+  }
+  100% {
+    margin-left: -5%;
+  }
+}
+
+@keyframes bubble1-v-movement {
+  0% {
+    margin-top: 115px;
+  }
+  100% {
+    margin-top: 160px;
+  }
+}
+
+@keyframes bubble2-v-movement {
+  0% {
+    margin-top: 115px;
+  }
+  100% {
+    margin-top: 90px;
+  }
+}
+
+@keyframes bubble-scale-movement {
+  0% {
+    @include transform(scale(1.4));
+  }
+  100% {
+    @include transform(scale(0.9));
+  }
+}
+
+@keyframes light-movement {
+  0% {
+    @include transform(rotate(-40deg));
+  }
+  50% {
+    @include transform(rotate(-70deg));
+  }
+  100% {
+    @include transform(rotate(-40deg));
+  }
+}
+// }

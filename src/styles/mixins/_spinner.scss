@@ -1,0 +1,154 @@
+@mixin morph-spinner($size: 40px) {
+  width: $size;
+  height: $size;
+  animation: Morph 2000ms infinite;
+
+  @keyframes Morph {
+    0%,
+    100% {
+      @include border-radius(50%);
+
+      transform: rotate(0deg);
+      background-color: #ff69b4;
+    }
+    50% {
+      @include border-radius(0%);
+
+      transform: rotate(180deg);
+      background-color: map-get($colors, header-bg);
+    }
+  }
+}
+
+@mixin dots-bars-spinner {
+  color: #2a2961;
+  width: 40px;
+  height: 20px;
+  --c: radial-gradient(farthest-side, currentColor 93%, #0000);
+  background: var(--c) 0 0, var(--c) 50% 0;
+  background-size: 8px 8px;
+  background-repeat: no-repeat;
+  position: relative;
+  clip-path: inset(-200% -100% 0 0);
+  animation: db6-0 1.5s linear infinite;
+
+  &:before {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 12px;
+    background: currentColor;
+    left: -16px;
+    top: 0;
+    animation: db6-1 1.5s linear infinite,
+      db6-2 0.5s cubic-bezier(0, 200, 0.8, 200) infinite;
+  }
+  &:after {
+    @include border-radius(50%);
+
+    content: '';
+    position: absolute;
+    inset: 0 0 auto auto;
+    width: 8px;
+    height: 8px;
+    background: currentColor;
+    animation: db6-3 1.5s linear infinite;
+  }
+
+  @keyframes db6-0 {
+    0%,
+    30% {
+      background-position: 0 0, 50% 0;
+    }
+    33% {
+      background-position: 0 100%, 50% 0;
+    }
+    41%,
+    63% {
+      background-position: 0 0, 50% 0;
+    }
+    66% {
+      background-position: 0 0, 50% 100%;
+    }
+    74%,
+    100% {
+      background-position: 0 0, 50% 0;
+    }
+  }
+
+  @keyframes db6-1 {
+    90% {
+      transform: translateY(0);
+    }
+    95% {
+      transform: translateY(15px);
+    }
+    100% {
+      transform: translateY(15px);
+      left: calc(100% - 8px);
+    }
+  }
+
+  @keyframes db6-2 {
+    100% {
+      top: -0.1px;
+    }
+  }
+
+  @keyframes db6-3 {
+    0%,
+    80%,
+    100% {
+      transform: translate(0);
+    }
+    90% {
+      transform: translate(26px);
+    }
+  }
+}
+
+@mixin bounce-spinner {
+  --color: #2a2961;
+  --size-mid: 6vmin;
+  --size-dot: 1.5vmin;
+  --size-bar: 0.4vmin;
+  --size-square: 3vmin;
+
+  display: block;
+  position: relative;
+  width: 50%;
+  display: grid;
+  place-items: center;
+
+  &::before {
+    height: var(--size-bar);
+    width: 6vmin;
+    background-color: var(--color);
+    animation: loader-4 0.8s cubic-bezier(0, 0, 0.03, 0.9) infinite;
+  }
+
+  @keyframes loader-4 {
+    0%,
+    44%,
+    88.1%,
+    100% {
+      transform-origin: left;
+    }
+
+    0%,
+    100%,
+    88% {
+      @include transform(scaleX(0));
+    }
+
+    44.1%,
+    88% {
+      transform-origin: right;
+    }
+
+    33%,
+    44% {
+      @include transform(scaleX(1));
+    }
+  }
+}

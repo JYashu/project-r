@@ -1,0 +1,88 @@
+@import '../../styles/lib';
+
+$base-class: field;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  @include border-radius(3px);
+
+  border: 1px solid map-get($colors, juror-5);
+  color: map-get($colors, lawyer);
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+  min-width: 0;
+  position: relative;
+
+  &--solid {
+    background-color: map-get($colors, juror-5);
+  }
+
+  &--transparent {
+    background-color: transparent;
+  }
+
+  &--has-children {
+    border-style: none;
+  }
+
+  &--has-error {
+    border-color: transparent;
+  }
+
+  &--text-area {
+    background-color: transparent;
+    border-style: none;
+  }
+
+  &--round {
+    @include border-radius(25px);
+
+    overflow: hidden;
+  }
+
+  &__description {
+    @include type-style-justice;
+
+    background-color: transparent;
+    color: map-get($colors, juror-1);
+    margin: 4px 0 0;
+    padding-left: 8px;
+    position: absolute;
+    top: 100%;
+  }
+
+  &__error {
+    margin: 4px 0 0;
+    padding-left: 8px;
+    position: absolute;
+    top: 100%;
+  }
+
+  &__error.field-error {
+    color: map-get($colors, invalid);
+  }
+
+  &__label {
+    left: 0;
+    padding: 0 8px;
+    position: absolute;
+    top: 6px;
+    width: fit-content;
+
+    &--with-left-icon {
+      padding-left: 36px;
+    }
+
+    &--with-right-icon {
+      padding-right: 36px;
+    }
+
+    &--hidden {
+      visibility: hidden;
+    }
+  }
+}

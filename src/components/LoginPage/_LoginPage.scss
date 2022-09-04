@@ -1,0 +1,51 @@
+@import '../../styles/lib';
+
+$base-class: login-page;
+
+/* stylelint-disable property-no-unknown */
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  background-color: map-get($colors, victim-4);
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  width: 100vw;
+  margin-top: -64px;
+
+  &__message-tile {
+    @include page-container;
+
+    margin-top: 50px;
+    width: 90%;
+    position: absolute;
+    z-index: 999;
+    /* left: 5%; */
+    top: 5%;
+    left: 50%;
+    @include transform(translateX(-50%));
+  }
+
+  &__display-none {
+    display: none;
+  }
+
+  &__error {
+    &::first-letter {
+      text-transform: uppercase;
+    }
+  }
+
+  @media only screen and (max-width: 1024px) {
+    margin-top: 0px;
+    &__message-tile {
+      padding: 10px 16px;
+      position: static;
+      @include transform(translateX(0%));
+    }
+  }
+}

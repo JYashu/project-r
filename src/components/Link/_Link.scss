@@ -1,0 +1,53 @@
+@import '../../styles/lib';
+
+$base-class: link;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  $this: &;
+  text-decoration: none;
+
+  color: map-get($colors, lawyer);
+
+  &--button {
+    @include button-size;
+    @include button-style;
+
+    display: inline-flex;
+    justify-content: center;
+  }
+
+  &--button-colors {
+    @include button-colors;
+  }
+
+  &--button-intent-primary {
+    @include button-intent(primary);
+  }
+
+  &--button-transparent {
+    @include button-colors($transparent: true);
+  }
+
+  &--icon {
+    @include button-icon($right: false);
+  }
+
+  &--icon-only {
+    @include button-icon($empty: true, $right: true);
+
+    min-width: 0;
+  }
+
+  &--container {
+    color: inherit;
+    text-decoration: inherit;
+
+    &:hover {
+      text-decoration: inherit;
+    }
+  }
+}

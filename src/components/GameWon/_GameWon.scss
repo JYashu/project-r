@@ -1,0 +1,19 @@
+@import '../../styles/lib';
+
+$base-class: game-won;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  @include type-style-justice;
+
+  &__message {
+    @include modal-section(content);
+  }
+
+  &__footer {
+    @include modal-section(footer);
+  }
+}

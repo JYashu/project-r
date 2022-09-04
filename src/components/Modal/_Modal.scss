@@ -1,0 +1,80 @@
+@import '../../styles/lib';
+
+$base-class: modal;
+
+/* stylelint-disable property-no-unknown */
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  align-items: center;
+  background-color: rgba(map-get($colors, suspect), 0.4);
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 1000;
+
+  &__dialog {
+    @include type-style-city;
+    @include box-level-4;
+
+    background-color: map-get($colors, victim);
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100% - 20px);
+    max-width: calc(100% - 20px);
+    outline: 0;
+    position: relative;
+    overflow: auto;
+
+    @include tablet {
+      height: calc(100% - 20px);
+      width: calc(100% - 20px);
+    }
+
+    &--size-small {
+      width: 424px;
+    }
+
+    &--size-medium {
+      width: 648px;
+    }
+
+    &--size-large {
+      width: 872px;
+    }
+
+    &--size-x-large {
+      width: 1096px;
+    }
+
+    &--size-digital-onboarding {
+      width: 931px;
+      height: 445px
+    }
+    &--size-xx-large {
+      width: 100vw;
+    }
+    &--size-tall {
+      height: 70vh;
+    }
+  }
+
+  &__close {
+    color: map-get($colors, suspect);
+    position: absolute;
+    right: 16px;
+    top: 16px;
+  }
+  @media only screen and (max-width: 1024px) {
+    .modal__dialog{
+      height: auto !important;
+      min-height: calc(100% - 70%) !important;
+    }
+  }
+}

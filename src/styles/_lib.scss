@@ -1,0 +1,13 @@
+@import 'variables/consts';
+@import 'variables/colors';
+@import 'variables/spacing';
+@import 'variables/img-provider';
+@import 'variables/animations';
+
+@import 'mixins/background-image', 'mixins/button', 'mixins/center-on-screen',
+  'mixins/cursors', 'mixins/custom-mixins', 'mixins/drop-shadow',
+  'mixins/effects', 'mixins/ellipsis', 'mixins/focus', 'mixins/grid',
+  'mixins/hidden-for-printing', 'mixins/hovers', 'mixins/modal-section',
+  'mixins/owl', 'mixins/page-container', 'mixins/position', 'mixins/responsive',
+  'mixins/size', 'mixins/spinner', 'mixins/truncate-lines', 'mixins/typography',
+  'mixins/visually-hidden', 'mixins/hide-scrollbars', 'mixins/scrollbar-color';

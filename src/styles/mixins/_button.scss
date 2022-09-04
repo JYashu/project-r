@@ -1,0 +1,290 @@
+@mixin button-style($style: normal) {
+  $border-radius: 4px;
+  $min-width: 80px;
+
+  @if $style == normal {
+    @include border-radius($border-radius);
+
+    appearance: none;
+    border: 0;
+    min-width: $min-width;
+    cursor: pointer;
+    display: inline-flex;
+    position: relative;
+    text-decoration: none;
+    transition: 0.1s ease-in-out;
+    transition-property: color, background-color;
+
+    &[disabled] {
+      cursor: not-allowed;
+    }
+  }
+
+  @if $style == game {
+    @include type-style-mono;
+    @include border-radius($border-radius);
+
+    color: #36395a;
+    align-items: center;
+    appearance: none;
+    background-color: #fcfcfd;
+    min-width: $min-width;
+    border-width: 0;
+    box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,
+      rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #d6d6e7 0 -3px 0 inset;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    list-style: none;
+    overflow: hidden;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: 4px;
+    position: relative;
+    text-align: left;
+    text-decoration: none;
+    transition: box-shadow 0.15s, transform 0.15s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    will-change: box-shadow, transform;
+
+    &:focus {
+      box-shadow: #d6d6e7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px,
+        rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #d6d6e7 0 -3px 0 inset;
+    }
+
+    &:hover {
+      box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px,
+        rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #d6d6e7 0 -3px 0 inset;
+      @include transform(translateY(-2px));
+    }
+
+    &:active {
+      box-shadow: #d6d6e7 0 3px 7px inset;
+      @include transform(translateY(2px));
+    }
+  }
+
+  @if $style == glossy {
+    @include border-radius($border-radius);
+
+    background: transparent;
+    color: map-get($colors, header-bg);
+    // color: #3bd9d9;
+    min-width: $min-width;
+    text-transform: uppercase;
+    border: 2px solid map-get($colors, header-bg);
+    @include transform(translate(0));
+    overflow: hidden;
+    cursor: pointer;
+
+    &::before {
+      content: '';
+      position: absolute;
+      background: map-get($colors, header-bg);
+      width: 8px;
+      top: 0;
+      bottom: 0;
+      left: -32px;
+      @include transform(rotate(-16deg));
+      filter: blur(18px);
+    }
+
+    &:hover::before {
+      left: calc(100% + 32px);
+      transition: 0.75s;
+    }
+  }
+
+  @if $style == abstract {
+    & {
+      @include border-radius($border-radius);
+
+      color: #ffa500;
+      position: relative;
+      background: transparent;
+      min-width: $min-width;
+      border: 2px solid #ffa500;
+      cursor: pointer;
+      transition: all 0.7s;
+      overflow: hidden;
+    }
+
+    &:hover {
+      color: #1a1a1a;
+    }
+
+    & span {
+      transition: all 0.7s;
+      z-index: -1;
+    }
+
+    & .left {
+      content: '';
+      position: absolute;
+      right: 100%;
+      top: 0;
+      width: 25%;
+      height: 100%;
+      background: blue;
+    }
+
+    &:hover .left {
+      top: 0;
+      right: 0;
+    }
+
+    & .top {
+      content: '';
+      position: absolute;
+      left: 25%;
+      top: -100%;
+      width: 25%;
+      height: 100%;
+      background: red;
+    }
+
+    &:hover .top {
+      top: 0;
+      left: 50%;
+    }
+
+    & .bottom {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 100%;
+      width: 25%;
+      height: 100%;
+      background: yellow;
+    }
+
+    &:hover .bottom {
+      top: 0;
+      left: 25%;
+    }
+
+    & .right {
+      content: '';
+      position: absolute;
+      left: 100%;
+      top: 0;
+      width: 25%;
+      height: 100%;
+      background: pink;
+    }
+
+    &:hover .right {
+      top: 0;
+      left: 0;
+    }
+  }
+}
+
+@mixin button-colors($transparent: true) {
+  background-color: transparent;
+  color: map-get($colors, lawyer);
+
+  &[disabled] {
+    background-color: transparent;
+    color: map-get($colors, juror-3);
+
+    &:hover {
+      background-color: map-get($colors, juror-4);
+      color: map-get($colors, juror-3);
+    }
+  }
+
+  @if $transparent == false {
+    background-color: map-get($colors, victim);
+    color: map-get($colors, lawyer);
+
+    &:active {
+      background-color: map-get($colors, juror-4);
+      color: map-get($colors, juror-1);
+    }
+
+    &[disabled] {
+      background-color: map-get($colors, juror-4);
+    }
+  }
+}
+
+@mixin button-size($size: medium) {
+  @if $size == small {
+    @include type-style-city;
+
+    padding: 6px 16px;
+  }
+
+  @if $size == medium {
+    @include type-style-city;
+
+    padding: 8px 16px;
+  }
+
+  @if $size == large {
+    @include type-style-district;
+
+    padding: 12px 16px;
+  }
+}
+
+@mixin button-icon($empty: false, $right: false) {
+  .icon {
+    margin: auto;
+
+    @if $right {
+      margin: -2px -8px -2px 4px;
+    }
+
+    @if $empty {
+      margin: -2px -10px;
+    }
+  }
+}
+
+@mixin button-intent($intent) {
+  $color: map-get($intent-colors, $intent);
+
+  background-color: $color;
+  color: map-get($colors, victim);
+
+  @include loading-spinner-internal {
+    background-color: map-get($colors, victim);
+  }
+
+  &:hover,
+  :focus,
+  :active {
+    background-color: darken($color, 5%);
+    color: map-get($colors, victim);
+  }
+
+  @if $intent == 'primary' {
+    &:hover,
+    &:focus {
+      background-color: map-get($colors, lawyer-light);
+    }
+
+    &:active {
+      background-color: map-get($colors, lawyer-dark);
+    }
+  }
+}
+
+@mixin loading-spinner-internal {
+  .loading-spinner {
+    /* stylelint-disable-next-line selector-max-compound-selectors */
+    > div > div {
+      @content;
+    }
+  }
+}
+
+@mixin button-is-round {
+  @include border-radius(25px);
+}

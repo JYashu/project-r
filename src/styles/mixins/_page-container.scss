@@ -1,0 +1,11 @@
+@mixin page-container {
+  $scrollbar-width: calc(100vw - 100%);
+  $padding: 40px;
+  $padding-with-scrollbar: calc(#{$padding} + (#{$scrollbar-width} / 2));
+
+  margin: 0 auto;
+  max-width: calc(1440px + #{$collapsed-sidebar-width});
+  padding-left: calc(#{$padding-with-scrollbar} + #{$collapsed-sidebar-width});
+  padding-right: $padding-with-scrollbar;
+  width: 100%;
+}

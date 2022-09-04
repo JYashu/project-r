@@ -1,0 +1,23 @@
+@mixin truncate-lines($lines: 1, $line-height: 16px, $bg-color: white) {
+  line-height: $line-height;
+  max-height: $line-height * $lines;
+  overflow: hidden;
+  padding-right: 1em;
+  position: relative;
+  text-align: justify;
+
+  &::before {
+    @include position(absolute, null 0 0 null);
+
+    content: '...';
+  }
+
+  &::after {
+    @include position(absolute, null 0);
+    @include size(1em);
+
+    background: $bg-color;
+    content: '';
+    margin-top: 0.2em;
+  }
+}

@@ -1,0 +1,159 @@
+@import '../../styles/lib';
+
+$base-class: memory;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  &__action-buttons {
+    margin: 30px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  &__cards {
+    max-width: 1060px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  &__card {
+    width: 160px;
+    height: 160px;
+    margin-bottom: 20px;
+    @include animation(float 3s ease-in-out infinite);
+  }
+  &__card:not(:nth-child(6n)) {
+    margin-right: 20px;
+  }
+
+  @for $i from 1 through 24 {
+    &__cards &__card:nth-child(#{$i}n) {
+      animation-delay: #{$i * 0.5}s;
+    }
+    &__cards--large &__card--large:nth-child(#{$i}n) {
+      animation-delay: #{$i * 0.5}s;
+    }
+  }
+
+  &__c {
+    position: absolute;
+    max-width: 160px;
+    max-height: 160px;
+    width: 50ch;
+    height: 50ch;
+    cursor: pointer;
+    will-change: transform, opacity;
+  }
+
+  &__front,
+  &__back-solid,
+  &__back-one-piece {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+
+  &__back-solid {
+    background-image: url(https://public-assets-7588.s3.ap-south-1.amazonaws.com/logo/block.png);
+  }
+
+  &__back-one-piece {
+    background-image: url(https://public-assets-7588.s3.ap-south-1.amazonaws.com/one-piece/Onepiece.png);
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    width: 100%;
+  }
+
+  &__menu {
+    @include type-style-cali-heading;
+  }
+
+  &__login {
+    @include type-style-cali-strong;
+
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    align-items: center;
+    width: 40vw;
+    text-align: center;
+  }
+
+  &__btns {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    margin: 1rem;
+  }
+
+  &__btn {
+    @include type-style-cali;
+
+    color: map-get($colors, button-dark);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 40px;
+    margin: 0 auto;
+    position: relative;
+    width: 80px;
+    height: 40px;
+  }
+
+  &__focus {
+    @include box-level-3;
+    @include border-radius(20px);
+
+    position: absolute;
+    width: 80px;
+    height: 40px;
+    background-color: map-get($colors, nav-focus);
+    z-index: -100;
+    @include transition(left 200ms ease-in-out 50ms);
+  }
+
+  @media only screen and (max-width: 1140px) {
+    &__cards {
+      width: 722px;
+    }
+    &__card:not(:nth-child(4n)) {
+      margin-right: 20px;
+    }
+  }
+
+  @media only screen and (max-width: 740px) {
+    &__cards {
+      width: 542px;
+    }
+    &__card:not(:nth-child(3n)) {
+      margin-right: 20px;
+    }
+  }
+
+  @media only screen and (max-width: 560px) {
+    &__cards {
+      width: 362px;
+    }
+    &__card:not(:nth-child(2n)) {
+      margin-right: 20px;
+    }
+  }
+}

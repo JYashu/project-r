@@ -1,0 +1,132 @@
+@import '../../styles/lib';
+
+$base-class: tic-tac-toe;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  /* background-color: beige; */
+  @include type-style-game;
+
+  margin-top: 50px;
+
+  &__header {
+    margin: 50px 0px 50px 20px;
+  }
+
+  &__status {
+    margin-bottom: 10px;
+  }
+
+  // ol,
+  // ul {
+  //   list-style: none;
+  //   padding-left: 0;
+  // }
+
+  // .kbd-navigation .square:focus {
+  //   background: #ddd;
+  // }
+
+  &__info-wrapper {
+    display: grid;
+    grid-gap: 24px;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0 48px;
+    // display: flex;
+    // flex-direction: row;
+    width: 100%;
+    // justify-content: center;
+  }
+
+  &__game-board {
+    @include center-horizontally;
+  }
+
+  &__game-info {
+    display: flex;
+    flex-direction: row;
+    width: inherit;
+    justify-content: center;
+  }
+
+  &__info {
+    width: 360px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  &__title.mob {
+    display: none;
+  }
+
+  &__status {
+    margin-bottom: 10px;
+  }
+
+  &__info-btn {
+    margin: 10px;
+  }
+
+  &__btn.move {
+    opacity: 1;
+  }
+
+  &__card {
+    @include card-div-hover;
+    @include type-style-city;
+
+    color: white;
+  }
+
+  @media screen and (max-width: 780px) {
+    // body {
+    //   min-width: 0;
+    // }
+
+    &__title.mob {
+      display: block;
+      position: absolute;
+    }
+
+    &__game-info {
+      margin-top: 400px;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    &__info {
+      width: 50%;
+    }
+
+    &__info.title {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    &__square {
+      font-size: 24px;
+      width: 62px;
+      height: 62px;
+    }
+
+    &__game-info {
+      margin-top: 360px;
+      display: block;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    &__info {
+      width: 100%;
+      height: 100px;
+    }
+  }
+}

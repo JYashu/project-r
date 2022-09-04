@@ -1,0 +1,42 @@
+@import '../../styles/lib';
+
+$base-class: dropdown;
+
+/* stylelint-disable property-no-unknown */
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  @include type-style-city;
+
+  height: 48px;
+
+  &__menu-list {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  &__menu-list-actions {
+    background-color: map-get($colors, victim);
+    border-top: 1px solid map-get($colors, juror-3);
+    bottom: 4px;
+    color: map-get($colors, lawyer);
+    left: 0;
+    position: absolute;
+    width: 100%;
+
+    &--solo {
+      border-top: 0;
+    }
+  }
+
+  &__create-new-client-matter-option {
+    align-items: center;
+    display: flex;
+
+    .icon {
+      margin-right: 5px;
+    }
+  }
+}

@@ -1,0 +1,122 @@
+@import '../../styles/lib';
+
+$base-class: button;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  $this: &;
+
+  @include button-icon;
+  @include button-size(medium);
+  @include button-style;
+  @include loading-spinner-internal {
+    background-color: map-get($colors, lawyer);
+  }
+  @include owl {
+    margin-left: 16px;
+  }
+
+  &__content-wrapper {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+    width: 100%;
+  }
+
+  &__loader-wrapper {
+    $loader-height: 30px;
+    $loader-width: 90px;
+
+    opacity: 0;
+    position: absolute;
+    right: calc(50% - #{$loader-width / 2});
+    top: calc(50% - #{$loader-height / 2});
+    @include transform(scale(0));
+    transition: 0.2s ease-in-out;
+    transition-property: opacity, transform;
+  }
+
+  &--transparent {
+    @include button-colors($transparent: true);
+  }
+
+  &--solid {
+    @include button-colors($transparent: false);
+  }
+
+  &--size-large {
+    @include button-size(large);
+  }
+
+  &--size-small {
+    @include button-size(small);
+    @include owl {
+      margin-left: 8px;
+    }
+  }
+
+  &--include-focus {
+    @include focus;
+  }
+
+  &--loading {
+    #{$this}__loader-wrapper {
+      opacity: 1;
+      @include transform(scale(1));
+    }
+
+    #{$this}__content-wrapper {
+      opacity: 0;
+      @include transform(scale(0));
+    }
+  }
+
+  &--right-icon {
+    @include button-icon($right: true);
+
+    #{$this}__content-wrapper {
+      flex-direction: row-reverse;
+    }
+  }
+
+  &--game {
+    @include button-style($style: game);
+  }
+
+  &--glossy {
+    @include button-style($style: glossy);
+  }
+
+  &--abstract {
+    @include button-style($style: abstract);
+  }
+
+  &--empty {
+    @include button-icon($empty: true);
+
+    min-width: 0;
+  }
+
+  &--is-round {
+    @include button-is-round;
+  }
+
+  &--hand-writing {
+    @include type-style-cali;
+  }
+
+  @each $intent, $color in $intent-colors {
+    &--intent-#{$intent} {
+      @include button-intent($intent);
+    }
+  }
+
+  .visually-hidden {
+    @include visually-hidden;
+  }
+}

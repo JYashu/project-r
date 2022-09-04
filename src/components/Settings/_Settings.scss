@@ -1,0 +1,27 @@
+@import '../../styles/lib';
+
+$base-class: settings;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  &__container {
+    @include center-on-screen;
+    @include background-image(
+      $width: 1678,
+      $height: 933,
+      $type: map-get($img-provider, picsum)
+    );
+  }
+
+  &__glass {
+    @include glass-effect;
+
+    margin: 40px;
+    min-width: 80%;
+    height: 600px;
+    overflow-y: scroll;
+  }
+}

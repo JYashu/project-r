@@ -1,0 +1,20 @@
+$img-provider: (
+  flickr: flickr,
+  placeimg: placeimg,
+  picsum: picsum,
+);
+
+$img-categories: (
+  animals: animals,
+  arch: arch,
+  nature: nature,
+  people: people,
+  tech: tech,
+);
+
+$img-filter: (
+  grayscale: grayscale,
+  sepia: sepia,
+  blur: blur,
+  grayblur: grayscale&blur,
+);

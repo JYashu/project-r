@@ -1,0 +1,57 @@
+@import '../../styles/lib';
+
+$base-class: global-header;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  @include hidden-for-printing;
+
+  color: map-get($colors, header-text);
+  align-items: center;
+  background-color: map-get($colors, header-bg);
+  // border-bottom: 1px solid map-get($colors, juror-4);
+  display: flex;
+  height: 64px;
+  padding: 0 5px;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+
+  .visually-hidden {
+    @include visually-hidden;
+  }
+
+  &__collapse {
+    color: map-get($colors, header-text);
+    margin-right: 7px;
+    margin-left: -15px;
+    border: none;
+  }
+
+  &__title {
+    @include type-style-heading;
+  }
+
+  &__score {
+    @include type-style-heading;
+
+    margin-left: 39%;
+  }
+
+  &__clock {
+    overflow-x: hidden;
+    position: absolute;
+    right: 40px;
+  }
+
+  @media only screen and (max-width: 1024px) {
+    &__collapse {
+      margin-left: 0px;
+    }
+    padding: 0 10px;
+  }
+}

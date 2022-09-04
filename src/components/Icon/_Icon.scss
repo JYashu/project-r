@@ -1,0 +1,79 @@
+@import '../../styles/lib';
+
+$base-class: icon;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  $this: &;
+  $size: 24px;
+
+  @include size($size);
+
+  &__description {
+    @include visually-hidden;
+  }
+
+  &--size-extra-small {
+    $size: 12px;
+
+    @include size($size);
+
+    .material-icons {
+      font-size: $size;
+    }
+  }
+
+  &--size-small {
+    $size: 18px;
+
+    @include size($size);
+
+    .material-icons {
+      font-size: $size;
+    }
+  }
+
+  &--size-medium {
+    padding-top: 5px;
+    $size: 28px;
+
+    @include size($size);
+
+    .material-icons {
+      font-size: $size;
+    }
+  }
+
+  &--size-large {
+    $size: 36px;
+
+    @include size($size);
+
+    .material-icons {
+      font-size: $size;
+    }
+  }
+
+  &--size-extra-large {
+    $size: 48px;
+
+    @include size($size);
+
+    .material-icons {
+      font-size: $size;
+    }
+  }
+
+  &--size-extra-extra-large {
+    $size: 64px;
+
+    @include size($size);
+
+    .material-icons {
+      font-size: $size;
+    }
+  }
+}

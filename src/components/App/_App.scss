@@ -1,0 +1,63 @@
+@import '../../styles/lib';
+@import '../../styles/global';
+
+$base-class: app;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  @media print {
+    padding: 0 0 0 0 !important;
+  }
+
+  height: 100%;
+  display: flex;
+  position: relative;
+  background-color: map-get($colors, witness-4);
+  height: 100vh;
+  padding-top: 64px;
+
+  &__global-header {
+    position: fixed;
+    width: 100vw;
+    top: 0;
+  }
+
+  &__sidebar {
+    height: 100%;
+    z-index: 1000;
+  }
+
+  &__content {
+    max-height: calc(100vh - 64px);
+    width: 100%;
+    overflow-y: auto;
+  }
+
+  &__content-static {
+    top: 64px;
+    left: $collapsed-sidebar-width;
+    width: calc(100vw - 57.4px);
+    position: fixed;
+    max-height: calc(100vh - 64px);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+
+  @media only screen and (max-width: 1024px) {
+    &__content {
+      min-width: 100vw;
+      position: fixed;
+    }
+
+    &__content-static {
+      left: 0;
+      width: 100vw;
+      position: fixed;
+    }
+  }
+}

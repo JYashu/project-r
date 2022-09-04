@@ -1,0 +1,46 @@
+@mixin mobile {
+  @media (max-width: 425px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+// Utility Mixins for Responsiveness burrowed from
+// https://tailwindcss.com/docs/responsive-design/
+// TODO: revisit responsive styles
+// these are only for the mobile-page, and should
+// be combined with above or replace the above styles
+// from a year ago
+
+/* Small (sm) */
+@mixin sm {
+  @media (min-width: 640px) {
+    @content;
+  }
+}
+
+/* Medium (md) */
+@mixin md {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+/* Large (lg) */
+@mixin lg {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+/* Extra Large (xl) */
+@mixin xl {
+  @media (min-width: 1280px) {
+    @content;
+  }
+}

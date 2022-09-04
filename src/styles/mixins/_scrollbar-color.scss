@@ -1,0 +1,11 @@
+@mixin scrollbar-color {
+  &::-webkit-scrollbar {
+    background-color: #425c65;
+    width: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    @include border-radius(10px);
+
+    background: rgba(247, 244, 244, 0.562);
+  }
+}

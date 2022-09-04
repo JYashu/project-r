@@ -1,0 +1,35 @@
+@mixin background-image(
+  $width,
+  $height,
+  $type: flickr,
+  $category: tech,
+  $filter: mock,
+  $blur: 1
+) {
+  @if $type == flickr {
+    background: url('https://loremflickr.com/' + $width + '/' + $height);
+  }
+
+  @if $type == placeimg {
+    @if $filter == mock {
+      background: url('http://placeimg.com/' + $width + '/' + $height + '/' + $category);
+    } @else {
+      background: url('http://placeimg.com/' + $width + '/' + $height + '/' + $category + '/' + $filter);
+    }
+  }
+
+  @if $type == picsum {
+    @if filter == mock {
+      background: url('https://picsum.photos/seed/picsum/' + $width + '/' + $height + '?');
+    }
+    @if filter == blur {
+      background: url('https://picsum.photos/' + $width + '/' + $height + '?' + $filter + '=' + $blur);
+    }
+    @if filter == grayscale&blur {
+      background: url('https://picsum.photos/' + $width + '/' + $height + '?' + $filter + '=' + $blur);
+    }
+    @if filter = grayscale {
+      background: url('https://picsum.photos/' + $width + '/' + $height + '?' + $filter);
+    }
+  }
+}

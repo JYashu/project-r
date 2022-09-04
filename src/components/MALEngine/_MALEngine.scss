@@ -1,0 +1,11 @@
+@import '../../styles/lib';
+
+$base-class: mal-engine;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  border: 1px solid black;
+}

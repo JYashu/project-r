@@ -1,0 +1,42 @@
+// Print position coords only.
+// https://gist.github.com/brianmcallister/3641867
+//
+// $values - Position values. Null values get skipped over.
+@mixin pos-coords($values: null null null null) {
+  $position-list: top right bottom left;
+  $count: 1;
+
+  @if length($values) == 1 and $values == 'reset' {
+    $values: auto auto auto auto;
+  }
+
+  @each $value in $values {
+    @if $value == 'auto' or $value != null {
+      $pos: nth($position-list, $count);
+      #{$pos}: $value;
+    }
+    $count: $count + 1;
+  }
+}
+
+// Reset position coords mixin.
+@mixin reset-coords() {
+  @include pos-coords('reset');
+}
+
+// Position mixin.
+//
+// $type     - Position type.
+// $values   - List of position values. Null values get skipped over.
+// $z-index  - Optional z-index value.
+@mixin position($type: relative, $values: null null null null, $z-index: '') {
+  position: $type;
+
+  @if $type != 'static' and $type != 'inherit' {
+    @include pos-coords($values);
+
+    @if $z-index != '' {
+      z-index: $z-index;
+    }
+  }
+}

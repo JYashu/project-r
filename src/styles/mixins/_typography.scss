@@ -1,0 +1,148 @@
+@font-face {
+  font-family: Biko;
+  src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/biko-black.woff');
+}
+
+@import url(https://fonts.googleapis.com/css?family=Archivo+Narrow);
+
+$serif: 'DM Serif Text', serif;
+$sans: 'Helvetica', Nunito Sans, -apple-system, system-ui, sans-serif;
+$game: 'Century Gothic', Futura, sans-serif;
+$game-btn: 'JetBrains Mono', monospace;
+$clock: 'Dosis', sans-serif;
+$biko: Biko, sans-serif;
+$cali: 'Dancing Script', serif;
+
+@mixin type-style-clock {
+  font-family: $clock;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+@mixin type-style-game {
+  font-family: $game;
+  font-size: 1.8rem;
+}
+
+@mixin type-style-mono {
+  font-family: $game-btn;
+  font-size: 1.8rem;
+  line-height: 2rem;
+  font-weight: 500;
+}
+
+@mixin type-style-heading {
+  font-family: $sans;
+  font-size: 1.8rem; // 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 2.4rem; // 24px;
+}
+
+@mixin type-style-cali {
+  font-family: $cali;
+  font-size: 2rem; // 20px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 2.4rem; // 26px;
+}
+
+@mixin type-style-cali-strong {
+  font-family: $cali;
+  font-size: 2rem; // 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 2.4rem; // 26px;
+}
+
+@mixin type-style-cali-heading {
+  font-family: $cali;
+  font-size: 5rem; // 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 5rem; // 26px;
+}
+
+@mixin type-style-mega {
+  font-family: $biko;
+  font-size: 8rem; // 140px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 8rem; // 210px;
+}
+//
+
+// Primary
+@mixin type-style-supreme {
+  font-family: $sans;
+  font-size: 3.6rem; // 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 4.8rem; // 48px;
+}
+
+@mixin type-style-county {
+  font-family: $sans;
+  font-size: 2.4rem; // 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 3.2rem; // 32px;
+}
+
+@mixin type-style-specialized {
+  font-family: $sans;
+  font-size: 2rem; // 20px
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2.8rem; // 28px;
+}
+
+@mixin type-style-district {
+  font-family: $sans;
+  font-size: 1.6rem; // 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 2.4rem; // 24px;
+}
+
+@mixin type-style-district-light {
+  font-family: $sans;
+  font-size: 1.6rem; // 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2.4rem; // 24px;
+}
+
+@mixin type-style-city {
+  font-family: $sans;
+  font-size: 1.4rem; // 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 2rem; // 20px;
+}
+
+@mixin type-style-justice {
+  font-family: $sans;
+  font-size: 1.2rem; // 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.6em; // 16px;
+}
+
+// Secondary
+
+@mixin type-style-lld {
+  font-family: $serif;
+  font-size: 3.6rem; // 36px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 4.8rem; // 48px;
+}
+
+@mixin type-style-jd {
+  font-family: $serif;
+  font-size: 2.4rem; // 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 3.2rem; // 32px;
+}

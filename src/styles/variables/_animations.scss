@@ -1,0 +1,65 @@
+@import '../mixins/custom-mixins';
+
+@include keyframes(float, float animation) {
+  0% {
+    box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
+    @include transform(translateY(0px));
+  }
+  50% {
+    box-shadow: 0 25px 15px 0px rgba(0, 0, 0, 0.2);
+    @include transform(translateY(-10px));
+  }
+  100% {
+    box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
+    @include transform(translateY(0px));
+  }
+}
+
+@include keyframes(scaleInOut, scaleInOut animation) {
+  0% {
+    @include transform(translateY(-50%) scale(1.5));
+  }
+  50% {
+    @include transform(translateY(-50%) scale(0.75));
+  }
+  100% {
+    @include transform(translateY(-50%) scale(1));
+  }
+}
+
+@include keyframes(fade-in-and-down, fade-in-and-down animation) {
+  0% {
+    @include opacity(0);
+    @include transform(translate3d(0, -5px, 0));
+  }
+
+  100% {
+    @include opacity(1);
+    @include transform(translate3d(0, 5px, 0));
+  }
+}
+
+@include keyframes(fade-in-and-out, fade-in-and-out animation) {
+  0% {
+    @include opacity(0);
+    @include transform(translate3d(0, -5px, 0));
+  }
+  10% {
+    @include opacity(1);
+    @include transform(translate3d(0, 5px, 0));
+  }
+  90% {
+    @include opacity(1);
+    @include transform(translate3d(0, 5px, 0));
+  }
+  100% {
+    @include opacity(0);
+    @include transform(translate3d(0, -5px, 0));
+  }
+}
+
+@include keyframes(progress, progress animation) {
+  to {
+    width: calc(100% - 10px);
+  }
+}

@@ -1,0 +1,102 @@
+@import '../../styles/lib';
+
+$base-class: input;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  @include type-style-city;
+  @include border-radius(3px);
+
+  border: 1px solid map-get($colors, juror-5);
+  caret-color: map-get($colors, judge);
+  color: map-get($colors, judge);
+  padding: 13px 8px;
+
+  &--solid {
+    background-color: map-get($colors, juror-5);
+  }
+
+  &--transparent {
+    background-color: transparent;
+  }
+
+  &--error {
+    border-color: map-get($intent-colors, destructive);
+  }
+
+  &--round {
+    @include border-radius(25px);
+  }
+
+  &__btn {
+    top: 4px;
+    right: 10px;
+    position: absolute;
+  }
+
+  &:disabled {
+    color: map-get($colors, prosecutor);
+  }
+
+  &::placeholder {
+    color: map-get($colors, juror-2);
+  }
+
+  &:focus {
+    border-color: map-get($colors, lawyer);
+    outline: none;
+  }
+
+  &--labelled {
+    padding: 20px 8px 6px;
+
+    &::placeholder {
+      color: map-get($colors, suspect);
+    }
+  }
+
+  &--with-left-icon {
+    padding-left: 36px;
+  }
+
+  &--with-right-icon {
+    padding-right: 36px;
+  }
+
+  &__icon-container {
+    display: flex;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+
+  &__left-background-icon {
+    background-color: transparent;
+    border-style: none;
+    min-width: 50%;
+
+    i {
+      color: map-get($colors, juror-3);
+    }
+  }
+
+  &__right-background-icon {
+    background-color: transparent;
+    border-style: none;
+    flex-basis: 100%;
+    min-width: 50%;
+    text-align: end;
+
+    i {
+      color: map-get($colors, juror-3);
+    }
+  }
+
+  &::placeholder {
+    color: map-get($colors, prosecutor);
+  }
+}

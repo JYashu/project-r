@@ -1,0 +1,34 @@
+@import '../../styles/lib';
+
+$base-class: textarea;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  @include type-style-city;
+  @include border-radius(3px);
+
+  background-color: map-get($colors, juror-5);
+  border: 1px solid map-get($colors, juror-5);
+  caret-color: map-get($colors, lawyer);
+  outline: none;
+  padding: 6px 8px;
+
+  &--error {
+    border: 1px solid map-get($intent-colors, destructive);
+  }
+
+  &--labelled {
+    padding: 22px 8px 6px;
+  }
+
+  &:focus {
+    border-color: map-get($colors, lawyer);
+  }
+
+  &::placeholder {
+    color: map-get($colors, prosecutor);
+  }
+}
