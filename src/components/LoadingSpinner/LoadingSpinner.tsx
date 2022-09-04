@@ -38,14 +38,7 @@ const SIZES = {
   xlarge: 28,
 };
 
-const LoadingSpinner = ({
-  text,
-  size,
-  intent,
-  className,
-  type,
-  color,
-}: Props) => {
+const LoadingSpinner = ({ text, size, intent, className, type, color }: Props) => {
   const loaderSize = size ? SIZES[size] : DEFAULT_SIZE;
   const cls = classnames(scssObj.baseClass, className, {
     [`${scssObj.baseClass}--size-${size}`]: size,
@@ -60,86 +53,52 @@ const LoadingSpinner = ({
 
       {type === SpinnerType.BarLoader && <BarLoader color={clr} />}
 
-      {type === SpinnerType.CircleLoader && (
-        <CircleLoader color={clr} size={loaderSize} />
-      )}
+      {type === SpinnerType.CircleLoader && <CircleLoader color={clr} size={loaderSize} />}
 
-      {type === SpinnerType.ClimbingBoxLoader && (
-        <ClimbingBoxLoader color={clr} />
-      )}
+      {type === SpinnerType.ClimbingBoxLoader && <ClimbingBoxLoader color={clr} />}
 
-      {type === SpinnerType.ClockLoader && (
-        <ClockLoader color={clr} size={loaderSize} />
-      )}
+      {type === SpinnerType.ClockLoader && <ClockLoader color={clr} size={loaderSize} />}
 
-      {type === SpinnerType.GridLoader && (
-        <GridLoader color={clr} size={loaderSize} />
-      )}
+      {type === SpinnerType.GridLoader && <GridLoader color={clr} size={loaderSize} />}
 
-      {type === SpinnerType.HashLoader && (
-        <HashLoader color={clr} size={loaderSize} />
-      )}
+      {type === SpinnerType.HashLoader && <HashLoader color={clr} size={loaderSize} />}
 
-      {type === SpinnerType.PacmanLoader && (
-        <PacmanLoader color={clr} size={loaderSize} />
-      )}
+      {type === SpinnerType.PacmanLoader && <PacmanLoader color={clr} size={loaderSize} />}
 
-      {type === SpinnerType.PropagateLoader && (
-        <PropagateLoader color={clr} size={loaderSize} />
-      )}
+      {type === SpinnerType.PropagateLoader && <PropagateLoader color={clr} size={loaderSize} />}
 
-      {type === SpinnerType.PuffLoader && (
-        <PuffLoader color={clr} size={loaderSize} />
-      )}
+      {type === SpinnerType.PuffLoader && <PuffLoader color={clr} size={loaderSize} />}
 
-      {type === SpinnerType.RingLoader && (
-        <RingLoader color={clr} size={loaderSize} />
-      )}
+      {type === SpinnerType.RingLoader && <RingLoader color={clr} size={loaderSize} />}
 
-      {type === SpinnerType.RiseLoader && (
-        <RiseLoader color={color} size={loaderSize} />
-      )}
+      {type === SpinnerType.RiseLoader && <RiseLoader color={color} size={loaderSize} />}
 
-      {type === SpinnerType.RotateLoader && (
-        <RotateLoader color={clr} size={loaderSize} />
-      )}
+      {type === SpinnerType.RotateLoader && <RotateLoader color={clr} size={loaderSize} />}
 
       {type === SpinnerType.ScaleLoader && <ScaleLoader color={color} />}
 
-      {type === SpinnerType.SkewLoader && (
-        <SkewLoader color={clr} size={loaderSize} />
-      )}
+      {type === SpinnerType.SkewLoader && <SkewLoader color={clr} size={loaderSize} />}
 
-      {type === SpinnerType.SquareLoader && (
-        <SquareLoader color={clr} size={loaderSize} />
-      )}
+      {type === SpinnerType.SquareLoader && <SquareLoader color={clr} size={loaderSize} />}
 
-      {type === SpinnerType.SyncLoader && (
-        <SyncLoader color={clr} size={loaderSize} />
-      )}
+      {type === SpinnerType.SyncLoader && <SyncLoader color={clr} size={loaderSize} />}
 
       {type === SpinnerType.MorphLoader && (
-        <div
-          className={classnames(
-            `${scssObj.baseClass}__morph${size ? `-${size}` : ''}`
-          )}
-        />
+        <div className={classnames(`${scssObj.baseClass}__morph${size ? `-${size}` : ''}`)} />
       )}
 
       {type === SpinnerType.CubeFlipSpinner && (
         <div className={`${scssObj.baseClass}__cube-wrapper`}>
           <div className={`${scssObj.baseClass}__cube-folding`}>
-            <span className={`${scssObj.baseClass}__leaf1`}></span>
-            <span className={`${scssObj.baseClass}__leaf2`}></span>
-            <span className={`${scssObj.baseClass}__leaf3`}></span>
-            <span className={`${scssObj.baseClass}__leaf4`}></span>
+            <span className={`${scssObj.baseClass}__leaf1`} />
+            <span className={`${scssObj.baseClass}__leaf2`} />
+            <span className={`${scssObj.baseClass}__leaf3`} />
+            <span className={`${scssObj.baseClass}__leaf4`} />
           </div>
         </div>
       )}
 
-      {type === SpinnerType.DotsBarSpinner && (
-        <div className={`${scssObj.baseClass}__dots-bars`}></div>
-      )}
+      {type === SpinnerType.DotsBarSpinner && <div className={`${scssObj.baseClass}__dots-bars`} />}
 
       {text && <p className={`${scssObj.baseClass}__text`}>{text}</p>}
     </div>

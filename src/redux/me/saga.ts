@@ -1,11 +1,5 @@
 import { SagaIterator } from 'redux-saga';
-import {
-  call,
-  getContext,
-  put,
-  SagaReturnType,
-  takeEvery,
-} from 'redux-saga/effects';
+import { call, getContext, put, SagaReturnType, takeEvery } from 'redux-saga/effects';
 import { completeSignIn, copyText } from './actions';
 import getErrorFromCatch from '../utils/getErrorFromCatch';
 import { addSnack } from '../snackbar';
@@ -15,7 +9,7 @@ import { SagaContext } from '../utils/sagaContext';
 
 export function* watchCopyText(
   { success, failure }: typeof copyText,
-  action: ReturnType<typeof copyText.request>
+  action: ReturnType<typeof copyText.request>,
 ): SagaIterator<void> {
   try {
     const { text } = action.payload;
@@ -25,9 +19,9 @@ export function* watchCopyText(
     yield put(
       addSnack({
         message: `Copied "${
-          text.length > 16 ? text.substring(0, 16) + '...' : text
+          text.length > 16 ? `${text.substring(0, 16)}...` : text
         }" to clipboard.`,
-      })
+      }),
     );
   } catch (e) {
     yield put(failure(getErrorFromCatch(e), action.meta));
@@ -35,31 +29,29 @@ export function* watchCopyText(
       addSnack({
         message: `Failed to copy text to clipboard.`,
         snackType: SnackType.FAILURE,
-      })
+      }),
     );
   }
 }
 
 export function* watchCompleteSignInRequest(
   { success, failure }: typeof completeSignIn,
-  { payload }: ReturnType<typeof completeSignIn.request>
+  { payload }: ReturnType<typeof completeSignIn.request>,
 ): SagaIterator<void> {
   try {
     const { username, password } = payload;
 
-    const tokens: SagaReturnType<typeof requestTokens> = yield call(
-      requestTokens,
-      { username, password }
-    );
+    const tokens: SagaReturnType<typeof requestTokens> = yield call(requestTokens, {
+      username,
+      password,
+    });
 
     if (!tokens.accessToken || !tokens.refreshToken) {
       throw new Error(`Invalid tokens: ${tokens}`);
     }
     persistTokens(tokens);
 
-    const routerHistory: SagaContext['routerHistory'] = yield getContext(
-      'routerHistory'
-    );
+    const routerHistory: SagaContext['routerHistory'] = yield getContext('routerHistory');
 
     setTimeout(() => routerHistory.push(`/auth`), 4000);
 
@@ -71,9 +63,5 @@ export function* watchCompleteSignInRequest(
 
 export function* meSaga(): SagaIterator<void> {
   yield takeEvery(copyText.request, watchCopyText, copyText);
-  yield takeEvery(
-    completeSignIn.request,
-    watchCompleteSignInRequest,
-    completeSignIn
-  );
+  yield takeEvery(completeSignIn.request, watchCompleteSignInRequest, completeSignIn);
 }

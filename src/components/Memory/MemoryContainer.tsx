@@ -14,7 +14,7 @@ const mapDispatch = (dispatch: Dispatch) => ({
         score,
         handleReplay,
         handleReset,
-      })
+      }),
     ),
 });
 

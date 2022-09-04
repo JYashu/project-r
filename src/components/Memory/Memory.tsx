@@ -1,4 +1,8 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable react-hooks/exhaustive-deps */
 import classNames from 'classnames';
+import { v4 as uuidv4 } from 'uuid';
 import React, { useState, useEffect, useRef } from 'react';
 import { useSpring, animated as a } from 'react-spring';
 import useActiveSidebarItem from '../../hooks/useActiveSidebarItem';
@@ -35,10 +39,9 @@ const Card = ({
   });
 
   useEffect(() => {
-    console.log('Flipped Indexes Changed');
     if (flippedIndexes[2] === true && flippedIndexes.indexOf(id) > -1) {
       setTimeout(() => {
-        set((state) => !state);
+        set(state => !state);
         setFlippedCount(flippedCount + 1);
         setFlippedIndexes([]);
       }, 1000);
@@ -46,24 +49,19 @@ const Card = ({
       setFlippedCount(flippedCount + 1);
       setFlippedIndexes([]);
     }
-  }, [flippedIndexes]);
+  }, [flippedIndexes]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onCardClick = () => {
-    console.log('Card Clicked');
-    set((state) => state);
+    set(state => state);
 
     if (!game[id].flipped && flippedCount % 3 === 0) {
-      set((state) => !state);
+      set(state => !state);
       setFlippedCount(flippedCount + 1);
       const newIndexes = [...flippedIndexes];
       newIndexes.push(id);
       setFlippedIndexes(newIndexes);
-    } else if (
-      flippedCount % 3 === 1 &&
-      !game[id].flipped &&
-      flippedIndexes.indexOf(id) < 0
-    ) {
-      set((state) => !state);
+    } else if (flippedCount % 3 === 1 && !game[id].flipped && flippedIndexes.indexOf(id) < 0) {
+      set(state => !state);
       setFlippedCount(flippedCount + 1);
       const newIndexes = [...flippedIndexes];
       newIndexes.push(id);
@@ -74,23 +72,17 @@ const Card = ({
   return (
     <div onClick={onCardClick}>
       <a.div
-        className={classNames(
-          `${scssObj.baseClass}__c`,
-          `${scssObj.baseClass}__back-${type}`
-        )}
+        className={classNames(`${scssObj.baseClass}__c`, `${scssObj.baseClass}__back-${type}`)}
         style={{
-          opacity: opacity.interpolate((o) => 1 - o),
+          opacity: opacity.interpolate(o => 1 - o),
           transform,
         }}
       />
       <a.div
-        className={classNames(
-          `${scssObj.baseClass}__c`,
-          `${scssObj.baseClass}__front`
-        )}
+        className={classNames(`${scssObj.baseClass}__c`, `${scssObj.baseClass}__front`)}
         style={{
           opacity,
-          transform: transform.interpolate((t) => `${t} rotateX(360deg)`),
+          transform: transform.interpolate(t => `${t} rotateX(360deg)`),
           background:
             type === CardType.Solid
               ? color
@@ -151,7 +143,7 @@ const MemoryGame = ({
 
   useEffect(() => {
     const newGame = [];
-    for (let i = 0; i < options / 2; i++) {
+    for (let i = 0; i < options / 2; i += 1) {
       const firstOption = {
         id: 2 * i,
         matchId: i,
@@ -190,9 +182,7 @@ const MemoryGame = ({
           multiplier = 1;
         }
 
-        const pointsLost = multiplier
-          ? multiplier * (0.66 * flippedCount - bestPossible)
-          : 0;
+        const pointsLost = multiplier ? multiplier * (0.66 * flippedCount - bestPossible) : 0;
 
         let score;
         if (pointsLost < 100) {
@@ -208,8 +198,8 @@ const MemoryGame = ({
         }
 
         openMessage({
-          name: name,
-          score: score,
+          name,
+          score,
           handleReplay: () => {
             const gameLength = game.length;
             setOptions(null);
@@ -221,11 +211,10 @@ const MemoryGame = ({
         });
       }, 500);
     }
-  }, [game]);
+  }, [game]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (flippedIndexes.length === 2) {
-    const match =
-      game[flippedIndexes[0]].matchId === game[flippedIndexes[1]].matchId;
+    const match = game[flippedIndexes[0]].matchId === game[flippedIndexes[1]].matchId;
 
     if (match) {
       const newGame = [...game];
@@ -244,27 +233,26 @@ const MemoryGame = ({
   }
 
   if (game.length === 0) return <div>loading...</div>;
-  else {
-    return (
-      <div className={`${scssObj.baseClass}__cards`}>
-        {game.map((card: any, index: any) => (
-          <div className={`${scssObj.baseClass}__card`} key={index}>
-            <Card
-              id={index}
-              color={card.color}
-              image={card.image}
-              game={game}
-              type={type}
-              flippedCount={flippedCount}
-              setFlippedCount={setFlippedCount}
-              flippedIndexes={flippedIndexes}
-              setFlippedIndexes={setFlippedIndexes}
-            />
-          </div>
-        ))}
-      </div>
-    );
-  }
+
+  return (
+    <div className={`${scssObj.baseClass}__cards`}>
+      {game.map((card: any, index: any) => (
+        <div className={`${scssObj.baseClass}__card`} key={uuidv4()}>
+          <Card
+            id={index}
+            color={card.color}
+            image={card.image}
+            game={game}
+            type={type}
+            flippedCount={flippedCount}
+            setFlippedCount={setFlippedCount}
+            flippedIndexes={flippedIndexes}
+            setFlippedIndexes={setFlippedIndexes}
+          />
+        </div>
+      ))}
+    </div>
+  );
 };
 
 interface Props {
@@ -276,12 +264,7 @@ interface Props {
   handleBlur: (e: React.FocusEvent) => void;
   handleChange: (e: React.ChangeEvent) => void;
   setFieldValue: (field: string, value: any, shouldValidate?: boolean) => void;
-  openMessage: ({
-    name,
-    score,
-    handleReplay,
-    handleReset,
-  }: MessageProps) => void;
+  openMessage: ({ name, score, handleReplay, handleReset }: MessageProps) => void;
 }
 
 const App = ({
@@ -310,28 +293,19 @@ const App = ({
   useSetGlobalHeader('Memory Game');
   useActiveSidebarItem(ActiveSidebarItem.Memory);
 
-  const moveFocus = (tx: number, type: string) => {
-    if (type === 'option') {
+  const moveFocus = (tx: number, focusType: string) => {
+    if (focusType === 'option') {
       setX(tx);
       if (values.options > 0 && initialOption > 5) {
         setScaleX(0.7);
         setTimeout(() => setScaleX(0.9), 250);
       } else setInitialOption(6);
-    } else if (type === 'type') {
+    } else if (focusType === 'type') {
       setY(tx);
       setScaleY(0.7);
       setTimeout(() => setScaleY(0.9), 250);
     }
   };
-
-  useEffect(() => console.log(name, options), [name, options]);
-
-  // if (isMobileOrTablet)
-  //   return (
-  //     <div className={`${scssObj.baseClass}`}>
-  //       This is only accessibe on laptop or desktop.
-  //     </div>
-  //   );
 
   return (
     <div className={`${scssObj.baseClass}`}>
@@ -339,7 +313,7 @@ const App = ({
         {options && (
           <div className={`${scssObj.baseClass}__action-buttons`}>
             <Button
-              style="game"
+              buttonStyle="game"
               handWriting
               onClick={() => {
                 const prevOptions = options;
@@ -351,7 +325,7 @@ const App = ({
             >
               Start Over
             </Button>
-            <Button style="game" handWriting onClick={() => setOptions(null)}>
+            <Button buttonStyle="game" handWriting onClick={() => setOptions(null)}>
               Main Menu
             </Button>
           </div>
@@ -462,7 +436,7 @@ const App = ({
                 <Button
                   disabled={isSubmitting || !isValid}
                   loading={isSubmitting}
-                  style="game"
+                  buttonStyle="game"
                   onClick={() => {
                     setName(values.name);
                     setOptions(values.options);

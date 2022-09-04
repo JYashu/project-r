@@ -61,9 +61,7 @@ const SpinnerPage = ({ copyText }: Props) => {
                 </div>
               </div>
               <div className="back">
-                <div
-                  className={classNames(`${scssObj.baseClass}__back`, 'child')}
-                >
+                <div className={classNames(`${scssObj.baseClass}__back`, 'child')}>
                   {smallSpinners.includes(type) ? (
                     <LoadingSpinner type={type} />
                   ) : (
@@ -75,7 +73,7 @@ const SpinnerPage = ({ copyText }: Props) => {
                     icon="copy"
                     iconSize="small"
                     rightIcon
-                    style="glossy"
+                    buttonStyle="glossy"
                     isRound
                     onClick={() => copyText(description)}
                   >

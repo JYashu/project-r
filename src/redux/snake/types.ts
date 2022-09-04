@@ -1,5 +1,5 @@
 import { ActionType } from 'typesafe-actions';
-import { AIMode, Coordinates } from '../../types';
+import { Coordinates } from '../../types';
 import {
   increaseSnake,
   makeMove,

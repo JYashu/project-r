@@ -19,13 +19,11 @@ const handleCloseModal = (draft: ModalState) => {
 
 export default createReducer<ModalState, ModalActions>(initialState)
   .handleAction(openModal, (state: ModalState, { payload }) =>
-    produce(state, (draft) => {
+    produce(state, draft => {
       draft.modals.unshift({ ...payload, uuid: uuidv4() });
       return draft;
-    })
+    }),
   )
-  .handleAction(closeModal, (state: ModalState) =>
-    produce(state, handleCloseModal)
-  );
+  .handleAction(closeModal, (state: ModalState) => produce(state, handleCloseModal));
 
 /* eslint-enable no-param-reassign */

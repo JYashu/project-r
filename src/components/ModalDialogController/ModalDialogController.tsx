@@ -1,9 +1,5 @@
 import { useDispatch } from 'react-redux';
-import {
-  ModalClosePayload,
-  ModalStateModal,
-  ModalTypes,
-} from '../../redux/modal';
+import { ModalClosePayload, ModalStateModal, ModalTypes } from '../../redux/modal';
 import Modal, { ModalSize } from '../Modal';
 import TestPage from '../TestPage';
 import GameWon from '../GameWon';
@@ -11,7 +7,6 @@ import GameWon from '../GameWon';
 interface Props {
   closeModal: (payload?: ModalClosePayload) => void;
   modals: ModalStateModal[];
-  isOtpSent?: boolean;
 }
 
 const modalSizes: { [modalId: string]: ModalSize } = {
@@ -34,9 +29,7 @@ const ModalDialogController = ({ modals, closeModal }: Props) => {
   return (
     <Modal
       isOpen={Boolean(modals.length)}
-      cancellable={
-        modals[0]?.cancellable === undefined ? true : modals[0]?.cancellable
-      }
+      cancellable={modals[0]?.cancellable === undefined ? true : modals[0]?.cancellable}
       handleClose={() => {
         if (modals[0]?.cancellable === undefined) {
           return closeModal();

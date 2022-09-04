@@ -1,10 +1,6 @@
 import { boolean, string } from 'yup';
 
-export interface MetaCallback<
-  RequestPayload = any,
-  SuccessPayload = any,
-  FailurePayload = any
-> {
+export interface MetaCallback<RequestPayload = any, SuccessPayload = any, FailurePayload = any> {
   requestPayload?: RequestPayload;
   onSuccess?: (payload: SuccessPayload) => void;
   onFailure?: (payload: FailurePayload) => void;

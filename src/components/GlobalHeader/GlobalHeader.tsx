@@ -61,9 +61,7 @@ const GlobalHeader = withRouter(
         </div>
         <div className={`${scssObj.baseClass}__title`}>{title}</div>
         {history.location.pathname === '/snake' && (
-          <div className={`${scssObj.baseClass}__score`}>
-            Score: {snakeScore}
-          </div>
+          <div className={`${scssObj.baseClass}__score`}>Score: {snakeScore}</div>
         )}
 
         <div className={`${scssObj.baseClass}__clock`}>
@@ -71,7 +69,7 @@ const GlobalHeader = withRouter(
         </div>
       </div>
     );
-  }
+  },
 );
 
 GlobalHeader.displayName = 'GlobalHeader';

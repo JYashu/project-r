@@ -5,11 +5,7 @@ import thunk from 'redux-thunk';
 import reducers from './rootReducer';
 import { SagaContext } from './utils/sagaContext';
 
-export default (
-  context: SagaContext,
-  // state?: Partial<State>,
-  disableSagas?: boolean
-) => {
+export default (context: SagaContext, disableSagas?: boolean) => {
   const sagaMiddleware = createSagaMiddleware({ context });
 
   const middlewares = [];
@@ -22,7 +18,7 @@ export default (
 
   const store = createStore(reducers, {}, applyMiddleware(...middlewares));
 
-  sagaMiddleware.run(require('./rootSaga').default);
+  sagaMiddleware.run(require('./rootSaga').default); //eslint-disable-line
 
   return store;
 };

@@ -39,8 +39,7 @@ const Link = ({
 }: Props) => {
   const cls = classnames(scssObj.baseClass, className, {
     [`${scssObj.baseClass}--button`]: linkStyle === 'button' || buttonProps,
-    [`${scssObj.baseClass}--button-intent-${buttonProps?.intent}`]:
-      buttonProps?.intent,
+    [`${scssObj.baseClass}--button-intent-${buttonProps?.intent}`]: buttonProps?.intent,
     [`${scssObj.baseClass}--button-transparent`]: buttonProps?.transparent,
     [`${scssObj.baseClass}--button-colors`]: buttonProps?.colors,
     [`${scssObj.baseClass}--container`]: linkStyle === 'container',
@@ -64,18 +63,9 @@ const Link = ({
   }
 
   return (
-    <ReactRouterLink
-      className={cls}
-      onClick={onClick}
-      to={to}
-      rel={rel}
-      target={target}
-    >
+    <ReactRouterLink className={cls} onClick={onClick} to={to} rel={rel} target={target}>
       {buttonProps?.icon && (
-        <Icon
-          icon={buttonProps.icon}
-          description={buttonProps?.iconDescription}
-        />
+        <Icon icon={buttonProps.icon} description={buttonProps?.iconDescription} />
       )}
 
       {children}

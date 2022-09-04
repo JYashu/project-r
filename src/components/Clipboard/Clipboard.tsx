@@ -1,10 +1,11 @@
+/* eslint-disable react/destructuring-assignment */
 import { useEffect, useRef, useState } from 'react';
 import Icon from '../Icon';
 import scssObj from './_Clipboard.scss';
 
 interface Props {
-  clipboard?: string[];
   isVisible: boolean;
+  clipboard?: string[];
   hideItself?: boolean;
   copyText: (text: string) => void;
   hideClipboard: () => void;
@@ -13,6 +14,7 @@ interface Props {
 
 const ClipboardView = ({
   clipboard,
+  isVisible,
   hideItself,
   copyText,
   hideClipboard,
@@ -30,7 +32,7 @@ const ClipboardView = ({
         hideClipboard();
       }, duration);
     }
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div>
@@ -54,7 +56,7 @@ const ClipboardView = ({
       <div className={`${scssObj.baseClass}__main`}>
         {clipboard && !cleared ? (
           <div>
-            {clipboard.map((item) => {
+            {clipboard.map(item => {
               return (
                 <div className={`${scssObj.baseClass}__item`}>
                   <div className={`${scssObj.baseClass}__text`}>{item}</div>
@@ -78,9 +80,7 @@ const ClipboardView = ({
 
 const Clipboard = (props: Props) => {
   return (
-    <div className={`${scssObj.baseClass}`}>
-      {props.isVisible && <ClipboardView {...props} />}
-    </div>
+    <div className={`${scssObj.baseClass}`}>{props.isVisible && <ClipboardView {...props} />}</div>
   );
 };
 

@@ -4,13 +4,7 @@ import { useDispatch } from 'react-redux';
 import scssObj from './_Snackbars.scss';
 import Button from '../Button';
 import { FULLSTORY_EXCLUDE_CLASS } from '../../utils/consts';
-import {
-  Img,
-  Snack,
-  SnackType,
-  SuggestionOperationType,
-  SuggestionType,
-} from '../../types';
+import { Img, Snack, SnackType, SuggestionOperationType, SuggestionType } from '../../types';
 import images from '../../utils/images';
 // import { patchTransactionSuggestion, tagTransaction } from '../../redux/transactions';
 
@@ -31,43 +25,16 @@ const defaultProps = {
   snackType: DEFAULT,
 };
 
-const Snackbar = ({
-  id,
-  duration,
-  message,
-  img,
-  undo,
-  removeSnack,
-  snackType,
-}: SnackbarProps) => {
+const Snackbar = ({ id, duration, message, img, undo, removeSnack, snackType }: SnackbarProps) => {
   const timeout = useRef<number>();
   const handleClick = useCallback(() => {
     removeSnack({ id });
   }, [id, removeSnack]);
-  const dispatch = useDispatch();
   const handleUndo = useCallback(() => {
     if (undo) {
-      if (undo.unlink) {
-        //   dispatch(
-        //     patchTransactionSuggestion.request({
-        //       accountId: undo.accountId,
-        //       transactionId: undo.transactionId,
-        //       operation: SuggestionOperationType.UNLINK,
-        //       type: SuggestionType.OUTSTANDING_CHECK,
-        //     }),
-        //   );
-        // } else {
-        //   dispatch(
-        //     tagTransaction.request({
-        //       accountId: undo.accountId,
-        //       transactionId: undo.transactionId,
-        //       matters: undo.prevAllocation ? [undo.prevAllocation] : [],
-        //     }),
-        //   );
-      }
       removeSnack({ id });
     }
-  }, [dispatch, id, removeSnack, undo]);
+  }, [id, removeSnack, undo]);
 
   useEffect(() => {
     clearTimeout(timeout.current);
@@ -101,9 +68,7 @@ const Snackbar = ({
           aria-label="snackbar-status"
         >
           <div className={`${scssObj.baseClass}__text`}>{message}</div>
-          <div className={`${scssObj.baseClass}__img`}>
-            {img && images.get(img)}
-          </div>
+          <div className={`${scssObj.baseClass}__img`}>{img && images.get(img)}</div>
         </div>
 
         {undo && (
@@ -129,7 +94,7 @@ const Snackbar = ({
 const Snackbars = ({ snacks, removeSnack }: Props) => {
   return (
     <div className={scssObj.baseClass} role="alert" aria-label="snackbar-alert">
-      {snacks.map((snack) => (
+      {snacks.map(snack => (
         <Snackbar {...snack} removeSnack={removeSnack} key={snack.id} />
       ))}
     </div>

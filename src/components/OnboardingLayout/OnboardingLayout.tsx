@@ -46,27 +46,19 @@ const OnboardingLayout = ({
       <div className={`${scssObj.baseClass}__row`}>
         <div className={`${scssObj.baseClass}__left-column`}>
           {marketingImage && (
-            <div className={`${scssObj.baseClass}__marketing-image`}>
-              {marketingImage}
-            </div>
+            <div className={`${scssObj.baseClass}__marketing-image`}>{marketingImage}</div>
           )}
         </div>
         <div className={`${scssObj.baseClass}__center-column`}>
           <div className={`${scssObj.baseClass}__content-row`}>
             <div className={`${scssObj.baseClass}__logo-row`}>
-              {!hideLogo && (
-                <div className={`${scssObj.baseClass}__logo`}>Logo</div>
-              )}
+              {!hideLogo && <div className={`${scssObj.baseClass}__logo`}>Logo</div>}
             </div>
 
             <div className={`${scssObj.baseClass}__title`}>
               <h1>{displayTitle}</h1>
-              <div className={`${scssObj.baseClass}__img`}>
-                {image && images.get(image)}
-              </div>
-              <div className={`${scssObj.baseClass}__description`}>
-                {description}
-              </div>
+              <div className={`${scssObj.baseClass}__img`}>{image && images.get(image)}</div>
+              <div className={`${scssObj.baseClass}__description`}>{description}</div>
             </div>
             <div className={`${scssObj.baseClass}__content`}>{children}</div>
           </div>

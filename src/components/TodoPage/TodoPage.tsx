@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
+import MUIDataTable, { MUIDataTableColumn, MUIDataTableOptions } from 'mui-datatables';
 import { ActiveSidebarItem, Todo } from '../../types';
-import MUIDataTable, {
-  MUIDataTableColumn,
-  MUIDataTableOptions,
-} from 'mui-datatables';
 import useSetGlobalHeader from '../../hooks/useSetGlobalHeader';
 import { getTodos } from '../../utils/api';
 import { ApiResponse, ApiSuccess } from '../../utils/apiUtils';
@@ -27,12 +24,10 @@ const TodoMuiTable = (data: Todo[], count: number) => {
         display: true,
         filter: false,
         sort: false,
-        customHeadLabelRender: (value) => {
-          return (
-            <div className={`${scssObj.baseClass}__label`}>{value.label}</div>
-          );
+        customHeadLabelRender: value => {
+          return <div className={`${scssObj.baseClass}__label`}>{value.label}</div>;
         },
-        customBodyRender: (value) => {
+        customBodyRender: value => {
           return <div className={`${scssObj.baseClass}__value`}>{value}</div>;
         },
       },
@@ -44,12 +39,10 @@ const TodoMuiTable = (data: Todo[], count: number) => {
         display: true,
         filter: false,
         sort: false,
-        customHeadLabelRender: (value) => {
-          return (
-            <div className={`${scssObj.baseClass}__label`}>{value.label}</div>
-          );
+        customHeadLabelRender: value => {
+          return <div className={`${scssObj.baseClass}__label`}>{value.label}</div>;
         },
-        customBodyRender: (value) => {
+        customBodyRender: value => {
           return <div className={`${scssObj.baseClass}__value`}>{value}</div>;
         },
       },
@@ -61,12 +54,10 @@ const TodoMuiTable = (data: Todo[], count: number) => {
         display: true,
         filter: false,
         sort: false,
-        customHeadLabelRender: (value) => {
-          return (
-            <div className={`${scssObj.baseClass}__label`}>{value.label}</div>
-          );
+        customHeadLabelRender: value => {
+          return <div className={`${scssObj.baseClass}__label`}>{value.label}</div>;
         },
-        customBodyRender: (value) => {
+        customBodyRender: value => {
           return (
             <div className={`${scssObj.baseClass}__value`}>
               {value ? 'Completed' : 'Not Completed'}
@@ -96,14 +87,7 @@ const TodoMuiTable = (data: Todo[], count: number) => {
     customFooter: () => null,
   };
 
-  return (
-    <MUIDataTable
-      data={data}
-      options={options}
-      columns={columns}
-      title="TODOS"
-    />
-  );
+  return <MUIDataTable data={data} options={options} columns={columns} title="TODOS" />;
 };
 
 const TodoPage = () => {
@@ -115,8 +99,8 @@ const TodoPage = () => {
   const [count, setCount] = useState(10);
 
   const getPageData = () =>
-    getTodos().then((response) => {
-      const result = response as ApiResponse<Todo[]> as ApiSuccess<Todo[]>;
+    getTodos().then(response => {
+      const result = (response as ApiResponse<Todo[]>) as ApiSuccess<Todo[]>;
       if (response.status === 200) {
         const totalElements = result?.data?.length;
         if (totalElements) setSize(totalElements);
@@ -133,13 +117,13 @@ const TodoPage = () => {
   useSetGlobalHeader('Todo');
   useActiveSidebarItem(ActiveSidebarItem.Todo);
 
-  if (state.fetchState == 'loading' || !state.todo)
+  if (state.fetchState === 'loading' || !state.todo)
     return (
       <div className={`${scssObj.baseClass}__spinner`}>
         <LoadingSpinner />
       </div>
     );
-  if (state.fetchState == 'error') return <p>error!...</p>;
+  if (state.fetchState === 'error') return <p>error!...</p>;
 
   return (
     <div className={`${scssObj.baseClass}`} data-testid="todo-test">
@@ -149,11 +133,7 @@ const TodoPage = () => {
       {TodoMuiTable(state.todo, count)}
       <div className={`${scssObj.baseClass}__action-buttons`}>
         <div className={`${scssObj.baseClass}__button`}>
-          <Button
-            iconSize="small"
-            icon="zoom_in"
-            onClick={() => setCount(count + 10)}
-          >
+          <Button iconSize="small" icon="zoom_in" onClick={() => setCount(count + 10)}>
             Show More Todos
           </Button>
         </div>

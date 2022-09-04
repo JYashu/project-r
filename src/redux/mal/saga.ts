@@ -7,7 +7,7 @@ import getErrorFromCatch from '../utils/getErrorFromCatch';
 
 export function* watchGetModules(
   { success, failure }: typeof getAnimes,
-  action: ReturnType<typeof getAnimes.request>
+  action: ReturnType<typeof getAnimes.request>,
 ): SagaIterator<void> {
   try {
     const { query } = action.payload;

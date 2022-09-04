@@ -7,7 +7,7 @@ import getErrorFromCatch from '../utils/getErrorFromCatch';
 
 export function* watchGetGifs(
   { success, failure }: typeof getGifs,
-  action: ReturnType<typeof getGifs.request>
+  action: ReturnType<typeof getGifs.request>,
 ): SagaIterator<void> {
   try {
     const { query } = action.payload;

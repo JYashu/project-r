@@ -5,8 +5,7 @@ import LabelText from '../LabelText';
 
 import scssObj from './_RadioButton.scss';
 
-interface Props
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'ref'> {
+interface Props extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'ref'> {
   label?: string;
   light?: boolean;
 }

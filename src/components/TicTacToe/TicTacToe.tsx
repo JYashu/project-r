@@ -1,10 +1,10 @@
+import { Helmet } from 'react-helmet';
+import { v4 as uuidv4 } from 'uuid';
 import Board from '../Board';
 import { findWinner, computerPlay } from '../../utils/tictactoeUtils';
 import { TicTacToeState } from '../../redux/tictactoe';
-import { WINNING_LINES } from '../../utils/consts';
 import scssObj from './_TicTacToe.scss';
 import useSetGlobalHeader from '../../hooks/useSetGlobalHeader';
-import { Helmet } from 'react-helmet';
 import Button from '../Button';
 import useActiveSidebarItem from '../../hooks/useActiveSidebarItem';
 import { ActiveSidebarItem, AIMode } from '../../types';
@@ -80,11 +80,11 @@ const Status = ({
   };
 
   const moves = currentHistory.map((step: any, move: any) => {
-    const desc = move ? 'Go to move #' + move : 'Go to start';
+    const desc = move ? `Go to move #${move}` : 'Go to start';
     return (
-      <div key={move}>
+      <div key={uuidv4()}>
         <Button
-          style="game"
+          buttonStyle="game"
           size="small"
           className={`${scssObj.baseClass}__btn move`}
           onClick={() => jumpTo(move)}
@@ -97,21 +97,21 @@ const Status = ({
 
   let status;
   if (winner) {
-    status = 'Winner: ' + winner;
+    status = `Winner: ${winner}`;
   } else {
-    status = 'Next Player: ' + (xIsNext ? 'X' : 'O');
+    status = `Next Player: ${xIsNext ? 'X' : 'O'}`;
   }
 
   return (
     <div className={`${scssObj.baseClass}__info`}>
       <h2 className={`${scssObj.baseClass}__status`}>{status}</h2>
-      <Button style="game" size="small" onClick={() => restart()}>
+      <Button buttonStyle="game" size="small" onClick={() => restart()}>
         Restart
       </Button>
-      <Button style="game" size="small" onClick={() => setOpen()}>
+      <Button buttonStyle="game" size="small" onClick={() => setOpen()}>
         Jump To
       </Button>
-      <Button style="game" size="small" onClick={() => undo()}>
+      <Button buttonStyle="game" size="small" onClick={() => undo()}>
         Undo
       </Button>
       {open && <ol>{moves}</ol>}
@@ -127,7 +127,7 @@ const Mode = ({ vsAI, aiMode, setVsAI, setAIMode }: ModeProps) => {
     <div className="info">
       <h2 className="status">{mode}</h2>
       <Button
-        style="game"
+        buttonStyle="game"
         size="small"
         onClick={() => {
           setVsAI(!vsAI);
@@ -200,17 +200,17 @@ const TicTacToe = ({
 
   let status;
   if (winner) {
-    status = 'Winner: ' + winner;
+    status = `Winner: ${winner}`;
   } else {
-    status = 'Next Player: ' + (xIsNext ? 'X' : 'O');
+    status = `Next Player: ${xIsNext ? 'X' : 'O'}`;
   }
 
   let name = 'Tic-Tac-Toe';
   // if (vsAI) {
   // }
   if (winner) {
-    name = name + ' | ' + status;
-  } else name = name + (vsAI ? ' | v/s AI' : ' | v/s Player');
+    name = `${name} | ${status}`;
+  } else name += vsAI ? ' | v/s AI' : ' | v/s Player';
 
   return (
     <div className={`${scssObj.baseClass}`}>
@@ -241,7 +241,7 @@ const TicTacToe = ({
       <div className={`${scssObj.baseClass}__game-board`}>
         <Board
           squares={board}
-          onClick={(i) => {
+          onClick={i => {
             handleClick(i);
           }}
         />

@@ -1,13 +1,10 @@
+/* eslint-disable consistent-return */
 import { useCallback, useEffect, useRef, useState } from 'react';
 import useActiveSidebarItem from '../../hooks/useActiveSidebarItem';
 import useSetGlobalHeader from '../../hooks/useSetGlobalHeader';
 import { ActiveSidebarItem, Coordinates } from '../../types';
 import { isMobileOrTablet } from '../../utils/getMobileOrTabletInfo';
-import {
-  clearBoard,
-  drawObject,
-  hasSnakeCollided,
-} from '../../utils/snakeUtils';
+import { clearBoard, drawObject, hasSnakeCollided } from '../../utils/snakeUtils';
 import scssObj from './_Snake.scss';
 
 interface Props {
@@ -49,8 +46,6 @@ const Snake = ({
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [context, setContext] = useState<CanvasRenderingContext2D | null>(null);
 
-  useEffect(() => console.log(gameEnded), [gameEnded]);
-
   const moveSnake = (dx = 0, dy = 0) => {
     if (dx > 0 && dy === 0 && disallowedDirection !== 'RIGHT') {
       setInPlay(true);
@@ -78,38 +73,36 @@ const Snake = ({
       switch (event.key) {
         case 'w':
         case 'i':
-          console.log(event);
           moveSnake(0, -20);
           break;
         case 's':
         case 'k':
-          console.log(event);
           moveSnake(0, 20);
           break;
         case 'a':
         case 'j':
-          console.log(event);
           if (disallowedDirection) moveSnake(-20, 0);
           break;
         case 'd':
         case 'l':
-          console.log(event);
           event.preventDefault();
           moveSnake(20, 0);
           break;
         case 'q':
-          console.log(event);
           setInPlay(!inPlay);
           if (!disallowedDirection) moveSnake(20, 0);
           break;
+        default:
+          break;
       }
     },
-    [disallowedDirection, moveSnake]
+    [disallowedDirection, moveSnake], // eslint-disable-line react-hooks/exhaustive-deps
   );
 
   useEffect(() => {
+    // eslint-disable-line consistent-return
     if (inPlay) {
-      let interval = setInterval(() => {
+      const interval = setInterval(() => {
         switch (disallowedDirection) {
           case 'RIGHT':
             moveSnake(-20, 0);
@@ -135,13 +128,12 @@ const Snake = ({
     if (isConsumed) {
       setMock();
       setIsConsumed(false);
-      console.log('here');
 
       increaseSnake();
 
       updateScore();
     }
-  }, [isConsumed, mock, height, width]);
+  }, [isConsumed, mock, height, width]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     setContext(canvasRef.current && canvasRef.current.getContext('2d'));
@@ -164,7 +156,7 @@ const Snake = ({
       stopGame();
       window.removeEventListener('keypress', handleKeyEvents);
     } else setGameEnded(false);
-  }, [context, mock, snake, height, width, handleKeyEvents]);
+  }, [context, mock, snake, height, width, handleKeyEvents]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     window.addEventListener('keypress', handleKeyEvents);
@@ -176,9 +168,7 @@ const Snake = ({
 
   if (isMobileOrTablet)
     return (
-      <div className={`${scssObj.baseClass}`}>
-        This is only accessibe on laptop or desktop.
-      </div>
+      <div className={`${scssObj.baseClass}`}>This is only accessibe on laptop or desktop.</div>
     );
 
   return (
@@ -212,9 +202,7 @@ const Snake = ({
           <div>
             Press <strong>Q</strong> to Pause / Play and Start
           </div>
-          <div className={`${scssObj.baseClass}__note`}>
-            Refresh the page to restart
-          </div>
+          <div className={`${scssObj.baseClass}__note`}>Refresh the page to restart</div>
         </div>
       </div>
     </div>

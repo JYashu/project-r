@@ -1,12 +1,12 @@
-import { GIFRepoActions, GIFRepoState } from './giphy';
-import { MALActions, MALState } from './mal';
+import { GIFRepoActions, GIFRepoState } from './giphy/types';
+import { MALActions, MALState } from './mal/types';
 import { MeState, MeActions } from './me/types';
-import { ModalActions, ModalState } from './modal';
-import { NPMRepoActions, NPMRepoState } from './npm';
-import { SidebarActions, SidebarState } from './sidebar';
-import { SnackbarActions, SnackbarState } from './snackbar';
-import { SnakeActions, SnakeState } from './snake';
-import { TicTacToeActions, TicTacToeState } from './tictactoe';
+import { ModalActions, ModalState } from './modal/types';
+import { NPMRepoActions, NPMRepoState } from './npm/types';
+import { SidebarActions, SidebarState } from './sidebar/types';
+import { SnackbarActions, SnackbarState } from './snackbar/types';
+import { SnakeActions, SnakeState } from './snake/types';
+import { TicTacToeActions, TicTacToeState } from './tictactoe/types';
 
 export interface State {
   me: MeState;

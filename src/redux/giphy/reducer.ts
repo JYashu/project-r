@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import produce from 'immer';
 import { createReducer } from 'typesafe-actions';
 import { getGifs } from './actions';
@@ -10,23 +11,20 @@ const initialState: GIFRepoState = {
 };
 
 export default createReducer<GIFRepoState, GIFRepoActions>(initialState)
-  .handleAction(getGifs.request, (state) =>
-    produce(state, (draft) => {
-      console.log(draft);
+  .handleAction(getGifs.request, state =>
+    produce(state, draft => {
       draft.isLoading = true;
-    })
+    }),
   )
   .handleAction(getGifs.success, (state, { payload }) =>
-    produce(state, (draft) => {
-      console.log(draft);
+    produce(state, draft => {
       draft.isLoading = false;
       draft.data = payload.data;
-    })
+    }),
   )
   .handleAction(getGifs.failure, (state, { payload }) =>
-    produce(state, (draft) => {
-      console.log(draft);
+    produce(state, draft => {
       draft.isLoading = false;
       draft.error = payload.message;
-    })
+    }),
   );

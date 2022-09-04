@@ -1,9 +1,5 @@
 import { ActiveSidebarItem } from '../../types';
-import {
-  setActiveSidebarItem,
-  setIsCollapsed,
-  setIsGamesOpen,
-} from './actions';
+import { setActiveSidebarItem, setIsCollapsed, setIsGamesOpen } from './actions';
 
 export interface SidebarState {
   isCollapsed: boolean;

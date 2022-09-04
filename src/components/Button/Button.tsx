@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 import * as React from 'react';
 import classnames from 'classnames';
 
@@ -8,16 +9,9 @@ import LoadingSpinner from '../LoadingSpinner';
 
 import scssObj from './_Button.scss';
 
-type ButtonProps =
-  | 'children'
-  | 'className'
-  | 'disabled'
-  | 'onClick'
-  | 'onFocus'
-  | 'role';
+type ButtonProps = 'children' | 'className' | 'disabled' | 'onClick' | 'onFocus' | 'role';
 
-export interface Props
-  extends Pick<React.ComponentProps<'button'>, ButtonProps> {
+export interface Props extends Pick<React.ComponentProps<'button'>, ButtonProps> {
   icon?: string;
   iconDescription?: string;
   iconSize?: 'small';
@@ -33,7 +27,7 @@ export interface Props
   ignoreChildren?: boolean;
   ariaExpanded?: boolean;
   ariaLabel?: string;
-  style?: 'game' | 'normal' | 'glossy' | 'abstract';
+  buttonStyle?: 'game' | 'normal' | 'glossy' | 'abstract';
   includeFocus?: boolean;
   isRound?: boolean;
   handWriting?: boolean;
@@ -62,15 +56,14 @@ const Button = ({
   ignoreChildren,
   ariaExpanded,
   ariaLabel,
-  style,
+  buttonStyle,
   includeFocus,
   isRound,
   handWriting,
   solid,
 }: Props): React.ReactElement<'button'> => {
   const buttonCls = classnames(scssObj.baseClass, className, {
-    [`${scssObj.baseClass}--empty`]:
-      !React.Children.count(children) || !children || ignoreChildren,
+    [`${scssObj.baseClass}--empty`]: !React.Children.count(children) || !children || ignoreChildren,
     [`${scssObj.baseClass}--has-icon`]: icon,
     [`${scssObj.baseClass}--intent-${intent}`]: intent,
     [`${scssObj.baseClass}--loading`]: loading,
@@ -78,7 +71,7 @@ const Button = ({
     [`${scssObj.baseClass}--size-${size}`]: size,
     [`${scssObj.baseClass}--transparent`]: !intent && transparent,
     [`${scssObj.baseClass}--solid`]: intent || !transparent || solid,
-    [`${scssObj.baseClass}--${style}`]: style,
+    [`${scssObj.baseClass}--${buttonStyle}`]: buttonStyle,
     [`${scssObj.baseClass}--include-focus`]: includeFocus,
     [`${scssObj.baseClass}--is-round`]: isRound,
     [`${scssObj.baseClass}--hand-writing`]: handWriting,
@@ -113,7 +106,7 @@ const Button = ({
       <div className={`${scssObj.baseClass}__loader-wrapper`}>
         <LoadingSpinner intent={intent} size="small" />
       </div>
-      {style === 'abstract' && (
+      {buttonStyle === 'abstract' && (
         <>
           <span className="left" />
           <span className="top" />

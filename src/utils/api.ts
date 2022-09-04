@@ -1,13 +1,13 @@
+/* eslint-disable prettier/prettier */
 import { NPMResponse, Todo } from '../types';
 import { ApiResponse, ApiStatusType, HttpMethod } from './apiUtils';
 
 const createFetchOptions = <Body, AdditionalHeaders>(
   method: HttpMethod,
   body?: Body,
-  additionalHeaders?: AdditionalHeaders
+  additionalHeaders?: AdditionalHeaders,
 ) => {
-  const setContentType =
-    body instanceof FormData ? null : { 'Content-Type': 'application/json' };
+  const setContentType = body instanceof FormData ? null : { 'Content-Type': 'application/json' };
 
   const headers: RequestInit['headers'] = {
     Accepts: 'application/json',
@@ -32,32 +32,27 @@ function api<ResponseData, Body = void, AdditionalHeaders = void>() {
       method: HttpMethod,
       urlFn: ((params: Params) => string) | (() => string),
       transform?: (json: unknown) => ResponseData,
-      additionalHeaders?: AdditionalHeaders
+      additionalHeaders?: AdditionalHeaders,
     ) =>
     async (params: Params, body: Body): Promise<ApiResponse<ResponseData>> => {
       const url = urlFn(params);
-      const resp = await fetch(
-        url,
-        createFetchOptions(method, body, additionalHeaders)
-      );
+      const resp = await fetch(url, createFetchOptions(method, body, additionalHeaders));
       try {
         if (resp.status >= 400) {
           const errorJson = await resp.json();
           throw new Error(errorJson.message);
         }
 
-        let responseData = await resp.json().catch(() => undefined);
+        const responseData = await resp.json().catch(() => undefined);
 
-        const data: ResponseData = transform
-          ? transform(responseData)
-          : responseData;
+        const data: ResponseData = transform ? transform(responseData) : responseData;
 
         return {
           status: resp.status,
           type: ApiStatusType.Success,
           data,
         };
-      } catch (err: unknown) {
+      } catch (err) {
         return {
           status: resp.status,
           type: ApiStatusType.Failure,
@@ -71,14 +66,11 @@ function HtmlApi<Body = void, AdditionalHeaders = void>() {
   return <Params = void>(
       method: HttpMethod,
       urlFn: ((params: Params) => string) | (() => string),
-      additionalHeaders?: AdditionalHeaders
+      additionalHeaders?: AdditionalHeaders,
     ) =>
     async (params: Params, body: Body): Promise<ApiResponse<string>> => {
       const url = urlFn(params);
-      const resp = await fetch(
-        url,
-        createFetchOptions(method, body, additionalHeaders)
-      );
+      const resp = await fetch(url, createFetchOptions(method, body, additionalHeaders));
 
       try {
         if (resp.status >= 400) {
@@ -96,7 +88,7 @@ function HtmlApi<Body = void, AdditionalHeaders = void>() {
           type: ApiStatusType.Success,
           data: response,
         };
-      } catch (err: unknown) {
+      } catch (err) {
         return {
           status: resp.status,
           type: ApiStatusType.Failure,

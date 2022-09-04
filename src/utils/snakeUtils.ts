@@ -12,7 +12,7 @@ export const drawObject = (
   fillColor: string,
   strokeStyle = '#146356',
 ) => {
-  let array = [...objectBody];
+  const array = [...objectBody];
   if (context) {
     if (array.length > 1) {
       context.fillStyle = '#ff0000';
@@ -31,7 +31,7 @@ export const drawObject = (
 };
 
 function randomNumber(min: number, max: number) {
-  let random = Math.random() * max;
+  const random = Math.random() * max;
   return random - (random % 20);
 }
 

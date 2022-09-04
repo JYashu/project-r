@@ -10,13 +10,7 @@ interface Props {
   handleClose?: () => void;
 }
 
-const GameWon = ({
-  name,
-  score,
-  handleReplay,
-  handleReset,
-  handleClose,
-}: Props) => {
+const GameWon = ({ name, score, handleReplay, handleReset, handleClose }: Props) => {
   messages.sort(() => Math.random() - 0.5);
   const title = `${messages[0].title}${name ? `, ${name}!` : '!'}`;
   const displayScore = score ? `You scored ${score}` : '';

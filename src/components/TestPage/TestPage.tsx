@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import useTimeout from '../../hooks/useTimeout';
 import { ActiveSidebarItem, SpinnerType } from '../../types';
 import { FULLSTORY_EXCLUDE_CLASS } from '../../utils/consts';
@@ -10,7 +11,6 @@ import Field from '../Field';
 import LoadingSpinner from '../LoadingSpinner';
 import { Values } from './types';
 import scssObj from './_TestPage.scss';
-import { v4 as uuidv4 } from 'uuid';
 import useSetGlobalHeader from '../../hooks/useSetGlobalHeader';
 import useActiveSidebarItem from '../../hooks/useActiveSidebarItem';
 
@@ -21,11 +21,7 @@ interface Props {
   values: Values;
   errors: ErrorValues<Values>;
   touched: TouchedValues<Values>;
-  setFieldValue: (
-    field: string,
-    value?: any,
-    shouldValidate?: boolean | undefined
-  ) => void;
+  setFieldValue: (field: string, value?: any, shouldValidate?: boolean | undefined) => void;
   handleBlur: (e: React.FocusEvent) => void;
   handleChange: (e: React.ChangeEvent) => void;
   handleOpenModal: () => void;
@@ -47,7 +43,6 @@ const TestApp = ({
 }: Props) => {
   const [loading, setLoading] = useState(true);
   const [state, setState] = useState('');
-  const [value, setValue] = useState('');
 
   useActiveSidebarItem(ActiveSidebarItem.Test);
   useSetGlobalHeader('Test Page');
@@ -69,11 +64,9 @@ const TestApp = ({
           <div className={`${scssObj.baseClass}__wrapper`}>
             <div className={`${scssObj.baseClass}__head`}>Test Page</div>
           </div>
-          <Button
-            intent="primary"
-            icon="file_download"
-            onClick={handleOpenModal}
-          >{`Click Me`}</Button>
+          <Button intent="primary" icon="file_download" onClick={handleOpenModal}>
+            Click Me
+          </Button>
 
           <div className={`${scssObj.baseClass}__glitch`}>
             <Button intent="primary" onClick={() => copyText(uuidv4())}>
@@ -83,21 +76,18 @@ const TestApp = ({
           <div className={`${scssObj.baseClass}__fields`}>
             <Field
               // disabled={viewOnly}
-              className={classnames(
-                `${scssObj.baseClass}__state`,
-                FULLSTORY_EXCLUDE_CLASS
-              )}
+              className={classnames(`${scssObj.baseClass}__state`, FULLSTORY_EXCLUDE_CLASS)}
               // errorMessage={errors?.state}
               name="state"
               touched={touched?.state}
               value={values.state}
               label="State"
             >
-              {(fieldName) => (
+              {fieldName => (
                 <StateDropdown
                   className={`${scssObj.baseClass}__states-dropdown`}
                   handleBlur={() => setState(fieldName)}
-                  handleChange={(option) => {
+                  handleChange={option => {
                     if (!option) {
                       setFieldValue(fieldName, '');
                       return;

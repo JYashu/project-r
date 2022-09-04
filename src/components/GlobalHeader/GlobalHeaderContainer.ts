@@ -1,10 +1,6 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import {
-  selectGlobalHeaderTitle,
-  setGlobalHeader,
-  setIsContentStatic,
-} from '../../redux/me';
+import { selectGlobalHeaderTitle, setGlobalHeader, setIsContentStatic } from '../../redux/me';
 import { selectIsCollapsed, setIsCollapsed } from '../../redux/sidebar';
 import { selectSnakeState } from '../../redux/snake';
 import { State } from '../../redux/types';
@@ -22,10 +18,8 @@ const mapState = (state: State) => {
 
 const mapDispatch = (dispatch: Dispatch) => ({
   setGlobalTitle: (title: string) => dispatch(setGlobalHeader({ title })),
-  handleSideBarState: (isCollapsed: boolean) =>
-    dispatch(setIsCollapsed({ isCollapsed })),
-  handleStaticContent: (isStatic: boolean) =>
-    dispatch(setIsContentStatic({ isStatic })),
+  handleSideBarState: (isCollapsed: boolean) => dispatch(setIsCollapsed({ isCollapsed })),
+  handleStaticContent: (isStatic: boolean) => dispatch(setIsContentStatic({ isStatic })),
 });
 
 export default connect(mapState, mapDispatch)(GlobalHeader);

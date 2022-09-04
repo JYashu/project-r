@@ -22,8 +22,7 @@ const mapState = (state: State) => ({
 
 const mapDispatch = (dispatch: Dispatch) => ({
   updateScore: (reset?: boolean) => dispatch(scoreUpdates({ reset })),
-  move: (direction: string, dx: number, dy: number) =>
-    dispatch(makeMove({ direction, dx, dy })),
+  move: (direction: string, dx: number, dy: number) => dispatch(makeMove({ direction, dx, dy })),
   increaseSnake: () => dispatch(increaseSnake()),
   stopGame: () => dispatch(stopGame()),
   setMock: () => dispatch(setMock()),

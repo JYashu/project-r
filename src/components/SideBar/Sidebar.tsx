@@ -1,14 +1,8 @@
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import scssObj from './_Sidebar.scss';
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
-import {
-  ProSidebar,
-  SidebarContent,
-  Menu,
-  MenuItem,
-  SidebarFooter,
-} from 'react-pro-sidebar';
+import { ProSidebar, SidebarContent, Menu, MenuItem, SidebarFooter } from 'react-pro-sidebar';
+import scssObj from './_Sidebar.scss';
 import { ActiveSidebarItem, Config } from '../../types';
 import Icon from '../Icon';
 import { isMobileOrTablet } from '../../utils/getMobileOrTabletInfo';
@@ -23,14 +17,7 @@ interface Props extends RouteComponentProps {
 }
 
 const Sidebar = withRouter(
-  ({
-    history,
-    config,
-    isCollapsed,
-    activeSidebarItem,
-    handleState,
-    showClipboard,
-  }: Props) => {
+  ({ history, config, isCollapsed, activeSidebarItem, handleState, showClipboard }: Props) => {
     const [isRecollapse, setRecollapse] = useState(true);
 
     if (
@@ -41,9 +28,7 @@ const Sidebar = withRouter(
       return null;
     }
 
-    const itemClassName = `${scssObj.baseClass}__item-${
-      config.sidebar.rtl ? 'right' : 'left'
-    }`;
+    const itemClassName = `${scssObj.baseClass}__item-${config.sidebar.rtl ? 'right' : 'left'}`;
 
     return (
       <ProSidebar
@@ -63,11 +48,7 @@ const Sidebar = withRouter(
         }}
       >
         <SidebarContent>
-          <Menu
-            key={uuidv4()}
-            className={`${scssObj.baseClass}__footer_menu`}
-            iconShape="square"
-          >
+          <Menu key={uuidv4()} className={`${scssObj.baseClass}__footer_menu`} iconShape="square">
             <MenuItem
               className={itemClassName}
               key={uuidv4()}
@@ -75,7 +56,7 @@ const Sidebar = withRouter(
               icon={<Icon removeOutline size="medium" icon="gif" />}
             >
               Giphy Finder
-              <Link tabIndex={-1} to={'/giphy-engine'} />
+              <Link tabIndex={-1} to="/giphy-engine" />
             </MenuItem>
             <MenuItem
               className={itemClassName}
@@ -84,7 +65,7 @@ const Sidebar = withRouter(
               icon={<Icon removeOutline size="small" icon="search" />}
             >
               NPM Engine
-              <Link tabIndex={-1} to={'/npm-engine'} />
+              <Link tabIndex={-1} to="/npm-engine" />
             </MenuItem>
             {/* <MenuItem
               className={itemClassName}
@@ -104,29 +85,19 @@ const Sidebar = withRouter(
               icon={<Icon removeOutline size="small" icon="restart_alt" />}
             >
               Spinners
-              <Link tabIndex={-1} to={'/spinners'} />
+              <Link tabIndex={-1} to="/spinners" />
             </MenuItem>
           </Menu>
           <SidebarFooter className={`${scssObj.baseClass}__games`}>
-            <Menu
-              key={uuidv4()}
-              className={`${scssObj.baseClass}__games-menu`}
-              iconShape="square"
-            >
+            <Menu key={uuidv4()} className={`${scssObj.baseClass}__games-menu`} iconShape="square">
               <MenuItem
                 className={itemClassName}
                 key={uuidv4()}
                 active={activeSidebarItem === ActiveSidebarItem.TicTacToe}
-                icon={
-                  <Icon
-                    removeOutline
-                    size="small"
-                    icon="align_vertical_center"
-                  />
-                }
+                icon={<Icon removeOutline size="small" icon="align_vertical_center" />}
               >
                 Tic Tac Toe
-                <Link tabIndex={-1} to={'/tic-tac-toe'} />
+                <Link tabIndex={-1} to="/tic-tac-toe" />
               </MenuItem>
               <MenuItem
                 className={itemClassName}
@@ -135,7 +106,7 @@ const Sidebar = withRouter(
                 icon={<Icon removeOutline size="small" icon="gesture" />}
               >
                 Snake
-                <Link tabIndex={-1} to={'/snake'} />
+                <Link tabIndex={-1} to="/snake" />
               </MenuItem>
               <MenuItem
                 className={itemClassName}
@@ -144,18 +115,14 @@ const Sidebar = withRouter(
                 icon={<Icon removeOutline size="small" icon="memory" />}
               >
                 Memory
-                <Link tabIndex={-1} to={'/memory'} />
+                <Link tabIndex={-1} to="/memory" />
               </MenuItem>
             </Menu>
           </SidebarFooter>
           <SidebarFooter className={`${scssObj.baseClass}__games`} />
         </SidebarContent>
         <SidebarFooter className={`${scssObj.baseClass}__footer`}>
-          <Menu
-            key={uuidv4()}
-            className={`${scssObj.baseClass}__footer_menu`}
-            iconShape="square"
-          >
+          <Menu key={uuidv4()} className={`${scssObj.baseClass}__footer_menu`} iconShape="square">
             <MenuItem
               className={itemClassName}
               key={uuidv4()}
@@ -163,7 +130,7 @@ const Sidebar = withRouter(
               icon={<Icon removeOutline size="small" icon="fact_check" />}
             >
               Test Page
-              <Link tabIndex={-1} to={'/test'} />
+              <Link tabIndex={-1} to="/test" />
             </MenuItem>
             <MenuItem
               className={itemClassName}
@@ -182,7 +149,7 @@ const Sidebar = withRouter(
               icon={<Icon removeOutline size="small" icon="settings" />}
             >
               Settings
-              <Link tabIndex={-1} to={'/settings'} />
+              <Link tabIndex={-1} to="/settings" />
             </MenuItem>
 
             <MenuItem
@@ -196,7 +163,7 @@ const Sidebar = withRouter(
         </SidebarFooter>
       </ProSidebar>
     );
-  }
+  },
 );
 
 export default Sidebar;

@@ -1,10 +1,6 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import {
-  getGifs,
-  selectGIFRepoData,
-  selectGIFRepoState,
-} from '../../redux/giphy';
+import { getGifs, selectGIFRepoData, selectGIFRepoState } from '../../redux/giphy';
 import { State } from '../../redux/types';
 import GiphySearchEngine from './GiphySearchEngine';
 import { Values } from './types';
@@ -28,12 +24,12 @@ const mapDispatch = (dispatch: Dispatch) => ({
         getGifs.request(
           { query },
           {
-            onSuccess: (response) => {
+            onSuccess: response => {
               resolve(response);
             },
             onFailure: reject,
-          }
-        )
+          },
+        ),
       );
     });
   },

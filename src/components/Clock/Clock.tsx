@@ -1,3 +1,6 @@
+/* eslint-disable no-nested-ternary */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import Icon from '../Icon';
@@ -10,9 +13,7 @@ interface Props {
 const Clock = ({ is12H }: Props) => {
   const [stopwatch, setStopwatch] = useState(false);
   const [stopwatchStart, setStopwatchStart] = useState<Date | null>(null);
-  const [stopwatchPauseStart, setStopwatchPauseStart] = useState<Date | null>(
-    null
-  );
+  const [stopwatchPauseStart, setStopwatchPauseStart] = useState<Date | null>(null);
   const [stopwatchPauseTime, setStopwatchPauseTime] = useState(0);
   const [sms, setStopwatchMiliSeconds] = useState(0);
   const [sss, setStopwatchSeconds] = useState(0);
@@ -28,39 +29,32 @@ const Clock = ({ is12H }: Props) => {
     const minutes = date.getMinutes();
     const seconds = date.getSeconds();
 
-    if (hours == 0) {
+    if (hours === 0) {
       hours = 12;
     }
     if (hours > 12) {
-      if (is12H) hours = hours - 12;
+      if (is12H) hours -= 12;
       setSession('PM');
     }
 
-    setHours(hours < 10 ? '0' + hours : '' + hours);
-    setMinutes(minutes < 10 ? '0' + minutes : '' + minutes);
-    setSeconds(seconds < 10 ? '0' + seconds : '' + seconds);
+    setHours(hours < 10 ? `0${hours}` : `${hours}`);
+    setMinutes(minutes < 10 ? `0${minutes}` : `${minutes}`);
+    setSeconds(seconds < 10 ? `0${seconds}` : `${seconds}`);
   };
 
   const { displayMinutes, displaySeconds, displayMiliSeconds } = {
-    displayMinutes: smm < 10 ? '0' + smm : '' + smm,
-    displaySeconds: sss < 10 ? '0' + sss : '' + sss,
+    displayMinutes: smm < 10 ? `0${smm}` : `${smm}`,
+    displaySeconds: sss < 10 ? `0${sss}` : `${sss}`,
     displayMiliSeconds:
-      sms < 10
-        ? '00' + Math.floor(sms)
-        : sms < 100
-        ? '0' + Math.floor(sms)
-        : Math.floor(sms),
+      sms < 10 ? `00${Math.floor(sms)}` : sms < 100 ? `0${Math.floor(sms)}` : Math.floor(sms),
   };
 
   const updateStopwatch = () => {
     if (!stopwatchStart) return;
-    const timePassed =
-      date.getTime() - stopwatchStart.getTime() - stopwatchPauseTime;
+    const timePassed = date.getTime() - stopwatchStart.getTime() - stopwatchPauseTime;
     const minutes = Math.floor(timePassed / (1000 * 60));
     const seconds = Math.floor((timePassed - minutes * 1000 * 60) / 1000);
-    const miliSeconds = Math.floor(
-      timePassed - minutes * 60 * 1000 - seconds * 1000
-    );
+    const miliSeconds = Math.floor(timePassed - minutes * 60 * 1000 - seconds * 1000);
 
     setStopwatchMinutes(minutes);
     setStopwatchSeconds(seconds);
@@ -78,7 +72,7 @@ const Clock = ({ is12H }: Props) => {
   };
 
   useEffect(() => {
-    let interval = setInterval(() => {
+    const interval = setInterval(() => {
       setDate(new Date());
       currentTime();
       if (stopwatch) updateStopwatch();
@@ -89,16 +83,12 @@ const Clock = ({ is12H }: Props) => {
   const onClick = () => {
     setStopwatch(!stopwatch);
     if (!stopwatchStart) setStopwatchStart(new Date());
+    else if (!stopwatchPauseStart) setStopwatchPauseStart(new Date());
     else {
-      if (!stopwatchPauseStart) setStopwatchPauseStart(new Date());
-      else {
-        setStopwatchPauseTime(
-          stopwatchPauseTime +
-            new Date().getTime() -
-            stopwatchPauseStart.getTime()
-        );
-        setStopwatchPauseStart(null);
-      }
+      setStopwatchPauseTime(
+        stopwatchPauseTime + new Date().getTime() - stopwatchPauseStart.getTime(),
+      );
+      setStopwatchPauseStart(null);
     }
   };
 
@@ -106,9 +96,7 @@ const Clock = ({ is12H }: Props) => {
     <div className={`${scssObj.baseClass}`}>
       <div className={classNames('item')}>
         {hh !== '' && (
-          <div
-            className={`${scssObj.baseClass}__item`}
-          >{`${hh}:${mm}:${ss} ${session}`}</div>
+          <div className={`${scssObj.baseClass}__item`}>{`${hh}:${mm}:${ss} ${session}`}</div>
         )}
       </div>
       <div className={classNames('item')}>
@@ -117,12 +105,7 @@ const Clock = ({ is12H }: Props) => {
             className={`${scssObj.baseClass}__stopwatch`}
             onClick={onClick}
           >{`${displayMinutes}:${displaySeconds}:${displayMiliSeconds}`}</div>
-          <Icon
-            icon="restart_alt"
-            size="small"
-            removeOutline
-            onClickHandler={resetStopwatch}
-          />
+          <Icon icon="restart_alt" size="small" removeOutline onClickHandler={resetStopwatch} />
         </div>
       </div>
       <div className={classNames('item')}>

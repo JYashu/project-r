@@ -7,16 +7,13 @@ import getErrorFromCatch from '../utils/getErrorFromCatch';
 
 export function* watchGetModules(
   { success, failure }: typeof getModules,
-  action: ReturnType<typeof getModules.request>
+  action: ReturnType<typeof getModules.request>,
 ): SagaIterator<void> {
   try {
     const { query } = action.payload;
-    const resp: SagaReturnType<typeof Api.getModules> = yield call(
-      Api.getModules,
-      {
-        query,
-      }
-    );
+    const resp: SagaReturnType<typeof Api.getModules> = yield call(Api.getModules, {
+      query,
+    });
 
     if (isApiSuccess(resp)) {
       yield put(success(resp.data, action.meta));

@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import produce from 'immer';
 import { createReducer } from 'typesafe-actions';
 import { getAnimes } from './actions';
@@ -10,23 +11,20 @@ const initialState: MALState = {
 };
 
 export default createReducer<MALState, MALActions>(initialState)
-  .handleAction(getAnimes.request, (state) =>
-    produce(state, (draft) => {
-      console.log(draft);
+  .handleAction(getAnimes.request, state =>
+    produce(state, draft => {
       draft.isLoading = true;
-    })
+    }),
   )
   .handleAction(getAnimes.success, (state, payload) =>
-    produce(state, (draft) => {
-      console.log(draft);
+    produce(state, draft => {
       draft.isLoading = false;
       draft.data = payload;
-    })
+    }),
   )
   .handleAction(getAnimes.failure, (state, { payload }) =>
-    produce(state, (draft) => {
-      console.log(draft);
+    produce(state, draft => {
       draft.isLoading = false;
       draft.error = payload.message;
-    })
+    }),
   );

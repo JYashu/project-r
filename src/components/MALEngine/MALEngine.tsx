@@ -5,7 +5,6 @@ import { Values } from './types';
 import scssObj from './_MALEngine.scss';
 
 interface Props {
-  // data: NPMRepoData[];
   isLoading: boolean;
   error: string | null;
   isSubmitting?: boolean;
@@ -19,7 +18,6 @@ interface Props {
 }
 
 const MALEngine = ({
-  // data,
   isLoading,
   error,
   isSubmitting,
@@ -35,7 +33,7 @@ const MALEngine = ({
   return (
     <div className={`${scssObj.baseClass}`}>
       <form
-        onSubmit={(e) => {
+        onSubmit={e => {
           e.preventDefault();
           handleSubmit();
         }}

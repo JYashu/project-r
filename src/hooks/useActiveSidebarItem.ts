@@ -8,5 +8,5 @@ export default (activeSidebarItem: ActiveSidebarItem) => {
 
   useEffect(() => {
     dispatch(setActiveSidebarItem({ activeSidebarItem }));
-  }, [dispatch]);
+  }, [dispatch, activeSidebarItem]);
 };

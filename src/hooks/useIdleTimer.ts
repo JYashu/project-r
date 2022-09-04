@@ -2,9 +2,7 @@ import { useEffect, useState } from 'react';
 import { useIdleTimer } from 'react-idle-timer';
 
 export default (callback: () => void, delay: number) => {
-  const [countDownTicker, SetcountDownTicker] = useState(
-    new Date().getTime() + delay
-  );
+  const [countDownTicker, SetcountDownTicker] = useState(new Date().getTime() + delay);
 
   const [count, SetCount] = useState(delay);
 

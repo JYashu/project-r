@@ -33,6 +33,7 @@ const Cube = () => {
             width="140px"
             height="140px"
             className="giphy-embed"
+            alt="gif display"
           />
         </div>
         <div className="side left">
@@ -41,6 +42,7 @@ const Cube = () => {
             width="140px"
             height="140px"
             className="giphy-embed"
+            alt="gif display"
           />
         </div>
         <div className="side top">
@@ -49,6 +51,7 @@ const Cube = () => {
             width="140px"
             height="140px"
             className="giphy-embed"
+            alt="gif display"
           />
         </div>
         <div className="side right">
@@ -57,6 +60,7 @@ const Cube = () => {
             width="140px"
             height="140px"
             className="giphy-embed"
+            alt="gif display"
           />
         </div>
         <div className="side bottom">
@@ -65,6 +69,7 @@ const Cube = () => {
             width="140px"
             height="140px"
             className="giphy-embed"
+            alt="gif display"
           />
         </div>
         <div className="side front">
@@ -73,6 +78,7 @@ const Cube = () => {
             width="140px"
             height="140px"
             className="giphy-embed"
+            alt="gif display"
           />
         </div>
       </div>
@@ -105,9 +111,8 @@ const GiphySearchEngine = ({
         </div>
         <form
           className={`${scssObj.baseClass}__form`}
-          onSubmit={(e) => {
+          onSubmit={e => {
             e.preventDefault();
-            console.log('submt');
             handleSubmit();
           }}
         >
@@ -136,35 +141,27 @@ const GiphySearchEngine = ({
             return (
               <div className={`${scssObj.baseClass}__gif`}>
                 <div className={`${scssObj.baseClass}__gif-container`}>
-                  <picture
-                    className={classNames(
-                      `${scssObj.baseClass}__content`,
-                      'data'
-                    )}
-                  >
+                  <picture className={classNames(`${scssObj.baseClass}__content`, 'data')}>
                     <img
                       className={`${scssObj.baseClass}__image`}
                       src={element.images.fixed_height_downsampled.url}
                       height="200px"
                       width="200px"
+                      alt="result gif"
                     />
                   </picture>
                   <div className="overlay" />
                   <div className="details">
                     <div className={`${scssObj.baseClass}__link-holder`}>
                       <Link isNative to={element.url} target="_blank">
-                        <Button style="abstract" isRound>
+                        <Button buttonStyle="abstract" isRound>
                           Giphy
                         </Button>
                       </Link>
                     </div>
                     <div className={`${scssObj.baseClass}__link-holder`}>
-                      <Link
-                        isNative
-                        to={element.source_post_url}
-                        target="_blank"
-                      >
-                        <Button style="abstract" isRound>
+                      <Link isNative to={element.source_post_url} target="_blank">
+                        <Button buttonStyle="abstract" isRound>
                           Original
                         </Button>
                       </Link>

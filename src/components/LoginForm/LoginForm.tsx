@@ -11,7 +11,6 @@ import { ErrorValues, TouchedValues } from '../../utils/typeHelpers';
 import Button from '../Button';
 import Field from '../Field';
 import LoadingSpinner from '../LoadingSpinner';
-import Link from '../Link';
 
 interface Props {
   error?: string;
@@ -24,7 +23,6 @@ interface Props {
   touched: TouchedValues<Values>;
   user: User | null;
   values: Values;
-  // verifiedUser?: User;
 }
 
 const LoginForm = ({
@@ -44,8 +42,6 @@ const LoginForm = ({
     }
   }, [setFieldValue, email]);
 
-  useEffect(() => console.log(errors), [errors]);
-
   let signInErrorMsg: string = '';
 
   if (!values.username && !values.password) {
@@ -62,11 +58,7 @@ const LoginForm = ({
 
   signInErrorMsg = signInErrorMsg.concat('required field. You are on ');
   return (
-    <form
-      aria-label="login-form"
-      onSubmit={handleSubmit}
-      className={`${scssObj.baseClass}__form`}
-    >
+    <form aria-label="login-form" onSubmit={handleSubmit} className={`${scssObj.baseClass}__form`}>
       <Helmet>
         <title>Login</title>
       </Helmet>
@@ -84,10 +76,7 @@ const LoginForm = ({
           placeholder="Email"
           onChange={handleChange}
           value={values.username}
-          className={classnames(
-            `${scssObj.baseClass}__input`,
-            FULLSTORY_EXCLUDE_CLASS
-          )}
+          className={classnames(`${scssObj.baseClass}__input`, FULLSTORY_EXCLUDE_CLASS)}
           touched={touched.username}
           errorClassName={`${scssObj.baseClass}__error`}
           errorMessage={errors.username}
@@ -104,10 +93,7 @@ const LoginForm = ({
           errorClassName={`${scssObj.baseClass}__error`}
           errorMessage={errors.password}
           touched={touched.password}
-          className={classnames(
-            `${scssObj.baseClass}__input`,
-            FULLSTORY_EXCLUDE_CLASS
-          )}
+          className={classnames(`${scssObj.baseClass}__input`, FULLSTORY_EXCLUDE_CLASS)}
         />
       </div>
       <Button

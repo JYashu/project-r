@@ -18,10 +18,6 @@ const Settings = ({ config, handleSettingsChange }: Props) => {
 
   useTimeout(() => setLoading(false), 1800);
 
-  useEffect(() => {
-    console.log(config);
-  }, [config]);
-
   useActiveSidebarItem(ActiveSidebarItem.Settings);
   useSetGlobalHeader('Settings');
 
@@ -44,7 +40,7 @@ const Settings = ({ config, handleSettingsChange }: Props) => {
     // create "a" HTLM element with href to file
     const link = document.createElement('a');
     link.href = href;
-    link.download = fileName + '.json';
+    link.download = `${fileName}.json`;
     document.body.appendChild(link);
     // link.click();
 
@@ -93,11 +89,11 @@ const Settings = ({ config, handleSettingsChange }: Props) => {
               offColor="#bbbbbb"
             />
             <div />
-            <Button style="glossy" size="small" onClick={applyConfig} isRound>
+            <Button buttonStyle="glossy" size="small" onClick={applyConfig} isRound>
               Apply
             </Button>
             <Button
-              style="glossy"
+              buttonStyle="glossy"
               size="small"
               icon="file_download"
               onClick={downloadFile}

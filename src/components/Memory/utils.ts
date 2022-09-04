@@ -19,12 +19,7 @@ const initialValues = (): Values => {
 };
 
 interface OuterProps {
-  openMessage: ({
-    name,
-    score,
-    handleReplay,
-    handleReset,
-  }: MessageProps) => void;
+  openMessage: ({ name, score, handleReplay, handleReset }: MessageProps) => void;
 }
 
 export const withState = withFormik<OuterProps, Values>({

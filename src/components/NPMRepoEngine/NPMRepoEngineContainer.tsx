@@ -1,10 +1,6 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import {
-  getModules,
-  selectNPMRepoData,
-  selectNPMRepoState,
-} from '../../redux/npm';
+import { getModules, selectNPMRepoData, selectNPMRepoState } from '../../redux/npm';
 import { addSnack } from '../../redux/snackbar';
 import { State } from '../../redux/types';
 import NPMRepoEngine from './NPMRepoEngine';
@@ -28,12 +24,12 @@ const mapDispatch = (dispatch: Dispatch) => ({
         getModules.request(
           { query },
           {
-            onSuccess: (response) => {
+            onSuccess: response => {
               resolve(response);
             },
             onFailure: reject,
-          }
-        )
+          },
+        ),
       );
     });
   },

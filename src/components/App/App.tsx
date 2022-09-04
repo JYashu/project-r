@@ -1,17 +1,17 @@
 import QueryString from 'query-string';
 import React, { useEffect } from 'react';
+import { Redirect, Route, RouteComponentProps } from 'react-router-dom';
+import { hot } from 'react-hot-loader/root';
+import Draggable from 'react-draggable';
 import TodoPage from '../TodoPage';
 import Sidebar from '../SideBar';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
-import { Redirect, Route, RouteComponentProps } from 'react-router-dom';
-import { hot } from 'react-hot-loader/root';
 import scssObj from './_App.scss';
 import GlobalHeader from '../GlobalHeader';
 import TicTacToe from '../TicTacToe';
 import NPMRepoEngine from '../NPMRepoEngine';
 import TestPage from '../TestPage';
 import Settings from '../Settings';
-import { State } from '../../redux/types';
 import { Config } from '../../types';
 import GiphySearchEngine from '../GiphySearchEngine';
 import ModalDialogController from '../ModalDialogController';
@@ -26,7 +26,6 @@ import { getTokens } from '../../utils/requestTokens';
 import HandleLoginContainer from '../HandleLogin/HandleLoginContainer';
 import Home from '../Home/Home';
 import Memory from '../Memory';
-import Draggable from 'react-draggable';
 
 const App = ({
   config,
@@ -34,9 +33,7 @@ const App = ({
   showClipboard,
 }: {
   config: Config;
-  state: State;
   isContentStatic: boolean;
-  isClipboardVisible: boolean;
   showClipboard: () => void;
 }): React.ReactElement => {
   useKeyboardShortcut(['shift', 'ctrl'], () => showClipboard(), 'c');
@@ -109,15 +106,12 @@ const App = ({
           const { accessToken } = getTokens();
           const searchParams = new URLSearchParams(location.search);
           const authCode = searchParams.get('code');
-          const state = searchParams.get('state');
 
           if (!accessToken && !authCode) {
             window.location.href = '/';
           }
 
-          return (
-            <HandleLoginContainer accessToken={accessToken} authCode={authCode} state={state} />
-          );
+          return <HandleLoginContainer />;
         }}
       />
 

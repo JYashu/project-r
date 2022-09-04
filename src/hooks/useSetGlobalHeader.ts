@@ -7,5 +7,5 @@ export default (title: string) => {
 
   useEffect(() => {
     dispatch(setGlobalHeader({ title }));
-  }, [dispatch]);
+  }, [dispatch, title]);
 };

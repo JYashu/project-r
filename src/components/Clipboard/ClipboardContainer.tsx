@@ -20,8 +20,7 @@ const mapDispatch = (dispatch: Dispatch) => ({
   copyText: (text: string) => {
     dispatch(copyText.request({ text }));
   },
-  hideClipboard: () =>
-    dispatch(setIsClipboardVisible({ isVisible: false, hideItself: false })),
+  hideClipboard: () => dispatch(setIsClipboardVisible({ isVisible: false, hideItself: false })),
   clearClipboard: () => dispatch(clearClipboard()),
 });
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import produce from 'immer';
 import { createReducer } from 'typesafe-actions';
 import { getModules } from './actions';
@@ -10,14 +11,13 @@ const initialState: NPMRepoState = {
 };
 
 export default createReducer<NPMRepoState, NPMRepoActions>(initialState)
-  .handleAction(getModules.request, (state) =>
-    produce(state, (draft) => {
-      console.log(draft);
+  .handleAction(getModules.request, state =>
+    produce(state, draft => {
       draft.isLoading = true;
-    })
+    }),
   )
   .handleAction(getModules.success, (state, { payload }) =>
-    produce(state, (draft) => {
+    produce(state, draft => {
       draft.isLoading = false;
 
       draft.data = payload.objects.map((repo: any) => {
@@ -29,12 +29,11 @@ export default createReducer<NPMRepoState, NPMRepoActions>(initialState)
           version: repo.package.version,
         };
       });
-    })
+    }),
   )
   .handleAction(getModules.failure, (state, { payload }) =>
-    produce(state, (draft) => {
-      console.log(draft);
+    produce(state, draft => {
       draft.isLoading = false;
       draft.error = payload.message;
-    })
+    }),
   );

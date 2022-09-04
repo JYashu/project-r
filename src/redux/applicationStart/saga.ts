@@ -6,29 +6,23 @@ import { SagaContext } from '../utils/sagaContext';
 
 export function* watchApplicationStart(
   { success, failure }: typeof applicationStart,
-  action: ReturnType<typeof applicationStart.request>
+  action: ReturnType<typeof applicationStart.request>,
 ): SagaIterator<void> {
   try {
     const { payload } = action;
     const { hasAccessToken } = payload;
 
     if (hasAccessToken) {
-      const routerHistory: SagaContext['routerHistory'] = yield getContext(
-        'routerHistory'
-      );
+      const routerHistory: SagaContext['routerHistory'] = yield getContext('routerHistory');
       routerHistory.push(`/home`);
     }
 
     yield put(success());
-  } catch (err: any) {
-    yield put(failure(err));
+  } catch (err) {
+    yield put(failure(err as any));
   }
 }
 
 export function* applicationStartSaga(): SagaIterator<void> {
-  yield takeEvery(
-    applicationStart.request,
-    watchApplicationStart,
-    applicationStart
-  );
+  yield takeEvery(applicationStart.request, watchApplicationStart, applicationStart);
 }

@@ -11,16 +11,10 @@ import LabelText from '../LabelText';
 import TextArea from '../TextArea';
 
 export interface Props
-  extends Omit<
-    React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement>,
-    'ref'
-  > {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement>, 'ref'> {
   children?: (
     name: string,
-    props: Omit<
-      React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement>,
-      'ref'
-    >
+    props: Omit<React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement>, 'ref'>,
   ) => React.ReactNode;
   description?: string;
   fsExcludeDescription?: boolean;
@@ -77,11 +71,8 @@ const Field: React.SFC<Props> = React.forwardRef((props: Props, ref: any) => {
 
   const labelCls = classnames(`${scssObj.baseClass}__label`, {
     [`${scssObj.baseClass}__label--with-left-icon`]:
-      icon &&
-      !textArea &&
-      (iconPosition === 'LEFT' || iconPosition === undefined),
-    [`${scssObj.baseClass}__label--with-right-icon`]:
-      icon && !textArea && iconPosition === 'RIGHT',
+      icon && !textArea && (iconPosition === 'LEFT' || iconPosition === undefined),
+    [`${scssObj.baseClass}__label--with-right-icon`]: icon && !textArea && iconPosition === 'RIGHT',
     [`${scssObj.baseClass}__label--hidden`]: !hasValue && !!label,
   });
 
@@ -107,12 +98,9 @@ const Field: React.SFC<Props> = React.forwardRef((props: Props, ref: any) => {
     <Input ref={ref} {...restProps} iconPosition={iconPosition} />
   );
 
-  const descriptionClassNames = classnames(
-    `${scssObj.baseClass}__description`,
-    {
-      [`${FULLSTORY_EXCLUDE_CLASS}`]: fsExcludeDescription,
-    }
-  );
+  const descriptionClassNames = classnames(`${scssObj.baseClass}__description`, {
+    [`${FULLSTORY_EXCLUDE_CLASS}`]: fsExcludeDescription,
+  });
 
   return (
     <label className={cls} htmlFor={name}>
@@ -120,9 +108,7 @@ const Field: React.SFC<Props> = React.forwardRef((props: Props, ref: any) => {
 
       {children ? children(name, { ...restProps }) : textInput}
 
-      {description && !hasError && (
-        <p className={descriptionClassNames}>{description}</p>
-      )}
+      {description && !hasError && <p className={descriptionClassNames}>{description}</p>}
 
       {hasError && <FieldError className={errorCls}>{errorMessage}</FieldError>}
     </label>

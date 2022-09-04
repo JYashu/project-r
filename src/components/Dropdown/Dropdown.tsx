@@ -65,7 +65,7 @@ const findOption = (options: Option[], value?: Option['value']) => {
     optionsMemo = options;
     valueMemo = value;
 
-    const result = optionsMemo.find((option) => option.value === value);
+    const result = optionsMemo.find(option => option.value === value);
     resultMemo = result || null;
   }
 
@@ -83,13 +83,7 @@ const actionsClass = `${scssObj.baseClass}__menu-list-actions`;
 /**
  * Custom DropdownMenuList
  */
-const DropdownMenuList = ({
-  cx,
-  children,
-  getStyles,
-  innerRef,
-  ...props
-}: any) => {
+const DropdownMenuList = ({ cx, children, getStyles, innerRef, ...props }: any) => {
   const optionsRef = useRef(null);
   const actionsRef = useRef(null);
   const [displayActions, setDisplayActions] = useState([]);
@@ -101,30 +95,24 @@ const DropdownMenuList = ({
 
   useEffect(() => {
     if (actionsRef.current) {
-      const { width, height } = (
-        actionsRef.current as any
-      ).getBoundingClientRect();
-      setDimensions((prev) => ({ ...prev, actions: { width, height } }));
+      const { width, height } = (actionsRef.current as any).getBoundingClientRect();
+      setDimensions(prev => ({ ...prev, actions: { width, height } }));
     } else {
-      setDimensions((prev) => ({ ...prev, actions: undefined }));
+      setDimensions(prev => ({ ...prev, actions: undefined }));
     }
   }, [actionsRef, children]);
 
   useEffect(() => {
     if (optionsRef.current) {
-      const { width, height } = (
-        optionsRef.current as any
-      ).getBoundingClientRect();
-      setDimensions((prev) => ({ ...prev, options: { width, height } }));
+      const { width, height } = (optionsRef.current as any).getBoundingClientRect();
+      setDimensions(prev => ({ ...prev, options: { width, height } }));
     } else {
-      setDimensions((prev) => ({ ...prev, options: undefined }));
+      setDimensions(prev => ({ ...prev, options: undefined }));
     }
   }, [optionsRef, children]);
 
   const { innerProps, selectProps } = props;
-  const { options, actions } = (
-    Array.isArray(children) ? children : [children]
-  ).reduce(
+  const { options, actions } = (Array.isArray(children) ? children : [children]).reduce(
     (acc: MenuListAcc, next: React.ReactElement) => {
       if (next.props.data && next.props.data.handleAction) {
         acc.actions.push(next);
@@ -137,7 +125,7 @@ const DropdownMenuList = ({
     {
       options: [],
       actions: [],
-    }
+    },
   );
 
   if (firstRender) {
@@ -199,10 +187,7 @@ const Dropdown = ({
   placeholder,
   value,
 }: Props) => {
-  const optionBackgroundColor = (state: {
-    isSelected: boolean;
-    isFocused: boolean;
-  }) => {
+  const optionBackgroundColor = (state: { isSelected: boolean; isFocused: boolean }) => {
     if (state.isFocused) {
       return colors.associate;
     }
@@ -220,18 +205,13 @@ const Dropdown = ({
       paddingTop: hasLabel && value ? 12 : 0,
       backgroundColor: 'transparent',
       boxShadow: 'none',
-      borderColor: state.isFocused
-        ? `${colors.lawyer} !important`
-        : `transparent !important`,
+      borderColor: state.isFocused ? `${colors.lawyer} !important` : `transparent !important`,
     }),
     menu: (base: React.CSSProperties) => ({
       ...base,
       marginTop: 0,
     }),
-    option: (
-      base: React.CSSProperties,
-      state: { isSelected: boolean; isFocused: boolean }
-    ) => ({
+    option: (base: React.CSSProperties, state: { isSelected: boolean; isFocused: boolean }) => ({
       ...base,
       backgroundColor: optionBackgroundColor(state),
       color: colors['juror-1'],
@@ -240,10 +220,7 @@ const Dropdown = ({
       ...base,
       marginLeft: 0,
     }),
-    placeholder: (
-      base: React.CSSProperties,
-      state: { isDisabled: boolean }
-    ) => ({
+    placeholder: (base: React.CSSProperties, state: { isDisabled: boolean }) => ({
       ...base,
       color: state.isDisabled ? colors['juror-3'] : colors.prosecutor,
     }),

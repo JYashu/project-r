@@ -1,11 +1,6 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import {
-  selectClipboardState,
-  selectGlobalConfig,
-  selectIsContentStatic,
-  setIsClipboardVisible,
-} from '../../redux/me';
+import { selectGlobalConfig, selectIsContentStatic, setIsClipboardVisible } from '../../redux/me';
 import { State } from '../../redux/types';
 import App from './App';
 

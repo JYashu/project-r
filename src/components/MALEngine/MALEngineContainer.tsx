@@ -12,14 +12,12 @@ const mapDispatch = (dispatch: Dispatch) => ({
         getAnimes.request(
           { query },
           {
-            onSuccess: (response) => {
-              console.log(response);
-
+            onSuccess: response => {
               resolve(response);
             },
             onFailure: reject,
-          }
-        )
+          },
+        ),
       );
     });
   },

@@ -1,5 +1,4 @@
-import { useRef } from 'react';
-import { useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import useActiveSidebarItem from '../../hooks/useActiveSidebarItem';
 import useSetGlobalHeader from '../../hooks/useSetGlobalHeader';
@@ -58,7 +57,7 @@ const NPMRepoEngine = ({
         <title>NPM Engine</title>
       </Helmet>
       <form
-        onSubmit={(e) => {
+        onSubmit={e => {
           e.preventDefault();
           handleSubmit();
         }}
@@ -90,7 +89,7 @@ const NPMRepoEngine = ({
         {isLoading && <h3>Loading...</h3>}
         {!error && !isLoading && (
           <>
-            {data.map((repo) => (
+            {data.map(repo => (
               <NPMRepoItem data={repo} />
             ))}
           </>

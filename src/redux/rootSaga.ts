@@ -12,7 +12,7 @@ function* watchAsyncMeta(key: string, action: AnyAction) {
   const { payload, meta } = action;
 
   if (key === 'onFailure') {
-    console.error(action);
+    console.error(action); // eslint-disable-line
   }
 
   if (meta && typeof meta === 'object' && typeof meta[key] === 'function') {
@@ -24,12 +24,12 @@ function* metaCallbackSaga() {
   yield takeEvery(
     (action: AnyAction) => /_SUCCESS$/.test(action.type),
     watchAsyncMeta,
-    'onSuccess'
+    'onSuccess',
   );
   yield takeEvery(
     (action: AnyAction) => /_FAILURE$/.test(action.type),
     watchAsyncMeta,
-    'onFailure'
+    'onFailure',
   );
 }
 

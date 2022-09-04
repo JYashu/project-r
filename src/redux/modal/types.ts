@@ -7,9 +7,7 @@ export type ModalStateModal = ModalActionPayload & {
   cancellable?: boolean;
 };
 
-export type ModalActions =
-  | ReturnType<typeof openModal>
-  | ReturnType<typeof closeModal>;
+export type ModalActions = ReturnType<typeof openModal> | ReturnType<typeof closeModal>;
 
 export type ModalState = {
   modals: ModalStateModal[];

@@ -26,7 +26,7 @@ const renderBackgroundIcon = (icon: string, iconPosition: 'LEFT' | 'RIGHT') => (
 
         iconPosition === 'LEFT'
           ? `${scssObj.baseClass}__left-background-icon`
-          : `${scssObj.baseClass}__right-background-icon`
+          : `${scssObj.baseClass}__right-background-icon`,
       )}
     />
   </div>
@@ -62,12 +62,7 @@ const Input: React.SFC<Props> = React.forwardRef((props: Props, ref: any) => {
 
       <input ref={ref} className={cls} {...rest} />
       <div className={`${scssObj.baseClass}__btn`}>
-        {canSubmit &&
-          (submitButton ? (
-            submitButton()
-          ) : (
-            <Button type="submit">Submit</Button>
-          ))}
+        {canSubmit && (submitButton ? submitButton() : <Button type="submit">Submit</Button>)}
       </div>
     </>
   );

@@ -40,7 +40,7 @@ export const withState = withFormik<OuterProps, Values>({
       props,
       setSubmitting,
       // setError
-    }
+    },
   ) => {
     const { onSubmit } = props;
     // setSubmitting(true);
