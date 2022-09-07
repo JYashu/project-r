@@ -26,6 +26,12 @@ $base-class: app;
   }
 
   &__sidebar {
+    position: fixed;
+    height: 100%;
+    z-index: 1000;
+  }
+
+  &__sidebar-static {
     height: 100%;
     z-index: 1000;
   }

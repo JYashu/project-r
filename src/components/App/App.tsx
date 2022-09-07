@@ -58,7 +58,11 @@ const App = ({
       </div>
 
       {!config.sidebar.rtl && (
-        <div className={`${cls}__sidebar`} role="navigation" aria-label="sidebar">
+        <div
+          className={`${cls}__sidebar${isContentStatic ? '' : '-static'}`}
+          role="navigation"
+          aria-label="sidebar"
+        >
           <PrivateRoute component={Sidebar} />
         </div>
       )}
