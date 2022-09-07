@@ -73,13 +73,7 @@ const App = ({
           });
           const isOnboardingFlow = () => {
             if (
-              history.location.pathname.includes('sign-up') ||
               history.location.pathname.includes('login') ||
-              history.location.pathname.includes('terms-and-conditions') ||
-              history.location.pathname.includes('forgot-password') ||
-              history.location.pathname.includes('digonboarding') ||
-              history.location.pathname.includes('onboardlink') ||
-              history.location.pathname.includes('dashboard') ||
               history.location.pathname.includes('auth')
             ) {
               return true;
