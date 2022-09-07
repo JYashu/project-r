@@ -1,14 +1,13 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react-hooks/exhaustive-deps */
 import classNames from 'classnames';
-import { v4 as uuidv4 } from 'uuid';
 import React, { useState, useEffect, useRef } from 'react';
 import { useSpring, animated as a } from 'react-spring';
 import useActiveSidebarItem from '../../hooks/useActiveSidebarItem';
 import useSetGlobalHeader from '../../hooks/useSetGlobalHeader';
 import { ActiveSidebarItem } from '../../types';
-import { isMobileOrTablet } from '../../utils/getMobileOrTabletInfo';
 import { ErrorValues, TouchedValues } from '../../utils/typeHelpers';
 import Button from '../Button';
 import Field from '../Field';
@@ -49,7 +48,7 @@ const Card = ({
       setFlippedCount(flippedCount + 1);
       setFlippedIndexes([]);
     }
-  }, [flippedIndexes]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [flippedIndexes]);
 
   const onCardClick = () => {
     set(state => state);
@@ -211,7 +210,7 @@ const MemoryGame = ({
         });
       }, 500);
     }
-  }, [game]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [game]);
 
   if (flippedIndexes.length === 2) {
     const match = game[flippedIndexes[0]].matchId === game[flippedIndexes[1]].matchId;
@@ -237,7 +236,7 @@ const MemoryGame = ({
   return (
     <div className={`${scssObj.baseClass}__cards`}>
       {game.map((card: any, index: any) => (
-        <div className={`${scssObj.baseClass}__card`} key={uuidv4()}>
+        <div className={`${scssObj.baseClass}__card`} key={index}>
           <Card
             id={index}
             color={card.color}
