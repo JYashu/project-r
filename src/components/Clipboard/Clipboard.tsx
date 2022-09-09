@@ -1,5 +1,6 @@
 /* eslint-disable react/destructuring-assignment */
 import { useEffect, useRef, useState } from 'react';
+import Draggable from 'react-draggable';
 import Icon from '../Icon';
 import scssObj from './_Clipboard.scss';
 
@@ -80,7 +81,15 @@ const ClipboardView = ({
 
 const Clipboard = (props: Props) => {
   return (
-    <div className={`${scssObj.baseClass}`}>{props.isVisible && <ClipboardView {...props} />}</div>
+    <div>
+      {props.isVisible && (
+        <Draggable>
+          <div className={`${scssObj.baseClass}`}>
+            <ClipboardView {...props} />
+          </div>
+        </Draggable>
+      )}
+    </div>
   );
 };
 

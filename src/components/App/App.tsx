@@ -26,17 +26,21 @@ import { getTokens } from '../../utils/requestTokens';
 import HandleLoginContainer from '../HandleLogin/HandleLoginContainer';
 import Home from '../Home/Home';
 import Memory from '../Memory';
+import Dictionary from '../Dictionary';
 
 const App = ({
   config,
   isContentStatic,
   showClipboard,
+  openDictionary,
 }: {
   config: Config;
   isContentStatic: boolean;
   showClipboard: () => void;
+  openDictionary: () => void;
 }): React.ReactElement => {
   useKeyboardShortcut(['shift', 'ctrl'], () => showClipboard(), 'c');
+  useKeyboardShortcut(['shift', 'ctrl'], () => openDictionary(), 'd');
 
   const cls = scssObj.baseClass;
 
@@ -48,9 +52,9 @@ const App = ({
 
       <Snackbars />
 
-      <Draggable>
-        <Clipboard />
-      </Draggable>
+      <Clipboard />
+
+      <Dictionary />
 
       {/* <HistoryListener /> */}
       <div className={`${cls}__global-header`} role="navigation" aria-label="global-header">

@@ -7,6 +7,7 @@ import { modalSaga } from './modal/saga';
 import { meSaga } from './me/saga';
 import { MALSaga } from './mal/saga';
 import { applicationStartSaga } from './applicationStart/saga';
+import { dictionarySaga } from './dictionary/saga';
 
 function* watchAsyncMeta(key: string, action: AnyAction) {
   const { payload, meta } = action;
@@ -42,6 +43,7 @@ function* rootSaga() {
     fork(meSaga),
     fork(MALSaga),
     fork(applicationStartSaga),
+    fork(dictionarySaga),
   ]);
 }
 

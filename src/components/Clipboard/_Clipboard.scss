@@ -9,12 +9,12 @@ $base-class: clipboard;
 .#{$base-class} {
   @include box-level-4;
 
-  top: 8rem;
-  right: 2rem;
   z-index: 1001;
   width: 250px;
   background-color: whitesmoke;
-  position: fixed;
+  position: relative;
+  top: 2rem;
+  left: calc(100vw - 27rem);
 
   &__header {
     @include modal-section('header');

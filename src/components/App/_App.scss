@@ -8,6 +8,10 @@ $base-class: app;
 }
 
 .#{$base-class} {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
   @media print {
     padding: 0 0 0 0 !important;
   }

@@ -10,6 +10,7 @@ import modalReducer from './modal/reducer';
 import snackbarReducer from './snackbar/reducer';
 import snakeReducer from './snake/reducer';
 import malReducer from './mal/reducer';
+import dictionaryReducer from './dictionary/reducer';
 
 export default combineReducers<State>({
   me: meReducer,
@@ -21,4 +22,5 @@ export default combineReducers<State>({
   snackbar: snackbarReducer,
   snake: snakeReducer,
   mal: malReducer,
+  dictionary: dictionaryReducer,
 });

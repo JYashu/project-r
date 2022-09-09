@@ -1,3 +1,4 @@
+import { DictionaryActions, DictionaryState } from './dictionary/types';
 import { GIFRepoActions, GIFRepoState } from './giphy/types';
 import { MALActions, MALState } from './mal/types';
 import { MeState, MeActions } from './me/types';
@@ -18,6 +19,7 @@ export interface State {
   snackbar: SnackbarState;
   snake: SnakeState;
   mal: MALState;
+  dictionary: DictionaryState;
 }
 
 export type Actions =
@@ -29,4 +31,5 @@ export type Actions =
   | ModalActions
   | SnackbarActions
   | SnakeActions
-  | MALActions;
+  | MALActions
+  | DictionaryActions;
