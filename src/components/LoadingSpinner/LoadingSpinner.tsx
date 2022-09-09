@@ -17,7 +17,7 @@ import {
   SquareLoader,
   SyncLoader,
 } from 'react-spinners';
-import classnames from 'classnames';
+import classNames from 'classnames';
 import scssObj from './_LoadingSpinner.scss';
 import { SpinnerType } from '../../types';
 
@@ -40,7 +40,7 @@ const SIZES = {
 
 const LoadingSpinner = ({ text, size, intent, className, type, color }: Props) => {
   const loaderSize = size ? SIZES[size] : DEFAULT_SIZE;
-  const cls = classnames(scssObj.baseClass, className, {
+  const cls = classNames(scssObj.baseClass, className, {
     [`${scssObj.baseClass}--size-${size}`]: size,
     [`${scssObj.baseClass}--intent-${intent}`]: intent,
     [`${scssObj.baseClass}--has-text`]: text,
@@ -84,16 +84,24 @@ const LoadingSpinner = ({ text, size, intent, className, type, color }: Props) =
       {type === SpinnerType.SyncLoader && <SyncLoader color={clr} size={loaderSize} />}
 
       {type === SpinnerType.MorphLoader && (
-        <div className={classnames(`${scssObj.baseClass}__morph${size ? `-${size}` : ''}`)} />
+        <div className={classNames(`${scssObj.baseClass}__morph${size ? `-${size}` : ''}`)} />
       )}
 
       {type === SpinnerType.CubeFlipSpinner && (
         <div className={`${scssObj.baseClass}__cube-wrapper`}>
           <div className={`${scssObj.baseClass}__cube-folding`}>
-            <span className={`${scssObj.baseClass}__leaf1`} />
-            <span className={`${scssObj.baseClass}__leaf2`} />
-            <span className={`${scssObj.baseClass}__leaf3`} />
-            <span className={`${scssObj.baseClass}__leaf4`} />
+            <span
+              className={classNames(`${scssObj.baseClass}__leaf`, `${scssObj.baseClass}__leaf1`)}
+            />
+            <span
+              className={classNames(`${scssObj.baseClass}__leaf`, `${scssObj.baseClass}__leaf2`)}
+            />
+            <span
+              className={classNames(`${scssObj.baseClass}__leaf`, `${scssObj.baseClass}__leaf3`)}
+            />
+            <span
+              className={classNames(`${scssObj.baseClass}__leaf`, `${scssObj.baseClass}__leaf4`)}
+            />
           </div>
         </div>
       )}
