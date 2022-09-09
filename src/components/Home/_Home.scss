@@ -2,7 +2,6 @@
 
 $base-class: home;
 
-/* stylelint-disable property-no-unknown */
 :export {
   baseClass: $base-class;
 }
@@ -21,51 +20,24 @@ $base-class: home;
     height: 100vh;
   }
 
-  &__image-cont {
-    animation: ss 5s infinite alternate linear;
-    width: 100%;
-    height: 100vh;
+  &__base-panel {
     overflow: hidden;
     position: sticky;
     top: 0;
   }
 
-  &__image {
-    // background: url('https://66.media.tumblr.com/8a9107afb52a0664c95fb16c128e4228/a5012367cd39dfeb-4e/s500x750/644d1e4acaed6c7ccf72a84df4c4da5e868d7402.png');
-    background: url('https://pluspng.com/img-png/new-york-city-png-skyline-mobile-first-2013-november-5-2013-new-york-timescenter-2999.png');
-    // background: url(https://www.pngkit.com/png/full/160-1607855_los-angeles-skyline-png.png);
-    background-repeat: no-repeat;
-    background-size: auto;
-    background-size: 1478px 785px;
-    height: 785px;
-    overflow: hidden;
-    margin: 0 auto;
-  }
-
-  &__sub-cont {
+  &__panel-relative {
     overflow: hidden;
     position: relative;
     width: 100%;
     height: 100vh;
   }
 
-  @keyframes ss {
-    0% {
-      background: #ee6055;
-    }
-    25% {
-      background: #60d394;
-    }
-    50% {
-      background: #aaf683;
-    }
-    75% {
-      // background: url('http://cdn.miscellaneoushi.com/1920x1200/20180630/5b371c806ac22.jpg');
-      background: #ffd97d;
-    }
-    100% {
-      background: #ff9b85;
-      // background: #144388;
-    }
+  &__panel-sticky {
+    overflow: hidden;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
   }
 }

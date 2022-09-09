@@ -1,0 +1,387 @@
+@import '../../../styles/lib';
+
+$base-class: truck;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  background: #009688;
+  overflow: hidden;
+  font-family: 'Open Sans', sans-serif;
+  height: 100%;
+
+  &__loop-wrapper {
+    margin: 0 auto;
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 80%;
+    overflow: hidden;
+    border-bottom: 3px solid #fff;
+    color: #fff;
+  }
+  &__mountain,
+  &__mountain:nth-child(2),
+  &__mountain:nth-child(3),
+  &__mountain:nth-child(4),
+  &__mountain:nth-child(5),
+  &__mountain:nth-child(6),
+  &__mountain:nth-child(7),
+  &__mountain:nth-child(8) {
+    position: absolute;
+    bottom: -20px;
+    width: 2px;
+    height: 2px;
+    box-shadow: 0 0 0 50px #4db6ac, 60px 50px 0 70px #4db6ac, 90px 90px 0 50px #4db6ac,
+      250px 250px 0 50px #4db6ac, 290px 320px 0 50px #4db6ac, 320px 400px 0 50px #4db6ac;
+    @include transform(rotate(130deg));
+    @include animation(mtn 40s linear infinite);
+    z-index: 3;
+  }
+  &__mountain {
+    right: -600px;
+    box-shadow: 0 0 0 65px #1d665d, 60px 65px 0 70px #1d665d, 90px 90px 0 65px #1d665d,
+      250px 250px 0 65px #1d665d, 290px 320px 0 65px #1d665d, 320px 400px 0 65px #1d665d;
+    z-index: 0;
+  }
+  &__mountain:nth-child(2) {
+    right: -1200px;
+  }
+  &__mountain:nth-child(3) {
+    right: -1500px;
+  }
+  &__mountain:nth-child(4) {
+    right: -2000px;
+    @include animation(mtn-4 30s linear infinite);
+  }
+  &__mountain:nth-child(5) {
+    right: -3000px;
+    @include animation(mtn-5 40s linear infinite);
+  }
+  &__mountain:nth-child(6) {
+    right: -2500px;
+    box-shadow: 0 0 0 56px #347e76, 60px 56px 0 70px #347e76, 90px 90px 0 56px #347e76,
+      250px 250px 0 56px #347e76, 290px 320px 0 56px #347e76, 320px 400px 0 56px #347e76;
+    @include animation(mtn-5 60s linear infinite);
+    z-index: 2;
+  }
+  &__mountain:nth-child(7) {
+    right: -900px;
+    box-shadow: 0 0 0 56px #347e76, 60px 56px 0 70px #347e76, 90px 90px 0 56px #347e76,
+      250px 250px 0 56px #347e76, 290px 320px 0 56px #347e76, 320px 400px 0 56px #347e76;
+    @include animation(mtn-4 40s linear infinite);
+    z-index: 1;
+  }
+  &__mountain:nth-child(8) {
+    right: -1100px;
+    @include animation(mtn-5 40s linear infinite);
+  }
+  &__hill {
+    position: absolute;
+    right: -900px;
+    bottom: -50px;
+    width: 400px;
+    @include border-radius(50%);
+    height: 20px;
+    box-shadow: 0 0 0 50px #329b7f, -20px 0 0 20px #329b7f, -90px 0 0 50px #329b7f,
+      250px 0 0 50px #329b7f, 290px 0 0 50px #329b7f, 620px 0 0 50px #329b7f;
+    @include animation(hill 4s 2s linear infinite);
+    z-index: 6;
+  }
+  &__tree,
+  &__tree:nth-child(2),
+  &__tree:nth-child(3) {
+    position: absolute;
+    height: 100px;
+    width: 35px;
+    bottom: 0;
+    background: url(https://public-assets-7588.s3.ap-south-1.amazonaws.com/truck-kun/tree.svg)
+      no-repeat;
+    z-index: 10;
+  }
+  &__rock {
+    margin-top: -17%;
+    height: 2%;
+    width: 2%;
+    bottom: -2px;
+    @include border-radius(20px);
+    position: absolute;
+    background: #ddd;
+    z-index: 11;
+  }
+  &__truck,
+  &__wheels {
+    @include transition(all ease);
+    width: 85px;
+    margin-right: -60px;
+    bottom: 0px;
+    right: 50%;
+    position: absolute;
+    background: #eee;
+    z-index: 11;
+  }
+  &__truck {
+    background: url(https://public-assets-7588.s3.ap-south-1.amazonaws.com/truck-kun/truck.svg)
+      no-repeat;
+    background-size: contain;
+    height: 60px;
+  }
+  &__truck:before {
+    content: ' ';
+    position: absolute;
+    width: 25px;
+    box-shadow: -30px 28px 0 1.5px #fff, -35px 18px 0 1.5px #fff;
+  }
+  &__wheels {
+    background: url(https://public-assets-7588.s3.ap-south-1.amazonaws.com/truck-kun/wheels.svg)
+      no-repeat;
+    height: 15px;
+    margin-bottom: 0;
+  }
+
+  &__tree {
+    @include animation(tree 6s 0s linear infinite);
+  }
+  &__tree:nth-child(2) {
+    @include animation(tree2 7s 0.15s linear infinite);
+  }
+  &__tree:nth-child(3) {
+    @include animation(tree3 8s 0.05s linear infinite);
+  }
+  &__rock {
+    @include animation(rock 4s -0.53s linear infinite);
+  }
+  &__truck {
+    @include animation(truck 4s 0.8s ease infinite);
+  }
+  &__wheels {
+    @include animation(truck 4s 0.8s ease infinite);
+  }
+  &__truck:before {
+    @include animation(wind 1.5s 0s ease infinite);
+  }
+}
+
+@include keyframes(tree) {
+  0% {
+    @include transform(translate(3050px));
+  }
+  50% {
+  }
+  100% {
+    @include transform(translate(-50px));
+  }
+}
+@include keyframes(tree2) {
+  0% {
+    @include transform(translate(3850px));
+  }
+  50% {
+  }
+  100% {
+    @include transform(translate(-50px));
+  }
+}
+@include keyframes(tree3) {
+  0% {
+    @include transform(translate(4250px));
+  }
+  50% {
+  }
+  100% {
+    @include transform(translate(-50px));
+  }
+}
+
+@include keyframes(rock) {
+  0% {
+    right: -200px;
+  }
+  100% {
+    right: 2000px;
+  }
+}
+@include keyframes(wind) {
+  0% {
+  }
+  50% {
+    @include transform(translateY(3px));
+  }
+  100% {
+  }
+}
+@include keyframes(mtn) {
+  100% {
+    @include transform(translateX(-3000px) rotate(130deg));
+  }
+}
+@include keyframes(mtn-4) {
+  100% {
+    @include transform(translateX(-4000px) rotate(130deg));
+  }
+}
+@include keyframes(mtn-5) {
+  100% {
+    @include transform(translateX(-6000px) rotate(130deg));
+  }
+}
+@include keyframes(hill) {
+  100% {
+    @include transform(translateX(-4000px));
+  }
+}
+@include keyframes(truck) {
+  2% {
+    @include transform(translate(1px, 1px) rotate(0.5deg));
+  }
+  4% {
+    @include transform(translate(0px, 1px) rotate(0.5deg));
+  }
+  6% {
+    @include transform(translate(0px, 0px) rotate(0.5deg));
+  }
+  8% {
+    @include transform(translate(0px, 1px) rotate(0.5deg));
+  }
+  10% {
+    @include transform(translate(0px, 1px) rotate(0.5deg));
+  }
+  12% {
+    @include transform(translate(1px, 0px) rotate(0.5deg));
+  }
+  14% {
+    @include transform(translate(0px, 0px) rotate(0.5deg));
+  }
+  16% {
+    @include transform(translate(0px, 1px) rotate(0.5deg));
+  }
+  18% {
+    @include transform(translate(1px, 0px) rotate(0.5deg));
+  }
+  20% {
+    @include transform(translate(0px, 1px) rotate(0.5deg));
+  }
+  22% {
+    @include transform(translate(1px, 1px) rotate(0.5deg));
+  }
+  24% {
+    @include transform(translate(1px, 0px) rotate(0.5deg));
+  }
+  26% {
+    @include transform(translate(0px, 1px) rotate(0.5deg));
+  }
+  28% {
+    @include transform(translate(1px, 1px) rotate(0.5deg));
+  }
+  30% {
+    @include transform(translate(0px, 1px) rotate(0.5deg));
+  }
+  32% {
+    @include transform(translate(1px, 1px) rotate(0.5deg));
+  }
+  34% {
+    @include transform(translate(1px, 0px) rotate(0.5deg));
+  }
+  36% {
+    @include transform(translate(0px, 1px) rotate(0.5deg));
+  }
+  38% {
+    @include transform(translate(0px, 1px) rotate(0.5deg));
+  }
+  40% {
+    @include transform(translate(0px, 0px) rotate(0.5deg));
+  }
+  42% {
+    @include transform(translate(0px, 1px) rotate(0.5deg));
+  }
+  44% {
+    @include transform(translate(1px, 0px) rotate(0.5deg));
+  }
+  46% {
+    @include transform(translate(0px, 0px) rotate(0.5deg));
+  }
+  48% {
+    @include transform(translate(1px, 0px) rotate(0.5deg));
+  }
+  50% {
+    @include transform(translate(1px, 0px) rotate(0.5deg));
+  }
+  52% {
+    @include transform(translate(0px, 0px) rotate(0.5deg));
+  }
+  54% {
+    @include transform(translate(1px, 0px) rotate(0.5deg));
+  }
+  56% {
+    @include transform(translate(0px, 1px) rotate(0.5deg));
+  }
+  58% {
+    @include transform(translate(1px, 1px) rotate(0.5deg));
+  }
+  60% {
+    @include transform(translate(0px, 1px) rotate(0.5deg));
+  }
+  62% {
+    @include transform(translate(0px, 0px) rotate(0.5deg));
+  }
+  64% {
+    @include transform(translate(1px, 1px) rotate(0.5deg));
+  }
+  66% {
+    @include transform(translate(0px, 0px) rotate(0.5deg));
+  }
+  68% {
+    @include transform(translate(1px, 0px) rotate(0.5deg));
+  }
+  70% {
+    @include transform(translate(1px, 0px) rotate(0.5deg));
+  }
+  72% {
+    @include transform(translate(1px, 0px) rotate(0.5deg));
+  }
+  74% {
+    @include transform(translate(0px, 0px) rotate(0.5deg));
+  }
+  76% {
+    @include transform(translate(0px, 0px) rotate(0.5deg));
+  }
+  78% {
+    @include transform(translate(0px, 1px) rotate(0.5deg));
+  }
+  80% {
+    @include transform(translate(0px, 1px) rotate(0.5deg));
+  }
+  82% {
+    @include transform(translate(1px, 0px) rotate(0.5deg));
+  }
+  84% {
+    @include transform(translate(1px, 0px) rotate(0.5deg));
+  }
+  86% {
+    @include transform(translate(1px, 0px) rotate(0.5deg));
+  }
+  88% {
+    @include transform(translate(0px, 0px) rotate(0.5deg));
+  }
+  90% {
+    @include transform(translate(0px, 1px) rotate(0.5deg));
+  }
+  92% {
+    @include transform(translate(1px, 1px) rotate(0.5deg));
+  }
+  94% {
+    @include transform(translate(1px, 0px) rotate(0.5deg));
+  }
+  96% {
+    @include transform(translate(1px, 0px) rotate(0.5deg));
+  }
+  98% {
+    @include transform(translate(1px, 0px) rotate(0.5deg));
+  }
+  0%,
+  100% {
+    @include transform(translate(0, 0) rotate(0));
+  }
+}

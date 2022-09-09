@@ -1,4 +1,4 @@
-@import '../../styles/lib';
+@import '../../../styles/lib';
 
 $base-class: submarine;
 
@@ -67,10 +67,10 @@ $seaGroundColor2: #08003b;
   &__propeller__perspective {
     width: 100%;
     height: 100%;
-    transition: transform 1s;
+    @include transition(transform 1s);
 
     transform-style: preserve-3d;
-    animation: rotateInfinite 1s linear infinite;
+    @include animation(rotateInfinite 1s linear infinite);
     cursor: pointer;
   }
   &__submarine__propeller-parts {
@@ -134,7 +134,7 @@ $seaGroundColor2: #08003b;
     background-image: linear-gradient(45deg, $windowLightColor, #fff);
     border: 8px solid $darkShadowColor;
     z-index: 10;
-    animation: shadow-change 1s linear infinite;
+    @include animation(shadow-change 1s linear infinite);
   }
   &__one,
   &__two {
@@ -239,7 +239,7 @@ $seaGroundColor2: #08003b;
       top: 15% * ($i + 1-1);
       left: 1%;
       opacity: 0;
-      animation: move-right 1s infinite linear;
+      @include animation(move-right 1s infinite linear);
       animation-delay: 0.25s * $i;
     }
   }
@@ -289,7 +289,7 @@ $seaGroundColor2: #08003b;
     &__#{$ground-class}-#{$i} {
       left: -10% * ($i + -1);
       top: -20px * ($i * 0.1);
-      animation: moveThegroundRight $i + 2s infinite linear;
+      @include animation(moveThegroundRight $i + 2s infinite linear);
     }
   }
 
@@ -300,7 +300,7 @@ $seaGroundColor2: #08003b;
   }
   //animation
 
-  @keyframes shadow-change {
+  @include keyframes(shadow-change) {
     0%,
     100% {
       background-image: linear-gradient(
@@ -369,7 +369,7 @@ $seaGroundColor2: #08003b;
     }
   }
 
-  @keyframes move-right {
+  @include keyframes(move-right) {
     0% {
       opacity: 0;
     }
@@ -391,7 +391,7 @@ $seaGroundColor2: #08003b;
       top: 0%;
     }
   }
-  @keyframes rotateInfinite {
+  @include keyframes(rotateInfinite) {
     0% {
       @include transform(rotateX(0deg));
     }
@@ -402,7 +402,7 @@ $seaGroundColor2: #08003b;
       @include transform(rotateX(360deg));
     }
   }
-  @keyframes moveThegroundRight {
+  @include keyframes(moveThegroundRight) {
     90% {
       opacity: 1;
       left: 100%;
@@ -417,16 +417,6 @@ $seaGroundColor2: #08003b;
   $color1: #306d85;
   $color2: #d93a54;
 
-  // body {
-  //
-  // }
-
-  // *,
-  // *:before,
-  // *:after {
-  //   box-sizing: border-box;
-  // }
-
   &__sea {
     position: absolute;
     top: 0%;
@@ -436,7 +426,6 @@ $seaGroundColor2: #08003b;
     background: #130560;
     overflow: hidden;
     margin: 40px auto 0 auto;
-    // background-color: #306d85;
   }
 
   .bubble {
@@ -487,8 +476,7 @@ $seaGroundColor2: #08003b;
     height: 0;
     width: 0;
     margin: 0 0 0 600px;
-    animation: diving 3s ease-in-out infinite,
-      diving-rotate 3s ease-in-out infinite;
+    animation: diving 3s ease-in-out infinite, diving-rotate 3s ease-in-out infinite;
   }
   &__submarine-body {
     @include border-radius(40px);
@@ -520,7 +508,7 @@ $seaGroundColor2: #08003b;
       position: absolute;
       content: '';
       background-color: white;
-      animation: spin 900ms linear infinite;
+      @include animation(spin 900ms linear infinite);
       opacity: 0.8;
     }
     &:after {
@@ -614,7 +602,7 @@ $seaGroundColor2: #08003b;
         lighten(#d93a54, 15%)
       );
       background-size: 100% 20px;
-      animation: helix-movement 110ms linear infinite;
+      @include animation(helix-movement 110ms linear infinite);
     }
   }
 
@@ -673,7 +661,7 @@ $seaGroundColor2: #08003b;
     width: 5px;
     height: 5px;
     background-color: white;
-    animation: leds-off 500ms linear infinite;
+    @include animation(leds-off 500ms linear infinite);
 
     &:after,
     &:before {
@@ -696,19 +684,19 @@ $seaGroundColor2: #08003b;
   }
 }
 
-@keyframes spin {
+@include keyframes(spin) {
   100% {
     @include transform(rotate(360deg));
   }
 }
 
-@keyframes leds-off {
+@include keyframes(leds-off) {
   100% {
     opacity: 0.3;
   }
 }
 
-@keyframes helix-movement {
+@include keyframes(helix-movement) {
   100% {
     background: linear-gradient(
       to bottom,
@@ -721,7 +709,7 @@ $seaGroundColor2: #08003b;
   }
 }
 
-@keyframes diving {
+@include keyframes(diving) {
   0% {
     margin-top: 5px;
   }
@@ -734,7 +722,7 @@ $seaGroundColor2: #08003b;
   }
 }
 
-@keyframes diving-rotate {
+@include keyframes(diving-rotate) {
   0% {
     @include transform(rotate(0deg));
   }
@@ -749,7 +737,7 @@ $seaGroundColor2: #08003b;
   }
 }
 
-@keyframes bubble1-h-movement {
+@include keyframes(bubble1-h-movement) {
   0% {
     margin-left: 80%;
   }
@@ -758,7 +746,7 @@ $seaGroundColor2: #08003b;
   }
 }
 
-@keyframes bubble2-h-movement {
+@include keyframes(bubble2-h-movement) {
   0% {
     margin-left: 65%;
   }
@@ -767,7 +755,7 @@ $seaGroundColor2: #08003b;
   }
 }
 
-@keyframes bubble1-v-movement {
+@include keyframes(bubble1-v-movement) {
   0% {
     margin-top: 115px;
   }
@@ -776,7 +764,7 @@ $seaGroundColor2: #08003b;
   }
 }
 
-@keyframes bubble2-v-movement {
+@include keyframes(bubble2-v-movement) {
   0% {
     margin-top: 115px;
   }
@@ -785,7 +773,7 @@ $seaGroundColor2: #08003b;
   }
 }
 
-@keyframes bubble-scale-movement {
+@include keyframes(bubble-scale-movement) {
   0% {
     @include transform(scale(1.4));
   }
@@ -794,7 +782,7 @@ $seaGroundColor2: #08003b;
   }
 }
 
-@keyframes light-movement {
+@include keyframes(light-movement) {
   0% {
     @include transform(rotate(-40deg));
   }

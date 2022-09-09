@@ -18,13 +18,6 @@ interface Props {
 }
 
 const Submarine = ({ animate }: Props) => {
-  const [x, setX] = useState('40px');
-  const [y, setY] = useState('400px');
-
-  window.onunload = () => {
-    sessionStorage.removeItem('subKey');
-  };
-
   const sub1 = (
     <div className={`${scssObj.baseClass}__cont`}>
       <div className={`${scssObj.baseClass}__submarine-wrapper`}>
@@ -122,10 +115,6 @@ const Submarine = ({ animate }: Props) => {
   );
 
   const subs = [sub1, sub2];
-
-  if (!sessionStorage.getItem('subKey')) {
-    sessionStorage.setItem('subKey', Math.round(Math.random()).toString());
-  }
 
   const idx = parseInt(sessionStorage.getItem('subKey') || '0', 10);
 

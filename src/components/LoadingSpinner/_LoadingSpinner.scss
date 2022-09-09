@@ -178,7 +178,7 @@ $base-class: loading-spinner;
 }
 
 //animation
-@include keyframes(folding, folding animation) {
+@include keyframes(folding) {
   0%,
   10% {
     @include transform(perspective(140px) rotateX(-180deg));
@@ -198,12 +198,12 @@ $base-class: loading-spinner;
 
 //with loading text and shadow
 
-@include keyframes(text, text animation) {
+@include keyframes(text) {
   100% {
     top: calc(($size/2) + 10);
   }
 }
-@include keyframes(shadow, shadow animation) {
+@include keyframes(shadow) {
   100% {
     bottom: -18px;
     width: calc($size * 2);

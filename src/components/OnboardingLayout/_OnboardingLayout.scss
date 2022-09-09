@@ -24,6 +24,7 @@ $medium: 1440px;
 
   &__left-column {
     min-width: 472px;
+    background: map-get($colors, header-bg);
   }
 
   @mixin row {

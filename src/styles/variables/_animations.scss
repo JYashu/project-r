@@ -1,6 +1,6 @@
 @import '../mixins/custom-mixins';
 
-@include keyframes(float, float animation) {
+@include keyframes(float) {
   0% {
     box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
     @include transform(translateY(0px));
@@ -15,7 +15,7 @@
   }
 }
 
-@include keyframes(scaleInOut, scaleInOut animation) {
+@include keyframes(scaleInOut) {
   0% {
     @include transform(translateY(-50%) scale(1.5));
   }
@@ -27,7 +27,7 @@
   }
 }
 
-@include keyframes(fade-in-and-down, fade-in-and-down animation) {
+@include keyframes(fade-in-and-down) {
   0% {
     @include opacity(0);
     @include transform(translate3d(0, -5px, 0));
@@ -39,7 +39,7 @@
   }
 }
 
-@include keyframes(fade-in-and-out, fade-in-and-out animation) {
+@include keyframes(fade-in-and-out) {
   0% {
     @include opacity(0);
     @include transform(translate3d(0, -5px, 0));
@@ -58,7 +58,7 @@
   }
 }
 
-@include keyframes(progress, progress animation) {
+@include keyframes(progress) {
   to {
     width: calc(100% - 10px);
   }

@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import scssObj from './_OnboardingLayout.scss';
 import images from '../../utils/images';
 import { Img } from '../../types';
+import { ASUNA } from '../../utils/assets';
 
 interface Props {
   children: React.ReactNode;
@@ -33,7 +34,7 @@ const OnboardingLayout = ({
   }
 
   const displayTitle = title;
-  const img = 'http://placeimg.com/525/849/animals';
+  const img = ASUNA;
 
   const marketingImage = (
     <>

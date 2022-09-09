@@ -13,7 +13,7 @@
   -moz-animation: $animation;
   animation: $animation;
 }
-@mixin keyframes($name, $name1) {
+@mixin keyframes($name) {
   @-webkit-keyframes #{$name} {
     @content;
   }
