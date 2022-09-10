@@ -115,9 +115,9 @@ const DropdownMenuList = ({ cx, children, getStyles, innerRef, ...props }: any) 
   const { options, actions } = (Array.isArray(children) ? children : [children]).reduce(
     (acc: MenuListAcc, next: React.ReactElement) => {
       if (next.props.data && next.props.data.handleAction) {
-        acc.actions.push(next);
+        acc.actions.push(<div className={`${scssObj.baseClass}__menu-list-item`}>{next}</div>);
       } else {
-        acc.options.push(next);
+        acc.options.push(<div className={`${scssObj.baseClass}__menu-list-item`}>{next}</div>);
       }
 
       return acc;
@@ -209,11 +209,12 @@ const Dropdown = ({
     }),
     menu: (base: React.CSSProperties) => ({
       ...base,
+      backgroundColor: 'transparent',
       marginTop: 0,
     }),
     option: (base: React.CSSProperties, state: { isSelected: boolean; isFocused: boolean }) => ({
       ...base,
-      backgroundColor: optionBackgroundColor(state),
+      backgroundColor: 'transparent',
       color: colors['juror-1'],
     }),
     singleValue: (base: React.CSSProperties) => ({

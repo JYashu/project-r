@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import Draggable from 'react-draggable';
+import Field from '../Field';
 import Icon from '../Icon';
 import scssObj from './_Dictionary.scss';
 
@@ -11,6 +13,7 @@ const Dictionary = ({
   selectedText?: string;
   hideDictionary: () => void;
 }) => {
+  const [value, setValue] = useState(selectedText || '');
   const text = selectedText || 'Dictionary';
   if (!isVisible) return null;
   return (
@@ -25,7 +28,7 @@ const Dictionary = ({
             onClickHandler={() => hideDictionary()}
           />
         </div>
-        <h1>{text}</h1>
+        <Field name="text" value={value} onChange={() => setValue(value)} />
       </div>
     </Draggable>
   );
