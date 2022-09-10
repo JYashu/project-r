@@ -148,19 +148,11 @@ $sidebar-collapsed-width: $collapsed-sidebar-width;
   .pro-menu {
     .pro-menu-item {
       &.active {
-        &.sidebar__item-left {
+        &.sidebar__item {
           background: map-get($colors, sidebar-highlight);
           > .pro-inner-item {
             > .pro-icon-wrapper {
               background: map-get($colors, sidebar-highlight);
-            }
-          }
-        }
-        &.sidebar__item-right {
-          background: map-get($colors, sidebar-highlight-rigth);
-          > .pro-inner-item {
-            > .pro-icon-wrapper {
-              background: map-get($colors, sidebar-highlight-rigth);
             }
           }
         }

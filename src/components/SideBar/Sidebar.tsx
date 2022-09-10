@@ -28,12 +28,11 @@ const Sidebar = withRouter(
       return null;
     }
 
-    const itemClassName = `${scssObj.baseClass}__item-${config.sidebar.rtl ? 'right' : 'left'}`;
+    const itemClassName = `${scssObj.baseClass}__item`;
 
     return (
       <ProSidebar
         collapsed={isCollapsed}
-        rtl={isMobileOrTablet ? false : config.sidebar.rtl}
         onMouseEnter={() => {
           if (isCollapsed) {
             handleState(false);

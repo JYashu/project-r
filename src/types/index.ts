@@ -50,9 +50,6 @@ export enum ActiveSidebarItem {
 }
 
 export interface Config {
-  sidebar: {
-    rtl: boolean;
-  };
   clock: {
     format12h: boolean;
   };
@@ -79,6 +76,7 @@ export enum SpinnerType {
   MorphLoader,
   DotsBarSpinner,
   CubeFlipSpinner,
+  BoxLoadingSpinner,
 }
 
 export enum SnackType {

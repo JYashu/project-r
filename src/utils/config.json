@@ -1,7 +1,4 @@
 {
-  "sidebar": {
-    "rtl": false
-  },
   "clock": {
     "format12h": true
   }

@@ -61,15 +61,13 @@ const App = ({
         <Route component={GlobalHeader} />
       </div>
 
-      {!config.sidebar.rtl && (
-        <div
-          className={`${cls}__sidebar${isContentStatic ? '' : '-static'}`}
-          role="navigation"
-          aria-label="sidebar"
-        >
-          <PrivateRoute component={Sidebar} />
-        </div>
-      )}
+      <div
+        className={`${cls}__sidebar${isContentStatic ? '' : '-static'}`}
+        role="navigation"
+        aria-label="sidebar"
+      >
+        <PrivateRoute component={Sidebar} />
+      </div>
       <Route
         path="/login"
         exact
@@ -136,12 +134,6 @@ const App = ({
         <Route path="/memory" exact component={Memory} />
         <Route path="/mal" exact component={MALEngine} />
       </div>
-
-      {config.sidebar.rtl && (
-        <div className={`${cls}__sidebar`} role="navigation" aria-label="sidebar">
-          <PrivateRoute component={Sidebar} />
-        </div>
-      )}
     </div>
   );
 };

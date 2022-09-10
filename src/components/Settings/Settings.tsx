@@ -56,22 +56,6 @@ const Settings = ({ config, handleSettingsChange }: Props) => {
           <LoadingSpinner />
         ) : (
           <div className={`${scssObj.baseClass}__glass`}>
-            <div>Right Sidebar (Only for PC)</div>
-            <Switch
-              height={16}
-              width={30}
-              checkedIcon={false}
-              uncheckedIcon={false}
-              onChange={() => {
-                updateConfig({
-                  ...config,
-                  sidebar: { rtl: !config.sidebar.rtl },
-                });
-              }}
-              checked={config.sidebar.rtl}
-              onColor="#219de9"
-              offColor="#bbbbbb"
-            />
             <div>12 Hour Format</div>
             <Switch
               height={16}
