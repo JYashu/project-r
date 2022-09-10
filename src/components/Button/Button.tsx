@@ -27,7 +27,7 @@ export interface Props extends Pick<React.ComponentProps<'button'>, ButtonProps>
   ignoreChildren?: boolean;
   ariaExpanded?: boolean;
   ariaLabel?: string;
-  buttonStyle?: 'game' | 'normal' | 'glossy' | 'abstract';
+  buttonStyle?: 'game' | 'normal' | 'glossy' | 'abstract' | 'blur';
   includeFocus?: boolean;
   isRound?: boolean;
   handWriting?: boolean;

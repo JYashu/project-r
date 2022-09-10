@@ -69,7 +69,7 @@ const TestApp = ({
           </Button>
 
           <div className={`${scssObj.baseClass}__glitch`}>
-            <Button intent="primary" onClick={() => copyText(uuidv4())}>
+            <Button buttonStyle="blur" onClick={() => copyText(uuidv4())}>
               Generate UUID
             </Button>
           </div>

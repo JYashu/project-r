@@ -96,6 +96,10 @@ $base-class: button;
     @include button-style($style: abstract);
   }
 
+  &--blur {
+    @include button-style($style: blur);
+  }
+
   &--empty {
     @include button-icon($empty: true);
 
