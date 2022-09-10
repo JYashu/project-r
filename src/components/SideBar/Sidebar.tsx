@@ -131,15 +131,17 @@ const Sidebar = withRouter(
               Test Page
               <Link tabIndex={-1} to="/test" />
             </MenuItem>
-            <MenuItem
-              className={itemClassName}
-              onClick={showClipboard}
-              key={uuidv4()}
-              active={activeSidebarItem === ActiveSidebarItem.Clipboard}
-              icon={<Icon removeOutline size="small" icon="content_paste" />}
-            >
-              Clipboard
-            </MenuItem>
+            {!isMobileOrTablet && (
+              <MenuItem
+                className={itemClassName}
+                onClick={showClipboard}
+                key={uuidv4()}
+                active={activeSidebarItem === ActiveSidebarItem.Clipboard}
+                icon={<Icon removeOutline size="small" icon="content_paste" />}
+              >
+                Clipboard
+              </MenuItem>
+            )}
 
             <MenuItem
               className={itemClassName}

@@ -108,6 +108,8 @@ const LoadingSpinner = ({ text, size, intent, className, type, color }: Props) =
 
       {type === SpinnerType.DotsBarSpinner && <div className={`${scssObj.baseClass}__dots-bars`} />}
 
+      {type === SpinnerType.BoxLoadingSpinner && <div className={`${scssObj.baseClass}__box`} />}
+
       {text && <p className={`${scssObj.baseClass}__text`}>{text}</p>}
     </div>
   );
