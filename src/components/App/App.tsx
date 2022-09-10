@@ -51,10 +51,11 @@ const App = ({
       <ModalDialogController />
 
       <Snackbars />
+      <div className={`${scssObj.baseClass}__container`}>
+        <Dictionary />
 
-      <Clipboard />
-
-      <Dictionary />
+        <Clipboard />
+      </div>
 
       {/* <HistoryListener /> */}
       <div className={`${cls}__global-header`} role="navigation" aria-label="global-header">

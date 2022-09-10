@@ -8,10 +8,6 @@ $base-class: app;
 }
 
 .#{$base-class} {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-
   @media print {
     padding: 0 0 0 0 !important;
   }
@@ -56,6 +52,18 @@ $base-class: app;
     display: flex;
     flex-direction: column;
     overflow-y: auto;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    position: fixed;
+    height: fit-content;
+    width: fit-content;
+    top: 6rem;
+    right: 2rem;
+    z-index: 1002;
   }
 
   @media only screen and (max-width: 1024px) {
