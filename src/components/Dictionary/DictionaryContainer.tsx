@@ -15,6 +15,7 @@ const mapState = (state: State) => ({
   isVisible: selectDictionaryState(state).isVisible,
   isLoading: selectDictionaryState(state).isLoading,
   definitions: selectDefinitions(state),
+  error: selectDictionaryState(state).error,
 });
 
 const mapDispatch = (dispatch: Dispatch) => ({

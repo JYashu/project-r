@@ -5,8 +5,9 @@ $colors: (
   button-dark: #105e47,
   sidebar-background: #2a2961,
   sidebar-highlight: linear-gradient(90deg, #4d4d80 0%, #b6b4f400 100%),
-  sidebar-highlight-rigth: linear-gradient(270deg, #4d4d80 0%, #b6b4f400 100%),
-  //
+  info: #9a9a9a,
+  sub-heading: #757474,
+  //,
   lawyer: #097d88,
   checking: #5450aa,
   personal: #3babc8,
@@ -43,7 +44,6 @@ $colors: (
   sidebar-badge: #147d88,
   check-done: #05bb7a,
   tile-CategoryType: #384e56,
-
   matter-name: #092937,
   matter-id: #145c67,
 );

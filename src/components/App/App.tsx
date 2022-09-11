@@ -1,8 +1,7 @@
 import QueryString from 'query-string';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Redirect, Route, RouteComponentProps } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
-import Draggable from 'react-draggable';
 import TodoPage from '../TodoPage';
 import Sidebar from '../SideBar';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
@@ -12,7 +11,6 @@ import TicTacToe from '../TicTacToe';
 import NPMRepoEngine from '../NPMRepoEngine';
 import TestPage from '../TestPage';
 import Settings from '../Settings';
-import { Config } from '../../types';
 import GiphySearchEngine from '../GiphySearchEngine';
 import ModalDialogController from '../ModalDialogController';
 import SpinnerPage from '../SpinnerPage';
@@ -29,12 +27,12 @@ import Memory from '../Memory';
 import Dictionary from '../Dictionary';
 
 const App = ({
-  config,
+  isDictionaryVisible,
   isContentStatic,
   showClipboard,
   openDictionary,
 }: {
-  config: Config;
+  isDictionaryVisible: boolean;
   isContentStatic: boolean;
   showClipboard: () => void;
   openDictionary: () => void;
@@ -52,7 +50,7 @@ const App = ({
 
       <Snackbars />
       <div className={`${scssObj.baseClass}__container`}>
-        <Dictionary />
+        {isDictionaryVisible && <Dictionary />}
 
         <Clipboard />
       </div>

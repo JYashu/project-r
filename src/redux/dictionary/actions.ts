@@ -5,7 +5,7 @@ export const openDictionary = createAsyncActionWithMeta(
   'OPEN_DICTIONARY_REQUEST',
   'OPEN_DICTIONARY_SUCCESS',
   'OPEN_DICTIONARY_FAILURE',
-)<void, { text?: string }, Error>();
+)<void, { word?: string }, Error>();
 
 export const setIsVisible = createAction(
   'SET_IS_DICTIONARY_VISIBLE',

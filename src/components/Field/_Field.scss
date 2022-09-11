@@ -17,6 +17,10 @@ $base-class: field;
   min-width: 0;
   position: relative;
 
+  &--border {
+    border: 1px solid map-get($colors, header-bg);
+  }
+
   &--solid {
     background-color: map-get($colors, juror-5);
   }

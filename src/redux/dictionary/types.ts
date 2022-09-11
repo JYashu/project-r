@@ -1,11 +1,13 @@
 import { ActionType } from 'typesafe-actions';
+import { Definition } from '../../types';
 import { setIsVisible, openDictionary, getDefinitions } from './actions';
 
 export interface DictionaryState {
   isVisible: boolean;
   selectedText: string;
   isLoading: boolean;
-  data: any;
+  data: Definition[];
+  error: string | null;
 }
 
 export type DictionaryActions =

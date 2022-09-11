@@ -10,18 +10,14 @@ $base-class: dictionary;
   @include box-level-4;
 
   z-index: 1011;
-  width: 250px;
-  min-height: 300px;
+  width: 320px;
   background-color: whitesmoke;
   position: relative;
   top: 2rem;
 
   &__header {
-    @include modal-section('header');
-
-    padding-top: 16px;
-    display: flex;
-    flex-direction: row;
+    padding: 1rem;
+    padding-bottom: 0;
   }
 
   &__content {
@@ -33,16 +29,33 @@ $base-class: dictionary;
 
   &__result {
     width: 100%;
-    min-height: 150px;
     max-height: 500px;
-    border: 1px solid black;
     overflow: scroll;
+  }
+
+  &__search {
+    color: map-get($colors, info);
+    padding: 10px;
+  }
+
+  &__error {
+    color: map-get($colors, info);
+    padding: 10px;
   }
 
   &__spinner {
     @include center-horizontally;
-    position: relative;
-    margin-top: 70px;
+
+    height: 100px;
     transition: 0.2s ease-in-out;
+  }
+
+  &__footer {
+    @include modal-section('footer');
+
+    padding-bottom: 10px;
+    padding-top: 10px;
+
+    text-align: right;
   }
 }

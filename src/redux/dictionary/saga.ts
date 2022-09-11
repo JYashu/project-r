@@ -12,14 +12,13 @@ export function* watchOpenDictionary(
   { meta }: ReturnType<typeof openDictionary.request>,
 ): SagaIterator<void> {
   try {
-    // const { text } = action.payload;
-    const text = window.getSelection()?.toString() || '';
+    const word = window.getSelection()?.toString() || '';
 
-    if (text.length > 0) {
-      yield put(getDefinitions.request({ word: text }));
+    if (word.length > 0) {
+      yield put(getDefinitions.request({ word }));
     }
 
-    yield put(success({ text }));
+    yield put(success({ word }));
     yield put(setIsVisible({ isVisible: true }));
   } catch (e) {
     yield put(failure(getErrorFromCatch(e), meta));
@@ -38,6 +37,7 @@ export function* watchGetDefinitions(
 ): SagaIterator<void> {
   try {
     const { word } = action.payload;
+    yield put(openDictionary.success({ word }));
     const resp: SagaReturnType<typeof Api.getDefinitions> = yield call(Api.getDefinitions, {
       word,
     });

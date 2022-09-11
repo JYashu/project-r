@@ -1,12 +1,22 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useRef, useState } from 'react';
-import Draggable from 'react-draggable';
-import { SpinnerType } from '../../types';
-import Definition from '../Definition';
+import { Definition, SpinnerType } from '../../types';
+import Button from '../Button';
+import DefinitionItem from '../Definition';
 import Field from '../Field';
 import Icon from '../Icon';
 import LoadingSpinner from '../LoadingSpinner';
 import scssObj from './_Dictionary.scss';
+
+interface Props {
+  isVisible: boolean;
+  isLoading: boolean;
+  selectedText: string;
+  definitions: Definition[];
+  error: string | null;
+  hideDictionary: () => void;
+  getDefinitions: (word: string) => Promise<any>;
+}
 
 const Dictionary = ({
   selectedText,
@@ -14,57 +24,85 @@ const Dictionary = ({
   isVisible,
   isLoading,
   definitions,
+  error,
   getDefinitions,
-}: {
-  isVisible: boolean;
-  isLoading: boolean;
-  selectedText: string;
-  definitions: any;
-  hideDictionary: () => void;
-  getDefinitions: (word: string) => Promise<any>;
-}) => {
+}: Props) => {
   const [value, setValue] = useState(selectedText);
   const [call, setCall] = useState(true);
-  // const [word, setWord] = useState(selectedText);
+  const [i, setI] = useState(0);
+  const searchInput = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (searchInput && searchInput.current) {
+      searchInput.current.focus();
+    }
+  }, [searchInput]);
 
   useEffect(() => {
     setValue(selectedText);
   }, [selectedText]);
 
-  useEffect(() => console.log(definitions), [definitions]);
+  useEffect(() => setI(0), [definitions]);
 
   if (!isVisible) return null;
   return (
-    // <Draggable>
     <div className={`${scssObj.baseClass}`}>
       <div className={`${scssObj.baseClass}__header`}>
-        <div className={`${scssObj.baseClass}__title`}>Dictionary</div>
-        <Icon
-          className={`${scssObj.baseClass}__icon-close`}
-          icon="close"
-          size="small"
-          onClickHandler={() => hideDictionary()}
-        />
+        <form
+          onSubmit={e => {
+            e.preventDefault();
+            getDefinitions(value);
+          }}
+        >
+          <Field
+            name="word"
+            value={value}
+            onChange={e => setValue(e.target.value)}
+            border
+            canSubmit
+            ref={searchInput}
+            submitButton={() => {
+              return (
+                <div style={{ marginTop: '2px', marginRight: '-4px' }}>
+                  <Button onClick={() => hideDictionary()}>
+                    <Icon
+                      className={`${scssObj.baseClass}__icon-close`}
+                      icon="close"
+                      size="small"
+                    />
+                  </Button>
+                </div>
+              );
+            }}
+          />
+        </form>
       </div>
       <div className={`${scssObj.baseClass}__content`}>
-        <Field name="word" value={value} onChange={e => setValue(e.target.value)} />
-        <div className={`${scssObj.baseClass}__result`}>
-          {isLoading ? (
-            <div className={`${scssObj.baseClass}__spinner`}>
-              <LoadingSpinner type={SpinnerType.BoxLoadingSpinner} />
-            </div>
-          ) : (
-            <>
-              {definitions.length > 0 &&
-                definitions.map(definition => {
-                  return <Definition definition={definition} />;
-                })}
-            </>
-          )}
-        </div>
+        {isLoading && (
+          <div className={`${scssObj.baseClass}__spinner`}>
+            <LoadingSpinner type={SpinnerType.BoxLoadingSpinner} />
+          </div>
+        )}
+        {!isLoading && definitions.length === 0 && !error && (
+          <div className={`${scssObj.baseClass}__search`}>
+            Type a word and press &apos;Enter&apos; to get its meaning.
+          </div>
+        )}
+        {error && <div className={`${scssObj.baseClass}__error`}>{error}</div>}
+        {definitions.length > 0 && (
+          <div className={`${scssObj.baseClass}__result`}>
+            <DefinitionItem definition={definitions[i]} />
+          </div>
+        )}
       </div>
+      {definitions.length > 0 && (
+        <div className={`${scssObj.baseClass}__footer`}>
+          <Button disabled={definitions.length - 1 === i} onClick={() => setI(i + 1)}>
+            <Icon icon="arrow_right_alt" size="small" description="Next" />
+          </Button>
+        </div>
+      )}
     </div>
-    // </Draggable>
   );
 };
 

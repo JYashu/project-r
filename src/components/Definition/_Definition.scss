@@ -1,3 +1,5 @@
+@import '../../styles/lib';
+
 $base-class: definition;
 
 :export {
@@ -5,4 +7,36 @@ $base-class: definition;
 }
 
 .#{$base-class} {
+  &__word-wrapper {
+    padding: 5px;
+  }
+  &__word {
+    @include type-style-specialized;
+    text-transform: capitalize;
+  }
+
+  &__phonetics {
+    color: map-get($colors, sub-heading);
+
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__speech {
+    color: map-get($colors, sub-heading);
+  }
+
+  &__block {
+    border-radius: 4px;
+    border: 2px solid map-get($colors, juror-4);
+    padding: 5px;
+    margin: 10px 5px;
+    box-shadow: -4px 0 0 0 #4a00e0;
+  }
+  &__block-wrapper {
+    @include box-level-3;
+
+    margin: 10px 5px;
+    padding: 5px;
+  }
 }

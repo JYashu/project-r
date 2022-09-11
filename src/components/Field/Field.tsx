@@ -21,6 +21,7 @@ export interface Props
   errorMessage?: string;
   errorClassName?: string;
   icon?: string;
+  onIconClick?: () => void;
   iconPosition?: 'LEFT' | 'RIGHT';
   inputClassName?: string;
   label?: string;
@@ -31,6 +32,7 @@ export interface Props
   isRound?: boolean;
   canSubmit?: boolean;
   isTransparent?: boolean;
+  border?: boolean;
   submitButton?: () => React.ReactNode;
 }
 
@@ -43,6 +45,7 @@ const Field: React.SFC<Props> = React.forwardRef((props: Props, ref: any) => {
     errorClassName,
     errorMessage,
     icon,
+    onIconClick,
     iconPosition,
     inputClassName,
     label,
@@ -54,6 +57,7 @@ const Field: React.SFC<Props> = React.forwardRef((props: Props, ref: any) => {
     canSubmit,
     isTransparent,
     submitButton,
+    border,
     ...rest
   } = props;
   const hasValue = value !== null && value !== undefined && value !== '';
@@ -67,6 +71,7 @@ const Field: React.SFC<Props> = React.forwardRef((props: Props, ref: any) => {
     [`${scssObj.baseClass}--round`]: isRound,
     [`${scssObj.baseClass}--solid`]: !isTransparent,
     [`${scssObj.baseClass}--transparent`]: isTransparent,
+    [`${scssObj.baseClass}--border`]: border,
   });
 
   const labelCls = classnames(`${scssObj.baseClass}__label`, {

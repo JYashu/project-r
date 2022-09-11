@@ -1,5 +1,3 @@
-import { boolean, string } from 'yup';
-
 export interface MetaCallback<RequestPayload = any, SuccessPayload = any, FailurePayload = any> {
   requestPayload?: RequestPayload;
   onSuccess?: (payload: SuccessPayload) => void;
@@ -127,4 +125,17 @@ export interface User extends Omit<{ email: string }, 'providerOrganization'> {}
 export interface Coordinates {
   x: number;
   y: number;
+}
+
+export interface Meaning {
+  antonyms: string[];
+  synonyms: string[];
+  definitions: { definition: string; example: string[] }[];
+  partOfSpeech: string;
+}
+
+export interface Definition {
+  word: string;
+  phonetics: { text: string; audio: string };
+  meanings: Meaning[];
 }

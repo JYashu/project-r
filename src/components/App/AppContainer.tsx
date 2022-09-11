@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { openDictionary } from '../../redux/dictionary';
-import { selectGlobalConfig, selectIsContentStatic, setIsClipboardVisible } from '../../redux/me';
+import { openDictionary, selectIsDictionaryVisible } from '../../redux/dictionary';
+import { selectIsContentStatic, setIsClipboardVisible } from '../../redux/me';
 import { State } from '../../redux/types';
 import App from './App';
 
 const mapState = (state: State) => {
   return {
-    config: selectGlobalConfig(state),
+    isDictionaryVisible: selectIsDictionaryVisible(state),
     isContentStatic: selectIsContentStatic(state),
   };
 };
