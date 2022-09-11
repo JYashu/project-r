@@ -14,10 +14,19 @@ interface Props extends RouteComponentProps {
   activeSidebarItem: ActiveSidebarItem;
   handleState: (isCollapsed: boolean) => void;
   showClipboard: () => void;
+  openDictionary: () => void;
 }
 
 const Sidebar = withRouter(
-  ({ history, config, isCollapsed, activeSidebarItem, handleState, showClipboard }: Props) => {
+  ({
+    history,
+    config,
+    isCollapsed,
+    activeSidebarItem,
+    handleState,
+    showClipboard,
+    openDictionary,
+  }: Props) => {
     const [isRecollapse, setRecollapse] = useState(true);
 
     if (
@@ -132,15 +141,26 @@ const Sidebar = withRouter(
               <Link tabIndex={-1} to="/test" />
             </MenuItem>
             {!isMobileOrTablet && (
-              <MenuItem
-                className={itemClassName}
-                onClick={showClipboard}
-                key={uuidv4()}
-                active={activeSidebarItem === ActiveSidebarItem.Clipboard}
-                icon={<Icon removeOutline size="small" icon="content_paste" />}
-              >
-                Clipboard
-              </MenuItem>
+              <>
+                <MenuItem
+                  className={itemClassName}
+                  onClick={showClipboard}
+                  key={uuidv4()}
+                  active={activeSidebarItem === ActiveSidebarItem.Clipboard}
+                  icon={<Icon removeOutline size="small" icon="content_paste" />}
+                >
+                  Clipboard
+                </MenuItem>
+                <MenuItem
+                  className={itemClassName}
+                  onClick={openDictionary}
+                  key={uuidv4()}
+                  active={activeSidebarItem === ActiveSidebarItem.Dictionary}
+                  icon={<Icon removeOutline size="small" icon="book" />}
+                >
+                  Dictionary
+                </MenuItem>
+              </>
             )}
 
             <MenuItem

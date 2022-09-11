@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+import { openDictionary } from '../../redux/dictionary';
 import { selectGlobalConfig, setIsClipboardVisible } from '../../redux/me';
 import { selectActiveSidebarItem, selectIsCollapsed, setIsCollapsed } from '../../redux/sidebar';
 import { State } from '../../redux/types';
@@ -16,6 +17,7 @@ const mapState = (state: State) => {
 const mapDispatch = (dispatch: Dispatch) => ({
   handleState: (isCollapsed: boolean) => dispatch(setIsCollapsed({ isCollapsed })),
   showClipboard: () => dispatch(setIsClipboardVisible({ isVisible: true, hideItself: false })),
+  openDictionary: () => dispatch(openDictionary.request()),
 });
 
 export default connect(mapState, mapDispatch)(Sidebar);

@@ -45,6 +45,7 @@ export enum ActiveSidebarItem {
   MAL,
   Clipboard,
   Memory,
+  Dictionary,
 }
 
 export interface Config {
