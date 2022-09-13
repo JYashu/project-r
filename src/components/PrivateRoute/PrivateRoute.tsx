@@ -13,6 +13,8 @@ const PrivateRoute = ({ component, ...rest }: Props) => (
       const { accessToken } = getTokens();
       const isAuthenticated = accessToken != null;
 
+      window.speechSynthesis.getVoices();
+
       const { location } = props;
 
       return isAuthenticated ? (

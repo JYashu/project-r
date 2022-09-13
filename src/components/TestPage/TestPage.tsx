@@ -13,6 +13,7 @@ import { Values } from './types';
 import scssObj from './_TestPage.scss';
 import useSetGlobalHeader from '../../hooks/useSetGlobalHeader';
 import useActiveSidebarItem from '../../hooks/useActiveSidebarItem';
+import useSpeechSynthesis from '../../hooks/useSpeechSynthesis';
 
 interface Props {
   delay?: number;
@@ -49,6 +50,10 @@ const TestApp = ({
 
   useTimeout(() => setLoading(false), delay || 1800);
 
+  const Speak = (text: string) => {
+    useSpeechSynthesis(text);
+  };
+
   if (loading) {
     return (
       <div className={`${scssObj.baseClass}__spinner`}>
@@ -67,6 +72,22 @@ const TestApp = ({
           <Button intent="primary" icon="file_download" onClick={handleOpenModal}>
             Click Me
           </Button>
+
+          <form
+            onSubmit={e => {
+              e.preventDefault();
+              Speak(values.value);
+            }}
+          >
+            <Field
+              className={`${scssObj.baseClass}__field`}
+              name="value"
+              value={values.value}
+              placeholder="Text to Speech"
+              label="Text to Speech"
+              onChange={handleChange}
+            />
+          </form>
 
           <div className={`${scssObj.baseClass}__glitch`}>
             <Button buttonStyle="blur" onClick={() => copyText(uuidv4())}>
@@ -103,13 +124,6 @@ const TestApp = ({
                 />
               )}
             </Field>
-            <Field
-              name="value"
-              value={values.value}
-              placeholder="placeholder"
-              label="label"
-              onChange={handleChange}
-            />
           </div>
         </div>
       </div>

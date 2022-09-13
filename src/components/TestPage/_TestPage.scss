@@ -9,11 +9,7 @@ $base-class: test-page;
 .#{$base-class} {
   &__container {
     @include center-on-screen;
-    @include background-image(
-      $width: 1478,
-      $height: 733,
-      $type: map-get($img-provider, picsum)
-    );
+    @include background-image($width: 1478, $height: 733, $type: map-get($img-provider, picsum));
   }
 
   &__glass {
@@ -37,6 +33,10 @@ $base-class: test-page;
 
     width: fit-content;
     max-width: fit-content;
+  }
+
+  &__field {
+    margin: 2rem;
   }
 
   &__spinner {

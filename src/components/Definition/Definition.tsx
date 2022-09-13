@@ -1,3 +1,4 @@
+import useSpeechSynthesis from '../../hooks/useSpeechSynthesis';
 import { Definition, Meaning } from '../../types';
 import Icon from '../Icon';
 import scssObj from './_Definition.scss';
@@ -10,8 +11,10 @@ const DefinitionItem = ({ definition }: { definition: Definition }) => {
   const { text, audio } = phonetics;
   const sound = new Audio(audio);
 
-  const start = () => {
-    sound.play();
+  const Start = () => {
+    if (audio !== '') sound.play();
+    const phrase = audio === '' ? word : undefined;
+    useSpeechSynthesis(phrase);
   };
 
   return (
@@ -21,12 +24,10 @@ const DefinitionItem = ({ definition }: { definition: Definition }) => {
           <div className={`${scssObj.baseClass}__word`}>{word}</div>
           <div className={`${scssObj.baseClass}__phonetics`}>
             {text}
-            {audio !== '' && (
-              <>
-                {' | '}
-                <Icon icon="volume_up" size="small" onClickHandler={() => start()} />
-              </>
-            )}
+            <>
+              {' | '}
+              <Icon icon="volume_up" size="small" onClickHandler={() => Start()} />
+            </>
           </div>
         </div>
         {meanings.map(({ antonyms, synonyms, definitions, partOfSpeech }: Meaning) => {
