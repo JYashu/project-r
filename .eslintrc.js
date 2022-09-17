@@ -59,6 +59,7 @@ module.exports = {
     {
       files: ['**/*.ts', '**/*.tsx'],
       rules: {
+        'prettier/prettier': ['error', { arrowParens: 'avoid' }],
         '@typescript-eslint/no-useless-constructor': 'error',
         'no-unused-vars': 'off',
         'no-useless-constructor': 'off',

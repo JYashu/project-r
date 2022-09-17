@@ -25,3 +25,7 @@ declare module '*.png' {
   const value: string | undefined;
   export = value;
 }
+declare module '*.wasm' {
+  const value: string | undefined;
+  export = value;
+}

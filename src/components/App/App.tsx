@@ -1,5 +1,5 @@
 import QueryString from 'query-string';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Redirect, Route, RouteComponentProps } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
 import TodoPage from '../TodoPage';
@@ -25,6 +25,7 @@ import HandleLoginContainer from '../HandleLogin/HandleLoginContainer';
 import Home from '../Home/Home';
 import Memory from '../Memory';
 import Dictionary from '../Dictionary';
+import CBook from '../CBook';
 
 const App = ({
   isDictionaryVisible,
@@ -67,6 +68,11 @@ const App = ({
       >
         <PrivateRoute component={Sidebar} />
       </div>
+
+      <div className={`${scssObj.baseClass}__cbook`}>
+        <Route path="/cbook" exact component={CBook} />
+      </div>
+
       <Route
         path="/login"
         exact

@@ -6,7 +6,7 @@ import { MetaCallback } from '../../types';
 const createAsyncActionWithMeta = <
   RequestType extends string,
   SuccessType extends string,
-  FailureType extends string
+  FailureType extends string,
 >(
   requestType: RequestType,
   successType: SuccessType,

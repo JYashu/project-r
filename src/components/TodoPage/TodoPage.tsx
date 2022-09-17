@@ -100,7 +100,7 @@ const TodoPage = () => {
 
   const getPageData = () =>
     getTodos().then(response => {
-      const result = (response as ApiResponse<Todo[]>) as ApiSuccess<Todo[]>;
+      const result = response as ApiResponse<Todo[]> as ApiSuccess<Todo[]>;
       if (response.status === 200) {
         const totalElements = result?.data?.length;
         if (totalElements) setSize(totalElements);

@@ -29,7 +29,7 @@ export interface Props
   textArea?: boolean;
   touched?: boolean;
   ref?: any;
-  isRound?: boolean;
+  rounded?: boolean;
   canSubmit?: boolean;
   isTransparent?: boolean;
   border?: boolean;
@@ -53,7 +53,7 @@ const Field: React.SFC<Props> = React.forwardRef((props: Props, ref: any) => {
     textArea,
     touched,
     value,
-    isRound,
+    rounded,
     canSubmit,
     isTransparent,
     submitButton,
@@ -68,7 +68,7 @@ const Field: React.SFC<Props> = React.forwardRef((props: Props, ref: any) => {
     [`${scssObj.baseClass}--has-error`]: hasError,
     [`${scssObj.baseClass}--has-children`]: children !== undefined,
     [`${scssObj.baseClass}--text-area`]: textArea,
-    [`${scssObj.baseClass}--round`]: isRound,
+    [`${scssObj.baseClass}--rounded`]: rounded,
     [`${scssObj.baseClass}--solid`]: !isTransparent,
     [`${scssObj.baseClass}--transparent`]: isTransparent,
     [`${scssObj.baseClass}--border`]: border,
@@ -91,7 +91,7 @@ const Field: React.SFC<Props> = React.forwardRef((props: Props, ref: any) => {
     hasLabel: !!value && !!label,
     icon,
     value,
-    isRound,
+    rounded,
     isTransparent,
     canSubmit,
     submitButton,

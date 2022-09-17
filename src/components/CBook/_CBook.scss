@@ -1,0 +1,18 @@
+@import '../../styles/lib';
+
+$base-class: cbook;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  padding: 10px 50px 25vh;
+  height: 100vh;
+  background-color: #1f2d3b;
+  overflow-y: scroll;
+
+  .react-draggable-transparent-selection &__cell-list {
+    margin-bottom: 50vh;
+  }
+}

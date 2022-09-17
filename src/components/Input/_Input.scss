@@ -27,7 +27,7 @@ $base-class: input;
     border-color: map-get($intent-colors, destructive);
   }
 
-  &--round {
+  &--rounded {
     @include border-radius(25px);
   }
 

@@ -42,7 +42,7 @@ $base-class: field;
     border-style: none;
   }
 
-  &--round {
+  &--rounded {
     @include border-radius(25px);
 
     overflow: hidden;

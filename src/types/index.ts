@@ -46,6 +46,7 @@ export enum ActiveSidebarItem {
   Clipboard,
   Memory,
   Dictionary,
+  CBook,
 }
 
 export interface Config {
@@ -140,3 +141,14 @@ export interface Definition {
   phonetics: { text: string; audio: string };
   meanings: Meaning[];
 }
+
+export type CellTypes = 'code' | 'md';
+
+export interface Cell {
+  id: string;
+  type: CellTypes;
+  content: string;
+  showPreview?: boolean;
+}
+
+export type Direction = 'up' | 'down';

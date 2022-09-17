@@ -2,6 +2,15 @@
   $border-radius: 4px;
   $min-width: 80px;
 
+  @if $style == minimal {
+    $min-width: 80px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: $border-radius;
+  }
+
   @if $style == normal {
     @include border-radius($border-radius);
 

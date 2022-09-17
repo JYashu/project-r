@@ -11,7 +11,7 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   icon?: string;
   iconPosition?: 'LEFT' | 'RIGHT';
   ref?: any;
-  isRound?: boolean;
+  rounded?: boolean;
   isTransparent?: boolean;
   canSubmit?: boolean;
   submitButton?: () => React.ReactNode;
@@ -39,7 +39,7 @@ const Input: React.SFC<Props> = React.forwardRef((props: Props, ref: any) => {
     hasLabel,
     icon,
     iconPosition,
-    isRound,
+    rounded,
     isTransparent,
     canSubmit,
     submitButton,
@@ -51,7 +51,7 @@ const Input: React.SFC<Props> = React.forwardRef((props: Props, ref: any) => {
     [`${scssObj.baseClass}--labelled`]: hasLabel,
     [`${scssObj.baseClass}--with-left-icon`]: icon && iconPosition === 'LEFT',
     [`${scssObj.baseClass}--with-right-icon`]: icon && iconPosition === 'RIGHT',
-    [`${scssObj.baseClass}--round`]: isRound,
+    [`${scssObj.baseClass}--rounded`]: rounded,
     [`${scssObj.baseClass}--solid`]: !isTransparent,
     [`${scssObj.baseClass}--transparent`]: isTransparent,
   });

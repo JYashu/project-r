@@ -27,9 +27,9 @@ export interface Props extends Pick<React.ComponentProps<'button'>, ButtonProps>
   ignoreChildren?: boolean;
   ariaExpanded?: boolean;
   ariaLabel?: string;
-  buttonStyle?: 'game' | 'normal' | 'glossy' | 'abstract' | 'blur';
+  buttonStyle?: 'game' | 'normal' | 'glossy' | 'abstract' | 'blur' | 'minimal';
   includeFocus?: boolean;
-  isRound?: boolean;
+  rounded?: boolean;
   handWriting?: boolean;
   solid?: boolean;
 }
@@ -58,7 +58,7 @@ const Button = ({
   ariaLabel,
   buttonStyle,
   includeFocus,
-  isRound,
+  rounded,
   handWriting,
   solid,
 }: Props): React.ReactElement<'button'> => {
@@ -73,7 +73,7 @@ const Button = ({
     [`${scssObj.baseClass}--solid`]: intent || !transparent || solid,
     [`${scssObj.baseClass}--${buttonStyle}`]: buttonStyle,
     [`${scssObj.baseClass}--include-focus`]: includeFocus,
-    [`${scssObj.baseClass}--is-round`]: isRound,
+    [`${scssObj.baseClass}--rounded`]: rounded,
     [`${scssObj.baseClass}--hand-writing`]: handWriting,
   });
 
