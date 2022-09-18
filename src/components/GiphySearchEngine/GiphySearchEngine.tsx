@@ -111,7 +111,7 @@ const GiphySearchEngine = ({
         </div>
         <form
           className={`${scssObj.baseClass}__form`}
-          onSubmit={e => {
+          onSubmit={(e) => {
             e.preventDefault();
             handleSubmit();
           }}

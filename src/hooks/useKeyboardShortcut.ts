@@ -9,7 +9,7 @@ export default (keys: string[], callback: () => void, shortcutKey: string, node:
 
   const allKeysPressed = (event: any) => {
     let pressed = false;
-    keys.every(key => {
+    keys.every((key) => {
       switch (key) {
         case 'shift':
           pressed = event.shiftKey;
@@ -30,7 +30,7 @@ export default (keys: string[], callback: () => void, shortcutKey: string, node:
 
   // handle what happens on key press
   const handleKeyPress = useCallback(
-    event => {
+    (event) => {
       // check if one of the key is part of the ones we want
       if (allKeysPressed(event) && event.code === `Key${shortcutKey.toUpperCase()}`) {
         callbackRef.current();

@@ -74,7 +74,7 @@ const TestApp = ({
           </Button>
 
           <form
-            onSubmit={e => {
+            onSubmit={(e) => {
               e.preventDefault();
               Speak(values.value);
             }}
@@ -104,11 +104,11 @@ const TestApp = ({
               value={values.state}
               label="State"
             >
-              {fieldName => (
+              {(fieldName) => (
                 <StateDropdown
                   className={`${scssObj.baseClass}__states-dropdown`}
                   handleBlur={() => setState(fieldName)}
-                  handleChange={option => {
+                  handleChange={(option) => {
                     if (!option) {
                       setFieldValue(fieldName, '');
                       return;

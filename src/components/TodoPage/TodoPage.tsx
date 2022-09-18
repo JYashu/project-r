@@ -24,10 +24,10 @@ const TodoMuiTable = (data: Todo[], count: number) => {
         display: true,
         filter: false,
         sort: false,
-        customHeadLabelRender: value => {
+        customHeadLabelRender: (value) => {
           return <div className={`${scssObj.baseClass}__label`}>{value.label}</div>;
         },
-        customBodyRender: value => {
+        customBodyRender: (value) => {
           return <div className={`${scssObj.baseClass}__value`}>{value}</div>;
         },
       },
@@ -39,10 +39,10 @@ const TodoMuiTable = (data: Todo[], count: number) => {
         display: true,
         filter: false,
         sort: false,
-        customHeadLabelRender: value => {
+        customHeadLabelRender: (value) => {
           return <div className={`${scssObj.baseClass}__label`}>{value.label}</div>;
         },
-        customBodyRender: value => {
+        customBodyRender: (value) => {
           return <div className={`${scssObj.baseClass}__value`}>{value}</div>;
         },
       },
@@ -54,10 +54,10 @@ const TodoMuiTable = (data: Todo[], count: number) => {
         display: true,
         filter: false,
         sort: false,
-        customHeadLabelRender: value => {
+        customHeadLabelRender: (value) => {
           return <div className={`${scssObj.baseClass}__label`}>{value.label}</div>;
         },
-        customBodyRender: value => {
+        customBodyRender: (value) => {
           return (
             <div className={`${scssObj.baseClass}__value`}>
               {value ? 'Completed' : 'Not Completed'}
@@ -99,7 +99,7 @@ const TodoPage = () => {
   const [count, setCount] = useState(10);
 
   const getPageData = () =>
-    getTodos().then(response => {
+    getTodos().then((response) => {
       const result = response as ApiResponse<Todo[]> as ApiSuccess<Todo[]>;
       if (response.status === 200) {
         const totalElements = result?.data?.length;

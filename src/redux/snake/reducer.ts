@@ -36,7 +36,7 @@ const initialState: SnakeState = {
 
 export default createReducer<SnakeState, SnakeActions>(initialState)
   .handleAction(makeMove, (state, { payload }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       if (!draft.stopGame) {
         let newSnake = [...state.snake];
         newSnake = [
@@ -69,12 +69,12 @@ export default createReducer<SnakeState, SnakeActions>(initialState)
     }),
   )
   .handleAction(setDisDirection, (state, { payload }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.disallowedDirection = payload.direction;
     }),
   )
-  .handleAction(increaseSnake, state =>
-    produce(state, draft => {
+  .handleAction(increaseSnake, (state) =>
+    produce(state, (draft) => {
       const snakeLen = state.snake.length;
       draft.snake = [
         ...state.snake,
@@ -86,23 +86,23 @@ export default createReducer<SnakeState, SnakeActions>(initialState)
     }),
   )
   .handleAction(scoreUpdates, (state, { payload }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       if (payload.reset) draft.score = 0;
       else draft.score += 1;
     }),
   )
-  .handleAction(stopGame, state =>
-    produce(state, draft => {
+  .handleAction(stopGame, (state) =>
+    produce(state, (draft) => {
       draft.stopGame = true;
     }),
   )
-  .handleAction(setMock, state =>
-    produce(state, draft => {
+  .handleAction(setMock, (state) =>
+    produce(state, (draft) => {
       draft.mock = generateRandomPosition(980, 580, draft.snake);
     }),
   )
   .handleAction(setInPlay, (state, { payload }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.inPlay = payload.inPlay;
     }),
   );

@@ -11,13 +11,13 @@ const initialState: NPMRepoState = {
 };
 
 export default createReducer<NPMRepoState, NPMRepoActions>(initialState)
-  .handleAction(getModules.request, state =>
-    produce(state, draft => {
+  .handleAction(getModules.request, (state) =>
+    produce(state, (draft) => {
       draft.isLoading = true;
     }),
   )
   .handleAction(getModules.success, (state, { payload }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.isLoading = false;
 
       draft.data = payload.objects.map((repo: any) => {
@@ -32,7 +32,7 @@ export default createReducer<NPMRepoState, NPMRepoActions>(initialState)
     }),
   )
   .handleAction(getModules.failure, (state, { payload }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.isLoading = false;
       draft.error = payload.message;
     }),

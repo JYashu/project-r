@@ -4,12 +4,12 @@ import createAsyncActionWithMeta from '../utils/createAsyncActionWithMeta';
 
 export const setGlobalHeader = createAction(
   'SET_GLOBAL_HEADER',
-  action => (payload: { title: string }) => action(payload),
+  (action) => (payload: { title: string }) => action(payload),
 );
 
 export const setGlobalConfig = createAction(
   'SET_GLOBAL_CONFIG',
-  action => (payload: { config: Config }) => action(payload),
+  (action) => (payload: { config: Config }) => action(payload),
 );
 
 export const copyText = createAsyncActionWithMeta(
@@ -20,14 +20,14 @@ export const copyText = createAsyncActionWithMeta(
 
 export const setIsClipboardVisible = createAction(
   'SET_IS_VISIBLE',
-  action => (payload: { isVisible: boolean; hideItself: boolean }) => action(payload),
+  (action) => (payload: { isVisible: boolean; hideItself: boolean }) => action(payload),
 );
 
-export const clearClipboard = createAction('CLEAR_CLIPBOARD', action => () => action());
+export const clearClipboard = createAction('CLEAR_CLIPBOARD', (action) => () => action());
 
 export const setIsContentStatic = createAction(
   'SET_IS_CONTENT_STATIC',
-  action => (payload: { isStatic: boolean }) => action(payload),
+  (action) => (payload: { isStatic: boolean }) => action(payload),
 );
 
 export const completeSignIn = createAsyncActionWithMeta(

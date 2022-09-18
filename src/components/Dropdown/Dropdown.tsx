@@ -65,7 +65,7 @@ const findOption = (options: Option[], value?: Option['value']) => {
     optionsMemo = options;
     valueMemo = value;
 
-    const result = optionsMemo.find(option => option.value === value);
+    const result = optionsMemo.find((option) => option.value === value);
     resultMemo = result || null;
   }
 
@@ -96,18 +96,18 @@ const DropdownMenuList = ({ cx, children, getStyles, innerRef, ...props }: any) 
   useEffect(() => {
     if (actionsRef.current) {
       const { width, height } = (actionsRef.current as any).getBoundingClientRect();
-      setDimensions(prev => ({ ...prev, actions: { width, height } }));
+      setDimensions((prev) => ({ ...prev, actions: { width, height } }));
     } else {
-      setDimensions(prev => ({ ...prev, actions: undefined }));
+      setDimensions((prev) => ({ ...prev, actions: undefined }));
     }
   }, [actionsRef, children]);
 
   useEffect(() => {
     if (optionsRef.current) {
       const { width, height } = (optionsRef.current as any).getBoundingClientRect();
-      setDimensions(prev => ({ ...prev, options: { width, height } }));
+      setDimensions((prev) => ({ ...prev, options: { width, height } }));
     } else {
-      setDimensions(prev => ({ ...prev, options: undefined }));
+      setDimensions((prev) => ({ ...prev, options: undefined }));
     }
   }, [optionsRef, children]);
 

@@ -26,7 +26,7 @@ const mapDispatch = (dispatch: Dispatch) => ({
         getDefinitions.request(
           { word },
           {
-            onSuccess: response => {
+            onSuccess: (response) => {
               resolve(response);
             },
             onFailure: reject,

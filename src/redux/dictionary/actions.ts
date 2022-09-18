@@ -9,7 +9,7 @@ export const openDictionary = createAsyncActionWithMeta(
 
 export const setIsVisible = createAction(
   'SET_IS_DICTIONARY_VISIBLE',
-  action => (payload: { isVisible: boolean }) => action(payload),
+  (action) => (payload: { isVisible: boolean }) => action(payload),
 );
 
 export const getDefinitions = createAsyncActionWithMeta(

@@ -57,7 +57,7 @@ const NPMRepoEngine = ({
         <title>NPM Engine</title>
       </Helmet>
       <form
-        onSubmit={e => {
+        onSubmit={(e) => {
           e.preventDefault();
           handleSubmit();
         }}
@@ -89,7 +89,7 @@ const NPMRepoEngine = ({
         {isLoading && <h3>Loading...</h3>}
         {!error && !isLoading && (
           <>
-            {data.map(repo => (
+            {data.map((repo) => (
               <NPMRepoItem data={repo} />
             ))}
           </>

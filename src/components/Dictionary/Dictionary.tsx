@@ -49,7 +49,7 @@ const Dictionary = ({
     <div className={`${scssObj.baseClass}`}>
       <div className={`${scssObj.baseClass}__header`}>
         <form
-          onSubmit={e => {
+          onSubmit={(e) => {
             e.preventDefault();
             getDefinitions(value);
           }}
@@ -57,7 +57,7 @@ const Dictionary = ({
           <Field
             name="word"
             value={value}
-            onChange={e => setValue(e.target.value)}
+            onChange={(e) => setValue(e.target.value)}
             border
             canSubmit
             ref={searchInput}

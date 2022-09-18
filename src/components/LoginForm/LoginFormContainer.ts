@@ -17,7 +17,7 @@ const mapDispatch = (dispatch: Dispatch) => ({
         completeSignIn.request(
           { username, password },
           {
-            onSuccess: response => {
+            onSuccess: (response) => {
               resolve(response);
             },
             onFailure: reject,

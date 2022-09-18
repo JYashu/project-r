@@ -12,7 +12,7 @@ const mapDispatch = (dispatch: Dispatch) => ({
         getAnimes.request(
           { query },
           {
-            onSuccess: response => {
+            onSuccess: (response) => {
               resolve(response);
             },
             onFailure: reject,

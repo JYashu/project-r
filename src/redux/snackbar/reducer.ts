@@ -17,7 +17,7 @@ const { DEFAULT } = SnackType;
 /* eslint-disable no-param-reassign */
 export default createReducer<SnackbarState, SnackbarActions>(initialState)
   .handleAction(addSnack, (state, { payload }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       const { duration, ...rest } = payload;
       draft.snacks.push({
         id: uuidv4(),
@@ -28,7 +28,7 @@ export default createReducer<SnackbarState, SnackbarActions>(initialState)
     }),
   )
   .handleAction(removeSnack, (state, { payload }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       const index = draft.snacks.findIndex(({ id }) => id === payload.id);
       if (index === -1) {
         return;
