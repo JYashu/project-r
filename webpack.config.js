@@ -107,8 +107,8 @@ module.exports = {
       index: '/index.html',
       rewrites: [
         {
-          from: /^\/$/,
-          to: '/index.html',
+          from: /^\/project-r\/$/,
+          to: '/404.html',
         },
       ],
     },
