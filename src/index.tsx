@@ -6,7 +6,7 @@ import ProviderWithRouter from './components/ProviderWithRouter';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/project-r">
       <ProviderWithRouter>
         <App />
       </ProviderWithRouter>

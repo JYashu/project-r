@@ -120,7 +120,7 @@ const App = ({
         id="main-content"
         aria-label="main-content"
       >
-        <Route path="/project-r" exact component={Home} />
+        <Route path="/" exact component={Home} />
         <Route path="/home" exact component={Home} />
         <Route path="/todo" exact component={TodoPage} />
         <Route path="/tic-tac-toe" exact component={TicTacToe} />
