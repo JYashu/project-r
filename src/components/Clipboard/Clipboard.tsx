@@ -57,7 +57,7 @@ const ClipboardView = ({
       <div className={`${scssObj.baseClass}__main`}>
         {clipboard && !cleared ? (
           <div>
-            {clipboard.map(item => {
+            {clipboard.map((item) => {
               return (
                 <div className={`${scssObj.baseClass}__item`}>
                   <div className={`${scssObj.baseClass}__text`}>{item}</div>

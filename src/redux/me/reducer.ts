@@ -23,17 +23,17 @@ const initialState: MeState = {
 
 export default createReducer<MeState, MeActions>(initialState)
   .handleAction(setGlobalHeader, (state, { payload }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.title = payload.title;
     }),
   )
   .handleAction(setGlobalConfig, (state, { payload }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.setting = payload.config;
     }),
   )
   .handleAction(copyText.success, (state, { payload }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       const data = localStorage.getItem('clipboard')?.split(',') || [];
       const idx = data.indexOf(payload.text);
       if (idx > -1) data.splice(idx, 1);
@@ -42,17 +42,17 @@ export default createReducer<MeState, MeActions>(initialState)
     }),
   )
   .handleAction(setIsClipboardVisible, (state, { payload }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.clipboard = { ...draft.clipboard, ...payload };
     }),
   )
-  .handleAction(clearClipboard, state =>
-    produce(state, draft => {
+  .handleAction(clearClipboard, (state) =>
+    produce(state, (draft) => {
       localStorage.removeItem('clipboard');
     }),
   )
   .handleAction(setIsContentStatic, (state, { payload }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.isContentStatic = payload.isStatic;
     }),
   );

@@ -14,24 +14,24 @@ const initialState: DictionaryState = {
 
 export default createReducer<DictionaryState, DictionaryActions>(initialState)
   .handleAction(openDictionary.success, (state, { payload }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.selectedText = payload.word || '';
     }),
   )
   .handleAction(setIsVisible, (state, { payload }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.isVisible = payload.isVisible;
     }),
   )
-  .handleAction(getDefinitions.request, state =>
-    produce(state, draft => {
+  .handleAction(getDefinitions.request, (state) =>
+    produce(state, (draft) => {
       draft.isLoading = true;
       draft.data = [];
       draft.error = null;
     }),
   )
   .handleAction(getDefinitions.success, (state, { payload }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.error = null;
       draft.isLoading = false;
       draft.data = payload.data.map((item: any) => {
@@ -50,7 +50,7 @@ export default createReducer<DictionaryState, DictionaryActions>(initialState)
     }),
   )
   .handleAction(getDefinitions.failure, (state, { payload }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.isLoading = false;
       draft.data = [];
       draft.error = payload.message;

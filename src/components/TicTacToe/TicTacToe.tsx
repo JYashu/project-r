@@ -241,7 +241,7 @@ const TicTacToe = ({
       <div className={`${scssObj.baseClass}__game-board`}>
         <Board
           squares={board}
-          onClick={i => {
+          onClick={(i) => {
             handleClick(i);
           }}
         />

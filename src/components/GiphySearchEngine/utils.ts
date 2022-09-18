@@ -35,7 +35,7 @@ export const withState = withFormik<OuterProps, Values>({
         setFieldValue('redirect', true);
         setSubmitting(false);
       })
-      .catch(e => {
+      .catch((e) => {
         setSubmitting(false);
         console.warn('link account error', e);
       });

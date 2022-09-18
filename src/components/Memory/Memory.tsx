@@ -40,7 +40,7 @@ const Card = ({
   useEffect(() => {
     if (flippedIndexes[2] === true && flippedIndexes.indexOf(id) > -1) {
       setTimeout(() => {
-        set(state => !state);
+        set((state) => !state);
         setFlippedCount(flippedCount + 1);
         setFlippedIndexes([]);
       }, 1000);
@@ -51,16 +51,16 @@ const Card = ({
   }, [flippedIndexes]);
 
   const onCardClick = () => {
-    set(state => state);
+    set((state) => state);
 
     if (!game[id].flipped && flippedCount % 3 === 0) {
-      set(state => !state);
+      set((state) => !state);
       setFlippedCount(flippedCount + 1);
       const newIndexes = [...flippedIndexes];
       newIndexes.push(id);
       setFlippedIndexes(newIndexes);
     } else if (flippedCount % 3 === 1 && !game[id].flipped && flippedIndexes.indexOf(id) < 0) {
-      set(state => !state);
+      set((state) => !state);
       setFlippedCount(flippedCount + 1);
       const newIndexes = [...flippedIndexes];
       newIndexes.push(id);
@@ -73,7 +73,7 @@ const Card = ({
       <a.div
         className={classNames(`${scssObj.baseClass}__c`, `${scssObj.baseClass}__back-${type}`)}
         style={{
-          opacity: opacity.interpolate(o => 1 - o),
+          opacity: opacity.interpolate((o) => 1 - o),
           transform,
         }}
       />
@@ -81,7 +81,7 @@ const Card = ({
         className={classNames(`${scssObj.baseClass}__c`, `${scssObj.baseClass}__front`)}
         style={{
           opacity,
-          transform: transform.interpolate(t => `${t} rotateX(360deg)`),
+          transform: transform.interpolate((t) => `${t} rotateX(360deg)`),
           background:
             type === CardType.Solid
               ? color

@@ -6,7 +6,7 @@ import { MetaCallback } from '../../types';
 const createAsyncActionWithMeta = <
   RequestType extends string,
   SuccessType extends string,
-  FailureType extends string
+  FailureType extends string,
 >(
   requestType: RequestType,
   successType: SuccessType,
@@ -15,17 +15,17 @@ const createAsyncActionWithMeta = <
   return <TRequest, TSuccess, TFailure>() => ({
     request: createAction(
       requestType,
-      action => (payload: TRequest, meta?: MetaCallback<TRequest, TSuccess, TFailure>) =>
+      (action) => (payload: TRequest, meta?: MetaCallback<TRequest, TSuccess, TFailure>) =>
         action(payload, meta),
     ),
     success: createAction(
       successType,
-      action => (payload: TSuccess, meta?: MetaCallback<TRequest, TSuccess, TFailure>) =>
+      (action) => (payload: TSuccess, meta?: MetaCallback<TRequest, TSuccess, TFailure>) =>
         action(payload, meta),
     ),
     failure: createAction(
       failureType,
-      action => (payload: TFailure, meta?: MetaCallback<TRequest, TSuccess, TFailure>) =>
+      (action) => (payload: TFailure, meta?: MetaCallback<TRequest, TSuccess, TFailure>) =>
         action(payload, meta),
     ),
   });

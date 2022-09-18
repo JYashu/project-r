@@ -9,7 +9,7 @@ interface Props extends RouteProps {
 const PrivateRoute = ({ component, ...rest }: Props) => (
   <Route
     {...rest}
-    render={props => {
+    render={(props) => {
       const { accessToken } = getTokens();
       const isAuthenticated = accessToken != null;
 

@@ -11,19 +11,19 @@ const initialState: GIFRepoState = {
 };
 
 export default createReducer<GIFRepoState, GIFRepoActions>(initialState)
-  .handleAction(getGifs.request, state =>
-    produce(state, draft => {
+  .handleAction(getGifs.request, (state) =>
+    produce(state, (draft) => {
       draft.isLoading = true;
     }),
   )
   .handleAction(getGifs.success, (state, { payload }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.isLoading = false;
       draft.data = payload.data;
     }),
   )
   .handleAction(getGifs.failure, (state, { payload }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.isLoading = false;
       draft.error = payload.message;
     }),

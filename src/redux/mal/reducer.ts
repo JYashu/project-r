@@ -11,19 +11,19 @@ const initialState: MALState = {
 };
 
 export default createReducer<MALState, MALActions>(initialState)
-  .handleAction(getAnimes.request, state =>
-    produce(state, draft => {
+  .handleAction(getAnimes.request, (state) =>
+    produce(state, (draft) => {
       draft.isLoading = true;
     }),
   )
   .handleAction(getAnimes.success, (state, payload) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.isLoading = false;
       draft.data = payload;
     }),
   )
   .handleAction(getAnimes.failure, (state, { payload }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.isLoading = false;
       draft.error = payload.message;
     }),

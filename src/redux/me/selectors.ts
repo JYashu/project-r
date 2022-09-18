@@ -9,10 +9,7 @@ export const selectGlobalConfig = (state: State) => selectMeState(state).setting
 export const selectClockFormat = (state: State) => selectGlobalConfig(state).clock.format12h;
 
 export const selectClipboardData = (state: State) =>
-  localStorage
-    .getItem('clipboard')
-    ?.split(',')
-    .reverse();
+  localStorage.getItem('clipboard')?.split(',').reverse();
 
 export const selectClipboardState = (state: State) => selectMeState(state).clipboard;
 

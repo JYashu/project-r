@@ -24,17 +24,17 @@ export type ModalClosePayloadConfirm = {
   id: ModalTypes.Test;
 };
 
-export const openModal = createAction('OPEN_MODAL', action => (args: ModalActionPayload) => {
+export const openModal = createAction('OPEN_MODAL', (action) => (args: ModalActionPayload) => {
   return action(args);
 });
 
-export const closeModal = createAction('CLOSE_MODAL', action => (args?: ModalClosePayload) => {
+export const closeModal = createAction('CLOSE_MODAL', (action) => (args?: ModalClosePayload) => {
   return action(args || undefined);
 });
 
 export const closeModalConfirm = createAction(
   'CLOSE_MODAL',
-  action => (args?: ModalClosePayloadConfirm) => {
+  (action) => (args?: ModalClosePayloadConfirm) => {
     return action(args || undefined);
   },
 );

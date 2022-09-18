@@ -24,7 +24,7 @@ const mapDispatch = (dispatch: Dispatch) => ({
         getGifs.request(
           { query },
           {
-            onSuccess: response => {
+            onSuccess: (response) => {
               resolve(response);
             },
             onFailure: reject,

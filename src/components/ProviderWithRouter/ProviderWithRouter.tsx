@@ -16,7 +16,7 @@ class ProviderWithRouter extends React.Component<Props> {
     const { accessToken } = getTokens();
 
     let lastLocation: any = null;
-    props.history.listen(location => {
+    props.history.listen((location) => {
       lastLocation = location;
     });
     const prevHistoryPush = props.history.push;

@@ -33,7 +33,7 @@ const MALEngine = ({
   return (
     <div className={`${scssObj.baseClass}`}>
       <form
-        onSubmit={e => {
+        onSubmit={(e) => {
           e.preventDefault();
           handleSubmit();
         }}

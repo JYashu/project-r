@@ -51,7 +51,7 @@ const DefinitionItem = ({ definition }: { definition: Definition }) => {
                 <div className={`${scssObj.baseClass}__block`}>
                   <strong>Synonyms</strong>
                   <div>
-                    {synonyms.map(syn => {
+                    {synonyms.map((syn) => {
                       return `${syn}, `;
                     })}
                   </div>
@@ -61,7 +61,7 @@ const DefinitionItem = ({ definition }: { definition: Definition }) => {
                 <div className={`${scssObj.baseClass}__block`}>
                   <strong>Antonyms</strong>
                   <div>
-                    {antonyms.map(ant => {
+                    {antonyms.map((ant) => {
                       return `${ant}, `;
                     })}
                   </div>

@@ -13,17 +13,17 @@ const initialState: SidebarState = {
 /* eslint-disable no-param-reassign */
 export default createReducer<SidebarState, SidebarActions>(initialState)
   .handleAction(setIsCollapsed, (state, { payload: { isCollapsed } }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.isCollapsed = isCollapsed;
     }),
   )
   .handleAction(setIsGamesOpen, (state, { payload: { isOpen } }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.isGamesOpen = isOpen;
     }),
   )
   .handleAction(setActiveSidebarItem, (state, { payload: { activeSidebarItem } }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.activeSidebarItem = activeSidebarItem;
     }),
   );

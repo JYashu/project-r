@@ -94,7 +94,7 @@ const Snackbar = ({ id, duration, message, img, undo, removeSnack, snackType }: 
 const Snackbars = ({ snacks, removeSnack }: Props) => {
   return (
     <div className={scssObj.baseClass} role="alert" aria-label="snackbar-alert">
-      {snacks.map(snack => (
+      {snacks.map((snack) => (
         <Snackbar {...snack} removeSnack={removeSnack} key={snack.id} />
       ))}
     </div>

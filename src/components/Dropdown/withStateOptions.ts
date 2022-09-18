@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { STATES } from '../../utils/consts';
 
 export const mapStatesToOptions = (statesArray: string[]) => {
-  return statesArray.map(state => ({ label: state, value: state }));
+  return statesArray.map((state) => ({ label: state, value: state }));
 };
 
 const mapState = () => {
