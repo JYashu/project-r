@@ -169,7 +169,7 @@ const CodeCell = ({ cell, bundle, updateCell }: Props) => {
               <CodeEditor
                 initialValue={cell.content}
                 runCode={() => setRunCode(true)}
-                onChange={value => updateCell(cell.id, value)}
+                onChange={(value) => updateCell(cell.id, value)}
               />
             </Resizable>
             <div className={`${scssObj.baseClass}__progress-wrapper`}>
@@ -186,7 +186,7 @@ const CodeCell = ({ cell, bundle, updateCell }: Props) => {
           <CodeEditor
             initialValue={cell.content}
             runCode={() => setRunCode(true)}
-            onChange={value => updateCell(cell.id, value)}
+            onChange={(value) => updateCell(cell.id, value)}
           />
         )}
       </div>

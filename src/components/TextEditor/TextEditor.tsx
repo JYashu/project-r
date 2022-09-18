@@ -33,7 +33,7 @@ const TextEditor = ({ cell, updateCell }: Props) => {
   if (editing) {
     return (
       <div className={classNames(`${scssObj.baseClass}`, 'text-editor')} ref={ref}>
-        <MDEditor value={cell.content} onChange={value => updateCell(cell.id, value || '')} />
+        <MDEditor value={cell.content} onChange={(value) => updateCell(cell.id, value || '')} />
       </div>
     );
   }

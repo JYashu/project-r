@@ -4,22 +4,22 @@ import createAsyncActionWithMeta from '../utils/createAsyncActionWithMeta';
 
 export const updateCell = createAction(
   'UPDATE_CELL',
-  action => (payload: { id: string; content: string }) => action(payload),
+  (action) => (payload: { id: string; content: string }) => action(payload),
 );
 
 export const deleteCell = createAction(
   'DELETE_CELL',
-  action => (payload: { id: string }) => action(payload),
+  (action) => (payload: { id: string }) => action(payload),
 );
 
 export const moveCell = createAction(
   'MOVE_CELL',
-  action => (payload: { id: string; direction: Direction }) => action(payload),
+  (action) => (payload: { id: string; direction: Direction }) => action(payload),
 );
 
 export const insertCellAfter = createAction(
   'INSERT_CELL_AFTER_SECOND',
-  action => (payload: { id: string | null; cellType: CellTypes }) => action(payload),
+  (action) => (payload: { id: string | null; cellType: CellTypes }) => action(payload),
 );
 
 export const createBundle = createAsyncActionWithMeta(
@@ -52,5 +52,5 @@ export const saveCells = createAsyncActionWithMeta(
 
 export const togglePreview = createAction(
   'TOGGLE_PREVIEW',
-  action => (payload: { id: string }) => action(payload),
+  (action) => (payload: { id: string }) => action(payload),
 );

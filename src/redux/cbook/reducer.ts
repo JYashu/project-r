@@ -28,22 +28,22 @@ const randomId = () => {
 
 export default createReducer<CBookState, CBookActions>(initialState)
   .handleAction(updateCell, (state, { payload }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       const { id, content } = payload;
 
       draft.data[id].content = content;
     }),
   )
   .handleAction(deleteCell, (state, { payload }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       delete draft.data[payload.id];
-      draft.order = draft.order.filter(id => id !== payload.id);
+      draft.order = draft.order.filter((id) => id !== payload.id);
     }),
   )
   .handleAction(moveCell, (state, { payload }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       const { direction } = payload;
-      const index = state.order.findIndex(id => id === payload.id);
+      const index = state.order.findIndex((id) => id === payload.id);
       const targetIndex = direction === 'up' ? index - 1 : index + 1;
 
       if (targetIndex < 0 || targetIndex > state.order.length - 1) {
@@ -55,7 +55,7 @@ export default createReducer<CBookState, CBookActions>(initialState)
     }),
   )
   .handleAction(insertCellAfter, (state, { payload }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       const cell: Cell = {
         content: '',
         type: payload.cellType,
@@ -64,7 +64,7 @@ export default createReducer<CBookState, CBookActions>(initialState)
       };
 
       draft.data[cell.id] = cell;
-      const foundIndex = draft.order.findIndex(id => id === payload.id);
+      const foundIndex = draft.order.findIndex((id) => id === payload.id);
 
       if (foundIndex < 0) {
         draft.order.unshift(cell.id);
@@ -74,15 +74,15 @@ export default createReducer<CBookState, CBookActions>(initialState)
     }),
   )
   .handleAction(fetchCells.request, (state, { payload }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.loading = true;
       draft.error = null;
     }),
   )
   .handleAction(fetchCells.success, (state, { payload }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.loading = false;
-      draft.order = payload.data.map(cell => cell.id);
+      draft.order = payload.data.map((cell) => cell.id);
       draft.data = payload.data.reduce((acc, cell) => {
         acc[cell.id] = cell;
         return acc;
@@ -90,19 +90,19 @@ export default createReducer<CBookState, CBookActions>(initialState)
     }),
   )
   .handleAction(fetchCells.failure, (state, { payload }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.loading = false;
       draft.data = {};
       draft.error = payload.message;
     }),
   )
   .handleAction(saveCells.failure, (state, { payload }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.error = payload.message;
     }),
   )
   .handleAction(createBundle.request, (state, { payload }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.bundle[payload.cellId] = {
         processing: true,
         code: '',
@@ -111,7 +111,7 @@ export default createReducer<CBookState, CBookActions>(initialState)
     }),
   )
   .handleAction(createBundle.success, (state, { payload }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.bundle[payload.cellId] = {
         processing: false,
         code: payload.bundle.code,
@@ -120,12 +120,12 @@ export default createReducer<CBookState, CBookActions>(initialState)
     }),
   )
   .handleAction(createBundle.failure, (state, { payload }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.error = payload.message;
     }),
   )
   .handleAction(togglePreview, (state, { payload }) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       const { id } = payload;
 
       draft.data[id].showPreview = !state.data[id].showPreview;
