@@ -24,7 +24,7 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/project-r/build',
+    publicPath: '/',
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.json'],
@@ -83,7 +83,7 @@ module.exports = {
     }),
     new CopyWebpackPlugin({
       patterns: [
-        { from: './app.webflow', to: './' },
+        { from: './app.webflow', to: './webflow' },
         {
           from: path.resolve(__dirname, 'env.local.js'),
           to: './public/env.js',
@@ -93,7 +93,7 @@ module.exports = {
       ],
     }),
     new HtmlWebpackPlugin({
-      filename: 'app.html',
+      filename: 'index.html',
       template: path.join(__dirname, 'src', 'index.html'),
     }),
   ],
@@ -104,8 +104,13 @@ module.exports = {
       directory: path.join(__dirname, 'dist'),
     },
     historyApiFallback: {
-      index: '/app.html',
-      rewrites: [{ from: /\/project-r\/[^?]/, to: '/404.html' }],
+      index: '/index.html',
+      rewrites: [
+        {
+          from: /^\/$/,
+          to: '/index.html',
+        },
+      ],
     },
     hot: true,
     port: CLIENT_PORT,

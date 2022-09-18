@@ -66,7 +66,7 @@
   "homepage": "https://jyashu.github.io/project-r/",
   "scripts": {
     "build:client": "webpack",
-    "build": "npm-run-all clean build:*",
+    "build": "npm-run-all clean build:client",
     "clean": "rimraf dist",
     "build:react": "react-scripts build",
     "start": "webpack-dev-server",
@@ -82,8 +82,8 @@
     "test:unit": "jest",
     "test:watch": "jest --watch",
     "test": "npm-run-all --parallel lint test:coverage",
-    "predeploy": "npm run build:react",
-    "deploy": "gh-pages -d build"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "eslintConfig": {
     "extends": [
