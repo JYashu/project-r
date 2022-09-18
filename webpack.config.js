@@ -24,7 +24,7 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/',
+    publicPath: '/project-r/build',
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.json'],
@@ -105,12 +105,7 @@ module.exports = {
     },
     historyApiFallback: {
       index: '/app.html',
-      rewrites: [
-        {
-          from: /^\/$/,
-          to: '/index.html',
-        },
-      ],
+      rewrites: [{ from: /\/project-r\/[^?]/, to: '/404.html' }],
     },
     hot: true,
     port: CLIENT_PORT,
