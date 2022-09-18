@@ -82,8 +82,8 @@
     "test:unit": "jest",
     "test:watch": "jest --watch",
     "test": "npm-run-all --parallel lint test:coverage",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "predeploy": "npm run build:react",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
