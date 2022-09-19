@@ -7,6 +7,7 @@ import { ActiveSidebarItem, Config } from '../../types';
 import Icon from '../Icon';
 import { isMobileOrTablet } from '../../utils/getMobileOrTabletInfo';
 import logOut from '../../utils/logOut';
+import ENV from '../../utils/env';
 
 interface Props extends RouteComponentProps {
   config: Config;
@@ -131,15 +132,20 @@ const Sidebar = withRouter(
         </SidebarContent>
         <SidebarFooter className={`${scssObj.baseClass}__footer`}>
           <Menu key={uuidv4()} className={`${scssObj.baseClass}__footer_menu`} iconShape="square">
-            <MenuItem
-              className={itemClassName}
-              key={uuidv4()}
-              active={activeSidebarItem === ActiveSidebarItem.Test}
-              icon={<Icon removeOutline size="small" icon="fact_check" />}
-            >
-              Test Page
-              <Link tabIndex={-1} to="/test" />
-            </MenuItem>
+            {ENV.isDevelopment ? (
+              <MenuItem
+                className={itemClassName}
+                key={uuidv4()}
+                active={activeSidebarItem === ActiveSidebarItem.Test}
+                icon={<Icon removeOutline size="small" icon="fact_check" />}
+              >
+                Test Page
+                <Link tabIndex={-1} to="/test" />
+              </MenuItem>
+            ) : (
+              <></>
+            )}
+
             {!isMobileOrTablet && (
               <>
                 <MenuItem
