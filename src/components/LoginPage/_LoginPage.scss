@@ -13,9 +13,10 @@ $base-class: login-page;
   background-position: top center;
   background-repeat: no-repeat;
   background-size: cover;
-  position: relative;
+  position: fixed;
   width: 100vw;
-  margin-top: -64px;
+  top: 0;
+  left: 0;
 
   &__message-tile {
     @include page-container;

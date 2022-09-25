@@ -86,3 +86,18 @@ export const GAME_WON_MESSAGES = [
   },
   { title: 'Way to go', message: 'That was lightening fast, Try again?' },
 ];
+
+export const ASSIGNED_PATHS = [
+  '/',
+  '/home',
+  'todo',
+  '/tic-tac-toe',
+  '/npm-engine',
+  '/test',
+  '/settings',
+  '/giphy-engine',
+  '/spinners',
+  '/snake',
+  '/memory',
+  '/mal',
+];

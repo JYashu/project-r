@@ -1,6 +1,6 @@
 import QueryString from 'query-string';
 import React from 'react';
-import { Redirect, Route, RouteComponentProps } from 'react-router-dom';
+import { Redirect, Route, RouteComponentProps, Switch, withRouter } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
 import TodoPage from '../TodoPage';
 import Sidebar from '../SideBar';
@@ -25,22 +25,28 @@ import HandleLoginContainer from '../HandleLogin/HandleLoginContainer';
 import Home from '../Home/Home';
 import Memory from '../Memory';
 import Dictionary from '../Dictionary';
+import NotFound from '../NotFound';
+import ENV from '../../utils/env';
+
+interface Props {
+  isDictionaryVisible: boolean;
+  isContentStatic: boolean;
+  showClipboard: () => void;
+  openDictionary: () => void;
+}
 
 const App = ({
   isDictionaryVisible,
   isContentStatic,
   showClipboard,
   openDictionary,
-}: {
-  isDictionaryVisible: boolean;
-  isContentStatic: boolean;
-  showClipboard: () => void;
-  openDictionary: () => void;
-}): React.ReactElement => {
+}: Props): React.ReactElement => {
   useKeyboardShortcut(['shift', 'ctrl'], () => showClipboard(), 'c');
   useKeyboardShortcut(['shift', 'ctrl'], () => openDictionary(), 'd');
 
   const cls = scssObj.baseClass;
+
+  const isDev = ENV.isDevelopment;
 
   return (
     <div className={cls}>
@@ -67,52 +73,6 @@ const App = ({
       >
         <PrivateRoute component={Sidebar} />
       </div>
-      <Route
-        path="/login"
-        exact
-        component={(props: RouteComponentProps) => {
-          const { location, history } = props;
-          const { accessToken } = getTokens();
-          const { email } = QueryString.parse(location.search, {
-            decode: false,
-          });
-          const isOnboardingFlow = () => {
-            if (
-              history.location.pathname.includes('login') ||
-              history.location.pathname.includes('auth')
-            ) {
-              return true;
-            }
-            return false;
-          };
-
-          if (accessToken) {
-            return <Redirect to="/home" />;
-          }
-          if (email) {
-            return <LoginPage email={decodeURIComponent(email)} />;
-          }
-
-          return <LoginPage />;
-        }}
-      />
-
-      <Route
-        path="/auth"
-        exact
-        component={(props: RouteComponentProps) => {
-          const { location } = props;
-          const { accessToken } = getTokens();
-          const searchParams = new URLSearchParams(location.search);
-          const authCode = searchParams.get('code');
-
-          if (!accessToken && !authCode) {
-            window.location.href = '/';
-          }
-
-          return <HandleLoginContainer />;
-        }}
-      />
 
       <div
         role="main"
@@ -120,18 +80,66 @@ const App = ({
         id="main-content"
         aria-label="main-content"
       >
-        <Route path="/" exact component={Home} />
-        <Route path="/home" exact component={Home} />
-        <Route path="/todo" exact component={TodoPage} />
-        <Route path="/tic-tac-toe" exact component={TicTacToe} />
-        <Route path="/npm-engine" exact component={NPMRepoEngine} />
-        <Route path="/test" exact component={TestPage} />
-        <Route path="/settings" exact component={Settings} />
-        <Route path="/giphy-engine" exact component={GiphySearchEngine} />
-        <Route path="/spinners" exact component={SpinnerPage} />
-        <Route path="/snake" exact component={() => <Snake height={600} width={1000} />} />
-        <Route path="/memory" exact component={Memory} />
-        <Route path="/mal" exact component={MALEngine} />
+        <Switch>
+          <Route
+            path="/login"
+            exact
+            component={(props: RouteComponentProps) => {
+              const { location, history } = props;
+              const { accessToken } = getTokens();
+              const { email } = QueryString.parse(location.search, {
+                decode: false,
+              });
+              const isOnboardingFlow = () => {
+                if (
+                  history.location.pathname.includes('login') ||
+                  history.location.pathname.includes('auth')
+                ) {
+                  return true;
+                }
+                return false;
+              };
+
+              if (accessToken) {
+                return <Redirect to="/home" />;
+              }
+              if (email) {
+                return <LoginPage email={decodeURIComponent(email)} />;
+              }
+
+              return <LoginPage />;
+            }}
+          />
+          <Route
+            path="/auth"
+            exact
+            component={(props: RouteComponentProps) => {
+              const { location } = props;
+              const { accessToken } = getTokens();
+              const searchParams = new URLSearchParams(location.search);
+              const authCode = searchParams.get('code');
+
+              if (!accessToken && !authCode) {
+                window.location.href = '/';
+              }
+
+              return <HandleLoginContainer />;
+            }}
+          />
+          <Route path="/" exact component={Home} />
+          <Route path="/home" exact component={Home} />
+          <Route path="/todo" exact component={TodoPage} />
+          <Route path="/tic-tac-toe" exact component={TicTacToe} />
+          <Route path="/npm-engine" exact component={NPMRepoEngine} />
+          {isDev && <Route path="/test" exact component={TestPage} />}
+          <Route path="/settings" exact component={Settings} />
+          <Route path="/giphy-engine" exact component={GiphySearchEngine} />
+          <Route path="/spinners" exact component={SpinnerPage} />
+          <Route path="/snake" exact component={() => <Snake height={600} width={1000} />} />
+          <Route path="/memory" exact component={Memory} />
+          {isDev && <Route path="/mal" exact component={MALEngine} />}
+          <Route component={NotFound} />
+        </Switch>
       </div>
     </div>
   );
