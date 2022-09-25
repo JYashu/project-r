@@ -1,24 +1,60 @@
+/* eslint-disable react/button-has-type */
+import classNames from 'classnames';
 import { Fragment, useEffect } from 'react';
+import { CellTypes, Cell } from '../../types';
+import Button from '../Button';
 import CellItem from '../CellItem';
-import AddCell from '../AddCell';
 
 import scssObj from './_CBook.scss';
-import { Cell } from '../../types';
-
-import '@fortawesome/fontawesome-free/css/all.min.css';
 
 interface Props {
   order: string[];
   data: {
     [key: string]: Cell;
   };
+  insertCellAfter: (id: string | null, cellType: CellTypes) => void;
 }
 
-const CellList = ({ order, data }: Props) => {
-  // @ts-ignore
-  const cells = order.map((id: string) => data[id]);
+interface AddCellProps {
+  prevCellId: string | null;
+  forceVisible?: boolean;
+  insertCellAfter: (id: string | null, cellType: CellTypes) => void;
+}
 
-  // const { fetchCells } = useActions();
+const AddCell = ({ forceVisible, prevCellId, insertCellAfter }: AddCellProps) => {
+  return (
+    <div
+      className={classNames(`${scssObj.baseClass}__add-cell`, `${forceVisible && 'force-visible'}`)}
+    >
+      <div className={`${scssObj.baseClass}__add-buttons`}>
+        <Button
+          className={`${scssObj.baseClass}__add-button`}
+          rounded
+          buttonStyle="minimal"
+          icon="add"
+          iconSize="small"
+          onClick={() => insertCellAfter(prevCellId, 'md')}
+        >
+          <span>Text</span>
+        </Button>
+        <Button
+          className={`${scssObj.baseClass}__add-button`}
+          rounded
+          buttonStyle="minimal"
+          icon="add"
+          iconSize="small"
+          onClick={() => insertCellAfter(prevCellId, 'code')}
+        >
+          <span>Code</span>
+        </Button>
+      </div>
+      <div className={`${scssObj.baseClass}__divider`} />
+    </div>
+  );
+};
+
+const CBook = ({ order, data, insertCellAfter }: Props) => {
+  const cells = order.map((id: string) => data[id]);
 
   useEffect(() => {
     if (cells.length === 0) return;
@@ -33,24 +69,23 @@ const CellList = ({ order, data }: Props) => {
     return () => window.removeEventListener('beforeunload', unloadCallback);
   }, [cells]);
 
-  useEffect(() => {
-    // fetchCells();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   const renderedCells = cells.map((cell: Cell) => (
     <Fragment key={cell.id}>
       <CellItem cell={cell} />
-      <AddCell prevCellId={cell.id} />
+      <AddCell prevCellId={cell.id} insertCellAfter={insertCellAfter} />
     </Fragment>
   ));
 
   return (
     <div className={`${scssObj.baseClass}`}>
-      <AddCell forceVisible={cells.length === 0} prevCellId={null} />
+      <AddCell
+        forceVisible={cells.length === 0}
+        prevCellId={null}
+        insertCellAfter={insertCellAfter}
+      />
       {renderedCells}
     </div>
   );
 };
 
-export default CellList;
+export default CBook;
