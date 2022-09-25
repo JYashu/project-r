@@ -82,32 +82,18 @@ const App = ({
         aria-label="main-content"
       >
         <Switch>
-          {/* <div className={`${scssObj.baseClass}__cbook`}> */}
           <Route path="/cbook" exact component={CBook} />
-          {/* </div> */}
 
           <Route
             path="/login"
             exact
             component={(props: RouteComponentProps) => {
-              const { location, history } = props;
+              const { location } = props;
               const { accessToken } = getTokens();
               const { email } = QueryString.parse(location.search, {
                 decode: false,
               });
-              const isOnboardingFlow = () => {
-                if (
-                  history.location.pathname.includes('login') ||
-                  history.location.pathname.includes('auth')
-                ) {
-                  return true;
-                }
-                return false;
-              };
 
-              if (accessToken) {
-                return <Redirect to="/home" />;
-              }
               if (email) {
                 return <LoginPage email={decodeURIComponent(email)} />;
               }

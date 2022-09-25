@@ -11,6 +11,7 @@ import { ErrorValues, TouchedValues } from '../../utils/typeHelpers';
 import Button from '../Button';
 import Field from '../Field';
 import LoadingSpinner from '../LoadingSpinner';
+import Icon from '../Icon';
 
 interface Props {
   error?: string;
@@ -62,6 +63,15 @@ const LoginForm = ({
       <Helmet>
         <title>Login</title>
       </Helmet>
+      <div className={`${scssObj.baseClass}__disclaimer`}>
+        <span className={`${scssObj.baseClass}__disclaimer-mark`}>
+          <Icon icon="warning" />
+        </span>
+
+        <div className={`${scssObj.baseClass}__disclaimer-text`}>
+          This page is for demo purpose only. Enter any value in the fields and hit Sign in
+        </div>
+      </div>
       <p
         className={classnames(`${scssObj.baseClass}__form-error`, {
           [`${scssObj.baseClass}__display-none`]: !error,

@@ -51,6 +51,27 @@ $base-class: login-form;
     position: relative;
   }
 
+  &__disclaimer {
+    @include type-style-district;
+
+    background-color: rgba(234, 166, 1, 0.1);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+  }
+
+  &__disclaimer-mark {
+    color: rgba(234, 66, 1, 1);
+    display: inline-flex;
+    margin-top: 5px;
+    margin-right: 5px;
+  }
+
+  &__disclaimer-text {
+    @include type-style-city;
+  }
+
   @media only screen and (max-width: 1024px) {
     &__input {
       min-width: auto;
