@@ -35,12 +35,4 @@ $base-class: board;
     content: '';
     display: table;
   }
-
-  @media screen and (max-width: 600px) {
-    &__square {
-      font-size: 24px;
-      width: 62px;
-      height: 62px;
-    }
-  }
 }
