@@ -236,7 +236,7 @@ const TicTacToe = ({
   const restart = () => {
     const emptyBoard = Array(9).fill(null);
     setBoard(emptyBoard);
-    setHistory([emptyBoard]);
+    setHistory([]);
     setStepNumber(0);
     setXIsNext(true);
   };
