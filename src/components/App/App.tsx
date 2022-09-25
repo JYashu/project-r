@@ -50,9 +50,9 @@ const App = ({
 
       <Snackbars />
       <div className={`${scssObj.baseClass}__container`}>
-        {isDictionaryVisible && <Dictionary />}
-
         <Clipboard />
+
+        {isDictionaryVisible && <Dictionary />}
       </div>
 
       {/* <HistoryListener /> */}
