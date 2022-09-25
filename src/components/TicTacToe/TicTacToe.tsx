@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet';
 import { v4 as uuidv4 } from 'uuid';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import Board from '../Board';
 import { findWinner, computerPlay } from '../../utils/tictactoeUtils';
 import { TicTacToeState } from '../../redux/tictactoe';
@@ -28,15 +28,16 @@ interface ModeProps {
   vsAI: boolean;
   aiMode: AIMode;
   open: boolean;
+  restart: () => void;
   setOpen: () => void;
   setShowDifficulty: () => void;
   setVsAI: (vsAI: boolean) => any;
-  setAIMode: (mode: AIMode) => void;
 }
 
 interface StatusProps {
   gameState: TicTacToeState;
   showDifficulty: boolean;
+  restart: () => void;
   setOpen: () => void;
   setShowDifficulty: () => void;
   setXIsNext: (xIsNext: boolean) => unknown;
@@ -45,9 +46,20 @@ interface StatusProps {
   setHistory: (history: any) => unknown;
 }
 
+interface SecondaryProps {
+  open: boolean;
+  showDifficulty: boolean;
+  aiMode: AIMode;
+  setAIMode: (mode: AIMode) => void;
+  moves: JSX.Element[];
+  toggleShowDifficulty: () => void;
+  setOpen: () => void;
+}
+
 const Status = ({
   gameState,
   setOpen,
+  restart,
   setXIsNext,
   setStepNumber,
   setBoard,
@@ -55,17 +67,9 @@ const Status = ({
   showDifficulty,
   setShowDifficulty,
 }: StatusProps) => {
-  const { open, xIsNext, vsAI, stepNumber, board, history } = gameState;
+  const { xIsNext, vsAI, stepNumber, board, history } = gameState;
 
   const winner = findWinner(board);
-
-  const restart = () => {
-    const emptyBoard = Array(9).fill(null);
-    setBoard(emptyBoard);
-    setHistory([emptyBoard]);
-    setStepNumber(0);
-    setXIsNext(true);
-  };
 
   const undo = () => {
     if (stepNumber !== 0) {
@@ -73,9 +77,7 @@ const Status = ({
       const boardCopy = history[stepNumber - 1];
       setBoard(boardCopy);
       setBoard(history[stepNumber - 1]);
-      if (vsAI) {
-        // setXIsNext('X');
-      } else {
+      if (!vsAI) {
         setXIsNext(!xIsNext);
       }
       setHistory(history.slice(0, stepNumber));
@@ -112,15 +114,7 @@ const Status = ({
   );
 };
 
-const Mode = ({
-  vsAI,
-  open,
-  aiMode,
-  setShowDifficulty,
-  setVsAI,
-  setAIMode,
-  setOpen,
-}: ModeProps) => {
+const Mode = ({ vsAI, open, aiMode, restart, setShowDifficulty, setVsAI, setOpen }: ModeProps) => {
   const mode = vsAI ? 'Player v/s AI' : 'Player v/s Player';
   const AI = 'Change Mode';
 
@@ -131,6 +125,7 @@ const Mode = ({
         buttonStyle="game"
         size="small"
         onClick={() => {
+          restart();
           setVsAI(!vsAI);
         }}
       >
@@ -147,7 +142,7 @@ const Mode = ({
             }
           }}
         >
-          Difficulty
+          {aiMode}
         </Button>
       )}
     </div>
@@ -162,7 +157,7 @@ const SecondaryActions = ({
   moves,
   toggleShowDifficulty,
   setOpen,
-}: any) => {
+}: SecondaryProps) => {
   const ref = useRef<HTMLDivElement>(null);
 
   useOutsideClick(() => {
@@ -187,20 +182,20 @@ const SecondaryActions = ({
               {showDifficulty && (
                 <div ref={ref} className={`${scssObj.baseClass}__secondary-actions`}>
                   <div className={`${scssObj.baseClass}__card`}>
-                    <div className="card one move">Mode {aiMode}</div>
+                    <div className="card one move">Mode: {aiMode}</div>
                     <div className="card two move">
                       <RadioButton
-                        label="Difficult"
-                        checked={aiMode === 'difficult'}
+                        label={AIMode.Hard}
+                        checked={aiMode === AIMode.Hard}
                         onChange={() => {
-                          setAIMode(AIMode.Difficult);
+                          setAIMode(AIMode.Hard);
                         }}
                       />
                     </div>
                     <div className="card three move">
                       <RadioButton
-                        label="Easy"
-                        checked={aiMode === 'easy'}
+                        label={AIMode.Easy}
+                        checked={aiMode === AIMode.Easy}
                         onChange={() => {
                           setAIMode(AIMode.Easy);
                         }}
@@ -236,6 +231,14 @@ const TicTacToe = ({
 
   const toggleShowDifficulty = () => {
     setTimeout(() => setShowDifficulty(!showDifficulty), 100);
+  };
+
+  const restart = () => {
+    const emptyBoard = Array(9).fill(null);
+    setBoard(emptyBoard);
+    setHistory([emptyBoard]);
+    setStepNumber(0);
+    setXIsNext(true);
   };
 
   const handleClick = (i: number) => {
@@ -274,24 +277,41 @@ const TicTacToe = ({
   const jumpTo = (step: number) => {
     setBoard(history[step]);
     setStepNumber(step);
-    setXIsNext(step % 2 === 0);
+    if (!vsAI) setXIsNext(step % 2 !== 0);
+    setOpen();
   };
 
-  const moves = currentHistory.map((step: any, move: any) => {
-    const desc = move ? `Go to move #${move}` : 'Go to start';
-    return (
+  const moves = [];
+
+  if (currentHistory.length > 0) {
+    for (let i = 0; i < currentHistory.length; i += 1) {
+      const desc = `Go to move #${i + 1}`;
+      moves.push(
+        <div key={uuidv4()}>
+          <Button
+            buttonStyle="game"
+            size="small"
+            className={`${scssObj.baseClass}__btn move`}
+            onClick={() => jumpTo(i)}
+          >
+            {desc}
+          </Button>
+        </div>,
+      );
+    }
+  } else
+    moves.push(
       <div key={uuidv4()}>
         <Button
           buttonStyle="game"
           size="small"
           className={`${scssObj.baseClass}__btn move`}
-          onClick={() => jumpTo(move)}
+          onClick={() => setOpen()}
         >
-          {desc}
+          Start Playing
         </Button>
-      </div>
+      </div>,
     );
-  });
 
   return (
     <div className={`${scssObj.baseClass}`}>
@@ -311,6 +331,7 @@ const TicTacToe = ({
         <div className={`${scssObj.baseClass}__status-info`}>
           <Status
             gameState={gameState}
+            restart={restart}
             showDifficulty={showDifficulty}
             setOpen={setOpen}
             setXIsNext={setXIsNext}
@@ -325,12 +346,11 @@ const TicTacToe = ({
           vsAI={vsAI}
           open={open}
           aiMode={aiMode}
+          restart={restart}
           setVsAI={setVsAI}
-          setAIMode={setAIMode}
           setOpen={setOpen}
         />
       </div>
-      {/* <div>{open && <ol>{moves}</ol>}</div> */}
       {(open || showDifficulty) && (
         <SecondaryActions
           open={open}

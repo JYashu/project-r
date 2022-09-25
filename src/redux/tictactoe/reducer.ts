@@ -16,7 +16,7 @@ import { TicTacToeState, TicTacToeActions } from './types';
 const initialState: TicTacToeState = {
   open: false,
   vsAI: false,
-  aiMode: AIMode.Difficult,
+  aiMode: AIMode.Hard,
   xIsNext: true,
   stepNumber: 0,
   board: Array(9).fill(null),
