@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { createReducer } from 'typesafe-actions';
 
 import { ModalState, ModalActions } from './types';
-import { openModal, closeModal, ModalTypes } from './actions';
+import { openModal, closeModal, ModalTypes, closeDoubleConfirmation } from './actions';
 
 const initialState = {
   modals: [],

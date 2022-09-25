@@ -1,5 +1,5 @@
 import QueryString from 'query-string';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Redirect, Route, RouteComponentProps, Switch, withRouter } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
 import TodoPage from '../TodoPage';
@@ -27,6 +27,7 @@ import Memory from '../Memory';
 import Dictionary from '../Dictionary';
 import NotFound from '../NotFound';
 import ENV from '../../utils/env';
+import CBook from '../CBook';
 
 interface Props {
   isDictionaryVisible: boolean;
@@ -81,6 +82,10 @@ const App = ({
         aria-label="main-content"
       >
         <Switch>
+          {/* <div className={`${scssObj.baseClass}__cbook`}> */}
+          <Route path="/cbook" exact component={CBook} />
+          {/* </div> */}
+
           <Route
             path="/login"
             exact

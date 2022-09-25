@@ -8,6 +8,10 @@
     border-top: 1px solid map-get($colors, juror-4);
   }
 
+  @if $type == 'content-dark' or $type == 'footer-dark' {
+    border-top: 1px solid #423440;
+  }
+
   @if $type == 'footer' {
     padding-bottom: 16px;
     padding-top: 16px;

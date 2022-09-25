@@ -1,11 +1,7 @@
 @mixin glass-effect {
   @include border-radius(20px);
 
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.1),
-    rgba(255, 255, 255, 0)
-  );
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
@@ -66,7 +62,7 @@
     animation: rotate 10s ease-in-out infinite;
     transform-origin: center center;
 
-    > .side {
+    > .cube__side {
       position: absolute;
       width: inherit;
       height: inherit;
@@ -77,45 +73,45 @@
     }
 
     @if $size == 'medium' {
-      > .back {
+      > .cube__back {
         transform: translateZ(70px) rotateX(180deg);
         // background-image: url('https://giphy.com/embed/ICOgUNjpvO0PC');
       }
 
-      > .front {
+      > .cube__front {
         transform: translateZ(-70px);
         // background-image: url('https://picsum.photos/180/180');
       }
     }
 
     @if $size == 'small' {
-      > .back {
+      > .cube__back {
         transform: translateZ(50px) rotateX(180deg);
         // background-image: url('https://giphy.com/embed/ICOgUNjpvO0PC');
       }
 
-      > .front {
+      > .cube__front {
         transform: translateZ(-50px);
         // background-image: url('https://picsum.photos/180/180');
       }
     }
 
-    > .left {
+    > .cube__left {
       transform: translateX(-50%) rotateY(270deg);
       // background-image: url('http://placeimg.com/180/180');
     }
 
-    > .right {
+    > .cube__right {
       transform: translateX(50%) rotateY(90deg);
       // background-image: url('http://placeimg.com/180/180/nature');
     }
 
-    > .top {
+    > .cube__top {
       transform: translateY(-50%) rotateX(90deg);
       // background-image: url('http://placeimg.com/180/180/arch');
     }
 
-    > .bottom {
+    > .cube__bottom {
       transform: translateY(50%) rotateX(270deg);
       // background-image: url('http://placeimg.com/180/180/animals');
     }
@@ -126,7 +122,7 @@
     @include transform(scale(1.12));
 
     > .cube {
-      > .side {
+      > .cube__side {
         opacity: 1;
       }
     }

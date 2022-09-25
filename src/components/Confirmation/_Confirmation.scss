@@ -1,0 +1,76 @@
+@import '../../styles/lib';
+
+$base-class: double-confirmation;
+
+/* stylelint-disable property-no-unknown */
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  &__content {
+    @include modal-section(content);
+  }
+
+  &__footer {
+    @include modal-section(footer);
+
+    text-align: right;
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__content-dark {
+    @include modal-section(content-dark);
+  }
+
+  &__footer-dark {
+    @include modal-section(footer-dark);
+
+    text-align: right;
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__header {
+    @include modal-section(header);
+
+    align-items: center;
+    display: flex;
+  }
+
+  &__icon {
+    display: inline-block;
+    margin-right: 8px;
+  }
+
+  .__check-printing {
+    color: map-get($colors, juror-2);
+
+    ul {
+      list-style-type: none;
+      display: table-row;
+    }
+
+    h3 {
+      @include type-style-district;
+      color: map-get($colors, suspect);
+    }
+    h3:last-child {
+      padding-top: 12px;
+    }
+
+    a {
+      color: map-get($colors, sidebar-badge);
+    }
+
+    .icon {
+      display: inline;
+      padding-right: 6px;
+      color: map-get($colors, check-done);
+      font-weight: bold;
+    }
+  }
+}

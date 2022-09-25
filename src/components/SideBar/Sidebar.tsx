@@ -100,6 +100,15 @@ const Sidebar = withRouter(
               Spinners
               <Link tabIndex={-1} to="/spinners" />
             </MenuItem>
+            <MenuItem
+              className={itemClassName}
+              key={uuidv4()}
+              active={activeSidebarItem === ActiveSidebarItem.CBook}
+              icon={<Icon removeOutline size="small" icon="developer_mode" />}
+            >
+              CBook
+              <Link tabIndex={-1} target="new" to="/cbook" />
+            </MenuItem>
           </Menu>
           <SidebarFooter className={`${scssObj.baseClass}__games`}>
             <Menu key={uuidv4()} className={`${scssObj.baseClass}__games-menu`} iconShape="square">

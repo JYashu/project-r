@@ -3,6 +3,7 @@ import { ModalClosePayload, ModalStateModal, ModalTypes } from '../../redux/moda
 import Modal, { ModalSize } from '../Modal';
 import TestPage from '../TestPage';
 import GameWon from '../GameWon';
+import Confirmation from '../Confirmation';
 
 interface Props {
   closeModal: (payload?: ModalClosePayload) => void;
@@ -26,6 +27,8 @@ const ModalDialogController = ({ modals, closeModal }: Props) => {
 
   function handleNothingOnClose(): void {}
 
+  const theme = modals[0] as { dark?: boolean };
+
   return (
     <Modal
       isOpen={Boolean(modals.length)}
@@ -37,6 +40,7 @@ const ModalDialogController = ({ modals, closeModal }: Props) => {
         return handleNothingOnClose();
       }}
       size={size as ModalSize}
+      dark={theme && theme.dark}
     >
       {modals.map((modal, index) => (
         <div style={index ? { display: 'none' } : undefined} key={modal.uuid}>
@@ -48,6 +52,19 @@ const ModalDialogController = ({ modals, closeModal }: Props) => {
               handleReplay={modal.handleReplay}
               handleReset={modal.handleReset}
               handleClose={handleClose}
+            />
+          )}
+          {modal.id === ModalTypes.Confirmation && (
+            <Confirmation
+              content={modal.content}
+              icon={modal.icon}
+              title={modal.title}
+              onCancel={modal.onCancel}
+              onConfirm={modal.onConfirm}
+              cancelText={modal.cancelText}
+              continueText={modal.continueText}
+              hasBackButton={modal.hasBackButton}
+              dark={modal.dark}
             />
           )}
         </div>

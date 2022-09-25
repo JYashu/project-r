@@ -11,6 +11,7 @@ import snackbarReducer from './snackbar/reducer';
 import snakeReducer from './snake/reducer';
 import malReducer from './mal/reducer';
 import dictionaryReducer from './dictionary/reducer';
+import cbookReducer from './cbook/reducer';
 
 export default combineReducers<State>({
   me: meReducer,
@@ -23,4 +24,5 @@ export default combineReducers<State>({
   snake: snakeReducer,
   mal: malReducer,
   dictionary: dictionaryReducer,
+  cbook: cbookReducer,
 });

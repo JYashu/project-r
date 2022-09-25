@@ -27,7 +27,7 @@ const Cube = () => {
   return (
     <div className={`${scssObj.baseClass}__cube`}>
       <div className="cube">
-        <div className="side back">
+        <div className="cube__side cube__back">
           <img
             src="https://media2.giphy.com/media/ICOgUNjpvO0PC/giphy.gif?cid=5b3312e6pppeu6yj10y5b9ihfwofc53ubj2atreb9w09g24p&rid=giphy.gif&ct=g"
             width="140px"
@@ -36,7 +36,7 @@ const Cube = () => {
             alt="gif display"
           />
         </div>
-        <div className="side left">
+        <div className="cube__side cube__left">
           <img
             src="https://media1.giphy.com/media/AUYhIMdGrg23e/giphy.gif?cid=5b3312e6d335b4sgwv1xdqmwu91ehiygmc4udczslsdtk2pf&rid=giphy.gif&ct=g"
             width="140px"
@@ -45,7 +45,7 @@ const Cube = () => {
             alt="gif display"
           />
         </div>
-        <div className="side top">
+        <div className="cube__side cube__top">
           <img
             src="https://media4.giphy.com/media/jOmQmJkjcvB3Bc8CRb/giphy.gif?cid=5b3312e6itmncuiaq32scm45s5iwzcxbjaodtuh1mcllmtbw&rid=giphy.gif&ct=g"
             width="140px"
@@ -54,7 +54,7 @@ const Cube = () => {
             alt="gif display"
           />
         </div>
-        <div className="side right">
+        <div className="cube__side cube__right">
           <img
             src="https://media2.giphy.com/media/xTiTnHvXHHxOTcdmxO/giphy.gif?cid=5b3312e6leocxbgyepk8lr9mc0cn1ty8n20przfwoif3rd6v&rid=giphy.gif&ct=g"
             width="140px"
@@ -63,7 +63,7 @@ const Cube = () => {
             alt="gif display"
           />
         </div>
-        <div className="side bottom">
+        <div className="cube__side cube__bottom">
           <img
             src="https://media1.giphy.com/media/w7CP59oLYw6PK/giphy.gif?cid=5b3312e69rh348bun9etiion46389utpwztt0tbnda3kx8f9&rid=giphy.gif&ct=g"
             width="140px"
@@ -72,7 +72,7 @@ const Cube = () => {
             alt="gif display"
           />
         </div>
-        <div className="side front">
+        <div className="cube__side cube__front">
           <img
             src="https://media0.giphy.com/media/oW4csEbiMzVjq/giphy.gif?cid=5b3312e6vmag22izjyy17vt348gs6r6rawwohg8ogihn99y6&rid=giphy.gif&ct=g"
             width="140px"
@@ -124,7 +124,7 @@ const GiphySearchEngine = ({
             value={values.query}
             errorMessage={errors.query}
             touched={touched.query}
-            isRound
+            rounded
             canSubmit
             // submitButton={() => <Button type="submit">Helo</Button>}
           />
@@ -154,14 +154,14 @@ const GiphySearchEngine = ({
                   <div className="details">
                     <div className={`${scssObj.baseClass}__link-holder`}>
                       <Link isNative to={element.url} target="_blank">
-                        <Button buttonStyle="abstract" isRound>
+                        <Button buttonStyle="abstract" rounded>
                           Giphy
                         </Button>
                       </Link>
                     </div>
                     <div className={`${scssObj.baseClass}__link-holder`}>
                       <Link isNative to={element.source_post_url} target="_blank">
-                        <Button buttonStyle="abstract" isRound>
+                        <Button buttonStyle="abstract" rounded>
                           Original
                         </Button>
                       </Link>

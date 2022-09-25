@@ -4,6 +4,7 @@ import { ModalSize } from '../../components/Modal';
 export enum ModalTypes {
   Test = 'test',
   GameWon = 'gameWon',
+  Confirmation = 'confirmation',
 }
 
 export type ModalActionPayload =
@@ -14,6 +15,19 @@ export type ModalActionPayload =
       score?: number;
       handleReplay?: () => void;
       handleReset?: () => void;
+    }
+  | {
+      id: ModalTypes.Confirmation;
+      size?: ModalSize;
+      content: React.ReactNode | string;
+      icon?: string;
+      title: string;
+      onConfirm?: () => void;
+      onCancel?: () => void;
+      cancelText?: string;
+      continueText?: string;
+      hasBackButton?: boolean;
+      dark?: boolean;
     };
 
 export type ModalClosePayload = {
@@ -38,3 +52,7 @@ export const closeModalConfirm = createAction(
     return action(args || undefined);
   },
 );
+
+export const cancelDoubleConfirmation = createAction('CANCEL_DOUBLE_CONFIRMATION');
+export const closeDoubleConfirmation = createAction('CLOSE_DOUBLE_CONFIRMATION');
+export const confirmDoubleConfirmation = createAction('CONFIRM_DOUBLE_CONFIRMATION');

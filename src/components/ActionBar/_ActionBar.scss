@@ -1,0 +1,48 @@
+@import '../../styles/lib';
+
+$base-class: action-bar;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  &__action-bar {
+    position: absolute;
+    top: 0;
+    opacity: 0.25;
+    transition: opacity 0.3s;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    gap: 15px;
+    color: #258c80;
+  }
+
+  &__action-bar:hover {
+    opacity: 1;
+  }
+
+  &__left {
+    left: 10px;
+  }
+
+  &__right {
+    right: 10px;
+  }
+
+  &__icon {
+    cursor: pointer;
+  }
+
+  &__icon-wrapper {
+    height: 100%;
+    display: flex;
+    padding-right: 10px;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid #1d665d;
+  }
+}

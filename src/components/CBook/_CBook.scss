@@ -1,0 +1,60 @@
+@import '../../styles/lib';
+
+$base-class: cbook;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  padding: 10px 50px 25vh;
+  height: 100vh;
+  background-color: #1f2d3b;
+  overflow-y: scroll;
+  position: fixed;
+  width: 100vw;
+  top: 0;
+  left: 0;
+
+  .react-draggable-transparent-selection &__cell-list {
+    margin-bottom: 50vh;
+  }
+
+  &__add-cell {
+    position: relative;
+    opacity: 0;
+    transition: opacity 0.3s ease-in 0.2s;
+    margin: 10px 0;
+  }
+
+  &__add-cell.force-visible {
+    opacity: 1;
+  }
+
+  &__add-cell:hover {
+    opacity: 1;
+  }
+
+  &__divider {
+    position: absolute;
+    top: 50%;
+    bottom: 50%;
+    border-bottom: 1px solid gray;
+    width: 96%;
+    right: 2%;
+    left: 2%;
+  }
+
+  &__add-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 200px;
+  }
+
+  &__add-button {
+    z-index: 5;
+    color: white;
+    background-color: #df6a19;
+  }
+}

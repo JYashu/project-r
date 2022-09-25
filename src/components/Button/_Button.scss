@@ -96,6 +96,10 @@ $base-class: button;
     @include button-style($style: abstract);
   }
 
+  &--minimal {
+    @include button-style($style: minimal);
+  }
+
   &--blur {
     @include button-style($style: blur);
   }
@@ -106,7 +110,7 @@ $base-class: button;
     min-width: 0;
   }
 
-  &--is-round {
+  &--rounded {
     @include button-is-round;
   }
 

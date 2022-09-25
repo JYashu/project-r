@@ -8,6 +8,7 @@ import { SidebarActions, SidebarState } from './sidebar/types';
 import { SnackbarActions, SnackbarState } from './snackbar/types';
 import { SnakeActions, SnakeState } from './snake/types';
 import { TicTacToeActions, TicTacToeState } from './tictactoe/types';
+import { CBookActions, CBookState } from './cbook/types';
 
 export interface State {
   me: MeState;
@@ -20,6 +21,7 @@ export interface State {
   snake: SnakeState;
   mal: MALState;
   dictionary: DictionaryState;
+  cbook: CBookState;
 }
 
 export type Actions =
@@ -32,4 +34,5 @@ export type Actions =
   | SnackbarActions
   | SnakeActions
   | MALActions
-  | DictionaryActions;
+  | DictionaryActions
+  | CBookActions;

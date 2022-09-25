@@ -74,7 +74,7 @@ const SpinnerPage = ({ copyText }: Props) => {
                     iconSize="small"
                     rightIcon
                     buttonStyle="glossy"
-                    isRound
+                    rounded
                     onClick={() => copyText(description)}
                   >
                     {description}

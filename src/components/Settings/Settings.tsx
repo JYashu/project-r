@@ -73,7 +73,7 @@ const Settings = ({ config, handleSettingsChange }: Props) => {
               offColor="#bbbbbb"
             />
             <div />
-            <Button buttonStyle="glossy" size="small" onClick={applyConfig} isRound>
+            <Button buttonStyle="glossy" size="small" onClick={applyConfig} rounded>
               Apply
             </Button>
             <Button
@@ -81,7 +81,7 @@ const Settings = ({ config, handleSettingsChange }: Props) => {
               size="small"
               icon="file_download"
               onClick={downloadFile}
-              isRound
+              rounded
             >
               Download Json
             </Button>

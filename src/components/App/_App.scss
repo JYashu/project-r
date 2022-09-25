@@ -23,6 +23,7 @@ $base-class: app;
     position: fixed;
     width: 100vw;
     top: 0;
+    z-index: 999;
   }
 
   &__sidebar {
@@ -34,6 +35,12 @@ $base-class: app;
   &__sidebar-static {
     height: 100%;
     z-index: 1000;
+  }
+
+  &__cbook {
+    width: 100vw;
+    position: fixed;
+    overflow: scroll;
   }
 
   &__content {
