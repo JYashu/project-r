@@ -7,6 +7,8 @@ import { ActiveSidebarItem, Config } from '../../types';
 import Icon from '../Icon';
 import { isMobileOrTablet } from '../../utils/getMobileOrTabletInfo';
 import logOut from '../../utils/logOut';
+import ENV from '../../utils/env';
+import { ASSIGNED_PATHS } from '../../utils/consts';
 
 interface Props extends RouteComponentProps {
   config: Config;
@@ -28,15 +30,17 @@ const Sidebar = withRouter(
     openDictionary,
   }: Props) => {
     const [isRecollapse, setRecollapse] = useState(true);
+    const isDev = ENV.isDevelopment;
 
     if (
       history.location.pathname === '/auth' ||
       history.location.pathname === '/login' ||
-      history.location.pathname === '/cbook' ||
-      (history.location.pathname === '/login/' && !isMobileOrTablet)
+      history.location.pathname === '/login/'
     ) {
       return null;
     }
+
+    if (!ASSIGNED_PATHS.includes(history.location.pathname)) return null;
 
     const itemClassName = `${scssObj.baseClass}__item`;
 
@@ -76,17 +80,17 @@ const Sidebar = withRouter(
               NPM Engine
               <Link tabIndex={-1} to="/npm-engine" />
             </MenuItem>
-            {/* <MenuItem
-              className={itemClassName}
-              key={uuidv4()}
-              active={activeSidebarItem === ActiveSidebarItem.Todo}
-              icon={
-                <Icon removeOutline size="small" icon="playlist_add_check" />
-              }
-            >
-              Todo
-              <Link tabIndex={-1} to={'/todo'} />
-            </MenuItem> */}
+            {isDev && (
+              <MenuItem
+                className={itemClassName}
+                key={uuidv4()}
+                active={activeSidebarItem === ActiveSidebarItem.Todo}
+                icon={<Icon removeOutline size="small" icon="playlist_add_check" />}
+              >
+                Todo
+                <Link tabIndex={-1} to="/todo" />
+              </MenuItem>
+            )}
             <MenuItem
               className={itemClassName}
               key={uuidv4()}
@@ -141,38 +145,35 @@ const Sidebar = withRouter(
         </SidebarContent>
         <SidebarFooter className={`${scssObj.baseClass}__footer`}>
           <Menu key={uuidv4()} className={`${scssObj.baseClass}__footer_menu`} iconShape="square">
+            {isDev && (
+              <MenuItem
+                className={itemClassName}
+                key={uuidv4()}
+                active={activeSidebarItem === ActiveSidebarItem.Test}
+                icon={<Icon removeOutline size="small" icon="fact_check" />}
+              >
+                Test Page
+                <Link tabIndex={-1} to="/test" />
+              </MenuItem>
+            )}
             <MenuItem
               className={itemClassName}
+              onClick={showClipboard}
               key={uuidv4()}
-              active={activeSidebarItem === ActiveSidebarItem.Test}
-              icon={<Icon removeOutline size="small" icon="fact_check" />}
+              active={activeSidebarItem === ActiveSidebarItem.Clipboard}
+              icon={<Icon removeOutline size="small" icon="content_paste" />}
             >
-              Test Page
-              <Link tabIndex={-1} to="/test" />
+              Clipboard
             </MenuItem>
-            {!isMobileOrTablet && (
-              <>
-                <MenuItem
-                  className={itemClassName}
-                  onClick={showClipboard}
-                  key={uuidv4()}
-                  active={activeSidebarItem === ActiveSidebarItem.Clipboard}
-                  icon={<Icon removeOutline size="small" icon="content_paste" />}
-                >
-                  Clipboard
-                </MenuItem>
-                <MenuItem
-                  className={itemClassName}
-                  onClick={openDictionary}
-                  key={uuidv4()}
-                  active={activeSidebarItem === ActiveSidebarItem.Dictionary}
-                  icon={<Icon removeOutline size="small" icon="book" />}
-                >
-                  Dictionary
-                </MenuItem>
-              </>
-            )}
-
+            <MenuItem
+              className={itemClassName}
+              onClick={openDictionary}
+              key={uuidv4()}
+              active={activeSidebarItem === ActiveSidebarItem.Dictionary}
+              icon={<Icon removeOutline size="small" icon="book" />}
+            >
+              Dictionary
+            </MenuItem>
             <MenuItem
               className={itemClassName}
               key={uuidv4()}

@@ -14,6 +14,7 @@ import scssObj from './_TestPage.scss';
 import useSetGlobalHeader from '../../hooks/useSetGlobalHeader';
 import useActiveSidebarItem from '../../hooks/useActiveSidebarItem';
 import useSpeechSynthesis from '../../hooks/useSpeechSynthesis';
+import Link from '../Link';
 
 interface Props {
   delay?: number;
@@ -88,6 +89,8 @@ const TestApp = ({
               onChange={handleChange}
             />
           </form>
+
+          <Link to="/sdf">404</Link>
 
           <div className={`${scssObj.baseClass}__glitch`}>
             <Button buttonStyle="blur" onClick={() => copyText(uuidv4())}>

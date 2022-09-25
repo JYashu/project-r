@@ -117,9 +117,9 @@ export enum SuggestionType {
 }
 
 export enum AIMode {
-  Easy = 'easy',
-  Moderate = 'moderate',
-  Difficult = 'difficult',
+  Easy = 'Easy',
+  Moderate = 'Moderate',
+  Hard = 'Hard',
 }
 
 export interface User extends Omit<{ email: string }, 'providerOrganization'> {}

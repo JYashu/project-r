@@ -21,12 +21,13 @@ class ProviderWithRouter extends React.Component<Props> {
     });
     const prevHistoryPush = props.history.push;
     props.history.push = (pathname: any, state?: any) => {
+      const newState = { ...state, from: lastLocation?.pathname };
       if (
         lastLocation === null ||
         pathname !== lastLocation.pathname + lastLocation.search + lastLocation.hash ||
-        JSON.stringify(state) !== JSON.stringify(lastLocation.state)
+        JSON.stringify(newState) !== JSON.stringify(lastLocation.newState)
       ) {
-        prevHistoryPush(pathname, state);
+        prevHistoryPush(pathname, { ...newState });
       }
     };
 

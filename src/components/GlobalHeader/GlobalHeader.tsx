@@ -3,7 +3,7 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 import Button from '../Button';
 import Clock from '../Clock';
 import scssObj from './_GlobalHeader.scss';
-import { isMobileOrTablet } from '../../utils/getMobileOrTabletInfo';
+import { ASSIGNED_PATHS } from '../../utils/consts';
 
 interface Props extends RouteComponentProps {
   title: string;
@@ -31,10 +31,13 @@ const GlobalHeader = withRouter(
     if (
       history.location.pathname === '/auth' ||
       history.location.pathname === '/login' ||
-      (history.location.pathname === '/login/' && !isMobileOrTablet)
+      history.location.pathname === '/login/'
     ) {
       return null;
     }
+
+    if (!ASSIGNED_PATHS.includes(history.location.pathname)) return null;
+
     const onClick = () => {
       handleSideBarState(!isCollapsed);
       if (isCollapsed) handleStaticContent(!isCollapsed);
@@ -63,7 +66,6 @@ const GlobalHeader = withRouter(
         {history.location.pathname === '/snake' && (
           <div className={`${scssObj.baseClass}__score`}>Score: {snakeScore}</div>
         )}
-
         <div className={`${scssObj.baseClass}__clock`}>
           <Clock />
         </div>

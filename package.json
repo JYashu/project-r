@@ -79,7 +79,7 @@
   "homepage": "https://jyashu.github.io/project-r/",
   "scripts": {
     "build:client": "webpack",
-    "build": "npm-run-all clean build:*",
+    "build": "npm-run-all clean build:client",
     "clean": "rimraf dist",
     "build:react": "react-scripts build",
     "start": "webpack-dev-server",

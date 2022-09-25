@@ -35,7 +35,7 @@ export const computerPlay = (board: any, mode: AIMode) => {
     return board;
   }
   let computerMove;
-  if (mode === 'easy') {
+  if (mode === AIMode.Easy) {
     computerMove = isPlayerWinning(board, 'O');
     if (!computerMove) {
       const rand = Math.floor(Math.random() * emptySquares.length);
