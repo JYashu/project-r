@@ -27,6 +27,7 @@ import Memory from '../Memory';
 import Dictionary from '../Dictionary';
 import NotFound from '../NotFound';
 import ENV from '../../utils/env';
+import CBook from '../CBook';
 
 interface Props {
   isDictionaryVisible: boolean;

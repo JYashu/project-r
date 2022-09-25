@@ -21,6 +21,19 @@ const CellList = ({ order, data }: Props) => {
   // const { fetchCells } = useActions();
 
   useEffect(() => {
+    if (cells.length === 0) return;
+    const unloadCallback = (event: any) => {
+      event.preventDefault();
+      // eslint-disable-next-line no-param-reassign
+      event.returnValue = '';
+    };
+
+    window.addEventListener('beforeunload', unloadCallback);
+    // eslint-disable-next-line consistent-return
+    return () => window.removeEventListener('beforeunload', unloadCallback);
+  }, [cells]);
+
+  useEffect(() => {
     // fetchCells();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

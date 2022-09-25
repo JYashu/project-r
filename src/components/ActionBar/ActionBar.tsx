@@ -8,9 +8,9 @@ interface Props {
   id: string;
   cellType: CellTypes;
   visibilityIcon: string;
-  moveCell: (id: string, direction: Direction) => void;
-  deleteCell: (id: string) => void;
-  togglePreview: (id: string) => void;
+  moveCell: (direction: Direction) => void;
+  togglePreview: () => void;
+  handleConfirmation: () => void;
 }
 
 const ActionBar = ({
@@ -18,8 +18,8 @@ const ActionBar = ({
   cellType,
   visibilityIcon,
   moveCell,
-  deleteCell,
   togglePreview,
+  handleConfirmation,
 }: Props) => {
   return (
     <div className={`${scssObj.baseClass}`}>
@@ -32,7 +32,7 @@ const ActionBar = ({
               className={`${scssObj.baseClass}__icon`}
               icon={visibilityIcon}
               size="small"
-              onClickHandler={() => togglePreview(id)}
+              onClickHandler={() => togglePreview()}
             />
           </div>
         )}
@@ -40,19 +40,19 @@ const ActionBar = ({
           className={`${scssObj.baseClass}__icon`}
           icon="arrow_upward"
           size="small"
-          onClickHandler={() => moveCell(id, 'up')}
+          onClickHandler={() => moveCell('up')}
         />
         <Icon
           className={`${scssObj.baseClass}__icon`}
           icon="arrow_downward"
           size="small"
-          onClickHandler={() => moveCell(id, 'down')}
+          onClickHandler={() => moveCell('down')}
         />
         <Icon
           className={`${scssObj.baseClass}__icon`}
           icon="close"
           size="small"
-          onClickHandler={() => deleteCell(id)}
+          onClickHandler={() => handleConfirmation()}
         />
       </div>
     </div>

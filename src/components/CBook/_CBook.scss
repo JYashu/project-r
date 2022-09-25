@@ -11,6 +11,10 @@ $base-class: cbook;
   height: 100vh;
   background-color: #1f2d3b;
   overflow-y: scroll;
+  position: fixed;
+  width: 100vw;
+  top: 0;
+  left: 0;
 
   .react-draggable-transparent-selection &__cell-list {
     margin-bottom: 50vh;
