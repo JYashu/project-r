@@ -9,7 +9,8 @@ $base-class: dictionary;
 .#{$base-class} {
   @include box-level-4;
 
-  width: 320px;
+  min-width: 320px;
+  max-width: 320px;
   background-color: whitesmoke;
   position: relative;
   top: 2rem;

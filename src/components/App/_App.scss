@@ -78,4 +78,12 @@ $base-class: app;
       position: fixed;
     }
   }
+
+  @media only screen and (max-width: 632px) {
+    &__container {
+      width: calc(100vw - 4rem);
+      margin-left: 2rem;
+      overflow-x: scroll;
+    }
+  }
 }

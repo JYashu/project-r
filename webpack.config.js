@@ -108,7 +108,7 @@ module.exports = {
       rewrites: [
         {
           from: /^\/project-r\/$/,
-          to: '/404.html',
+          to: '/index.html',
         },
       ],
     },
