@@ -13,8 +13,6 @@ const PrivateRoute = ({ component, ...rest }: Props) => (
       const { accessToken } = getTokens();
       const isAuthenticated = accessToken != null;
 
-      window.speechSynthesis.getVoices();
-
       const { location } = props;
 
       return isAuthenticated ? (
@@ -23,7 +21,7 @@ const PrivateRoute = ({ component, ...rest }: Props) => (
         <Redirect
           to={{
             pathname: '/login',
-            // state: { from: location },
+            state: { from: location },
           }}
         />
       );

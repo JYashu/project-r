@@ -175,7 +175,7 @@ const CodeCell = ({ cell, bundle, updateCell }: Props) => {
             <div className={`${scssObj.baseClass}__progress-wrapper`}>
               {!bundle || bundle.processing ? (
                 <div className={`${scssObj.baseClass}__progress-cover`}>
-                  <LoadingSpinner type={SpinnerType.PropagateLoader} />
+                  <LoadingSpinner type={SpinnerType.CubeFlipSpinner} />
                 </div>
               ) : (
                 <Preview code={bundle.code} status={bundle.error} />

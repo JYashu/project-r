@@ -87,7 +87,7 @@ const Sidebar = withRouter(
                 active={activeSidebarItem === ActiveSidebarItem.Todo}
                 icon={<Icon removeOutline size="small" icon="playlist_add_check" />}
               >
-                Todo
+                Todo (Beta Only)
                 <Link tabIndex={-1} to="/todo" />
               </MenuItem>
             )}
@@ -152,7 +152,7 @@ const Sidebar = withRouter(
                 active={activeSidebarItem === ActiveSidebarItem.Test}
                 icon={<Icon removeOutline size="small" icon="fact_check" />}
               >
-                Test Page
+                Test Page (Beta Only)
                 <Link tabIndex={-1} to="/test" />
               </MenuItem>
             )}
@@ -183,14 +183,19 @@ const Sidebar = withRouter(
               Settings
               <Link tabIndex={-1} to="/settings" />
             </MenuItem>
-
-            <MenuItem
-              key={uuidv4()}
-              onClick={() => logOut()}
-              icon={<Icon removeOutline size="small" icon="logout" />}
-            >
-              Logout
+            <MenuItem key={uuidv4()} icon={<Icon removeOutline size="small" icon="login" />}>
+              Login
+              <Link tabIndex={-1} to="/login" />
             </MenuItem>
+            {isDev && (
+              <MenuItem
+                key={uuidv4()}
+                onClick={() => logOut()}
+                icon={<Icon removeOutline size="small" icon="logout" />}
+              >
+                Logout (Beta Only)
+              </MenuItem>
+            )}
           </Menu>
         </SidebarFooter>
       </ProSidebar>

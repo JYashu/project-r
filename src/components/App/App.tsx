@@ -4,7 +4,6 @@ import { Redirect, Route, RouteComponentProps, Switch, withRouter } from 'react-
 import { hot } from 'react-hot-loader/root';
 import TodoPage from '../TodoPage';
 import Sidebar from '../SideBar';
-import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import scssObj from './_App.scss';
 import GlobalHeader from '../GlobalHeader';
 import TicTacToe from '../TicTacToe';
@@ -49,12 +48,13 @@ const App = ({
 
   const isDev = ENV.isDevelopment;
 
+  window.speechSynthesis.getVoices();
+
   return (
     <div className={cls}>
       {/* <ScrollToTop /> */}
       {/* <PlatformMessage /> */}
       <ModalDialogController />
-
       <Snackbars />
       <div className={`${scssObj.baseClass}__container`}>
         <Clipboard />
@@ -72,7 +72,7 @@ const App = ({
         role="navigation"
         aria-label="sidebar"
       >
-        <PrivateRoute component={Sidebar} />
+        <Route component={Sidebar} />
       </div>
 
       <div
