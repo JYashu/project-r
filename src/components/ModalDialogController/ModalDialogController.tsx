@@ -1,9 +1,9 @@
 import { useDispatch } from 'react-redux';
 import { ModalClosePayload, ModalStateModal, ModalTypes } from '../../redux/modal';
-import Modal, { ModalSize } from '../Modal';
-import TestPage from '../TestPage';
-import GameWon from '../GameWon';
-import Confirmation from '../Confirmation';
+import Modal, { ModalSize } from '../modal';
+import TestPage from '../testPage';
+import GameWon from '../gameWon';
+import Confirmation from '../confirmationModal';
 
 interface Props {
   closeModal: (payload?: ModalClosePayload) => void;

@@ -8,9 +8,9 @@ import { useCumulativeCode } from '../../hooks/useCumulativeCode';
 import { createBundle } from '../../redux/cbook';
 import { Cell, SpinnerType } from '../../types';
 import Bundle from '../../utils/bundler';
-import LoadingSpinner from '../LoadingSpinner';
-import Resizable from '../Resizable';
-import Icon from '../Icon';
+import LoadingSpinner from '../../elements/loadingSpinner';
+import Resizable from '../../elements/resizable';
+import Icon from '../../elements/icon';
 import scssObj from './_CodeCell.scss';
 import { HTML } from '../../utils/consts';
 

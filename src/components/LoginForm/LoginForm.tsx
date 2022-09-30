@@ -8,10 +8,10 @@ import { Values } from './utils';
 import { FULLSTORY_EXCLUDE_CLASS } from '../../utils/consts';
 import { ErrorValues, TouchedValues } from '../../utils/typeHelpers';
 
-import Button from '../Button';
-import Field from '../Field';
-import LoadingSpinner from '../LoadingSpinner';
-import Icon from '../Icon';
+import Button from '../../elements/button';
+import Field from '../../elements/field';
+import LoadingSpinner from '../../elements/loadingSpinner';
+import Icon from '../../elements/icon';
 
 interface Props {
   error?: string;

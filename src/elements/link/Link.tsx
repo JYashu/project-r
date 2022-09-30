@@ -4,7 +4,7 @@ import { Link as ReactRouterLink, LinkProps } from 'react-router-dom';
 
 import { Intent } from '../../types';
 
-import Icon from '../Icon';
+import Icon from '../icon';
 
 import scssObj from './_Link.scss';
 

@@ -1,7 +1,6 @@
-/* eslint-disable react/button-has-type */
 import classNames from 'classnames';
 import { CellTypes, Direction } from '../../types';
-import Icon from '../Icon';
+import Icon from '../../elements/icon';
 import scssObj from './_ActionBar.scss';
 
 interface Props {

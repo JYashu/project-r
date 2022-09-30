@@ -1,11 +1,10 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { withRouter } from 'react-router-dom';
-import { useEffect } from 'react';
 import scssObj from './_NotFound.scss';
-import Astronaut from '../Animations/Astronaut/Astronaut';
+import Astronaut from '../animations/astronaut';
 import { ASSETS_BASE_URL } from '../../utils/assets';
-import Button from '../Button';
-import Link from '../Link';
+import Button from '../../elements/button';
+import Link from '../../elements/link';
 
 const NotFound = withRouter((history) => {
   const state = (history.location.state || { from: undefined }) as { from?: string };

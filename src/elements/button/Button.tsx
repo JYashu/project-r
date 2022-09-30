@@ -4,8 +4,8 @@ import classnames from 'classnames';
 
 import { Intent } from '../../types';
 
-import Icon from '../Icon';
-import LoadingSpinner from '../LoadingSpinner';
+import Icon from '../icon';
+import LoadingSpinner from '../loadingSpinner';
 
 import scssObj from './_Button.scss';
 

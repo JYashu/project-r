@@ -3,9 +3,9 @@ import useActiveSidebarItem from '../../hooks/useActiveSidebarItem';
 import useSetGlobalHeader from '../../hooks/useSetGlobalHeader';
 import { ActiveSidebarItem } from '../../types';
 import { ErrorValues, TouchedValues } from '../../utils/typeHelpers';
-import Button from '../Button';
-import Field from '../Field';
-import Link from '../Link';
+import Button from '../../elements/button';
+import Field from '../../elements/field';
+import Link from '../../elements/link';
 import { Values } from './types';
 import scssObj from './_GiphySearchEngine.scss';
 

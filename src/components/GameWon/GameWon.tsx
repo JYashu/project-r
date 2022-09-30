@@ -1,5 +1,5 @@
 import { GAME_WON_MESSAGES as messages } from '../../utils/consts';
-import Button from '../Button';
+import Button from '../../elements/button';
 import scssObj from './_GameWon.scss';
 
 interface Props {

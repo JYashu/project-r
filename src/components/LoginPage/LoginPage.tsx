@@ -2,8 +2,8 @@ import { useHistory } from 'react-router-dom';
 
 import scssObj from './_LoginPage.scss';
 
-import OnboardingLayout from '../OnboardingLayout';
-import LoginForm from '../LoginForm';
+import OnboardingLayout from '../onboardingLayout';
+import LoginForm from '../loginForm';
 import { Img } from '../../types';
 
 interface Props {

@@ -2,8 +2,8 @@ import classNames from 'classnames';
 import useActiveSidebarItem from '../../hooks/useActiveSidebarItem';
 import useSetGlobalHeader from '../../hooks/useSetGlobalHeader';
 import { ActiveSidebarItem, SpinnerType } from '../../types';
-import Button from '../Button';
-import LoadingSpinner from '../LoadingSpinner';
+import Button from '../../elements/button';
+import LoadingSpinner from '../../elements/loadingSpinner';
 import scssObj from './_SpinnerPage.scss';
 
 interface Props {

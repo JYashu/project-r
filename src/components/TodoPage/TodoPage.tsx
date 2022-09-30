@@ -7,8 +7,8 @@ import { getTodos } from '../../utils/api';
 import { ApiResponse, ApiSuccess } from '../../utils/apiUtils';
 import scssObj from './_TodoPage.scss';
 import useActiveSidebarItem from '../../hooks/useActiveSidebarItem';
-import Button from '../Button';
-import LoadingSpinner from '../LoadingSpinner';
+import LoadingSpinner from '../../elements/loadingSpinner';
+import Button from '../../elements/button';
 
 type State = {
   fetchState: 'loading' | 'error' | 'success';

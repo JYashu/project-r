@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import React from 'react';
 import Radio from '@material-ui/core/Radio';
-import LabelText from '../LabelText';
+import LabelText from '../labelText';
 
 import scssObj from './_RadioButton.scss';
 

@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-no-target-blank */
-/* eslint-disable jsx-a11y/alt-text */
 import { ASSETS_BASE_URL } from '../../../utils/assets';
 import scssObj from './_Astronaut.scss';
 
@@ -7,43 +5,41 @@ export default () => {
   return (
     <div className={`${scssObj.baseClass}`}>
       <div className={`${scssObj.baseClass}__stars`}>
-        {/* <div className={`${scssObj.baseClass}__central-body`}>
-          <img
-            className={`${scssObj.baseClass}__image-404`}
-            src="http://salehriaz.com/404Page/img/404.svg"
-            width="300px"
-          />
-        </div> */}
         <div className={`${scssObj.baseClass}__objects`}>
           <img
             className={`${scssObj.baseClass}__object_rocket`}
-            src="http://salehriaz.com/404Page/img/rocket.svg"
+            src={`${ASSETS_BASE_URL}/404/rocket.svg`}
             width="40px"
+            alt="rocket"
           />
           <div className={`${scssObj.baseClass}__earth-moon`}>
             <img
               className={`${scssObj.baseClass}__object_earth`}
-              src="http://salehriaz.com/404Page/img/earth.svg"
+              src={`${ASSETS_BASE_URL}/404/earth.svg`}
               width="100px"
+              alt="earth"
             />
             <img
               className={`${scssObj.baseClass}__object_moon`}
-              src="http://salehriaz.com/404Page/img/moon.svg"
+              src={`${ASSETS_BASE_URL}/404/moon.svg`}
               width="80px"
+              alt="moon"
             />
           </div>
           <div className={`${scssObj.baseClass}__object_jupiter`}>
             <img
               className={`${scssObj.baseClass}__object_earth`}
-              src="https://3tjgvb3tdd7aelfox3lofer7-wpengine.netdna-ssl.com/wp-content/uploads/2019/09/is-there-life-on-mars-600x600.png"
+              src={`${ASSETS_BASE_URL}/404/mars.webp`}
               width="100px"
+              alt="mars"
             />
           </div>
           <div className={`${scssObj.baseClass}__box_astronaut`}>
             <img
               className={`${scssObj.baseClass}__object_astronaut`}
-              src="https://www.pinclipart.com/picdir/big/523-5232959_astronaut-clip-art.png"
+              src={`${ASSETS_BASE_URL}/404/astronaut.png`}
               width="140px"
+              alt="astronaut"
             />
           </div>
         </div>

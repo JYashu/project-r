@@ -5,16 +5,16 @@ import useTimeout from '../../hooks/useTimeout';
 import { ActiveSidebarItem, SpinnerType } from '../../types';
 import { FULLSTORY_EXCLUDE_CLASS } from '../../utils/consts';
 import { ErrorValues, TouchedValues } from '../../utils/typeHelpers';
-import Button from '../Button';
-import { StateDropdown } from '../Dropdown';
-import Field from '../Field';
-import LoadingSpinner from '../LoadingSpinner';
-import { Values } from './types';
+import Button from '../../elements/button';
+import { StateDropdown } from '../../elements/dropdown';
+import Field from '../../elements/field';
+import LoadingSpinner from '../../elements/loadingSpinner';
 import scssObj from './_TestPage.scss';
 import useSetGlobalHeader from '../../hooks/useSetGlobalHeader';
 import useActiveSidebarItem from '../../hooks/useActiveSidebarItem';
 import useSpeechSynthesis from '../../hooks/useSpeechSynthesis';
-import Link from '../Link';
+import Link from '../../elements/link';
+import { Values } from './types';
 
 interface Props {
   delay?: number;
@@ -70,9 +70,11 @@ const TestApp = ({
           <div className={`${scssObj.baseClass}__wrapper`}>
             <div className={`${scssObj.baseClass}__head`}>Test Page</div>
           </div>
-          <Button intent="primary" icon="file_download" onClick={handleOpenModal}>
-            Click Me
+          <Button intent="primary" icon="open" onClick={handleOpenModal}>
+            Open Model
           </Button>
+
+          <Link to="/sdf">404</Link>
 
           <form
             onSubmit={(e) => {
@@ -89,8 +91,6 @@ const TestApp = ({
               onChange={handleChange}
             />
           </form>
-
-          <Link to="/sdf">404</Link>
 
           <div className={`${scssObj.baseClass}__glitch`}>
             <Button buttonStyle="blur" onClick={() => copyText(uuidv4())}>

@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useRef, useState } from 'react';
 import { Definition, SpinnerType } from '../../types';
-import Button from '../Button';
-import DefinitionItem from '../Definition';
-import Field from '../Field';
-import Icon from '../Icon';
-import LoadingSpinner from '../LoadingSpinner';
+import Button from '../../elements/button';
+import DefinitionItem from '../definition';
+import Field from '../../elements/field';
+import Icon from '../../elements/icon';
+import LoadingSpinner from '../../elements/loadingSpinner';
 import scssObj from './_Dictionary.scss';
 
 interface Props {

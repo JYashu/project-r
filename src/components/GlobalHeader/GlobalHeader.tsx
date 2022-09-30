@@ -1,7 +1,7 @@
 import Hamburger from 'hamburger-react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import Button from '../Button';
-import Clock from '../Clock';
+import Button from '../../elements/button';
+import Clock from '../clock';
 import scssObj from './_GlobalHeader.scss';
 import { ASSIGNED_PATHS } from '../../utils/consts';
 

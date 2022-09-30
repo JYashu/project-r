@@ -1,8 +1,8 @@
 import classnames from 'classnames';
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import Button from '../Button';
-import Icon from '../Icon';
+import Button from '../../elements/button';
+import Icon from '../../elements/icon';
 import scssObj from './_Confirmation.scss';
 
 interface Props {

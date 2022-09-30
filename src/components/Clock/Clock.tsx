@@ -1,9 +1,7 @@
-/* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
-import Icon from '../Icon';
+import Icon from '../../elements/icon';
 import scssObj from './_Clock.scss';
 
 interface Props {
@@ -42,11 +40,16 @@ const Clock = ({ is12H }: Props) => {
     setSeconds(seconds < 10 ? `0${seconds}` : `${seconds}`);
   };
 
+  const displayMS = () => {
+    if (sms < 10) return `00${Math.floor(sms)}`;
+    if (sms < 100) return `0${Math.floor(sms)}`;
+    return Math.floor(sms);
+  };
+
   const { displayMinutes, displaySeconds, displayMiliSeconds } = {
     displayMinutes: smm < 10 ? `0${smm}` : `${smm}`,
     displaySeconds: sss < 10 ? `0${sss}` : `${sss}`,
-    displayMiliSeconds:
-      sms < 10 ? `00${Math.floor(sms)}` : sms < 100 ? `0${Math.floor(sms)}` : Math.floor(sms),
+    displayMiliSeconds: displayMS(),
   };
 
   const updateStopwatch = () => {
@@ -104,6 +107,7 @@ const Clock = ({ is12H }: Props) => {
           <div
             className={`${scssObj.baseClass}__stopwatch`}
             onClick={onClick}
+            onKeyDown={onClick}
           >{`${displayMinutes}:${displaySeconds}:${displayMiliSeconds}`}</div>
           <Icon icon="restart_alt" size="small" removeOutline onClickHandler={resetStopwatch} />
         </div>

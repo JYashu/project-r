@@ -3,7 +3,6 @@
 $base-class: modal;
 $base-class-dark: modal-dark;
 
-/* stylelint-disable property-no-unknown */
 :export {
   baseClass: $base-class;
   baseClassDark: $base-class-dark;

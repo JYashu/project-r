@@ -1,9 +1,8 @@
-/* eslint-disable react/button-has-type */
 import classNames from 'classnames';
 import { Fragment, useEffect } from 'react';
 import { CellTypes, Cell } from '../../types';
-import Button from '../Button';
-import CellItem from '../CellItem';
+import Button from '../../elements/button';
+import CellItem from '../cellItem';
 
 import scssObj from './_CBook.scss';
 

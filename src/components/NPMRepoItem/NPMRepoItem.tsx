@@ -1,12 +1,5 @@
-import { Tooltip } from '@material-ui/core';
-import classnames from 'classnames';
-import React, { useEffect } from 'react';
+import Link from '../../elements/link';
 import { NPMRepoData } from '../../types';
-
-import { FULLSTORY_EXCLUDE_CLASS } from '../../utils/consts';
-
-import Link from '../Link';
-
 import scssObj from './_NPMRepoItem.scss';
 
 interface Props {

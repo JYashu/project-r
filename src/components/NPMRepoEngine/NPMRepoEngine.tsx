@@ -4,9 +4,9 @@ import useActiveSidebarItem from '../../hooks/useActiveSidebarItem';
 import useSetGlobalHeader from '../../hooks/useSetGlobalHeader';
 import { ActiveSidebarItem, NPMRepoData } from '../../types';
 import { ErrorValues, TouchedValues } from '../../utils/typeHelpers';
-import Button from '../Button';
-import Field from '../Field';
-import NPMRepoItem from '../NPMRepoItem';
+import Button from '../../elements/button';
+import Field from '../../elements/field';
+import NPMRepoItem from '../npmRepoItem';
 import { Values } from './types';
 import scssObj from './_NPMRepoEngine.scss';
 

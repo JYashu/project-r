@@ -4,7 +4,7 @@ import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import { ProSidebar, SidebarContent, Menu, MenuItem, SidebarFooter } from 'react-pro-sidebar';
 import scssObj from './_Sidebar.scss';
 import { ActiveSidebarItem, Config } from '../../types';
-import Icon from '../Icon';
+import Icon from '../../elements/icon';
 import { isMobileOrTablet } from '../../utils/getMobileOrTabletInfo';
 import logOut from '../../utils/logOut';
 import ENV from '../../utils/env';

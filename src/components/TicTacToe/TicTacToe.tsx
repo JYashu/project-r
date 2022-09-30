@@ -1,16 +1,15 @@
 import { Helmet } from 'react-helmet';
 import { v4 as uuidv4 } from 'uuid';
 import { useRef, useState } from 'react';
-import Board from '../Board';
+import Board from '../board';
 import { findWinner, computerPlay } from '../../utils/tictactoeUtils';
 import { TicTacToeState } from '../../redux/tictactoe';
 import scssObj from './_TicTacToe.scss';
 import useSetGlobalHeader from '../../hooks/useSetGlobalHeader';
-import Button from '../Button';
+import Button from '../../elements/button';
 import useActiveSidebarItem from '../../hooks/useActiveSidebarItem';
 import { ActiveSidebarItem, AIMode } from '../../types';
-import RadioButton from '../RadioButton/RadioButton';
-import Dropdown from '../Dropdown';
+import RadioButton from '../../elements/radioButton/RadioButton';
 import useOutsideClick from '../../hooks/useOutsideClick';
 
 interface Props {

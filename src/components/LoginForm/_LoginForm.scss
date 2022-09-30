@@ -2,8 +2,6 @@
 
 $base-class: login-form;
 
-/* stylelint-disable property-no-unknown */
-
 :export {
   baseClass: $base-class;
 }

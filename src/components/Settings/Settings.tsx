@@ -4,8 +4,8 @@ import useActiveSidebarItem from '../../hooks/useActiveSidebarItem';
 import useSetGlobalHeader from '../../hooks/useSetGlobalHeader';
 import useTimeout from '../../hooks/useTimeout';
 import { ActiveSidebarItem, Config } from '../../types';
-import Button from '../Button';
-import LoadingSpinner from '../LoadingSpinner';
+import Button from '../../elements/button';
+import LoadingSpinner from '../../elements/loadingSpinner';
 import scssObj from './_Settings.scss';
 
 interface Props {

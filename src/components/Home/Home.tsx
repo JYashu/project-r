@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useRef, useState } from 'react';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
-import Cat from '../Animations/Cat/Cat';
-import Scape from '../Animations/Scape/Scape';
-import Submarine from '../Animations/Submarine/Submarine';
-import Truck from '../Animations/Truck/Truck';
+import Cat from '../animations/cat';
+import Scape from '../animations/scape';
+import Submarine from '../animations/submarine';
+import Truck from '../animations/truck';
 import scssObj from './_Home.scss';
 
 const clsRelative = `${scssObj.baseClass}__panel-relative`;

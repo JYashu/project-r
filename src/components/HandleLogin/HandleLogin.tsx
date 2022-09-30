@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import { Redirect } from 'react-router';
 import scssObj from './_HandleLogin.scss';
-import LoadingSpinner from '../LoadingSpinner';
+import LoadingSpinner from '../../elements/loadingSpinner';
 
 const HandleLogin = () => {
   const [Flag, setFlag] = React.useState(false);

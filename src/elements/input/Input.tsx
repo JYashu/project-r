@@ -2,8 +2,8 @@ import React from 'react';
 import classnames from 'classnames';
 
 import scssObj from './_Input.scss';
-import Icon from '../Icon';
-import Button from '../Button';
+import Icon from '../icon';
+import Button from '../button';
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   hasError?: boolean;

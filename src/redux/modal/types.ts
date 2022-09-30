@@ -1,4 +1,4 @@
-import { ModalSize } from '../../components/Modal/types';
+import { ModalSize } from '../../components/modal/types';
 import {
   ModalActionPayload,
   openModal,

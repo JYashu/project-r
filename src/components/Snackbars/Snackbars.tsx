@@ -2,7 +2,7 @@ import { useEffect, useCallback, useRef } from 'react';
 import classnames from 'classnames';
 import { useDispatch } from 'react-redux';
 import scssObj from './_Snackbars.scss';
-import Button from '../Button';
+import Button from '../../elements/button';
 import { FULLSTORY_EXCLUDE_CLASS } from '../../utils/consts';
 import { Img, Snack, SnackType, SuggestionOperationType, SuggestionType } from '../../types';
 import images from '../../utils/images';

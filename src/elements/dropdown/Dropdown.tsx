@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import { css } from '@emotion/css';
 
 import { FULLSTORY_EXCLUDE_CLASS } from '../../utils/consts';
-import Icon from '../Icon';
+import Icon from '../icon';
 
 import scssObj from './_Dropdown.scss';
 import colors from '../../styles/variables/_colors.scss';

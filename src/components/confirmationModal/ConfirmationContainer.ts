@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import { cancelDoubleConfirmation, closeModal, confirmDoubleConfirmation } from '../../redux/modal';
+import { closeModal, confirmDoubleConfirmation } from '../../redux/modal';
 import Confirmation from './Confirmation';
 
 interface OwnProps {

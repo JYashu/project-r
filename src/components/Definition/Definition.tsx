@@ -1,6 +1,6 @@
 import useSpeechSynthesis from '../../hooks/useSpeechSynthesis';
 import { Definition, Meaning } from '../../types';
-import Icon from '../Icon';
+import Icon from '../../elements/icon';
 import scssObj from './_Definition.scss';
 
 const DefinitionItem = ({ definition }: { definition: Definition }) => {

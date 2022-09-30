@@ -1,5 +1,5 @@
 import { createAction } from 'typesafe-actions';
-import { ModalSize } from '../../components/Modal';
+import { ModalSize } from '../../components/modal';
 
 export enum ModalTypes {
   Test = 'test',

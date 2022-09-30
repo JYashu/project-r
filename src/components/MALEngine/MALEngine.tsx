@@ -1,6 +1,6 @@
 import { ErrorValues, TouchedValues } from '../../utils/typeHelpers';
-import Button from '../Button';
-import Field from '../Field';
+import Button from '../../elements/button';
+import Field from '../../elements/field';
 import { Values } from './types';
 import scssObj from './_MALEngine.scss';
 

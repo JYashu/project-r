@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import produce from 'immer';
 import { createReducer } from 'typesafe-actions';
-import config from '../../utils/config.json';
+import config from '../../assets/config.json';
 import {
   clearClipboard,
   copyText,

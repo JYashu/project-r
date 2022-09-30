@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import React from 'react';
 import ReactModal from 'react-modal';
 
-import Button from '../Button';
+import Button from '../../elements/button';
 
 import scssObj from './_Modal.scss';
 import { ModalSize } from './types';

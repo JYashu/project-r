@@ -1,7 +1,7 @@
 import { Cell } from '../../types';
-import ActionBar from '../ActionBar';
-import CodeCell from '../CodeCell';
-import TextEditor from '../TextEditor';
+import ActionBar from '../actionBar';
+import CodeCell from '../codeCell';
+import TextEditor from '../textEditor';
 import scssObj from './_CellItem.scss';
 
 interface CellListItemProps {

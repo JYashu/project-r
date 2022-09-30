@@ -1,9 +1,7 @@
-/* eslint-disable react/destructuring-assignment */
 import { useEffect, useRef, useState } from 'react';
 import Draggable from 'react-draggable';
-import useWindowDimensions from '../../hooks/useWindowDimensions';
 import { isMobileOrTablet } from '../../utils/getMobileOrTabletInfo';
-import Icon from '../Icon';
+import Icon from '../../elements/icon';
 import scssObj from './_Clipboard.scss';
 
 interface Props {
@@ -82,9 +80,10 @@ const ClipboardView = ({
 };
 
 const Clipboard = (props: Props) => {
+  const { isVisible } = props;
   return (
     <div>
-      {props.isVisible && (
+      {isVisible && (
         <>
           {isMobileOrTablet ? (
             <div className={`${scssObj.baseClass}`}>

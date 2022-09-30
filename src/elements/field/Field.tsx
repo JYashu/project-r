@@ -5,10 +5,10 @@ import { FULLSTORY_EXCLUDE_CLASS } from '../../utils/consts';
 
 import scssObj from './_Field.scss';
 
-import FieldError from '../FieldError';
-import Input from '../Input';
-import LabelText from '../LabelText';
-import TextArea from '../TextArea';
+import FieldError from '../fieldError';
+import Input from '../input';
+import LabelText from '../labelText';
+import TextArea from '../textArea';
 
 export interface Props
   extends Omit<React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement>, 'ref'> {
