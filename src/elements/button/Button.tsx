@@ -2,7 +2,7 @@
 import * as React from 'react';
 import classnames from 'classnames';
 
-import { Intent } from '../../types';
+import { Intent, SpinnerType } from '../../types';
 
 import Icon from '../icon';
 import LoadingSpinner from '../loadingSpinner';
@@ -104,7 +104,7 @@ const Button = ({
       </div>
 
       <div className={`${scssObj.baseClass}__loader-wrapper`}>
-        <LoadingSpinner intent={intent} size="small" />
+        <LoadingSpinner intent={intent} type={SpinnerType.ScaleLoader} size="small" />
       </div>
       {buttonStyle === 'abstract' && (
         <>

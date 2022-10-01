@@ -5,10 +5,9 @@ import { ProSidebar, SidebarContent, Menu, MenuItem, SidebarFooter } from 'react
 import scssObj from './_Sidebar.scss';
 import { ActiveSidebarItem, Config } from '../../types';
 import Icon from '../../elements/icon';
-import { isMobileOrTablet } from '../../utils/getMobileOrTabletInfo';
 import logOut from '../../utils/logOut';
 import ENV from '../../utils/env';
-import { ASSIGNED_PATHS } from '../../utils/consts';
+import { ASSIGNED_PATHS, BETA_ONLY_PATHS } from '../../utils/consts';
 
 interface Props extends RouteComponentProps {
   config: Config;
@@ -31,6 +30,7 @@ const Sidebar = withRouter(
   }: Props) => {
     const [isRecollapse, setRecollapse] = useState(true);
     const isDev = ENV.isDevelopment;
+    const isProd = ENV.isProduction;
 
     if (
       history.location.pathname === '/auth' ||
@@ -41,6 +41,8 @@ const Sidebar = withRouter(
     }
 
     if (!ASSIGNED_PATHS.includes(history.location.pathname)) return null;
+
+    if (isProd && BETA_ONLY_PATHS.includes(history.location.pathname)) return null;
 
     const itemClassName = `${scssObj.baseClass}__item`;
 

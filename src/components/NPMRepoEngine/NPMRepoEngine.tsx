@@ -55,6 +55,11 @@ const NPMRepoEngine = ({
     <div className={`${scssObj.baseClass}`}>
       <Helmet>
         <title>NPM Engine</title>
+        <meta name="title" content="NPM Engine - JYashu" />
+        <meta
+          name="description"
+          content="A simple and elegant tool to find and access the NPM package you need from the official NPM Repository"
+        />
       </Helmet>
       <form
         onSubmit={(e) => {
@@ -76,7 +81,7 @@ const NPMRepoEngine = ({
               type="submit"
               disabled={isSubmitDisabled}
               loading={isSubmitting}
-              intent="primary"
+              buttonStyle="minimal"
               size="small"
             >
               Search

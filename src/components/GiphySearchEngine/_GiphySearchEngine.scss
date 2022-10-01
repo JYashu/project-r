@@ -9,11 +9,7 @@ $base-class: giphy-search-engine;
 .#{$base-class} {
   padding: 5em;
   background: #360033; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #360033,
-    #0b8793
-  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, #360033, #0b8793); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
     to right,
     #360033,
@@ -73,15 +69,18 @@ $base-class: giphy-search-engine;
     @include zoom-hover(1.08);
 
     float: left;
-    padding: 5px;
-    width: 14%;
+    padding: 1.6rem;
+    width: 16.66%;
     overflow: hidden;
+    transition: all 0.5s;
   }
 
   &__gif-container {
     @include overlay-div-hover;
 
     max-width: 100%;
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
   }
 
   &__content img {
@@ -90,5 +89,41 @@ $base-class: giphy-search-engine;
 
   &__link-holder {
     margin: 1.2em;
+  }
+
+  &__spinner {
+    @include center-on-div;
+
+    margin-top: 10rem;
+  }
+
+  @media screen and (max-width: 1300px) {
+    &__gif {
+      width: 20%;
+    }
+  }
+
+  @media screen and (max-width: 1000px) {
+    &__gif {
+      width: 25%;
+    }
+  }
+
+  @media screen and (max-width: 850px) {
+    &__gif {
+      width: 33.33%;
+    }
+  }
+
+  @media screen and (max-width: 674px) {
+    &__gif {
+      width: 50%;
+    }
+  }
+
+  @media screen and (max-width: 440px) {
+    &__gif {
+      width: 100%;
+    }
   }
 }

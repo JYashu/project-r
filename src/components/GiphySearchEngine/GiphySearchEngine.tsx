@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { Helmet } from 'react-helmet';
 import useActiveSidebarItem from '../../hooks/useActiveSidebarItem';
 import useSetGlobalHeader from '../../hooks/useSetGlobalHeader';
 import { ActiveSidebarItem } from '../../types';
@@ -8,6 +9,7 @@ import Field from '../../elements/field';
 import Link from '../../elements/link';
 import { Values } from './types';
 import scssObj from './_GiphySearchEngine.scss';
+import LoadingSpinner from '../../elements/loadingSpinner';
 
 interface Props {
   data: any;
@@ -104,6 +106,11 @@ const GiphySearchEngine = ({
 
   return (
     <div className={`${scssObj.baseClass}`}>
+      <Helmet>
+        <title>Giphy Engine</title>
+        <meta name="title" content="Giphy Engine | GIF Finder - JYashu" />
+        <meta name="description" content="Search the Giphy Engine to discover best GIFs" />
+      </Helmet>
       <div className={`${scssObj.baseClass}__main`}>
         <div className={`${scssObj.baseClass}__info`}>
           <div className={`${scssObj.baseClass}__head`}>Giphy Search</div>
@@ -126,51 +133,53 @@ const GiphySearchEngine = ({
             touched={touched.query}
             rounded
             canSubmit
-            // submitButton={() => <Button type="submit">Helo</Button>}
           />
-          {/* <input
-            type="submit"
-            className={`${scssObj.baseClass}__search-button`}
-            value="Go"
-          /> */}
         </form>
       </div>
       <div className={`${scssObj.baseClass}__result`}>
-        {data &&
-          data.map((element: any) => {
-            return (
-              <div className={`${scssObj.baseClass}__gif`}>
-                <div className={`${scssObj.baseClass}__gif-container`}>
-                  <picture className={classNames(`${scssObj.baseClass}__content`, 'data')}>
-                    <img
-                      className={`${scssObj.baseClass}__image`}
-                      src={element.images.fixed_height_downsampled.url}
-                      height="200px"
-                      width="200px"
-                      alt="result gif"
-                    />
-                  </picture>
-                  <div className="overlay" />
-                  <div className="details">
-                    <div className={`${scssObj.baseClass}__link-holder`}>
-                      <Link isNative to={element.url} target="_blank">
-                        <Button buttonStyle="abstract" rounded>
-                          Giphy
-                        </Button>
-                      </Link>
-                    </div>
-                    <div className={`${scssObj.baseClass}__link-holder`}>
-                      <Link isNative to={element.source_post_url} target="_blank">
-                        <Button buttonStyle="abstract" rounded>
-                          Original
-                        </Button>
-                      </Link>
+        {isLoading ? (
+          <div className={`${scssObj.baseClass}__spinner`}>
+            <LoadingSpinner color="#ededed" />
+          </div>
+        ) : (
+          <>
+            {data &&
+              data.map((element: any) => {
+                return (
+                  <div className={`${scssObj.baseClass}__gif`}>
+                    <div className={`${scssObj.baseClass}__gif-container`}>
+                      <picture className={classNames(`${scssObj.baseClass}__content`, 'data')}>
+                        <img
+                          className={`${scssObj.baseClass}__image`}
+                          src={element.images.fixed_height_downsampled.url}
+                          height="200px"
+                          width="200px"
+                          alt="result gif"
+                        />
+                      </picture>
+                      <div className="overlay" />
+                      <div className="details">
+                        <div className={`${scssObj.baseClass}__link-holder`}>
+                          <Link isNative to={element.url} target="_blank">
+                            <Button buttonStyle="abstract" rounded>
+                              Giphy
+                            </Button>
+                          </Link>
+                        </div>
+                        <div className={`${scssObj.baseClass}__link-holder`}>
+                          <Link isNative to={element.source_post_url} target="_blank">
+                            <Button buttonStyle="abstract" rounded>
+                              Original
+                            </Button>
+                          </Link>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            );
-          })}
+                );
+              })}
+          </>
+        )}
       </div>
     </div>
   );
