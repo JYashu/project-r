@@ -97,7 +97,15 @@ const Dictionary = ({
       </div>
       {definitions.length > 0 && (
         <div className={`${scssObj.baseClass}__footer`}>
-          <Button disabled={definitions.length - 1 === i} onClick={() => setI(i + 1)}>
+          <Button disabled={i === 0} onClick={() => setI(i - 1)}>
+            <Icon
+              className={`${scssObj.baseClass}__left-arrow`}
+              icon="arrow_right_alt"
+              size="small"
+              description="Next"
+            />
+          </Button>
+          <Button disabled={i === definitions.length - 1} onClick={() => setI(i + 1)}>
             <Icon icon="arrow_right_alt" size="small" description="Next" />
           </Button>
         </div>
