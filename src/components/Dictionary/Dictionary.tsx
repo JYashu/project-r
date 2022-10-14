@@ -102,7 +102,7 @@ const Dictionary = ({
               className={`${scssObj.baseClass}__left-arrow`}
               icon="arrow_right_alt"
               size="small"
-              description="Next"
+              description="Previous"
             />
           </Button>
           <Button disabled={i === definitions.length - 1} onClick={() => setI(i + 1)}>
