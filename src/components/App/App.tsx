@@ -119,7 +119,7 @@ const App = ({
           />
           <Route path="/" exact component={Home} />
           <Route path="/home" exact component={Home} />
-          <Route path="/todo" exact component={TodoPage} />
+          {isDev && <Route path="/todo" exact component={TodoPage} />}
           <Route path="/tic-tac-toe" exact component={TicTacToe} />
           <Route path="/npm-engine" exact component={NPMRepoEngine} />
           {isDev && <Route path="/test" exact component={TestPage} />}

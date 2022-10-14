@@ -33,6 +33,7 @@ export interface Props
   canSubmit?: boolean;
   isTransparent?: boolean;
   border?: boolean;
+  fieldSize?: 'small';
   submitButton?: () => React.ReactNode;
 }
 
@@ -58,6 +59,7 @@ const Field: React.SFC<Props> = React.forwardRef((props: Props, ref: any) => {
     isTransparent,
     submitButton,
     border,
+    fieldSize,
     ...rest
   } = props;
   const hasValue = value !== null && value !== undefined && value !== '';
@@ -90,11 +92,13 @@ const Field: React.SFC<Props> = React.forwardRef((props: Props, ref: any) => {
     hasError,
     hasLabel: !!value && !!label,
     icon,
+    onIconClick,
     value,
     rounded,
     isTransparent,
     canSubmit,
     submitButton,
+    fieldSize,
   };
 
   const textInput = textArea ? (

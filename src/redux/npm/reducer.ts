@@ -23,6 +23,7 @@ export default createReducer<NPMRepoState, NPMRepoActions>(initialState)
       draft.data = payload.objects.map((repo: any) => {
         return {
           name: repo.package.name,
+          description: repo.package.description,
           link: repo.package.links.npm,
           date: repo.package.date,
           publisher: repo.package.publisher.username,

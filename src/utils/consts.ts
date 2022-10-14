@@ -102,6 +102,8 @@ export const ASSIGNED_PATHS = [
   '/mal',
 ];
 
+export const BETA_ONLY_PATHS = ['todo', 'test'];
+
 export const HTML = `
 <html>
   <head>

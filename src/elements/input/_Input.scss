@@ -13,7 +13,23 @@ $base-class: input;
   border: 1px solid map-get($colors, juror-5);
   caret-color: map-get($colors, judge);
   color: map-get($colors, judge);
-  padding: 13px 8px;
+
+  &--default {
+    padding: 13px 8px;
+  }
+
+  &--small {
+    padding: 5px 13px;
+  }
+
+  &--pointer i {
+    cursor: pointer;
+    color: #38838b !important;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
 
   &--solid {
     background-color: map-get($colors, juror-5);

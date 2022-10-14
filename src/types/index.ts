@@ -12,6 +12,7 @@ export interface Todo {
 
 export interface NPMRepoData {
   name: string;
+  description?: string;
   link: string;
   date: string;
   publisher: string;
