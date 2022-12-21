@@ -9,6 +9,7 @@ import Field from '../../elements/field';
 import NPMRepoItem from '../npmRepoItem';
 import { Values } from './types';
 import scssObj from './_NPMRepoEngine.scss';
+import PermissionsManager from '../../elements/permissionsManager';
 
 interface Props {
   data: NPMRepoData[];
@@ -104,4 +105,12 @@ const NPMRepoEngine = ({
   );
 };
 
-export default NPMRepoEngine;
+const NPMRepoEngineWithPermissionsManager = (props: Props) => {
+  return (
+    <PermissionsManager isBetaOnly>
+      <NPMRepoEngine {...props} />
+    </PermissionsManager>
+  );
+};
+
+export default NPMRepoEngineWithPermissionsManager;

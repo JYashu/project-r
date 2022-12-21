@@ -10,6 +10,7 @@ import Link from '../../elements/link';
 import { Values } from './types';
 import scssObj from './_GiphySearchEngine.scss';
 import LoadingSpinner from '../../elements/loadingSpinner';
+import PermissionsManager from '../../elements/permissionsManager';
 
 interface Props {
   data: any;
@@ -185,4 +186,12 @@ const GiphySearchEngine = ({
   );
 };
 
-export default GiphySearchEngine;
+const GiphySearchEngineWithPermissionsManager = (props: Props) => {
+  return (
+    <PermissionsManager isBetaOnly>
+      <GiphySearchEngine {...props} />
+    </PermissionsManager>
+  );
+};
+
+export default GiphySearchEngineWithPermissionsManager;

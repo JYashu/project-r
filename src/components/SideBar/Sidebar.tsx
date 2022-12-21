@@ -8,6 +8,7 @@ import Icon from '../../elements/icon';
 import logOut from '../../utils/logOut';
 import ENV from '../../utils/env';
 import { ASSIGNED_PATHS, BETA_ONLY_PATHS } from '../../utils/consts';
+import PermissionsManager from '../../elements/permissionsManager';
 
 interface Props extends RouteComponentProps {
   config: Config;
@@ -64,25 +65,29 @@ const Sidebar = withRouter(
       >
         <SidebarContent>
           <Menu key={uuidv4()} className={`${scssObj.baseClass}__footer_menu`} iconShape="square">
-            <MenuItem
-              className={itemClassName}
-              key={uuidv4()}
-              active={activeSidebarItem === ActiveSidebarItem.GiphyEngine}
-              icon={<Icon removeOutline size="medium" icon="gif" />}
-            >
-              Giphy Finder
-              <Link tabIndex={-1} to="/giphy-engine" />
-            </MenuItem>
-            <MenuItem
-              className={itemClassName}
-              key={uuidv4()}
-              active={activeSidebarItem === ActiveSidebarItem.NPMEngine}
-              icon={<Icon removeOutline size="small" icon="search" />}
-            >
-              NPM Engine
-              <Link tabIndex={-1} to="/npm-engine" />
-            </MenuItem>
-            {isDev && (
+            <PermissionsManager isHiddenForProd>
+              <MenuItem
+                className={itemClassName}
+                key={uuidv4()}
+                active={activeSidebarItem === ActiveSidebarItem.GiphyEngine}
+                icon={<Icon removeOutline size="medium" icon="gif" />}
+              >
+                Giphy Finder (Beta Only)
+                <Link tabIndex={-1} to="/giphy-engine" />
+              </MenuItem>
+            </PermissionsManager>
+            <PermissionsManager isHiddenForProd>
+              <MenuItem
+                className={itemClassName}
+                key={uuidv4()}
+                active={activeSidebarItem === ActiveSidebarItem.NPMEngine}
+                icon={<Icon removeOutline size="small" icon="search" />}
+              >
+                NPM Engine (Beta Only)
+                <Link tabIndex={-1} to="/npm-engine" />
+              </MenuItem>
+            </PermissionsManager>
+            <PermissionsManager isHiddenForProd>
               <MenuItem
                 className={itemClassName}
                 key={uuidv4()}
@@ -92,7 +97,7 @@ const Sidebar = withRouter(
                 Todo (Beta Only)
                 <Link tabIndex={-1} to="/todo" />
               </MenuItem>
-            )}
+            </PermissionsManager>
             <MenuItem
               className={itemClassName}
               key={uuidv4()}
@@ -147,7 +152,7 @@ const Sidebar = withRouter(
         </SidebarContent>
         <SidebarFooter className={`${scssObj.baseClass}__footer`}>
           <Menu key={uuidv4()} className={`${scssObj.baseClass}__footer_menu`} iconShape="square">
-            {isDev && (
+            <PermissionsManager isHiddenForProd>
               <MenuItem
                 className={itemClassName}
                 key={uuidv4()}
@@ -157,7 +162,7 @@ const Sidebar = withRouter(
                 Test Page (Beta Only)
                 <Link tabIndex={-1} to="/test" />
               </MenuItem>
-            )}
+            </PermissionsManager>
             <MenuItem
               className={itemClassName}
               onClick={showClipboard}
@@ -189,7 +194,7 @@ const Sidebar = withRouter(
               Login
               <Link tabIndex={-1} to="/login" />
             </MenuItem>
-            {isDev && (
+            <PermissionsManager isHiddenForProd>
               <MenuItem
                 key={uuidv4()}
                 onClick={() => logOut()}
@@ -197,7 +202,7 @@ const Sidebar = withRouter(
               >
                 Logout (Beta Only)
               </MenuItem>
-            )}
+            </PermissionsManager>
           </Menu>
         </SidebarFooter>
       </ProSidebar>

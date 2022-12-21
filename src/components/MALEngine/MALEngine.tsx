@@ -3,6 +3,7 @@ import Button from '../../elements/button';
 import Field from '../../elements/field';
 import { Values } from './types';
 import scssObj from './_MALEngine.scss';
+import PermissionsManager from '../../elements/permissionsManager';
 
 interface Props {
   isLoading: boolean;
@@ -64,4 +65,12 @@ const MALEngine = ({
   );
 };
 
-export default MALEngine;
+const MALEngineWithPermissionsManager = (props: Props) => {
+  return (
+    <PermissionsManager isBetaOnly>
+      <MALEngine {...props} />
+    </PermissionsManager>
+  );
+};
+
+export default MALEngineWithPermissionsManager;

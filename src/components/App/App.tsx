@@ -119,16 +119,16 @@ const App = ({
           />
           <Route path="/" exact component={Home} />
           <Route path="/home" exact component={Home} />
-          {isDev && <Route path="/todo" exact component={TodoPage} />}
+          <Route path="/todo" exact component={TodoPage} />
           <Route path="/tic-tac-toe" exact component={TicTacToe} />
           <Route path="/npm-engine" exact component={NPMRepoEngine} />
-          {isDev && <Route path="/test" exact component={TestPage} />}
+          <Route path="/test" exact component={TestPage} />
           <Route path="/settings" exact component={Settings} />
           <Route path="/giphy-engine" exact component={GiphySearchEngine} />
           <Route path="/spinners" exact component={SpinnerPage} />
           <Route path="/snake" exact component={() => <Snake height={600} width={1000} />} />
           <Route path="/memory" exact component={Memory} />
-          {isDev && <Route path="/mal" exact component={MALEngine} />}
+          <Route path="/mal" exact component={MALEngine} />
           <Route component={NotFound} />
         </Switch>
       </div>
