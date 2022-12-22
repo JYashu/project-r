@@ -2,7 +2,7 @@
 import { NPMResponse, Todo } from '../types';
 import { ApiResponse, ApiStatusType, HttpMethod } from './apiUtils';
 
-const BASE_URL = 'https://cors-jyashu.herokuapp.com';
+const BASE_URL = 'https://proxy.cors.sh';
 
 const createFetchOptions = <Body, AdditionalHeaders>(
   method: HttpMethod,

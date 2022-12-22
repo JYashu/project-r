@@ -15,6 +15,7 @@ import useActiveSidebarItem from '../../hooks/useActiveSidebarItem';
 import useSpeechSynthesis from '../../hooks/useSpeechSynthesis';
 import Link from '../../elements/link';
 import { Values } from './types';
+import PermissionsManager from '../../elements/permissionsManager';
 
 interface Props {
   delay?: number;
@@ -134,4 +135,12 @@ const TestApp = ({
   );
 };
 
-export default TestApp;
+const TestAppWithPermissionsManager = (props: Props) => {
+  return (
+    <PermissionsManager isBetaOnly>
+      <TestApp {...props} />
+    </PermissionsManager>
+  );
+};
+
+export default TestAppWithPermissionsManager;

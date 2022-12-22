@@ -49,7 +49,7 @@ const SpinnerPage = ({ copyText }: Props) => {
     <div className={`${scssObj.baseClass}`}>
       {array.map(({ type, description }) => {
         return (
-          <div className={`${scssObj.baseClass}__container`}>
+          <div key={description} className={`${scssObj.baseClass}__container`}>
             <div className="inner">
               <div className="front">
                 <div className="child">

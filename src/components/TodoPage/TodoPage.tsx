@@ -9,6 +9,7 @@ import scssObj from './_TodoPage.scss';
 import useActiveSidebarItem from '../../hooks/useActiveSidebarItem';
 import LoadingSpinner from '../../elements/loadingSpinner';
 import Button from '../../elements/button';
+import PermissionsManager from '../../elements/permissionsManager';
 
 type State = {
   fetchState: 'loading' | 'error' | 'success';
@@ -154,4 +155,12 @@ const TodoPage = () => {
   );
 };
 
-export default TodoPage;
+const TodoPageWithPermissionsManager = () => {
+  return (
+    <PermissionsManager isBetaOnly>
+      <TodoPage />
+    </PermissionsManager>
+  );
+};
+
+export default TodoPageWithPermissionsManager;
