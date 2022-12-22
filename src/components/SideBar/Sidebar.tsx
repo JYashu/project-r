@@ -190,10 +190,12 @@ const Sidebar = withRouter(
               Settings
               <Link tabIndex={-1} to="/settings" />
             </MenuItem>
-            <MenuItem key={uuidv4()} icon={<Icon removeOutline size="small" icon="login" />}>
-              Login
-              <Link tabIndex={-1} to="/login" />
-            </MenuItem>
+            <PermissionsManager isHiddenForProd>
+              <MenuItem key={uuidv4()} icon={<Icon removeOutline size="small" icon="login" />}>
+                Login (Beta Only)
+                <Link tabIndex={-1} to="/login" />
+              </MenuItem>
+            </PermissionsManager>
             <PermissionsManager isHiddenForProd>
               <MenuItem
                 key={uuidv4()}
