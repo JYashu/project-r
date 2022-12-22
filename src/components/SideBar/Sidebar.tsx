@@ -65,28 +65,24 @@ const Sidebar = withRouter(
       >
         <SidebarContent>
           <Menu key={uuidv4()} className={`${scssObj.baseClass}__footer_menu`} iconShape="square">
-            <PermissionsManager isHiddenForProd>
-              <MenuItem
-                className={itemClassName}
-                key={uuidv4()}
-                active={activeSidebarItem === ActiveSidebarItem.GiphyEngine}
-                icon={<Icon removeOutline size="medium" icon="gif" />}
-              >
-                Giphy Finder (Beta Only)
-                <Link tabIndex={-1} to="/giphy-engine" />
-              </MenuItem>
-            </PermissionsManager>
-            <PermissionsManager isHiddenForProd>
-              <MenuItem
-                className={itemClassName}
-                key={uuidv4()}
-                active={activeSidebarItem === ActiveSidebarItem.NPMEngine}
-                icon={<Icon removeOutline size="small" icon="search" />}
-              >
-                NPM Engine (Beta Only)
-                <Link tabIndex={-1} to="/npm-engine" />
-              </MenuItem>
-            </PermissionsManager>
+            <MenuItem
+              className={itemClassName}
+              key={uuidv4()}
+              active={activeSidebarItem === ActiveSidebarItem.GiphyEngine}
+              icon={<Icon removeOutline size="medium" icon="gif" />}
+            >
+              Giphy Finder
+              <Link tabIndex={-1} to="/giphy-engine" />
+            </MenuItem>
+            <MenuItem
+              className={itemClassName}
+              key={uuidv4()}
+              active={activeSidebarItem === ActiveSidebarItem.NPMEngine}
+              icon={<Icon removeOutline size="small" icon="search" />}
+            >
+              NPM Engine
+              <Link tabIndex={-1} to="/npm-engine" />
+            </MenuItem>
             <PermissionsManager isHiddenForProd>
               <MenuItem
                 className={itemClassName}

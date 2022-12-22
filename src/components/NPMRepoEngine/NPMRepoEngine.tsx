@@ -105,12 +105,4 @@ const NPMRepoEngine = ({
   );
 };
 
-const NPMRepoEngineWithPermissionsManager = (props: Props) => {
-  return (
-    <PermissionsManager isBetaOnly>
-      <NPMRepoEngine {...props} />
-    </PermissionsManager>
-  );
-};
-
-export default NPMRepoEngineWithPermissionsManager;
+export default NPMRepoEngine;

@@ -186,12 +186,4 @@ const GiphySearchEngine = ({
   );
 };
 
-const GiphySearchEngineWithPermissionsManager = (props: Props) => {
-  return (
-    <PermissionsManager isBetaOnly>
-      <GiphySearchEngine {...props} />
-    </PermissionsManager>
-  );
-};
-
-export default GiphySearchEngineWithPermissionsManager;
+export default GiphySearchEngine;
