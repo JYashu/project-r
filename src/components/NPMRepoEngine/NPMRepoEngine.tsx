@@ -9,7 +9,6 @@ import Field from '../../elements/field';
 import NPMRepoItem from '../npmRepoItem';
 import { Values } from './types';
 import scssObj from './_NPMRepoEngine.scss';
-import PermissionsManager from '../../elements/permissionsManager';
 
 interface Props {
   data: NPMRepoData[];
