@@ -16,6 +16,14 @@ const mapDispatch = (dispatch: Dispatch) => ({
         handleReset,
       }),
     ),
+  openImage: (url: string) =>
+    dispatch(
+      openModal({
+        id: ModalTypes.ImageModal,
+        url,
+        transparent: true,
+      }),
+    ),
 });
 
 export default connect(null, mapDispatch)(withState(Memory));

@@ -32,7 +32,7 @@ export interface Props
   rounded?: boolean;
   canSubmit?: boolean;
   isTransparent?: boolean;
-  border?: boolean;
+  noBorder?: boolean;
   fieldSize?: 'small';
   submitButton?: () => React.ReactNode;
 }
@@ -58,7 +58,7 @@ const Field: React.SFC<Props> = React.forwardRef((props: Props, ref: any) => {
     canSubmit,
     isTransparent,
     submitButton,
-    border,
+    noBorder,
     fieldSize,
     ...rest
   } = props;
@@ -73,7 +73,7 @@ const Field: React.SFC<Props> = React.forwardRef((props: Props, ref: any) => {
     [`${scssObj.baseClass}--rounded`]: rounded,
     [`${scssObj.baseClass}--solid`]: !isTransparent,
     [`${scssObj.baseClass}--transparent`]: isTransparent,
-    [`${scssObj.baseClass}--border`]: border,
+    [`${scssObj.baseClass}--border`]: !noBorder,
   });
 
   const labelCls = classnames(`${scssObj.baseClass}__label`, {

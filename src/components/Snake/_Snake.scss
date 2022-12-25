@@ -1,6 +1,6 @@
 @import '../../styles/lib';
 
-$base-class: snale;
+$base-class: snake;
 
 :export {
   baseClass: $base-class;
@@ -8,11 +8,15 @@ $base-class: snale;
 
 .#{$base-class} {
   @include center-on-screen;
+  background-image: url('https://public-assets-7588.s3.ap-south-1.amazonaws.com/backgrounds/inclined.webp');
 
   &__content {
     display: flex;
     flex-direction: row;
-    // border: 1px solid black;
+  }
+
+  &__canvas {
+    background-image: url('https://public-assets-7588.s3.ap-south-1.amazonaws.com/backgrounds/inclined.webp');
   }
 
   &__instructions {
@@ -37,5 +41,11 @@ $base-class: snale;
 
   &__first-instruction {
     margin-top: 10px;
+  }
+
+  &__message {
+    @include type-style-heading;
+    @include center-on-screen;
+    background-image: url('https://public-assets-7588.s3.ap-south-1.amazonaws.com/backgrounds/inclined.webp');
   }
 }

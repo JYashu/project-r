@@ -8,12 +8,14 @@ import Icon from '../icon';
 
 import scssObj from './_Dropdown.scss';
 import colors from '../../styles/variables/_colors.scss';
+import FieldError from '../fieldError';
 
 export interface Option {
   label: string;
   value: string | null;
   meta?: any;
   fsExclude?: boolean;
+  isFixed?: boolean;
 }
 
 interface FixedAction {
@@ -28,7 +30,6 @@ interface Props {
   handleChange: (value: Option | null) => void;
   name: string;
   options: Option[];
-  pageSize: number;
   noOptionsMessage?: string;
   openMenuOnClick?: boolean;
   isClearable?: boolean;
@@ -41,6 +42,8 @@ interface Props {
   className?: string;
   errorMessage?: string;
   handleBlur?: (e: React.FocusEvent) => void;
+  isTransparent?: boolean;
+  noBorder?: boolean;
 }
 
 interface MenuListAcc {
@@ -74,7 +77,6 @@ const findOption = (options: Option[], value?: Option['value']) => {
 
 const defaultProps = {
   actions: [],
-  pageSize: 4,
 };
 
 const menuListClass = `${scssObj.baseClass}__menu-list`;
@@ -92,6 +94,7 @@ const DropdownMenuList = ({ cx, children, getStyles, innerRef, ...props }: any) 
     actions: undefined,
     options: undefined,
   });
+  const [scrollEnd, setScrollEnd] = useState(false);
 
   useEffect(() => {
     if (actionsRef.current) {
@@ -115,9 +118,23 @@ const DropdownMenuList = ({ cx, children, getStyles, innerRef, ...props }: any) 
   const { options, actions } = (Array.isArray(children) ? children : [children]).reduce(
     (acc: MenuListAcc, next: React.ReactElement) => {
       if (next.props.data && next.props.data.handleAction) {
-        acc.actions.push(<div className={`${scssObj.baseClass}__menu-list-item`}>{next}</div>);
+        acc.actions.push(
+          <div className={`${scssObj.baseClass}__menu-list-item`} key={next.key}>
+            {next}
+          </div>,
+        );
+      } else if (next.props.data && next.props.data.isFixed) {
+        acc.actions.push(
+          <div className={`${scssObj.baseClass}__menu-list-item`} key={next.key}>
+            {next}
+          </div>,
+        );
       } else {
-        acc.options.push(<div className={`${scssObj.baseClass}__menu-list-item`}>{next}</div>);
+        acc.options.push(
+          <div className={`${scssObj.baseClass}__menu-list-item`} key={next.key}>
+            {next}
+          </div>,
+        );
       }
 
       return acc;
@@ -133,6 +150,15 @@ const DropdownMenuList = ({ cx, children, getStyles, innerRef, ...props }: any) 
     setFirstRender(false);
   }
 
+  const handleScroll = (e: any) => {
+    const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+    if (bottom) {
+      setScrollEnd(true);
+    } else if (scrollEnd) {
+      setScrollEnd(false);
+    }
+  };
+
   const styles = getStyles('menuList', props);
   const style = {} as React.CSSProperties;
   style.marginBottom = dimensions.actions ? dimensions.actions.height + 4 : 0;
@@ -142,6 +168,10 @@ const DropdownMenuList = ({ cx, children, getStyles, innerRef, ...props }: any) 
       ? (dimensions.options.height / options.length) * selectProps.pageSize + 4
       : undefined;
 
+  const isScrollable =
+    (Boolean(displayActions.length) && options.length > 3) ||
+    (!displayActions.length && options.length > 4);
+
   return (
     <>
       <div
@@ -149,9 +179,28 @@ const DropdownMenuList = ({ cx, children, getStyles, innerRef, ...props }: any) 
         className={classnames(cx('', css(styles)), menuListClass)}
         {...innerProps}
         style={style}
+        onScroll={handleScroll}
       >
         <div ref={optionsRef}>{options}</div>
       </div>
+
+      {isScrollable && !scrollEnd && (
+        <div
+          className={`${scssObj.baseClass}__scrollable-icon-div`}
+          style={{
+            position: 'absolute',
+            right: '0',
+            top: `${actions.length > 0 ? '60%' : '88%'}`,
+          }}
+        >
+          <Icon
+            className={`${scssObj.baseClass}__scrollable-icon`}
+            icon="keyboard_double_arrow_down"
+            size="small"
+            removeOutline
+          />
+        </div>
+      )}
 
       {Boolean(displayActions.length) && (
         <div
@@ -183,9 +232,11 @@ const Dropdown = ({
   noOptionsMessage,
   openMenuOnClick,
   options,
-  pageSize,
   placeholder,
   value,
+  noBorder,
+  errorMessage,
+  isTransparent,
 }: Props) => {
   const optionBackgroundColor = (state: { isSelected: boolean; isFocused: boolean }) => {
     if (state.isFocused) {
@@ -197,15 +248,19 @@ const Dropdown = ({
     return '#fff';
   };
 
+  const hasError = !!errorMessage;
+
+  const errorCls = classnames(`${scssObj.baseClass}__error`);
+
   const customSelectStyles = {
     control: (base: React.CSSProperties, state: { isFocused: boolean }) => ({
       ...base,
       height: '100%',
       minHeight: null,
       paddingTop: hasLabel && value ? 12 : 0,
-      backgroundColor: 'transparent',
+      backgroundColor: isTransparent ? 'transparent' : colors['juror-5'],
       boxShadow: 'none',
-      borderColor: state.isFocused ? `${colors.lawyer} !important` : `transparent !important`,
+      borderColor: noBorder ? `transparent !important` : `${colors['header-bg']} !important`,
     }),
     menu: (base: React.CSSProperties) => ({
       ...base,
@@ -231,55 +286,66 @@ const Dropdown = ({
     }),
   };
 
-  return (
-    <Select
-      className={classnames(scssObj.baseClass, className)}
-      components={{
-        DropdownIndicator: () => <Icon icon="arrow_drop_down" />,
-        IndicatorSeparator: () => null,
-        MenuList: DropdownMenuList,
-      }}
-      formatOptionLabel={(option: Option | FixedAction) => {
-        return 'render' in option && option.render ? (
-          option.render()
-        ) : (
-          <div
-            className={classnames({
-              [`${FULLSTORY_EXCLUDE_CLASS}`]: option.fsExclude,
-            })}
-          >
-            {option.label}
-          </div>
-        );
-      }}
-      inputId={name}
-      isClearable={isClearable}
-      isDisabled={isDisabled}
-      menuPortalTarget={menuPortalTarget}
-      menuPosition={menuPortalTarget ? 'fixed' : undefined}
-      menuShouldScrollIntoView
-      name={name}
-      noOptionsMessage={noOptionsMessage ? () => noOptionsMessage : undefined}
-      onBlur={handleBlur}
-      onChange={(option: Option | FixedAction | null) => {
-        if (!option) {
-          handleChange(null);
-          return;
-        }
+  const fixedActions = options.reduce((count, option) => {
+    if ('isFixed' in option) return count + 1;
+    return count;
+  }, actions.length);
 
-        if ('handleAction' in option) {
-          option.handleAction();
-        } else {
-          handleChange(option);
-        }
-      }}
-      openMenuOnClick={openMenuOnClick}
-      options={[...options, ...actions]}
-      pageSize={pageSize}
-      placeholder={placeholder}
-      styles={customSelectStyles}
-      value={findOption(options, value)}
-    />
+  const pageSize = fixedActions > 0 ? 3 : 4;
+
+  return (
+    <>
+      <Select
+        className={classnames(scssObj.baseClass, className)}
+        components={{
+          DropdownIndicator: () => <Icon icon="arrow_drop_down" />,
+          IndicatorSeparator: () => null,
+          MenuList: DropdownMenuList,
+        }}
+        formatOptionLabel={(option: Option | FixedAction) => {
+          return 'render' in option && option.render ? (
+            option.render()
+          ) : (
+            <div
+              className={classnames({
+                [`${FULLSTORY_EXCLUDE_CLASS}`]: option.fsExclude,
+              })}
+            >
+              {option.label}
+            </div>
+          );
+        }}
+        inputId={name}
+        isClearable={isClearable}
+        isDisabled={isDisabled}
+        menuPortalTarget={menuPortalTarget}
+        menuPosition={menuPortalTarget ? 'fixed' : undefined}
+        menuShouldScrollIntoView
+        name={name}
+        noOptionsMessage={noOptionsMessage ? () => noOptionsMessage : undefined}
+        onBlur={handleBlur}
+        onChange={(option: Option | FixedAction | null) => {
+          if (!option) {
+            handleChange(null);
+            return;
+          }
+
+          if ('handleAction' in option) {
+            option.handleAction();
+          } else {
+            handleChange(option);
+          }
+        }}
+        openMenuOnClick={openMenuOnClick}
+        options={[...options, ...actions]}
+        pageSize={pageSize}
+        placeholder={placeholder}
+        styles={customSelectStyles}
+        value={findOption(options, value)}
+      />
+
+      {hasError && <FieldError className={errorCls}>{errorMessage}</FieldError>}
+    </>
   );
 };
 

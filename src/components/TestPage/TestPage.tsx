@@ -15,7 +15,9 @@ import useActiveSidebarItem from '../../hooks/useActiveSidebarItem';
 import useSpeechSynthesis from '../../hooks/useSpeechSynthesis';
 import Link from '../../elements/link';
 import { Values } from './types';
+import useLongPress from '../../hooks/useLongPress';
 import PermissionsManager from '../../elements/permissionsManager';
+import Clock from '../clock';
 
 interface Props {
   delay?: number;
@@ -47,6 +49,8 @@ const TestApp = ({
   const [loading, setLoading] = useState(true);
   const [state, setState] = useState('');
 
+  const { action, handlers } = useLongPress();
+
   useActiveSidebarItem(ActiveSidebarItem.Test);
   useSetGlobalHeader('Test Page');
 
@@ -74,6 +78,9 @@ const TestApp = ({
           <Button intent="primary" icon="open" onClick={handleOpenModal}>
             Open Model
           </Button>
+          <button type="button" {...handlers}>
+            Click or Press Me
+          </button>
 
           <Link to="/sdf">404</Link>
 
@@ -92,7 +99,7 @@ const TestApp = ({
               onChange={handleChange}
             />
           </form>
-
+          <Clock />
           <div className={`${scssObj.baseClass}__glitch`}>
             <Button buttonStyle="blur" onClick={() => copyText(uuidv4())}>
               Generate UUID
@@ -125,6 +132,7 @@ const TestApp = ({
                   hasLabel={!!values.state}
                   isClearable
                   value={values.state}
+                  noBorder
                 />
               )}
             </Field>

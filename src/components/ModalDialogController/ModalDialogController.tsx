@@ -4,6 +4,7 @@ import Modal, { ModalSize } from '../modal';
 import TestPage from '../testPage';
 import GameWon from '../gameWon';
 import Confirmation from '../confirmationModal';
+import ImageModal from '../imageModal';
 
 interface Props {
   closeModal: (payload?: ModalClosePayload) => void;
@@ -13,6 +14,7 @@ interface Props {
 const modalSizes: { [modalId: string]: ModalSize } = {
   [ModalTypes.Test]: 'medium',
   [ModalTypes.GameWon]: 'small',
+  [ModalTypes.ImageModal]: 'medium',
 };
 
 const ModalDialogController = ({ modals, closeModal }: Props) => {
@@ -29,6 +31,8 @@ const ModalDialogController = ({ modals, closeModal }: Props) => {
 
   const theme = modals[0] as { dark?: boolean };
 
+  const background = modals[0] as { transparent?: boolean };
+
   return (
     <Modal
       isOpen={Boolean(modals.length)}
@@ -41,6 +45,7 @@ const ModalDialogController = ({ modals, closeModal }: Props) => {
       }}
       size={size as ModalSize}
       dark={theme && theme.dark}
+      transparent={background && background.transparent}
     >
       {modals.map((modal, index) => (
         <div style={index ? { display: 'none' } : undefined} key={modal.uuid}>
@@ -66,6 +71,9 @@ const ModalDialogController = ({ modals, closeModal }: Props) => {
               hasBackButton={modal.hasBackButton}
               dark={modal.dark}
             />
+          )}
+          {modal.id === ModalTypes.ImageModal && (
+            <ImageModal url={modal.url} handleClose={handleClose} />
           )}
         </div>
       ))}
