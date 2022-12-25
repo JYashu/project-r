@@ -58,7 +58,7 @@ const Dictionary = ({
             name="word"
             value={value}
             onChange={(e) => setValue(e.target.value)}
-            border
+            noBorder
             canSubmit
             ref={searchInput}
             submitButton={() => {
