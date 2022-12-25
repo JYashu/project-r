@@ -9,7 +9,6 @@ $base-class: field;
 .#{$base-class} {
   @include border-radius(3px);
 
-  border: 1px solid map-get($colors, juror-5);
   color: map-get($colors, lawyer);
   display: flex;
   flex-direction: column;

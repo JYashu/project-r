@@ -153,3 +153,8 @@ export interface Cell {
 }
 
 export type Direction = 'up' | 'down';
+
+export enum ClickActionType {
+  CLICK = 'click',
+  LONG_PRESS = 'longPress',
+}

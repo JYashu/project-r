@@ -5,6 +5,7 @@ export enum ModalTypes {
   Test = 'test',
   GameWon = 'gameWon',
   Confirmation = 'confirmation',
+  ImageModal = 'imageModal',
 }
 
 export type ModalActionPayload =
@@ -28,6 +29,11 @@ export type ModalActionPayload =
       continueText?: string;
       hasBackButton?: boolean;
       dark?: boolean;
+    }
+  | {
+      id: ModalTypes.ImageModal;
+      url: string;
+      transparent?: boolean;
     };
 
 export type ModalClosePayload = {

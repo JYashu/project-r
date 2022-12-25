@@ -3,34 +3,72 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react-hooks/exhaustive-deps */
 import classNames from 'classnames';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSpring, animated as a } from 'react-spring';
 import useActiveSidebarItem from '../../hooks/useActiveSidebarItem';
 import useSetGlobalHeader from '../../hooks/useSetGlobalHeader';
-import { ActiveSidebarItem } from '../../types';
+import { ActiveSidebarItem, ClickActionType } from '../../types';
 import { ErrorValues, TouchedValues } from '../../utils/typeHelpers';
 import Button from '../../elements/button';
 import Field from '../../elements/field';
 import { MessageProps, Values } from './types';
 import scssObj from './_Memory.scss';
+import { CardTheme, IMAGES } from './const';
+import useLongPress from '../../hooks/useLongPress';
+import { CardThemeDropdown } from '../../elements/dropdown';
+import LoadingSpinner from '../../elements/loadingSpinner';
 
-enum CardType {
-  Solid = 'solid',
-  OnePiece = 'one-piece',
+interface Props {
+  isSubmitting?: boolean;
+  isValid: boolean;
+  values: Values;
+  errors: ErrorValues<Values>;
+  touched: TouchedValues<Values>;
+  handleBlur: (e: React.FocusEvent) => void;
+  handleChange: (e: React.ChangeEvent) => void;
+  setFieldValue: (field: string, value: any, shouldValidate?: boolean) => void;
+  setFieldTouched: (field: string, value?: boolean, shouldValidate?: boolean) => void;
+  openMessage: ({ name, score, handleReplay, handleReset }: MessageProps) => void;
+  openImage: (url: string) => void;
+}
+
+interface GameProps {
+  name: string;
+  options: number;
+  setOptions: React.Dispatch<React.SetStateAction<number | null | undefined>>;
+  theme: CardTheme;
+  highScore: number;
+  setHighScore: React.Dispatch<React.SetStateAction<number>>;
+  openMessage: ({ name, score, handleReplay, handleReset }: MessageProps) => void;
+  openImage: (url: string) => void;
+  restart: number;
+}
+
+interface CardProps {
+  id: any;
+  image: any;
+  game: any;
+  theme: CardTheme;
+  flippedCount: number;
+  setFlippedCount: React.Dispatch<React.SetStateAction<number>>;
+  flippedIndexes: any;
+  setFlippedIndexes: any;
+  openImage: (url: string) => void;
 }
 
 const Card = ({
   id,
-  color,
   image,
   game,
-  type,
+  theme,
   flippedCount,
   setFlippedCount,
   flippedIndexes,
   setFlippedIndexes,
-}: any) => {
+  openImage,
+}: CardProps) => {
   const [flipped, set] = useState(false);
+  const url = `https://public-assets-7588.s3.ap-south-1.amazonaws.com/memory/${theme}/${image}`;
   const { transform, opacity } = useSpring({
     opacity: flipped ? 1 : 0,
     transform: `perspective(600px) rotateY(${flipped ? 180 : 0}deg)`,
@@ -50,7 +88,9 @@ const Card = ({
     }
   }, [flippedIndexes]);
 
-  const onCardClick = () => {
+  const { action, userAction, handlers } = useLongPress();
+
+  const handleCardFlipAction = () => {
     set((state) => state);
 
     if (!game[id].flipped && flippedCount % 3 === 0) {
@@ -68,31 +108,45 @@ const Card = ({
     }
   };
 
+  const handleOpenImageAction = () => {
+    if (flipped && theme !== CardTheme.Solid) openImage(url);
+  };
+
+  useEffect(() => {
+    if (userAction === ClickActionType.CLICK) {
+      handleCardFlipAction();
+    }
+    if (userAction === ClickActionType.LONG_PRESS) {
+      handleOpenImageAction();
+    }
+  }, [action]);
+
   return (
-    <div onClick={onCardClick}>
-      <a.div
-        className={classNames(`${scssObj.baseClass}__c`, `${scssObj.baseClass}__back-${type}`)}
-        style={{
-          opacity: opacity.interpolate((o) => 1 - o),
-          transform,
-        }}
-      />
-      <a.div
-        className={classNames(`${scssObj.baseClass}__c`, `${scssObj.baseClass}__front`)}
-        style={{
-          opacity,
-          transform: transform.interpolate((t) => `${t} rotateX(360deg)`),
-          background:
-            type === CardType.Solid
-              ? color
-              : `url(
-            'https://public-assets-7588.s3.ap-south-1.amazonaws.com/one-piece/${image}.png'
-          )`,
-          backgroundSize: 'contain',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center center',
-        }}
-      />
+    <div>
+      <div {...handlers}>
+        <a.div
+          className={classNames(`${scssObj.baseClass}__c`, `${scssObj.baseClass}__back-${theme}`)}
+          style={{
+            opacity: opacity.interpolate((o) => 1 - o),
+            transform,
+            background: `url(https://public-assets-7588.s3.ap-south-1.amazonaws.com/memory/${theme}/${theme}.png)`,
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center center',
+          }}
+        />
+        <a.div
+          className={classNames(`${scssObj.baseClass}__c`, `${scssObj.baseClass}__front`)}
+          style={{
+            opacity,
+            transform: transform.interpolate((t) => `${t} rotateY(180deg)`),
+            background: theme === CardTheme.Solid ? image : `url(${url})`,
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center center',
+          }}
+        />
+      </div>
     </div>
   );
 };
@@ -101,59 +155,34 @@ const MemoryGame = ({
   name,
   options,
   setOptions,
-  type,
+  theme,
   highScore,
   setHighScore,
   openMessage,
-}: any) => {
+  openImage,
+  restart,
+}: GameProps) => {
   const [game, setGame] = useState<any>([]);
   const [flippedCount, setFlippedCount] = useState(0);
   const [flippedIndexes, setFlippedIndexes] = useState([]);
-
-  const colors = [
-    '#ecdb54',
-    '#e34132',
-    '#6ca0dc',
-    '#944743',
-    '#dbb2d1',
-    '#ec9787',
-    '#00a68c',
-    '#645394',
-    '#6c4f3d',
-    '#ebe1df',
-    '#bc6ca7',
-    '#bfd833',
-  ].sort(() => Math.random() - 0.5);
-
-  const images = [
-    'Luffy',
-    'Zorro',
-    'Nami',
-    'Usopp',
-    'Sanji',
-    'Robin-Chibi',
-    'Chopper',
-    'Franky',
-    'Sunny',
-    'Brooks',
-    'Carrot',
-    'Jimbei',
-  ].sort(() => Math.random() - 0.5);
+  const [isLoading, setLoading] = useState(false);
+  const images = IMAGES[theme].sort(() => Math.random() - 0.5);
 
   useEffect(() => {
+    setLoading(true);
+    setFlippedIndexes([]);
+    setFlippedCount(0);
     const newGame = [];
     for (let i = 0; i < options / 2; i += 1) {
       const firstOption = {
         id: 2 * i,
         matchId: i,
-        color: colors[i],
         image: images[i],
         flipped: false,
       };
       const secondOption = {
         id: 2 * i + 1,
         matchId: i,
-        color: colors[i],
         image: images[i],
         flipped: false,
       };
@@ -164,7 +193,10 @@ const MemoryGame = ({
 
     const shuffledGame = newGame.sort(() => Math.random() - 0.5);
     setGame(shuffledGame);
-  }, []);
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
+  }, [restart]);
 
   useEffect(() => {
     const finished = !game.some((card: any) => !card.flipped);
@@ -193,7 +225,7 @@ const MemoryGame = ({
         if (score > highScore) {
           setHighScore(score);
           const json = JSON.stringify(score);
-          localStorage.setItem('memorygamehighscore', json);
+          localStorage.setItem('memoryGameHighScore', json);
         }
 
         openMessage({
@@ -231,7 +263,12 @@ const MemoryGame = ({
     }
   }
 
-  if (game.length === 0) return <div>loading...</div>;
+  if (game.length === 0 || isLoading)
+    return (
+      <div className={`${scssObj.baseClass}__spinner`}>
+        <LoadingSpinner />
+      </div>
+    );
 
   return (
     <div className={`${scssObj.baseClass}__cards`}>
@@ -239,32 +276,20 @@ const MemoryGame = ({
         <div className={`${scssObj.baseClass}__card`} key={index}>
           <Card
             id={index}
-            color={card.color}
             image={card.image}
             game={game}
-            type={type}
+            theme={theme}
             flippedCount={flippedCount}
             setFlippedCount={setFlippedCount}
             flippedIndexes={flippedIndexes}
             setFlippedIndexes={setFlippedIndexes}
+            openImage={openImage}
           />
         </div>
       ))}
     </div>
   );
 };
-
-interface Props {
-  isSubmitting?: boolean;
-  isValid: boolean;
-  values: Values;
-  errors: ErrorValues<Values>;
-  touched: TouchedValues<Values>;
-  handleBlur: (e: React.FocusEvent) => void;
-  handleChange: (e: React.ChangeEvent) => void;
-  setFieldValue: (field: string, value: any, shouldValidate?: boolean) => void;
-  openMessage: ({ name, score, handleReplay, handleReset }: MessageProps) => void;
-}
 
 const App = ({
   isSubmitting,
@@ -275,18 +300,22 @@ const App = ({
   handleBlur,
   handleChange,
   setFieldValue,
+  setFieldTouched,
   openMessage,
+  openImage,
 }: Props) => {
   const [options, setOptions] = useState<number | null>();
-  const [type, setType] = useState(CardType.Solid);
   const [highScore, setHighScore] = useState(0);
   const [name, setName] = useState('');
-  const [initialOption, setInitialOption] = useState(values.options);
+  const [optionCount, setOptionCount] = useState(values.options);
+  const [customCard, setCustomCard] = useState(false);
+  const [chosenTheme, setChosenTheme] = useState(values.theme);
+  const [restart, setRestart] = useState(0);
 
   const [scaleX, setScaleX] = useState(0.9);
   const [scaleY, setScaleY] = useState(0.9);
 
-  const [x, setX] = useState(80);
+  const [x, setX] = useState(0);
   const [y, setY] = useState(10);
 
   useSetGlobalHeader('Memory Game');
@@ -295,11 +324,11 @@ const App = ({
   const moveFocus = (tx: number, focusType: string) => {
     if (focusType === 'option') {
       setX(tx);
-      if (values.options > 0 && initialOption > 5) {
+      if (values.options > 0 && optionCount > 5) {
         setScaleX(0.7);
         setTimeout(() => setScaleX(0.9), 250);
-      } else setInitialOption(6);
-    } else if (focusType === 'type') {
+      } else setOptionCount(6);
+    } else if (focusType === 'theme') {
       setY(tx);
       setScaleY(0.7);
       setTimeout(() => setScaleY(0.9), 250);
@@ -315,11 +344,7 @@ const App = ({
               buttonStyle="game"
               handWriting
               onClick={() => {
-                const prevOptions = options;
-                setOptions(null);
-                setTimeout(() => {
-                  setOptions(prevOptions);
-                }, 5);
+                setRestart((prevValue) => prevValue + 1);
               }}
             >
               Start Over
@@ -338,15 +363,34 @@ const App = ({
           setOptions={setOptions}
           highScore={highScore}
           setHighScore={setHighScore}
-          type={type}
+          theme={chosenTheme}
           openMessage={openMessage}
+          openImage={openImage}
+          restart={restart}
         />
       ) : (
         <>
           <div className={`${scssObj.baseClass}__wrapper`}>
             <div className={`${scssObj.baseClass}__menu`}>Menu</div>
             <div className={`${scssObj.baseClass}__login`}>
-              <form>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  setFieldTouched('theme', true);
+                  if (isValid) {
+                    const cardTypes = Object.keys(IMAGES).filter((card) => card !== 'random');
+
+                    const theme =
+                      values.theme === CardTheme.Random
+                        ? (cardTypes[Math.floor(Math.random() * cardTypes.length)] as CardTheme)
+                        : values.theme;
+
+                    setChosenTheme(theme);
+                    setName(values.name);
+                    setOptions(values.options);
+                  }
+                }}
+              >
                 <div className={`${scssObj.baseClass}__form-group`}>
                   <div>Choose a difficulty to begin!</div>
                   <div className={`${scssObj.baseClass}__btns`}>
@@ -386,7 +430,7 @@ const App = ({
                       Hard
                     </div>
                   </div>
-                  <div>Choose card type!</div>
+                  <div>Choose card theme!</div>
                   <div className={`${scssObj.baseClass}__btns`}>
                     <div
                       className={`${scssObj.baseClass}__focus`}
@@ -400,8 +444,10 @@ const App = ({
                     <div
                       className={`${scssObj.baseClass}__btn`}
                       onClick={() => {
-                        setType(CardType.Solid);
-                        moveFocus(10, 'type');
+                        setFieldValue('theme', CardTheme.Solid);
+                        setFieldTouched('theme', false);
+                        setCustomCard(false);
+                        moveFocus(10, 'theme');
                       }}
                     >
                       Solid
@@ -409,41 +455,85 @@ const App = ({
                     <div
                       className={`${scssObj.baseClass}__btn`}
                       onClick={() => {
-                        setType(CardType.OnePiece);
-                        moveFocus(130, 'type');
+                        setFieldValue('theme', '');
+                        setCustomCard(true);
+                        moveFocus(130, 'theme');
                       }}
                     >
-                      One Piece
+                      Custom
                     </div>
                   </div>
-                  <div>What should we call you?!</div>
-                  <Field
-                    name="name"
-                    label="Name"
-                    placeholder="Name"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={values.name}
-                    errorMessage={errors.name}
-                    touched={touched.name}
-                  />
-                  {/* <small className="form-text text-muted">
-                    This is a memory game
-                  </small> */}
+                  <div
+                    style={{
+                      opacity: `${customCard ? '1' : '0'}`,
+                      transform: `translateY(${customCard ? '0' : '-50px'})`,
+                      transition: 'transform 250ms, opacity 125ms ease',
+                      zIndex: `${customCard ? '10' : '-1'}`,
+                      position: 'relative',
+                    }}
+                  >
+                    <Field
+                      className={`${scssObj.baseClass}__dropdown`}
+                      errorMessage={errors.theme}
+                      name="theme"
+                      touched={touched.theme}
+                      value={values.theme}
+                      isTransparent
+                    >
+                      {(fieldName) => (
+                        <CardThemeDropdown
+                          className={`${scssObj.baseClass}__dropdown`}
+                          name={fieldName}
+                          handleBlur={handleBlur}
+                          handleChange={(option) => {
+                            setFieldValue(fieldName, option?.value);
+                          }}
+                          value={values.theme}
+                          isTransparent
+                        />
+                      )}
+                    </Field>
+                  </div>
+                  <div
+                    style={{
+                      transform: `translateY(${customCard ? '-10px' : '-70px'})`,
+                      transition: 'all 250ms ease',
+                    }}
+                  >
+                    <div className={`${scssObj.baseClass}__name-field-title`}>
+                      What should we call you?!
+                    </div>
+                    <Field
+                      className={`${scssObj.baseClass}__name-field`}
+                      name="name"
+                      label="Name"
+                      placeholder="Name"
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      value={values.name}
+                      errorMessage={errors.name}
+                      touched={touched.name}
+                      isTransparent
+                    />
+                  </div>
                 </div>
 
-                <Button
-                  disabled={isSubmitting || !isValid}
-                  loading={isSubmitting}
-                  buttonStyle="game"
-                  onClick={() => {
-                    setName(values.name);
-                    setOptions(values.options);
+                <div
+                  style={{
+                    transform: `translateY(${customCard ? '-10px' : '-70px'})`,
+                    transition: 'all 250ms ease',
                   }}
-                  handWriting
                 >
-                  Submit
-                </Button>
+                  <Button
+                    disabled={isSubmitting}
+                    loading={isSubmitting}
+                    buttonStyle="game"
+                    type="submit"
+                    handWriting
+                  >
+                    Submit
+                  </Button>
+                </div>
               </form>
             </div>
           </div>

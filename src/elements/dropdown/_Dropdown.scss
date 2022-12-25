@@ -6,6 +6,10 @@ $base-class: dropdown;
   baseClass: $base-class;
 }
 
+.css-1wnqixv-singleValue {
+  padding-left: 0.5rem;
+}
+
 .#{$base-class} {
   @include type-style-city;
 
@@ -56,5 +60,28 @@ $base-class: dropdown;
 
   &__menu-list-item:hover {
     background: map-get($colors, associate);
+  }
+
+  &__menu-list-item:hover > div {
+    background: transparent;
+  }
+
+  &__menu-list-item:active {
+    background: map-get($colors, eden);
+  }
+
+  &__error {
+    margin: 0;
+    padding-left: 8px;
+    position: absolute;
+    top: 100%;
+  }
+
+  &__scrollable-icon-div {
+    animation: bounce2 2s ease infinite;
+  }
+
+  &__scrollable-icon {
+    animation: gelatine 1s infinite;
   }
 }

@@ -6,12 +6,32 @@ $base-class: memory;
   baseClass: $base-class;
 }
 
+.dropdown__menu-list-item,
+.css-g1d714-ValueContainer,
+.css-b8ldur-Input > div > input,
+.input.input--transparent.input--default {
+  @include type-style-cali;
+}
+
+.label-text.field__label {
+  @include type-style-cali;
+  font-size: 1.6rem;
+  @include transform(translateY(-0.4rem));
+}
+
 .#{$base-class} {
+  height: 100vh;
+  z-index: -200;
+  background-image: url('https://public-assets-7588.s3.ap-south-1.amazonaws.com/backgrounds/cubic.webp');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+
   &__container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    margin-top: 50px;
   }
   &__action-buttons {
     margin: 30px 0;
@@ -37,10 +57,10 @@ $base-class: memory;
 
   @for $i from 1 through 24 {
     &__cards &__card:nth-child(#{$i}n) {
-      animation-delay: #{$i * 0.5}s;
+      animation-delay: #{$i * 0.125}s;
     }
     &__cards--large &__card--large:nth-child(#{$i}n) {
-      animation-delay: #{$i * 0.5}s;
+      animation-delay: #{$i * 0.125}s;
     }
   }
 
@@ -56,18 +76,11 @@ $base-class: memory;
 
   &__front,
   &__back-solid,
-  &__back-one-piece {
+  &__back-one-piece,
+  &__back-noragami {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center center;
-  }
-
-  &__back-solid {
-    background-image: url(https://public-assets-7588.s3.ap-south-1.amazonaws.com/logo/block.png);
-  }
-
-  &__back-one-piece {
-    background-image: url(https://public-assets-7588.s3.ap-south-1.amazonaws.com/one-piece/Onepiece.png);
   }
 
   &__wrapper {
@@ -128,6 +141,19 @@ $base-class: memory;
     background-color: map-get($colors, nav-focus);
     z-index: -100;
     @include transition(left 200ms ease-in-out 50ms);
+  }
+
+  &__name-field-title {
+    padding-top: 1.8rem;
+    padding-bottom: 0.8rem;
+  }
+
+  &__name-field {
+    margin-bottom: 2rem;
+  }
+
+  &__spinner {
+    @include center-on-div;
   }
 
   @media only screen and (max-width: 1140px) {

@@ -15,15 +15,32 @@ interface Props {
   size: ModalSize;
   cancellable?: boolean;
   dark?: boolean;
+  transparent?: boolean;
 }
 
-const Modal = ({ cancellable, children, handleClose, className, isOpen, size, dark }: Props) => {
+const Modal = ({
+  cancellable,
+  children,
+  handleClose,
+  className,
+  isOpen,
+  size,
+  dark,
+  transparent,
+}: Props) => {
   const cls = dark ? scssObj.baseClassDark : scssObj.baseClass;
   return (
     <ReactModal
-      className={classnames(`${cls}__dialog`, className, {
-        [`${cls}__dialog--size-${size}`]: size,
-      })}
+      closeTimeoutMS={1000}
+      className={classnames(
+        `${cls}__dialog`,
+        className,
+        `${cls}__dialog--background-${transparent ? 'transparent' : 'solid'}`,
+        {
+          [`${cls}__dialog--size-${size}`]: size,
+        },
+      )}
+      ariaHideApp={false}
       isOpen={isOpen}
       overlayClassName={cls}
       onRequestClose={handleClose}

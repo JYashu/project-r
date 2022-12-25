@@ -1,0 +1,16 @@
+@import '../../styles/lib';
+
+$base-class: image-modal;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  @include type-style-justice;
+  background: transparent;
+
+  &__image {
+    @include center-horizontally;
+  }
+}

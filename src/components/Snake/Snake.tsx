@@ -2,6 +2,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import useActiveSidebarItem from '../../hooks/useActiveSidebarItem';
 import useSetGlobalHeader from '../../hooks/useSetGlobalHeader';
+import useWindowDimensions from '../../hooks/useWindowDimensions';
 import { ActiveSidebarItem, Coordinates } from '../../types';
 import { isMobileOrTablet } from '../../utils/getMobileOrTabletInfo';
 import { clearBoard, drawObject, hasSnakeCollided } from '../../utils/snakeUtils';
@@ -92,6 +93,9 @@ const Snake = ({
           setInPlay(!inPlay);
           if (!disallowedDirection) moveSnake(20, 0);
           break;
+        case 'r':
+          window.location.reload();
+          break;
         default:
           break;
       }
@@ -166,18 +170,51 @@ const Snake = ({
     };
   }, [disallowedDirection, handleKeyEvents]);
 
-  if (isMobileOrTablet)
+  const { width: windowWidth, height: windowHeight } = useWindowDimensions();
+
+  if (isMobileOrTablet) {
+    if (inPlay) {
+      setInPlay(false);
+    }
     return (
-      <div className={`${scssObj.baseClass}`}>This is only accessibe on laptop or desktop.</div>
+      <div className={`${scssObj.baseClass}__message`}>
+        Snake is not accessible on mobile use a laptop/desktop to continue playing.
+      </div>
     );
+  }
+
+  if (windowWidth < 1321 && windowHeight < 672) {
+    return (
+      <div className={`${scssObj.baseClass}__message`}>
+        Increase the window width and height to continue playing.
+      </div>
+    );
+  }
+
+  if (windowWidth < 1321) {
+    return (
+      <div className={`${scssObj.baseClass}__message`}>
+        Increase the window width to continue playing.
+      </div>
+    );
+  }
+
+  if (windowHeight < 672) {
+    return (
+      <div className={`${scssObj.baseClass}__message`}>
+        Increase the window height to continue playing.
+      </div>
+    );
+  }
 
   return (
     <div className={`${scssObj.baseClass}`}>
       <div className={`${scssObj.baseClass}__content`}>
         <canvas
+          className={`${scssObj.baseClass}__canvas`}
           ref={canvasRef}
           style={{
-            border: `3px solid ${gameEnded ? 'red' : 'black'}`,
+            border: `3px solid ${gameEnded ? '#EA4435' : '#CA7D82'}`, // 8A463F, BB6B70
           }}
           width={width}
           height={height}
@@ -185,7 +222,7 @@ const Snake = ({
         <div className={`${scssObj.baseClass}__instructions`}>
           <div className={`${scssObj.baseClass}__heading`}>How to Play</div>
           <div className={`${scssObj.baseClass}__note`}>
-            NOTE: Start the game by pressing <strong>d</strong>
+            NOTE: Start the game by pressing <strong>D</strong>
           </div>
           <div className={`${scssObj.baseClass}__first-instruction`}>
             Press <strong>W or I</strong> to Move Up
@@ -202,7 +239,9 @@ const Snake = ({
           <div>
             Press <strong>Q</strong> to Pause / Play and Start
           </div>
-          <div className={`${scssObj.baseClass}__note`}>Refresh the page to restart</div>
+          <div className={`${scssObj.baseClass}__note`}>
+            Press <strong>R</strong> or Refresh the page to restart
+          </div>
         </div>
       </div>
     </div>

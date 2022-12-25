@@ -8,6 +8,30 @@ $base-class-dark: modal-dark;
   baseClassDark: $base-class-dark;
 }
 
+.ReactModal__Content {
+  @include transform(scale(0.75));
+  @include transition(all 100ms ease-in-out);
+  opacity: 0;
+}
+
+.ReactModal__Overlay {
+  @include transition(all 100ms ease-in-out);
+  opacity: 0;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}
+
+.ReactModal__Content--after-open {
+  @include transform(scale(1));
+  opacity: 1;
+}
+
 .#{$base-class} {
   align-items: center;
   background-color: rgba(map-get($colors, suspect), 0.4);
@@ -22,13 +46,11 @@ $base-class-dark: modal-dark;
 
   &__dialog {
     @include type-style-city;
-    @include box-level-4;
 
-    background-color: map-get($colors, victim);
     display: flex;
     flex-direction: column;
-    max-height: calc(100% - 20px);
-    max-width: calc(100% - 20px);
+    max-height: calc(100% - 60px);
+    max-width: calc(100% - 60px);
     outline: 0;
     position: relative;
     overflow: auto;
@@ -36,6 +58,16 @@ $base-class-dark: modal-dark;
     @include tablet {
       height: calc(100% - 20px);
       width: calc(100% - 20px);
+    }
+
+    &--background-solid {
+      @include box-level-4;
+
+      background-color: map-get($colors, victim);
+    }
+
+    &--background-transparent {
+      background-color: transparent;
     }
 
     &--size-small {
