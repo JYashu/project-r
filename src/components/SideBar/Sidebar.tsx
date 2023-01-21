@@ -7,7 +7,7 @@ import { ActiveSidebarItem, Config } from '../../types';
 import Icon from '../../elements/icon';
 import logOut from '../../utils/logOut';
 import ENV from '../../utils/env';
-import { ASSIGNED_PATHS, BETA_ONLY_PATHS } from '../../utils/consts';
+import { ASSIGNED_PATHS, BETA_ONLY_PAGES, BETA_ONLY_PATHS, Pages } from '../../utils/consts';
 import PermissionsManager from '../../elements/permissionsManager';
 
 interface Props extends RouteComponentProps {
@@ -65,36 +65,36 @@ const Sidebar = withRouter(
       >
         <SidebarContent>
           <Menu key={uuidv4()} className={`${scssObj.baseClass}__footer_menu`} iconShape="square">
-            <PermissionsManager isHiddenForProd>
+            <PermissionsManager isHiddenForProd={BETA_ONLY_PAGES.includes(Pages.GIPHY_ENGINE)}>
               <MenuItem
                 className={itemClassName}
                 key={uuidv4()}
                 active={activeSidebarItem === ActiveSidebarItem.GiphyEngine}
                 icon={<Icon removeOutline size="medium" icon="gif" />}
               >
-                Giphy Finder (Beta Only)
+                Giphy Finder {BETA_ONLY_PAGES.includes(Pages.GIPHY_ENGINE) ? '(Beta Only)' : ''}
                 <Link tabIndex={-1} to="/giphy-engine" />
               </MenuItem>
             </PermissionsManager>
-            <PermissionsManager isHiddenForProd>
+            <PermissionsManager isHiddenForProd={BETA_ONLY_PAGES.includes(Pages.NPM_ENGINE)}>
               <MenuItem
                 className={itemClassName}
                 key={uuidv4()}
                 active={activeSidebarItem === ActiveSidebarItem.NPMEngine}
                 icon={<Icon removeOutline size="small" icon="search" />}
               >
-                NPM Engine (Beta Only)
+                NPM Engine {BETA_ONLY_PAGES.includes(Pages.NPM_ENGINE) ? '(Beta Only)' : ''}
                 <Link tabIndex={-1} to="/npm-engine" />
               </MenuItem>
             </PermissionsManager>
-            <PermissionsManager isHiddenForProd>
+            <PermissionsManager isHiddenForProd={BETA_ONLY_PAGES.includes(Pages.TODO)}>
               <MenuItem
                 className={itemClassName}
                 key={uuidv4()}
                 active={activeSidebarItem === ActiveSidebarItem.Todo}
                 icon={<Icon removeOutline size="small" icon="playlist_add_check" />}
               >
-                Todo (Beta Only)
+                Todo {BETA_ONLY_PAGES.includes(Pages.TODO) ? '(Beta Only)' : ''}
                 <Link tabIndex={-1} to="/todo" />
               </MenuItem>
             </PermissionsManager>
@@ -152,14 +152,14 @@ const Sidebar = withRouter(
         </SidebarContent>
         <SidebarFooter className={`${scssObj.baseClass}__footer`}>
           <Menu key={uuidv4()} className={`${scssObj.baseClass}__footer_menu`} iconShape="square">
-            <PermissionsManager isHiddenForProd>
+            <PermissionsManager isHiddenForProd={BETA_ONLY_PAGES.includes(Pages.TEST)}>
               <MenuItem
                 className={itemClassName}
                 key={uuidv4()}
                 active={activeSidebarItem === ActiveSidebarItem.Test}
                 icon={<Icon removeOutline size="small" icon="fact_check" />}
               >
-                Test Page (Beta Only)
+                Test Page {BETA_ONLY_PAGES.includes(Pages.TEST) ? '(Beta Only)' : ''}
                 <Link tabIndex={-1} to="/test" />
               </MenuItem>
             </PermissionsManager>
@@ -190,9 +190,9 @@ const Sidebar = withRouter(
               Settings
               <Link tabIndex={-1} to="/settings" />
             </MenuItem>
-            <PermissionsManager isHiddenForProd>
+            <PermissionsManager isHiddenForProd={BETA_ONLY_PAGES.includes(Pages.LOGIN)}>
               <MenuItem key={uuidv4()} icon={<Icon removeOutline size="small" icon="login" />}>
-                Login (Beta Only)
+                Login {BETA_ONLY_PAGES.includes(Pages.LOGIN) ? '(Beta Only)' : ''}
                 <Link tabIndex={-1} to="/login" />
               </MenuItem>
             </PermissionsManager>
