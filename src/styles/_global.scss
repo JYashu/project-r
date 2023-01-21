@@ -17,6 +17,13 @@ body {
 html {
   font-size: 62.5%;
 }
+input,
+textarea,
+button,
+select,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
 .global {
   &--home-page {
     .app {

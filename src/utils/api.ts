@@ -1,8 +1,9 @@
 /* eslint-disable prettier/prettier */
 import { NPMResponse, Todo } from '../types';
 import { ApiResponse, ApiStatusType, HttpMethod } from './apiUtils';
+import ENV from './env';
 
-const BASE_URL = 'https://proxy.cors.sh';
+const BASE_URL = ENV.isDevelopment ? 'https://proxy.cors.sh/' : '';
 
 const createFetchOptions = <Body, AdditionalHeaders>(
   method: HttpMethod,
@@ -103,9 +104,9 @@ function HtmlApi<Body = void, AdditionalHeaders = void>() {
 const URLS = {
   GET_TODOS: () => 'https://jsonplaceholder.typicode.com/todos',
   GET_MODULES: ({ query }: { query: string }) =>
-    `${BASE_URL}/https://registry.npmjs.org/-/v1/search?text=${query}`,
+    `${BASE_URL}https://registry.npmjs.org/-/v1/search?text=${query}`,
   GET_GIFS: ({ query }: { query: string }) =>
-    `${BASE_URL}/https://api.giphy.com/v1/gifs/search?api_key=SDEsWMHoj4DO7LFMxWFHlVJVkElcDm8h&q=${query}`,
+    `${BASE_URL}https://api.giphy.com/v1/gifs/search?api_key=SDEsWMHoj4DO7LFMxWFHlVJVkElcDm8h&q=${query}`,
   GET_ANIME: ({ query }: { query: string }) =>
     `https://jikan1.p.rapidapi.com/search/anime?q=${encodeURIComponent(query)}`,
   GET_DEFINITIONS: ({ word }: { word: string }) =>

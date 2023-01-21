@@ -32,6 +32,10 @@ $base-class: global-header;
     border: none;
   }
 
+  &__collapse:active {
+    outline: none !important;
+  }
+
   &__title {
     @include type-style-heading;
   }
@@ -45,13 +49,26 @@ $base-class: global-header;
   &__clock {
     overflow-x: hidden;
     position: absolute;
-    right: 40px;
+    right: 3%;
   }
 
   @media only screen and (max-width: 1024px) {
     &__collapse {
-      margin-left: 0px;
+      margin-left: -20%;
+    }
+    &__clock {
+      right: 1%;
     }
     padding: 0 10px;
+
+    &__title {
+      transform: translateX(-22px);
+    }
+  }
+
+  @media only screen and (max-width: 455px) {
+    &__title {
+      transform: translateX(-30px);
+    }
   }
 }

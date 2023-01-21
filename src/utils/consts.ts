@@ -102,7 +102,22 @@ export const ASSIGNED_PATHS = [
   '/mal',
 ];
 
-export const BETA_ONLY_PATHS = ['todo', 'test'];
+export enum Pages {
+  TODO = 'todo',
+  TEST = 'test',
+  MEMORY = 'memory',
+  SNAKE = 'snake',
+  TIC_TAC_TOE = 'tic-tac-toe',
+  CBOOK = 'cbook',
+  NPM_ENGINE = 'npm-engine',
+  GIPHY_ENGINE = 'giphy-engine',
+  SETTINGS = 'settings',
+  LOGIN = 'login',
+}
+
+export const BETA_ONLY_PAGES = [Pages.TODO, Pages.TEST, Pages.LOGIN];
+
+export const BETA_ONLY_PATHS = BETA_ONLY_PAGES.map((e) => e.toString());
 
 export const HTML = `
 <html>
