@@ -115,7 +115,13 @@ export enum Pages {
   LOGIN = 'login',
 }
 
-export const BETA_ONLY_PAGES = [Pages.TODO, Pages.TEST, Pages.LOGIN];
+export const BETA_ONLY_PAGES = [
+  Pages.TODO,
+  Pages.TEST,
+  Pages.LOGIN,
+  Pages.NPM_ENGINE,
+  Pages.GIPHY_ENGINE,
+];
 
 export const BETA_ONLY_PATHS = BETA_ONLY_PAGES.map((e) => e.toString());
 
