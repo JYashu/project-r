@@ -11,6 +11,7 @@ import { Values } from './types';
 import scssObj from './_GiphySearchEngine.scss';
 import LoadingSpinner from '../../elements/loadingSpinner';
 import PermissionsManager from '../../elements/permissionsManager';
+import { BETA_ONLY_PAGES, Pages } from '../../utils/consts';
 
 interface Props {
   data: any;
@@ -187,7 +188,7 @@ const GiphySearchEngine = ({
 };
 
 const GiphySearchEngineWithPermissionManager = (props: Props) => (
-  <PermissionsManager isBetaOnly>
+  <PermissionsManager isBetaOnly={BETA_ONLY_PAGES.includes(Pages.GIPHY_ENGINE)}>
     <GiphySearchEngine {...props} />
   </PermissionsManager>
 );

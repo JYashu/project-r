@@ -10,6 +10,7 @@ import NPMRepoItem from '../npmRepoItem';
 import { Values } from './types';
 import scssObj from './_NPMRepoEngine.scss';
 import PermissionsManager from '../../elements/permissionsManager';
+import { BETA_ONLY_PAGES, Pages } from '../../utils/consts';
 
 interface Props {
   data: NPMRepoData[];
@@ -106,7 +107,7 @@ const NPMRepoEngine = ({
 };
 
 const NPMRepoEngineWithPermissionManager = (props: Props) => (
-  <PermissionsManager isBetaOnly>
+  <PermissionsManager isBetaOnly={BETA_ONLY_PAGES.includes(Pages.NPM_ENGINE)}>
     <NPMRepoEngine {...props} />
   </PermissionsManager>
 );
