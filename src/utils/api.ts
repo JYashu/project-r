@@ -12,8 +12,9 @@ const createFetchOptions = <Body, AdditionalHeaders>(
 ) => {
   const setContentType = body instanceof FormData ? null : { 'Content-Type': 'application/json' };
   const setCorsAccess = {
-    'access-control-allow-headers': 'X-Requested-With',
-    'access-control-allow-origin': '*',
+    'Access-Control-Allow-Headers': '*',
+    'Access-Control-Allow-Methods': '*',
+    'Access-Control-Allow-Origin': '*',
   };
 
   const headers: RequestInit['headers'] = {
