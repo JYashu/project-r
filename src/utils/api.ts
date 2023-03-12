@@ -1,9 +1,21 @@
 /* eslint-disable prettier/prettier */
 import { NPMResponse, Todo } from '../types';
 import { ApiResponse, ApiStatusType, HttpMethod } from './apiUtils';
-import ENV from './env';
+import { ACCESS_CODE, PROXY_URLS } from './consts';
+import { parseNumber } from './helpers';
 
-const BASE_URL = ENV.isDevelopment ? 'https://proxy.cors.sh/' : '';
+const CONFIG = localStorage.getItem('apiAccess')
+  ? localStorage.getItem('apiAccess')?.split('-')[0]
+  : 'config';
+
+const PROXY_INDEX =
+  localStorage.getItem('apiAccess') &&
+  localStorage.getItem('apiAccess')?.split('-').length === 2 &&
+  parseNumber(localStorage.getItem('apiAccess')?.split('-')[1] || '0')
+    ? parseNumber(localStorage.getItem('apiAccess')?.split('-')[1] || '0')
+    : 0;
+
+export const BASE_URL = CONFIG === ACCESS_CODE ? PROXY_URLS[PROXY_INDEX || 0] : '';
 
 const createFetchOptions = <Body, AdditionalHeaders>(
   method: HttpMethod,

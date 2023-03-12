@@ -4,8 +4,13 @@ import { CardTheme } from './const';
 import ENV from '../../utils/env';
 
 import { MessageProps, Values } from './types';
+import { ACCESS_TOKEN } from '../../utils/consts';
 
 type ValidatedValues = 'options' & 'theme';
+
+interface OuterProps {
+  devAccess: boolean;
+}
 
 export const validationSchema = () => {
   return Yup.object().shape<Pick<Values, ValidatedValues>>({
@@ -14,9 +19,9 @@ export const validationSchema = () => {
   });
 };
 
-const initialValues = (): Values => {
+const mapPropsToValues = ({ devAccess }: OuterProps): Values => {
   return {
-    options: ENV.isDevelopment ? 2 : 12,
+    options: ENV.isDevelopment || devAccess ? 2 : 12,
     name: '',
     theme: CardTheme.Solid,
   };
@@ -30,6 +35,6 @@ interface OuterProps {
 export const withState = withFormik<OuterProps, Values>({
   displayName: 'MemoryLogin',
   handleSubmit: () => {},
-  mapPropsToValues: () => initialValues(),
+  mapPropsToValues,
   validationSchema,
 });

@@ -35,3 +35,8 @@ export const completeSignIn = createAsyncActionWithMeta(
   'COMPLETE_SIGN_IN_SUCCESS',
   'COMPLETE_SIGN_IN_FAILURE',
 )<{ username: string; password: string }, void, Error>();
+
+export const setGlobalAccess = createAction(
+  'SET_GLOBAL_ACCESS',
+  (action) => (payload: { devAccess?: boolean; apiAccess?: boolean }) => action(payload),
+);

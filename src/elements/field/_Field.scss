@@ -17,11 +17,11 @@ $base-class: field;
   position: relative;
 
   &--border {
-    border: 1px solid map-get($colors, header-bg);
+    border: 1px solid map-get($colors, sub-heading);
   }
 
   &--solid {
-    background-color: map-get($colors, juror-5);
+    background-color: map-get($colors, victim);
   }
 
   &--transparent {
@@ -87,5 +87,66 @@ $base-class: field;
     &--hidden {
       visibility: hidden;
     }
+  }
+
+  &__file-field,
+  &__color-field {
+    position: relative;
+  }
+
+  &__file-input {
+    // flex-basis: 100%;
+
+    > input#fileUpload {
+      padding-left: 18px;
+      padding-right: 70px;
+    }
+  }
+
+  &__load-url-button {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &__preview-button {
+    position: absolute;
+    right: 70px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 1s ease-in-out;
+  }
+
+  &__clear-button {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &__input-button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: -100;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  &__picker-wrapper {
+    margin-top: 4px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid map-get($colors, sub-heading);
+  }
+
+  &__picker {
+    margin-top: 1.6px;
+    margin-left: 1.5px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
   }
 }

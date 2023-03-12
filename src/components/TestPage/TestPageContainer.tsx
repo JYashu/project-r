@@ -6,7 +6,7 @@ import TestPage from './TestPage';
 import { withState } from './utils';
 
 const mapDispatch = (dispatch: Dispatch) => ({
-  handleOpenModal: () => dispatch(openModal({ id: ModalTypes.Test })),
+  handleOpenModal: () => dispatch(openModal({ id: ModalTypes.Test, delay: 100 })),
   copyText: (text: string) => {
     dispatch(copyText.request({ text }));
   },

@@ -1,6 +1,6 @@
 @import '../../styles/lib';
 
-$base-class: image-modal;
+$base-class: iframe-modal;
 
 :export {
   baseClass: $base-class;
@@ -10,7 +10,9 @@ $base-class: image-modal;
   @include type-style-justice;
   background: transparent;
 
-  &__image {
+  &__iframe {
     @include center-horizontally;
+    height: fit-content;
+    width: fit-content;
   }
 }

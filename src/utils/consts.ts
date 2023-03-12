@@ -1,5 +1,14 @@
 export const FULLSTORY_EXCLUDE_CLASS = 'fs-exclude';
 
+export const ACCESS_CODE = 'JYashu';
+
+export const ACCESS_FIELD_TOKEN =
+  'TAPETVM6H6KRDXCBFUE45CD36SEBUYLMHSAAG5YGMWN6GVX52RXWLPR5W4DPXSYM';
+
+export const ACCESS_TOKEN = 'PL6MYW7MIZ34CPO5A6D5DUPMMSIX3XF3HUWLRIYAOQ4WAU2SFDBTJFBSWYBNLID3';
+
+export const ELLIPSIS = '...';
+
 export const WINNING_LINES = [
   [0, 1, 2],
   [3, 4, 5],
@@ -100,6 +109,7 @@ export const ASSIGNED_PATHS = [
   '/snake',
   '/memory',
   '/mal',
+  '/svg-converter',
 ];
 
 export enum Pages {
@@ -113,6 +123,7 @@ export enum Pages {
   GIPHY_ENGINE = 'giphy-engine',
   SETTINGS = 'settings',
   LOGIN = 'login',
+  SVGConverter = 'svg-converter',
 }
 
 export const BETA_ONLY_PAGES = [
@@ -155,3 +166,9 @@ export const HTML = `
   </body>
 </html>
 `;
+
+export const PROXY_URLS = [
+  'https://proxy.cors.sh/',
+  'https://magnificent-brioche-204c18.netlify.app/',
+  'https://angry-rose-coyote.cyclic.app/',
+];

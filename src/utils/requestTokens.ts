@@ -16,8 +16,9 @@ export const persistTokens = ({ accessToken, refreshToken }: Tokens) => {
 };
 
 export const destroyTokens = () => {
-  window.localStorage.removeItem(ACCESS_TOKEN_KEY);
-  window.localStorage.removeItem(REFRESH_TOKEN_KEY);
+  window.localStorage.removeItem('config');
+  window.localStorage.removeItem('normalAccess');
+  window.localStorage.removeItem('apiAccess');
 };
 
 export const getTokens = () => {

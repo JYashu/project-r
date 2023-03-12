@@ -32,6 +32,9 @@ export interface Props extends Pick<React.ComponentProps<'button'>, ButtonProps>
   rounded?: boolean;
   handWriting?: boolean;
   solid?: boolean;
+  title?: string;
+  renderLoader?: () => React.ReactNode;
+  spinnerType?: SpinnerType;
 }
 
 const Button = ({
@@ -61,6 +64,9 @@ const Button = ({
   rounded,
   handWriting,
   solid,
+  title,
+  renderLoader,
+  spinnerType,
 }: Props): React.ReactElement<'button'> => {
   const buttonCls = classnames(scssObj.baseClass, className, {
     [`${scssObj.baseClass}--empty`]: !React.Children.count(children) || !children || ignoreChildren,
@@ -88,6 +94,7 @@ const Button = ({
       tabIndex={tabIndex}
       type={type}
       aria-expanded={ariaExpanded}
+      title={title || ''}
     >
       <span className="visually-hidden">{ariaLabel}</span>
       <div className={`${scssObj.baseClass}__content-wrapper`}>
@@ -97,14 +104,27 @@ const Button = ({
             description={iconDescription}
             size={iconSize}
             removeOutline={iconRemoveOutline}
+            title={title}
           />
         )}
 
         <div className={`${scssObj.baseClass}__children`}>{children}</div>
       </div>
 
-      <div className={`${scssObj.baseClass}__loader-wrapper`}>
-        <LoadingSpinner intent={intent} type={SpinnerType.ScaleLoader} size="small" />
+      <div
+        className={`${scssObj.baseClass}__loader-wrapper-${
+          children ? 'with-children' : 'without-children'
+        }`}
+      >
+        {renderLoader ? (
+          renderLoader()
+        ) : (
+          <LoadingSpinner
+            intent={intent}
+            type={spinnerType || SpinnerType.ScaleLoader}
+            size="small"
+          />
+        )}
       </div>
       {buttonStyle === 'abstract' && (
         <>
@@ -120,7 +140,6 @@ const Button = ({
 
 Button.defaultProps = {
   role: 'button',
-  transparent: true,
   type: 'button',
 };
 

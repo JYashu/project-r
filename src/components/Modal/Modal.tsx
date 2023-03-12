@@ -48,7 +48,7 @@ const Modal = ({
       shouldCloseOnEsc={false}
     >
       {cancellable && handleClose && (
-        <Button icon="close" className={`${cls}__close`} onClick={handleClose} />
+        <Button icon="close" transparent className={`${cls}__close`} onClick={handleClose} />
       )}
       <div className={`${cls}__content`}>{children}</div>
     </ReactModal>

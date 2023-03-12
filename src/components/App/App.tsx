@@ -27,6 +27,8 @@ import Dictionary from '../dictionary';
 import NotFound from '../notFound';
 import ENV from '../../utils/env';
 import CBook from '../cbook';
+import SVGConverter from '../svgConverter';
+import useGetEnvironment from '../../hooks/useGetEnvironment';
 
 interface Props {
   isDictionaryVisible: boolean;
@@ -46,7 +48,7 @@ const App = ({
 
   const cls = scssObj.baseClass;
 
-  const isDev = ENV.isDevelopment;
+  const { isDev } = useGetEnvironment();
 
   window.speechSynthesis.getVoices();
 
@@ -129,6 +131,7 @@ const App = ({
           <Route path="/snake" exact component={() => <Snake height={600} width={1000} />} />
           <Route path="/memory" exact component={Memory} />
           <Route path="/mal" exact component={MALEngine} />
+          <Route path="/svg-converter" exact component={SVGConverter} />
           <Route component={NotFound} />
         </Switch>
       </div>

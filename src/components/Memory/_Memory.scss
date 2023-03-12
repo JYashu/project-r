@@ -6,33 +6,46 @@ $base-class: memory;
   baseClass: $base-class;
 }
 
-.dropdown__menu-list-item,
-.css-g1d714-ValueContainer,
-.css-b8ldur-Input > div > input,
-.input.input--transparent.input--default {
-  @include type-style-cali;
-}
-
-.label-text.field__label {
-  @include type-style-cali;
-  font-size: 1.6rem;
-  @include transform(translateY(-0.4rem));
-}
-
 .#{$base-class} {
   height: 100vh;
   z-index: -200;
-  background-image: url('https://public-assets-7588.s3.ap-south-1.amazonaws.com/backgrounds/cubic.webp');
+  background-image: url('https://project-r-assets.s3.us-east-2.amazonaws.com/backgrounds/cubic.webp');
   background-repeat: no-repeat;
   background-size: 100% 100%;
+
+  &__dropdown {
+    font-family: $cali !important;
+    font-size: 2rem !important; // 20px;
+    font-style: normal !important;
+    font-weight: 300 !important;
+    line-height: 2.4rem !important; // 26px;
+  }
+
+  &__form-group
+    > div:nth-child(5)
+    > label
+    > div
+    > div.css-a6ql65-control
+    > div.css-g1d714-ValueContainer
+    > div.css-b8ldur-Input
+    > div
+    > input {
+    @include type-style-cali;
+  }
+
+  &__form-group > div:nth-child(6) > label > span {
+    @include type-style-cali;
+    font-size: 1.6rem;
+    @include transform(translateY(-0.4rem));
+  }
 
   &__container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
-    margin-top: 50px;
+    margin: 20px 0;
   }
+
   &__action-buttons {
     margin: 30px 0;
     width: 100%;
@@ -150,6 +163,10 @@ $base-class: memory;
 
   &__name-field {
     margin-bottom: 2rem;
+
+    > .input.input--transparent.input--default {
+      @include type-style-cali;
+    }
   }
 
   &__spinner {

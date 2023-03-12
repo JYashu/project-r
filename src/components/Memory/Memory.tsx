@@ -17,6 +17,7 @@ import { CardTheme, IMAGES } from './const';
 import useLongPress from '../../hooks/useLongPress';
 import { CardThemeDropdown } from '../../elements/dropdown';
 import LoadingSpinner from '../../elements/loadingSpinner';
+import { ASSETS_BASE_URL } from '../../utils/assets';
 
 interface Props {
   isSubmitting?: boolean;
@@ -68,7 +69,7 @@ const Card = ({
   openImage,
 }: CardProps) => {
   const [flipped, set] = useState(false);
-  const url = `https://public-assets-7588.s3.ap-south-1.amazonaws.com/memory/${theme}/${image}`;
+  const url = `${ASSETS_BASE_URL}/memory/${theme}/${image}`;
   const { transform, opacity } = useSpring({
     opacity: flipped ? 1 : 0,
     transform: `perspective(600px) rotateY(${flipped ? 180 : 0}deg)`,
@@ -129,7 +130,7 @@ const Card = ({
           style={{
             opacity: opacity.interpolate((o) => 1 - o),
             transform,
-            background: `url(https://public-assets-7588.s3.ap-south-1.amazonaws.com/memory/${theme}/${theme}.png)`,
+            background: `url(https://project-r-assets.s3.us-east-2.amazonaws.com/memory/${theme}/${theme}.png)`,
             backgroundSize: 'contain',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center center',

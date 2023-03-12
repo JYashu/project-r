@@ -9,6 +9,7 @@ import logOut from '../../utils/logOut';
 import ENV from '../../utils/env';
 import { ASSIGNED_PATHS, BETA_ONLY_PAGES, BETA_ONLY_PATHS, Pages } from '../../utils/consts';
 import PermissionsManager from '../../elements/permissionsManager';
+import useGetEnvironment from '../../hooks/useGetEnvironment';
 
 interface Props extends RouteComponentProps {
   config: Config;
@@ -30,8 +31,7 @@ const Sidebar = withRouter(
     openDictionary,
   }: Props) => {
     const [isRecollapse, setRecollapse] = useState(true);
-    const isDev = ENV.isDevelopment;
-    const isProd = ENV.isProduction;
+    const { isDev, isProd } = useGetEnvironment();
 
     if (
       history.location.pathname === '/auth' ||
@@ -116,6 +116,15 @@ const Sidebar = withRouter(
               CBook
               <Link tabIndex={-1} target="new" to="/cbook" />
             </MenuItem>
+            <MenuItem
+              className={itemClassName}
+              key={uuidv4()}
+              active={activeSidebarItem === ActiveSidebarItem.SVGConverter}
+              icon={<Icon removeOutline size="small" icon="developer_mode" />}
+            >
+              SVG Converter
+              <Link tabIndex={-1} to="/svg-converter" />
+            </MenuItem>
           </Menu>
           <SidebarFooter className={`${scssObj.baseClass}__games`}>
             <Menu key={uuidv4()} className={`${scssObj.baseClass}__games-menu`} iconShape="square">
@@ -196,13 +205,13 @@ const Sidebar = withRouter(
                 <Link tabIndex={-1} to="/login" />
               </MenuItem>
             </PermissionsManager>
-            <PermissionsManager isHiddenForProd>
+            <PermissionsManager isLogout>
               <MenuItem
                 key={uuidv4()}
                 onClick={() => logOut()}
                 icon={<Icon removeOutline size="small" icon="logout" />}
               >
-                Logout (Beta Only)
+                Logout
               </MenuItem>
             </PermissionsManager>
           </Menu>

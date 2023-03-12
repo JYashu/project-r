@@ -8,6 +8,7 @@ import {
   clearClipboard,
   setIsContentStatic,
   completeSignIn,
+  setGlobalAccess,
 } from './actions';
 
 export interface MeState {
@@ -18,6 +19,10 @@ export interface MeState {
     hideItself: boolean;
   };
   isContentStatic: boolean;
+  accessGranted: {
+    devAccess: boolean;
+    apiAccess: boolean;
+  };
 }
 
 export type MeActions =
@@ -27,4 +32,5 @@ export type MeActions =
   | ActionType<typeof setIsClipboardVisible>
   | ActionType<typeof clearClipboard>
   | ActionType<typeof setIsContentStatic>
-  | ActionType<typeof completeSignIn>;
+  | ActionType<typeof completeSignIn>
+  | ActionType<typeof setGlobalAccess>;

@@ -7,6 +7,7 @@ interface Props {
   className?: string;
   description?: string;
   icon: any;
+  title?: string;
   onClickHandler?: () => void;
   size?: 'extra-small' | 'small' | 'medium' | 'large' | 'extra-large' | 'extra-extra-large';
   removeOutline?: boolean | undefined;
@@ -17,7 +18,15 @@ interface Props {
  *
  * @param {Props}
  */
-const Icon = ({ className, icon, onClickHandler, size, description, removeOutline }: Props) => {
+const Icon = ({
+  className,
+  icon,
+  title,
+  onClickHandler,
+  size,
+  description,
+  removeOutline,
+}: Props) => {
   const cls = classnames(scssObj.baseClass, className, {
     [`${scssObj.baseClass}--size-${size}`]: size,
   });
@@ -26,7 +35,7 @@ const Icon = ({ className, icon, onClickHandler, size, description, removeOutlin
 
   return (
     <div className={cls}>
-      <i aria-hidden="true" className={iconCls} onClick={onClickHandler}>
+      <i aria-hidden="true" className={iconCls} onClick={onClickHandler} title={title || ''}>
         {icon}
 
         <span className={`${scssObj.baseClass}__description`}>{description}</span>

@@ -1,13 +1,14 @@
 import classnames from 'classnames';
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { Helmet } from 'react-helmet';
 import useTimeout from '../../hooks/useTimeout';
 import { ActiveSidebarItem, SpinnerType } from '../../types';
 import { FULLSTORY_EXCLUDE_CLASS } from '../../utils/consts';
 import { ErrorValues, TouchedValues } from '../../utils/typeHelpers';
 import Button from '../../elements/button';
 import { StateDropdown } from '../../elements/dropdown';
-import Field from '../../elements/field';
+import Field, { FileField } from '../../elements/field';
 import LoadingSpinner from '../../elements/loadingSpinner';
 import scssObj from './_TestPage.scss';
 import useSetGlobalHeader from '../../hooks/useSetGlobalHeader';
@@ -54,7 +55,7 @@ const TestApp = ({
   useActiveSidebarItem(ActiveSidebarItem.Test);
   useSetGlobalHeader('Test Page');
 
-  useTimeout(() => setLoading(false), delay || 1800);
+  useTimeout(() => setLoading(false), delay || 100); // 1800
 
   const Speak = (text: string) => {
     useSpeechSynthesis(text);
@@ -70,11 +71,11 @@ const TestApp = ({
 
   return (
     <div className={`${scssObj.baseClass}`}>
+      <Helmet>
+        <title>Test Page</title>
+      </Helmet>
       <div className={`${scssObj.baseClass}__container`}>
         <div className={`${scssObj.baseClass}__glass`}>
-          <div className={`${scssObj.baseClass}__wrapper`}>
-            <div className={`${scssObj.baseClass}__head`}>Test Page</div>
-          </div>
           <Button intent="primary" icon="open" onClick={handleOpenModal}>
             Open Model
           </Button>
@@ -136,6 +137,8 @@ const TestApp = ({
                 />
               )}
             </Field>
+            <FileField minimal />
+            <FileField restrictURL />
           </div>
         </div>
       </div>

@@ -6,6 +6,8 @@ export const selectGlobalHeaderTitle = (state: State) => selectMeState(state).ti
 
 export const selectGlobalConfig = (state: State) => selectMeState(state).setting;
 
+export const selectAccessGranted = (state: State) => selectMeState(state).accessGranted;
+
 export const selectClockFormat = (state: State) => selectGlobalConfig(state).clock.format12h;
 
 export const selectClipboardData = (state: State) =>

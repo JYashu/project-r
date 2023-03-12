@@ -59,9 +59,9 @@ const Dictionary = ({
             value={value}
             onChange={(e) => setValue(e.target.value)}
             noBorder
-            canSubmit
+            hasButton
             ref={searchInput}
-            submitButton={() => {
+            renderButton={() => {
               return (
                 <div style={{ marginTop: '2px', marginRight: '-4px' }}>
                   <Button onClick={() => hideDictionary()}>
