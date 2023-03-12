@@ -27,7 +27,10 @@ $base-class: svg-converter;
 
   &__file-upload-title {
     @include type-style-mono;
-    padding-bottom: 20px;
+
+    font-size: 2.5rem;
+    font-weight: 500;
+    padding-bottom: 30px;
   }
 
   &__file-upload {
