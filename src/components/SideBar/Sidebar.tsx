@@ -120,7 +120,7 @@ const Sidebar = withRouter(
               className={itemClassName}
               key={uuidv4()}
               active={activeSidebarItem === ActiveSidebarItem.SVGConverter}
-              icon={<Icon removeOutline size="small" icon="developer_mode" />}
+              icon={<Icon removeOutline size="small" icon="style" />}
             >
               SVG Converter
               <Link tabIndex={-1} to="/svg-converter" />
