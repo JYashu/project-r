@@ -5,11 +5,11 @@ export enum ModalTypes {
   Test = 'test',
   GameWon = 'gameWon',
   Confirmation = 'confirmation',
-  ImageModal = 'imageModal',
+  PreviewModal = 'previewModal',
 }
 
 export type ModalActionPayload =
-  | { id: ModalTypes.Test }
+  | { id: ModalTypes.Test; delay: number }
   | {
       id: ModalTypes.GameWon;
       name?: string;
@@ -19,7 +19,6 @@ export type ModalActionPayload =
     }
   | {
       id: ModalTypes.Confirmation;
-      size?: ModalSize;
       content: React.ReactNode | string;
       icon?: string;
       title: string;
@@ -31,8 +30,10 @@ export type ModalActionPayload =
       dark?: boolean;
     }
   | {
-      id: ModalTypes.ImageModal;
-      url: string;
+      id: ModalTypes.PreviewModal;
+      url?: string;
+      fileId?: string;
+      previewType: 'img' | 'file';
       transparent?: boolean;
     };
 

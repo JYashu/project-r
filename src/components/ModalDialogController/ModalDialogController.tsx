@@ -4,7 +4,7 @@ import Modal, { ModalSize } from '../modal';
 import TestPage from '../testPage';
 import GameWon from '../gameWon';
 import Confirmation from '../confirmationModal';
-import ImageModal from '../imageModal';
+import PreviewModal from '../previewModal';
 
 interface Props {
   closeModal: (payload?: ModalClosePayload) => void;
@@ -14,7 +14,7 @@ interface Props {
 const modalSizes: { [modalId: string]: ModalSize } = {
   [ModalTypes.Test]: 'medium',
   [ModalTypes.GameWon]: 'small',
-  [ModalTypes.ImageModal]: 'medium',
+  [ModalTypes.PreviewModal]: 'medium',
 };
 
 const ModalDialogController = ({ modals, closeModal }: Props) => {
@@ -49,7 +49,7 @@ const ModalDialogController = ({ modals, closeModal }: Props) => {
     >
       {modals.map((modal, index) => (
         <div style={index ? { display: 'none' } : undefined} key={modal.uuid}>
-          {modal.id === ModalTypes.Test && <TestPage delay={100000} />}
+          {modal.id === ModalTypes.Test && <TestPage delay={modal.delay} />}
           {modal.id === ModalTypes.GameWon && (
             <GameWon
               name={modal.name}
@@ -72,8 +72,13 @@ const ModalDialogController = ({ modals, closeModal }: Props) => {
               dark={modal.dark}
             />
           )}
-          {modal.id === ModalTypes.ImageModal && (
-            <ImageModal url={modal.url} handleClose={handleClose} />
+          {modal.id === ModalTypes.PreviewModal && (
+            <PreviewModal
+              url={modal.url}
+              fileId={modal.fileId}
+              previewType={modal.previewType}
+              handleClose={handleClose}
+            />
           )}
         </div>
       ))}

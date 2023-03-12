@@ -134,7 +134,7 @@ const GiphySearchEngine = ({
             errorMessage={errors.query}
             touched={touched.query}
             rounded
-            canSubmit
+            hasButton
           />
         </form>
       </div>

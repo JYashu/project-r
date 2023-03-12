@@ -8,7 +8,7 @@ $base-class: snake;
 
 .#{$base-class} {
   @include center-on-screen;
-  background-image: url('https://public-assets-7588.s3.ap-south-1.amazonaws.com/backgrounds/inclined.webp');
+  background-image: url('https://project-r-assets.s3.us-east-2.amazonaws.com/backgrounds/inclined.webp');
 
   &__content {
     display: flex;
@@ -16,7 +16,7 @@ $base-class: snake;
   }
 
   &__canvas {
-    background-image: url('https://public-assets-7588.s3.ap-south-1.amazonaws.com/backgrounds/inclined.webp');
+    background-image: url('https://project-r-assets.s3.us-east-2.amazonaws.com/backgrounds/inclined.webp');
   }
 
   &__instructions {
@@ -46,6 +46,6 @@ $base-class: snake;
   &__message {
     @include type-style-heading;
     @include center-on-screen;
-    background-image: url('https://public-assets-7588.s3.ap-south-1.amazonaws.com/backgrounds/inclined.webp');
+    background-image: url('https://project-r-assets.s3.us-east-2.amazonaws.com/backgrounds/inclined.webp');
   }
 }

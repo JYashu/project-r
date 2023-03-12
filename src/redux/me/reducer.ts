@@ -2,9 +2,11 @@
 import produce from 'immer';
 import { createReducer } from 'typesafe-actions';
 import config from '../../assets/config.json';
+import { ACCESS_CODE } from '../../utils/consts';
 import {
   clearClipboard,
   copyText,
+  setGlobalAccess,
   setGlobalConfig,
   setGlobalHeader,
   setIsClipboardVisible,
@@ -19,6 +21,12 @@ const initialState: MeState = {
     : config,
   clipboard: { isVisible: false, hideItself: false },
   isContentStatic: true,
+  accessGranted: {
+    devAccess: false,
+    apiAccess: localStorage.getItem('apiAccess')
+      ? localStorage.getItem('apiAccess') === ACCESS_CODE
+      : false,
+  },
 };
 
 export default createReducer<MeState, MeActions>(initialState)
@@ -54,5 +62,10 @@ export default createReducer<MeState, MeActions>(initialState)
   .handleAction(setIsContentStatic, (state, { payload }) =>
     produce(state, (draft) => {
       draft.isContentStatic = payload.isStatic;
+    }),
+  )
+  .handleAction(setGlobalAccess, (state, { payload }) =>
+    produce(state, (draft) => {
+      draft.accessGranted = { ...draft.accessGranted, ...payload };
     }),
   );

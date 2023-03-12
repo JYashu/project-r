@@ -4,6 +4,10 @@ export interface MetaCallback<RequestPayload = any, SuccessPayload = any, Failur
   onFailure?: (payload: FailurePayload) => void;
 }
 
+export interface StyledElement extends Element {
+  style: any;
+}
+
 export interface Todo {
   id: number;
   title: string;
@@ -48,11 +52,16 @@ export enum ActiveSidebarItem {
   Memory,
   Dictionary,
   CBook,
+  SVGConverter,
 }
 
 export interface Config {
   clock: {
     format12h: boolean;
+  };
+  code: {
+    accessCode: string;
+    apiAccessCode: string;
   };
 }
 

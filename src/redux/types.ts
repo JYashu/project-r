@@ -9,6 +9,7 @@ import { SnackbarActions, SnackbarState } from './snackbar/types';
 import { SnakeActions, SnakeState } from './snake/types';
 import { TicTacToeActions, TicTacToeState } from './tictactoe/types';
 import { CBookActions, CBookState } from './cbook/types';
+import { FileReaderActions, FileReaderState } from './fileReader/types';
 
 export interface State {
   me: MeState;
@@ -22,6 +23,7 @@ export interface State {
   mal: MALState;
   dictionary: DictionaryState;
   cbook: CBookState;
+  fileReader: FileReaderState;
 }
 
 export type Actions =
@@ -35,4 +37,5 @@ export type Actions =
   | SnakeActions
   | MALActions
   | DictionaryActions
-  | CBookActions;
+  | CBookActions
+  | FileReaderActions;

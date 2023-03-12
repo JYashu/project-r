@@ -22,6 +22,12 @@
     text-decoration: none;
     transition: 0.1s ease-in-out;
     transition-property: color, background-color;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+
+    &:active {
+      box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset,
+        rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+    }
 
     &[disabled] {
       cursor: not-allowed;
@@ -238,6 +244,11 @@
 @mixin button-colors($transparent: true) {
   background-color: transparent;
   color: map-get($colors, lawyer);
+  box-shadow: none;
+
+  &:active {
+    box-shadow: none;
+  }
 
   &[disabled] {
     background-color: transparent;
@@ -250,8 +261,9 @@
   }
 
   @if $transparent == false {
-    background-color: map-get($colors, victim);
+    background-color: map-get($colors, juror-5);
     color: map-get($colors, lawyer);
+    border: 1px solid map-get($colors, sub-heading);
 
     &:active {
       background-color: map-get($colors, juror-4);

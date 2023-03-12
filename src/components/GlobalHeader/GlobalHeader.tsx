@@ -5,6 +5,7 @@ import Clock from '../clock';
 import scssObj from './_GlobalHeader.scss';
 import ENV from '../../utils/env';
 import { ASSIGNED_PATHS, BETA_ONLY_PATHS } from '../../utils/consts';
+import useGetEnvironment from '../../hooks/useGetEnvironment';
 
 interface Props extends RouteComponentProps {
   title: string;
@@ -25,7 +26,7 @@ const GlobalHeader = withRouter(
     handleSideBarState,
     handleStaticContent,
   }: Props) => {
-    const isProd = ENV.isProduction;
+    const { isProd } = useGetEnvironment();
 
     if (history.location.pathname === '/') {
       setGlobalTitle('Global Header');

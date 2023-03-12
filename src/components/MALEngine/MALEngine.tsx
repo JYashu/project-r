@@ -47,8 +47,8 @@ const MALEngine = ({
           value={values.query}
           errorMessage={errors.query}
           touched={touched.query}
-          canSubmit
-          submitButton={() => (
+          hasButton
+          renderButton={() => (
             <Button
               type="submit"
               disabled={isSubmitDisabled}

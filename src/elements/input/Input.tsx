@@ -14,9 +14,9 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   ref?: any;
   rounded?: boolean;
   isTransparent?: boolean;
-  canSubmit?: boolean;
+  hasButton?: boolean;
   fieldSize?: 'small';
-  submitButton?: () => React.ReactNode;
+  renderButton?: () => React.ReactNode;
 }
 
 const renderBackgroundIcon = (
@@ -52,8 +52,8 @@ const Input: React.SFC<Props> = React.forwardRef((props: Props, ref: any) => {
     onIconClick,
     rounded,
     isTransparent,
-    canSubmit,
-    submitButton,
+    hasButton,
+    renderButton,
     fieldSize,
     ...rest
   } = props;
@@ -81,7 +81,7 @@ const Input: React.SFC<Props> = React.forwardRef((props: Props, ref: any) => {
 
       <input ref={ref} className={cls} {...rest} />
       <div className={`${scssObj.baseClass}__btn`}>
-        {canSubmit && (submitButton ? submitButton() : <Button type="submit">Submit</Button>)}
+        {hasButton && (renderButton ? renderButton() : <Button type="submit">Submit</Button>)}
       </div>
     </>
   );

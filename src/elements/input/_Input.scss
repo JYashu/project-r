@@ -10,7 +10,7 @@ $base-class: input;
   @include type-style-city;
   @include border-radius(3px);
 
-  border: 1px solid map-get($colors, juror-5);
+  border: 0.5px solid map-get($colors, juror-5);
   caret-color: map-get($colors, judge);
   color: map-get($colors, judge);
 
@@ -32,7 +32,7 @@ $base-class: input;
   }
 
   &--solid {
-    background-color: map-get($colors, juror-5);
+    background-color: map-get($colors, victim);
   }
 
   &--transparent {
@@ -62,7 +62,7 @@ $base-class: input;
   }
 
   &:focus {
-    border-color: map-get($colors, lawyer);
+    border-color: map-get($colors, sub-heading);
     outline: none;
   }
 
@@ -93,8 +93,9 @@ $base-class: input;
   &__left-background-icon {
     background-color: transparent;
     border-style: none;
+    flex-basis: 100%;
     min-width: 50%;
-
+    text-align: start;
     i {
       color: map-get($colors, juror-3);
     }

@@ -5,7 +5,7 @@ import { createReducer } from 'typesafe-actions';
 import { ModalState, ModalActions } from './types';
 import { openModal, closeModal, ModalTypes, closeDoubleConfirmation } from './actions';
 
-const initialState = {
+const initialState: ModalState = {
   modals: [],
   prevModal: undefined,
 };

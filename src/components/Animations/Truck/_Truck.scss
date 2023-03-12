@@ -97,7 +97,7 @@ $base-class: truck;
     height: 100px;
     width: 35px;
     bottom: 0;
-    background: url(https://public-assets-7588.s3.ap-south-1.amazonaws.com/truck-kun/tree.svg)
+    background: url(https://project-r-assets.s3.us-east-2.amazonaws.com/truck-kun/tree.svg)
       no-repeat;
     z-index: 10;
   }
@@ -123,7 +123,7 @@ $base-class: truck;
     z-index: 11;
   }
   &__truck {
-    background: url(https://public-assets-7588.s3.ap-south-1.amazonaws.com/truck-kun/truck.svg)
+    background: url(https://project-r-assets.s3.us-east-2.amazonaws.com/truck-kun/truck.svg)
       no-repeat;
     background-size: contain;
     height: 60px;
@@ -135,7 +135,7 @@ $base-class: truck;
     box-shadow: -30px 28px 0 1.5px #fff, -35px 18px 0 1.5px #fff;
   }
   &__wheels {
-    background: url(https://public-assets-7588.s3.ap-south-1.amazonaws.com/truck-kun/wheels.svg)
+    background: url(https://project-r-assets.s3.us-east-2.amazonaws.com/truck-kun/wheels.svg)
       no-repeat;
     height: 15px;
     margin-bottom: 0;

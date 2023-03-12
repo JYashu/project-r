@@ -15,9 +15,6 @@ $base-class: button;
   @include loading-spinner-internal {
     background-color: map-get($colors, lawyer);
   }
-  @include owl {
-    margin-left: 16px;
-  }
 
   &__content-wrapper {
     align-items: center;
@@ -28,7 +25,7 @@ $base-class: button;
     width: 100%;
   }
 
-  &__loader-wrapper {
+  &__loader-wrapper-with-children {
     $loader-height: 30px;
     $loader-width: 90px;
 
@@ -36,6 +33,22 @@ $base-class: button;
     position: absolute;
     right: calc(50% - #{$loader-width / 2});
     top: calc(50% - #{$loader-height / 2});
+    @include transform(scale(0));
+    transition: 0.2s ease-in-out;
+    transition-property: opacity, transform;
+  }
+
+  &__loader-wrapper-without-children {
+    $loader-height: 30px;
+
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
     @include transform(scale(0));
     transition: 0.2s ease-in-out;
     transition-property: opacity, transform;
@@ -65,7 +78,11 @@ $base-class: button;
   }
 
   &--loading {
-    #{$this}__loader-wrapper {
+    #{$this}__loader-wrapper-with-children {
+      opacity: 1;
+      @include transform(scale(1));
+    }
+    #{$this}__loader-wrapper-without-children {
       opacity: 1;
       @include transform(scale(1));
     }

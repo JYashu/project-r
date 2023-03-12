@@ -13,6 +13,7 @@ import {
   togglePreview,
 } from './actions';
 import { CBookState, CBookActions } from './types';
+import { getUniqueId } from '../../utils/helpers';
 
 const initialState: CBookState = {
   loading: false,
@@ -20,10 +21,6 @@ const initialState: CBookState = {
   order: [],
   data: {},
   bundle: {},
-};
-
-const randomId = () => {
-  return Math.random().toString(36).substring(2, 5);
 };
 
 export default createReducer<CBookState, CBookActions>(initialState)
@@ -59,7 +56,7 @@ export default createReducer<CBookState, CBookActions>(initialState)
       const cell: Cell = {
         content: '',
         type: payload.cellType,
-        id: randomId(),
+        id: getUniqueId(draft.order),
         showPreview: payload.cellType === 'code' ? true : undefined,
       };
 

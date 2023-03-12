@@ -82,6 +82,7 @@ const Snackbar = ({ id, duration, message, img, undo, removeSnack, snackType }: 
         <Button
           className={`${scssObj.baseClass}__dismiss`}
           icon="close"
+          transparent
           iconDescription={`Dismiss snack message. ${message}`}
           onClick={handleClick}
         />

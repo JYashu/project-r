@@ -30,11 +30,11 @@ export interface Props
   touched?: boolean;
   ref?: any;
   rounded?: boolean;
-  canSubmit?: boolean;
+  hasButton?: boolean;
   isTransparent?: boolean;
   noBorder?: boolean;
   fieldSize?: 'small';
-  submitButton?: () => React.ReactNode;
+  renderButton?: () => React.ReactNode;
 }
 
 const Field: React.SFC<Props> = React.forwardRef((props: Props, ref: any) => {
@@ -55,9 +55,9 @@ const Field: React.SFC<Props> = React.forwardRef((props: Props, ref: any) => {
     touched,
     value,
     rounded,
-    canSubmit,
+    hasButton,
     isTransparent,
-    submitButton,
+    renderButton,
     noBorder,
     fieldSize,
     ...rest
@@ -96,8 +96,8 @@ const Field: React.SFC<Props> = React.forwardRef((props: Props, ref: any) => {
     value,
     rounded,
     isTransparent,
-    canSubmit,
-    submitButton,
+    hasButton,
+    renderButton,
     fieldSize,
   };
 
