@@ -169,7 +169,7 @@ const SVGConverter = () => {
             <FileField
               className={`${scssObj.baseClass}__file-input`}
               acceptedTypes={['image/svg+xml']}
-              onFileUpload={(file) => onFileUpload(file)}
+              onFileUpload={(file: File | undefined) => onFileUpload(file)}
               placeHolder="Choose a SVG file or Drop it here"
               errorMessage="Upload SVG file"
               restrictURL={isProd}
