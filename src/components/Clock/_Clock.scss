@@ -13,7 +13,7 @@ $base-class: clock;
   height: fit-content;
   overflow-y: hidden;
   overflow-x: scroll;
-  width: 140px;
+  width: 150px;
   scroll-snap-type: x mandatory;
   gap: 12px;
 
@@ -33,7 +33,7 @@ $base-class: clock;
     @include type-style-clock;
     @include border-radius(20px);
 
-    width: 100px;
+    width: 112px;
     color: map-get($colors, header-text);
     padding: 1rem;
     border: 1px solid map-get($colors, header-text);

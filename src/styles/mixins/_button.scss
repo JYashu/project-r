@@ -1,4 +1,4 @@
-@mixin button-style($style: normal) {
+@mixin button-style($style: normal, $is-active: false) {
   $border-radius: 4px;
   $min-width: 80px;
 
@@ -237,6 +237,37 @@
     }
     &:hover::after {
       transform: translateX(15%);
+    }
+  }
+
+  @if $style == minesweeper {
+    & {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: solid 2px map-get($colors, mine-sweeper);
+      border-right: solid 2px map-get($colors, mine-sweeper);
+      border-top: solid 2px #fff;
+      border-left: solid 2px #fff;
+      background-color: map-get($colors, mine-sweeper-bg);
+      color: black;
+
+      @if $is-active {
+        border-bottom: solid 0.5px white;
+        border-right: solid 0.5px white;
+        border-left: solid 2px map-get($colors, mine-sweeper);
+        border-top: solid 2px map-get($colors, mine-sweeper);
+      }
+    }
+
+    &:active,
+    &--active {
+      border-bottom: solid 0.5px white;
+      border-right: solid 0.5px white;
+      border-left: solid 2px map-get($colors, mine-sweeper);
+      border-top: solid 2px map-get($colors, mine-sweeper);
+      background-color: map-get($colors, mine-sweeper-bg);
+      color: black;
     }
   }
 }

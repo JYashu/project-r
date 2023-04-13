@@ -30,10 +30,10 @@ export const drawObject = (
   }
 };
 
-function randomNumber(min: number, max: number) {
+const randomNumber = (min: number, max: number) => {
   const random = Math.random() * max;
   return random - (random % 20);
-}
+};
 
 const getRandomCoords = (width: number, height: number) => {
   return {

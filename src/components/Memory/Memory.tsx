@@ -18,6 +18,8 @@ import useLongPress from '../../hooks/useLongPress';
 import { CardThemeDropdown } from '../../elements/dropdown';
 import LoadingSpinner from '../../elements/loadingSpinner';
 import { ASSETS_BASE_URL } from '../../utils/assets';
+import ToggleBar from '../../elements/toggleBar';
+import { getUniqueId } from '../../utils/helpers';
 
 interface Props {
   isSubmitting?: boolean;
@@ -308,33 +310,12 @@ const App = ({
   const [options, setOptions] = useState<number | null>();
   const [highScore, setHighScore] = useState(0);
   const [name, setName] = useState('');
-  const [optionCount, setOptionCount] = useState(values.options);
   const [customCard, setCustomCard] = useState(false);
   const [chosenTheme, setChosenTheme] = useState(values.theme);
   const [restart, setRestart] = useState(0);
 
-  const [scaleX, setScaleX] = useState(0.9);
-  const [scaleY, setScaleY] = useState(0.9);
-
-  const [x, setX] = useState(0);
-  const [y, setY] = useState(10);
-
   useSetGlobalHeader('Memory Game');
   useActiveSidebarItem(ActiveSidebarItem.Memory);
-
-  const moveFocus = (tx: number, focusType: string) => {
-    if (focusType === 'option') {
-      setX(tx);
-      if (values.options > 0 && optionCount > 5) {
-        setScaleX(0.7);
-        setTimeout(() => setScaleX(0.9), 250);
-      } else setOptionCount(6);
-    } else if (focusType === 'theme') {
-      setY(tx);
-      setScaleY(0.7);
-      setTimeout(() => setScaleY(0.9), 250);
-    }
-  };
 
   return (
     <div className={`${scssObj.baseClass}`}>
@@ -394,76 +375,36 @@ const App = ({
               >
                 <div className={`${scssObj.baseClass}__form-group`}>
                   <div>Choose a difficulty to begin!</div>
-                  <div className={`${scssObj.baseClass}__btns`}>
-                    <div
-                      className={`${scssObj.baseClass}__focus`}
-                      style={{
-                        opacity: `${values.options < 12 ? 0 : 1}`,
-                        left: x,
-                        transform: `scale(${scaleX})`,
-                      }}
-                    />
-                    <div
-                      className={`${scssObj.baseClass}__btn`}
-                      onClick={() => {
-                        moveFocus(0, 'option');
-                        setFieldValue('options', 12);
-                      }}
-                    >
-                      Easy
-                    </div>
-                    <div
-                      className={`${scssObj.baseClass}__btn`}
-                      onClick={() => {
-                        moveFocus(80, 'option');
-                        setFieldValue('options', 18);
-                      }}
-                    >
-                      Medium
-                    </div>
-                    <div
-                      className={`${scssObj.baseClass}__btn`}
-                      onClick={() => {
-                        moveFocus(160, 'option');
-                        setFieldValue('options', 24);
-                      }}
-                    >
-                      Hard
-                    </div>
-                  </div>
+                  <ToggleBar
+                    className={`${scssObj.baseClass}__memory-toggle`}
+                    setFieldValue={(value: number) => setFieldValue('options', value)}
+                    options={[
+                      { label: 'Easy', value: 12, id: getUniqueId() },
+                      { label: 'Medium', value: 18, id: getUniqueId() },
+                      { label: 'Hard', value: 24, id: getUniqueId() },
+                    ]}
+                    value={values.options}
+                    focusValues={[0, 80, 160]}
+                    noFocusCondition={values.options < 12}
+                  />
                   <div>Choose card theme!</div>
-                  <div className={`${scssObj.baseClass}__btns`}>
-                    <div
-                      className={`${scssObj.baseClass}__focus`}
-                      style={{
-                        opacity: 1,
-                        left: y,
-                        transform: `scale(${scaleY})`,
-                        width: '100px',
-                      }}
-                    />
-                    <div
-                      className={`${scssObj.baseClass}__btn`}
-                      onClick={() => {
-                        setFieldValue('theme', CardTheme.Solid);
+                  <ToggleBar
+                    className={`${scssObj.baseClass}__memory-toggle`}
+                    setFieldValue={(value: CardTheme) => {
+                      setFieldValue('theme', value);
+                      if (value === CardTheme.Solid) {
                         setFieldTouched('theme', false);
                         setCustomCard(false);
-                        moveFocus(10, 'theme');
-                      }}
-                    >
-                      Solid
-                    </div>
-                    <div
-                      className={`${scssObj.baseClass}__btn`}
-                      onClick={() => {
-                        setFieldValue('theme', '');
-                        setCustomCard(true);
-                        moveFocus(130, 'theme');
-                      }}
-                    >
-                      Custom
-                    </div>
-                  </div>
+                      } else setCustomCard(true);
+                    }}
+                    options={[
+                      { label: 'Solid', value: CardTheme.Solid, id: getUniqueId() },
+                      { label: 'Custom', value: '', id: getUniqueId() },
+                    ]}
+                    focusValues={[10, 130]}
+                    focusWidth="100px"
+                    value={values.theme}
+                  />
                   <div
                     style={{
                       opacity: `${customCard ? '1' : '0'}`,

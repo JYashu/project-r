@@ -1,0 +1,43 @@
+@import '../../styles/lib';
+
+$base-class: toggle-bar;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  height: fit-content;
+
+  &__btn {
+    @include type-style-cali;
+
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    cursor: pointer;
+    color: map-get($colors, button-dark);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 40px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  &__focus {
+    position: absolute;
+    @include transition(left 200ms ease-in-out 50ms);
+  }
+
+  &__native {
+    @include box-level-3;
+    @include border-radius(20px);
+  }
+}

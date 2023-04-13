@@ -11,9 +11,12 @@ $base-class: button;
 
   @include button-icon;
   @include button-size(medium);
-  @include button-style;
   @include loading-spinner-internal {
     background-color: map-get($colors, lawyer);
+  }
+
+  &--normal {
+    @include button-style;
   }
 
   &__content-wrapper {
@@ -115,6 +118,14 @@ $base-class: button;
 
   &--minimal {
     @include button-style($style: minimal);
+  }
+
+  &--minesweeper {
+    @include button-style($style: minesweeper);
+  }
+
+  &--minesweeper--active {
+    @include button-style($style: minesweeper, $is-active: true);
   }
 
   &--blur {

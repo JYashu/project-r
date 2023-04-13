@@ -120,40 +120,8 @@ $base-class: memory;
     text-align: center;
   }
 
-  &__btns {
-    position: relative;
-    display: flex;
-    flex-direction: row;
+  &__memory-toggle {
     margin: 1rem;
-  }
-
-  &__btn {
-    @include type-style-cali;
-
-    color: map-get($colors, button-dark);
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 40px;
-    margin: 0 auto;
-    position: relative;
-    width: 80px;
-    height: 40px;
-  }
-
-  &__focus {
-    @include box-level-3;
-    @include border-radius(20px);
-
-    position: absolute;
-    width: 80px;
-    height: 40px;
-    background-color: map-get($colors, nav-focus);
-    z-index: -100;
-    @include transition(left 200ms ease-in-out 50ms);
   }
 
   &__name-field-title {
