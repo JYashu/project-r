@@ -14,7 +14,7 @@
   transition: 0.4s;
   transform: translate(0);
   overflow: hidden;
-  box-shadow: 0 4px 0 0 map-get($colors, lawyer);
+  box-shadow: 0 4px 0 0 map-get($colors, eden);
 
   &::before {
     @include border-radius(50%);

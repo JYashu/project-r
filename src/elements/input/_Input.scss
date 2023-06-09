@@ -62,7 +62,7 @@ $base-class: input;
   }
 
   &:focus {
-    border-color: map-get($colors, sub-heading);
+    border-color: map-get($colors, eden);
     outline: none;
   }
 

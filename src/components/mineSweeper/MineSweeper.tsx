@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import Button from '../../elements/button';
 import ToggleBar from '../../elements/toggleBar';
+import useActiveSidebarItem from '../../hooks/useActiveSidebarItem';
+import useSetGlobalHeader from '../../hooks/useSetGlobalHeader';
+import { ActiveSidebarItem } from '../../types';
 import { ASSETS_BASE_URL } from '../../utils/assets';
 import { getUniqueId } from '../../utils/helpers';
 import { createBoard, revealed } from '../../utils/mineSweeperUtils';
@@ -21,6 +24,9 @@ const MineSweeper = () => {
   const [inPlay, setInPlay] = useState(true);
   const [gameStarted, setGameStarted] = useState(false);
   const [primaryButton, setPrimaryButton] = useState('R');
+
+  useSetGlobalHeader('MineSweeper');
+  useActiveSidebarItem(ActiveSidebarItem.MineSweeper);
 
   useEffect(() => {
     setConfig(CONFIG[difficulty]);

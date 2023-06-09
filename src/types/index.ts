@@ -53,6 +53,7 @@ export enum ActiveSidebarItem {
   Dictionary,
   CBook,
   SVGConverter,
+  MineSweeper,
 }
 
 export interface Config {

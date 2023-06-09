@@ -12,7 +12,7 @@ $base-class: textarea;
 
   background-color: map-get($colors, juror-5);
   border: 1px solid map-get($colors, juror-5);
-  caret-color: map-get($colors, lawyer);
+  caret-color: map-get($colors, eden);
   outline: none;
   padding: 6px 8px;
   resize: none;
@@ -41,7 +41,7 @@ $base-class: textarea;
   }
 
   &:focus {
-    border-color: map-get($colors, lawyer);
+    border-color: map-get($colors, eden);
   }
 
   &::placeholder {

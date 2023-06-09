@@ -8,7 +8,7 @@ $base-class: loading-spinner;
 
 .#{$base-class} {
   $this: &;
-  $color: map-get($colors, lawyer);
+  $color: map-get($colors, eden);
 
   display: inline-block;
   text-align: center;

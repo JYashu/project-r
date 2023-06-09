@@ -12,7 +12,7 @@ $base-class: button;
   @include button-icon;
   @include button-size(medium);
   @include loading-spinner-internal {
-    background-color: map-get($colors, lawyer);
+    background-color: map-get($colors, eden);
   }
 
   &--normal {

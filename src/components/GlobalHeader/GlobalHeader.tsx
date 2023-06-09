@@ -5,6 +5,7 @@ import Clock from '../clock';
 import scssObj from './_GlobalHeader.scss';
 import ENV from '../../utils/env';
 import { ASSIGNED_PATHS, BETA_ONLY_PATHS } from '../../utils/consts';
+import Link from '../../elements/link';
 import useGetEnvironment from '../../hooks/useGetEnvironment';
 
 interface Props extends RouteComponentProps {
@@ -72,6 +73,9 @@ const GlobalHeader = withRouter(
         {history.location.pathname === '/snake' && (
           <div className={`${scssObj.baseClass}__score`}>Score: {snakeScore}</div>
         )}
+        <Link isNative target="new" to="https://github.com/jyashu">
+          <div className={`${scssObj.baseClass}__github`} />
+        </Link>
         <div className={`${scssObj.baseClass}__clock`}>
           <Clock />
         </div>

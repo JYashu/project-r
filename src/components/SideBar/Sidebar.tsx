@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import { ProSidebar, SidebarContent, Menu, MenuItem, SidebarFooter } from 'react-pro-sidebar';
 import scssObj from './_Sidebar.scss';
@@ -10,6 +9,7 @@ import ENV from '../../utils/env';
 import { ASSIGNED_PATHS, BETA_ONLY_PAGES, BETA_ONLY_PATHS, Pages } from '../../utils/consts';
 import PermissionsManager from '../../elements/permissionsManager';
 import useGetEnvironment from '../../hooks/useGetEnvironment';
+import { getUniqueId } from '../../utils/helpers';
 
 interface Props extends RouteComponentProps {
   config: Config;
@@ -64,11 +64,15 @@ const Sidebar = withRouter(
         }}
       >
         <SidebarContent>
-          <Menu key={uuidv4()} className={`${scssObj.baseClass}__footer_menu`} iconShape="square">
+          <Menu
+            key={getUniqueId()}
+            className={`${scssObj.baseClass}__footer_menu`}
+            iconShape="square"
+          >
             <PermissionsManager isHiddenForProd={BETA_ONLY_PAGES.includes(Pages.GIPHY_ENGINE)}>
               <MenuItem
                 className={itemClassName}
-                key={uuidv4()}
+                key={getUniqueId()}
                 active={activeSidebarItem === ActiveSidebarItem.GiphyEngine}
                 icon={<Icon removeOutline size="medium" icon="gif" />}
               >
@@ -79,7 +83,7 @@ const Sidebar = withRouter(
             <PermissionsManager isHiddenForProd={BETA_ONLY_PAGES.includes(Pages.NPM_ENGINE)}>
               <MenuItem
                 className={itemClassName}
-                key={uuidv4()}
+                key={getUniqueId()}
                 active={activeSidebarItem === ActiveSidebarItem.NPMEngine}
                 icon={<Icon removeOutline size="small" icon="search" />}
               >
@@ -90,7 +94,7 @@ const Sidebar = withRouter(
             <PermissionsManager isHiddenForProd={BETA_ONLY_PAGES.includes(Pages.TODO)}>
               <MenuItem
                 className={itemClassName}
-                key={uuidv4()}
+                key={getUniqueId()}
                 active={activeSidebarItem === ActiveSidebarItem.Todo}
                 icon={<Icon removeOutline size="small" icon="playlist_add_check" />}
               >
@@ -100,7 +104,7 @@ const Sidebar = withRouter(
             </PermissionsManager>
             <MenuItem
               className={itemClassName}
-              key={uuidv4()}
+              key={getUniqueId()}
               active={activeSidebarItem === ActiveSidebarItem.SpinnerPage}
               icon={<Icon removeOutline size="small" icon="restart_alt" />}
             >
@@ -109,7 +113,7 @@ const Sidebar = withRouter(
             </MenuItem>
             <MenuItem
               className={itemClassName}
-              key={uuidv4()}
+              key={getUniqueId()}
               active={activeSidebarItem === ActiveSidebarItem.CBook}
               icon={<Icon removeOutline size="small" icon="developer_mode" />}
             >
@@ -118,7 +122,7 @@ const Sidebar = withRouter(
             </MenuItem>
             <MenuItem
               className={itemClassName}
-              key={uuidv4()}
+              key={getUniqueId()}
               active={activeSidebarItem === ActiveSidebarItem.SVGConverter}
               icon={<Icon removeOutline size="small" icon="style" />}
             >
@@ -127,10 +131,14 @@ const Sidebar = withRouter(
             </MenuItem>
           </Menu>
           <SidebarFooter className={`${scssObj.baseClass}__games`}>
-            <Menu key={uuidv4()} className={`${scssObj.baseClass}__games-menu`} iconShape="square">
+            <Menu
+              key={getUniqueId()}
+              className={`${scssObj.baseClass}__games-menu`}
+              iconShape="square"
+            >
               <MenuItem
                 className={itemClassName}
-                key={uuidv4()}
+                key={getUniqueId()}
                 active={activeSidebarItem === ActiveSidebarItem.TicTacToe}
                 icon={<Icon removeOutline size="small" icon="align_vertical_center" />}
               >
@@ -139,7 +147,7 @@ const Sidebar = withRouter(
               </MenuItem>
               <MenuItem
                 className={itemClassName}
-                key={uuidv4()}
+                key={getUniqueId()}
                 active={activeSidebarItem === ActiveSidebarItem.Snake}
                 icon={<Icon removeOutline size="small" icon="gesture" />}
               >
@@ -148,23 +156,36 @@ const Sidebar = withRouter(
               </MenuItem>
               <MenuItem
                 className={itemClassName}
-                key={uuidv4()}
+                key={getUniqueId()}
                 active={activeSidebarItem === ActiveSidebarItem.Memory}
                 icon={<Icon removeOutline size="small" icon="memory" />}
               >
                 Memory
                 <Link tabIndex={-1} to="/memory" />
               </MenuItem>
+              <MenuItem
+                className={itemClassName}
+                key={getUniqueId()}
+                active={activeSidebarItem === ActiveSidebarItem.MineSweeper}
+                icon={<Icon removeOutline size="small" icon="golf_course" />}
+              >
+                MineSweeper
+                <Link tabIndex={-1} to="/mine-sweeper" />
+              </MenuItem>
             </Menu>
           </SidebarFooter>
           <SidebarFooter className={`${scssObj.baseClass}__games`} />
         </SidebarContent>
         <SidebarFooter className={`${scssObj.baseClass}__footer`}>
-          <Menu key={uuidv4()} className={`${scssObj.baseClass}__footer_menu`} iconShape="square">
+          <Menu
+            key={getUniqueId()}
+            className={`${scssObj.baseClass}__footer_menu`}
+            iconShape="square"
+          >
             <PermissionsManager isHiddenForProd={BETA_ONLY_PAGES.includes(Pages.TEST)}>
               <MenuItem
                 className={itemClassName}
-                key={uuidv4()}
+                key={getUniqueId()}
                 active={activeSidebarItem === ActiveSidebarItem.Test}
                 icon={<Icon removeOutline size="small" icon="fact_check" />}
               >
@@ -175,7 +196,7 @@ const Sidebar = withRouter(
             <MenuItem
               className={itemClassName}
               onClick={showClipboard}
-              key={uuidv4()}
+              key={getUniqueId()}
               active={activeSidebarItem === ActiveSidebarItem.Clipboard}
               icon={<Icon removeOutline size="small" icon="content_paste" />}
             >
@@ -184,7 +205,7 @@ const Sidebar = withRouter(
             <MenuItem
               className={itemClassName}
               onClick={openDictionary}
-              key={uuidv4()}
+              key={getUniqueId()}
               active={activeSidebarItem === ActiveSidebarItem.Dictionary}
               icon={<Icon removeOutline size="small" icon="book" />}
             >
@@ -192,7 +213,7 @@ const Sidebar = withRouter(
             </MenuItem>
             <MenuItem
               className={itemClassName}
-              key={uuidv4()}
+              key={getUniqueId()}
               active={activeSidebarItem === ActiveSidebarItem.Settings}
               icon={<Icon removeOutline size="small" icon="settings" />}
             >
@@ -200,14 +221,14 @@ const Sidebar = withRouter(
               <Link tabIndex={-1} to="/settings" />
             </MenuItem>
             <PermissionsManager isHiddenForProd={BETA_ONLY_PAGES.includes(Pages.LOGIN)}>
-              <MenuItem key={uuidv4()} icon={<Icon removeOutline size="small" icon="login" />}>
+              <MenuItem key={getUniqueId()} icon={<Icon removeOutline size="small" icon="login" />}>
                 Login {BETA_ONLY_PAGES.includes(Pages.LOGIN) ? '(Beta Only)' : ''}
                 <Link tabIndex={-1} to="/login" />
               </MenuItem>
             </PermissionsManager>
             <PermissionsManager isLogout>
               <MenuItem
-                key={uuidv4()}
+                key={getUniqueId()}
                 onClick={() => logOut()}
                 icon={<Icon removeOutline size="small" icon="logout" />}
               >

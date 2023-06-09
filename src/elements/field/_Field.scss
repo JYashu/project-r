@@ -9,7 +9,7 @@ $base-class: field;
 .#{$base-class} {
   @include border-radius(3px);
 
-  color: map-get($colors, lawyer);
+  color: map-get($colors, eden);
   display: flex;
   flex-direction: column;
   margin-bottom: 12px;

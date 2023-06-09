@@ -274,7 +274,7 @@
 
 @mixin button-colors($transparent: true) {
   background-color: transparent;
-  color: map-get($colors, lawyer);
+  color: map-get($colors, eden);
   box-shadow: none;
 
   &:active {
@@ -292,9 +292,8 @@
   }
 
   @if $transparent == false {
-    background-color: map-get($colors, juror-5);
-    color: map-get($colors, lawyer);
-    border: 1px solid map-get($colors, sub-heading);
+    background-color: map-get($colors, victim);
+    color: map-get($colors, eden);
 
     &:active {
       background-color: map-get($colors, juror-4);

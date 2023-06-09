@@ -21,9 +21,9 @@ $sidebar-collapsed-width: $collapsed-sidebar-width;
   height: calc(100vh - 64px);
   overflow: hidden;
   display: block;
-  // padding-bottom: 64px; /* height of your footer */
+  -ms-overflow-style: none; /*Hides scrollbar for IE and Edge */
+  scrollbar-width: none; /*Hides scrollbar for Firefox */
   @include hidden-for-printing;
-  // opacity: 0.95;
   &.collapsed {
     opacity: 1;
     .pro-menu {
@@ -141,6 +141,10 @@ $sidebar-collapsed-width: $collapsed-sidebar-width;
       display: none;
     }
   }
+}
+
+.pro-sidebar::-webkit-scrollbar {
+  display: none;
 }
 
 .pro-sidebar {
