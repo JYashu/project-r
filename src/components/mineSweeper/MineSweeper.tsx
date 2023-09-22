@@ -23,7 +23,7 @@ const MineSweeper = () => {
   const [mineLocation, setMineLocation] = useState<number[][]>();
   const [inPlay, setInPlay] = useState(true);
   const [gameStarted, setGameStarted] = useState(false);
-  const [primaryButton, setPrimaryButton] = useState('R');
+  const [primaryButton, setPrimaryButton] = useState('smile');
 
   useSetGlobalHeader('MineSweeper');
   useActiveSidebarItem(ActiveSidebarItem.MineSweeper);
@@ -55,10 +55,16 @@ const MineSweeper = () => {
     const img = new Image();
     img.src = `${ASSETS_BASE_URL}/minesweeper/flag.png`;
     img.onload = () => {};
+    img.src = `${ASSETS_BASE_URL}/minesweeper/smile.png`;
+    img.onload = () => {};
+    img.src = `${ASSETS_BASE_URL}/minesweeper/happy.png`;
+    img.onload = () => {};
+    img.src = `${ASSETS_BASE_URL}/minesweeper/dead.png`;
+    img.onload = () => {};
   }, []);
 
   const initializeGame = () => {
-    setPrimaryButton('R');
+    setPrimaryButton('smile');
     const board = [];
     // Create empty board
     for (let row = 0; row < config.boardRows; row += 1) {
@@ -97,7 +103,7 @@ const MineSweeper = () => {
       }
       setGrid(copyGrid);
       setInPlay(false);
-      setPrimaryButton('W');
+      setPrimaryButton('happy');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nonMineCount]);
@@ -112,7 +118,7 @@ const MineSweeper = () => {
         copyGrid[mineLocation[i][0]][mineLocation[i][1]].revealed = true;
       }
       setGrid(copyGrid);
-      setPrimaryButton('L');
+      setPrimaryButton('dead');
     } else {
       const revealedBoard = revealed(copyGrid, x, y, nonMineCount);
       setGrid(revealedBoard.newArr);
@@ -233,7 +239,12 @@ const MineSweeper = () => {
               buttonStyle="minesweeper"
               onClick={initializeGame}
             >
-              {primaryButton}
+              <img
+                height={22}
+                width={22}
+                alt={primaryButton}
+                src={`${ASSETS_BASE_URL}/minesweeper/${primaryButton}.png`}
+              />
             </Button>
           </div>
         </div>

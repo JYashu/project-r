@@ -34,19 +34,19 @@ export const computerPlay = (board: any, mode: AIMode) => {
   if (emptySquares.length < 2) {
     return board;
   }
-  let computerMove;
+  let computerMove = null;
   if (mode === AIMode.Easy) {
     computerMove = isPlayerWinning(board, 'O');
-    if (!computerMove) {
+    if (computerMove === null) {
       const rand = Math.floor(Math.random() * emptySquares.length);
       computerMove = emptySquares[rand];
     }
   } else {
     computerMove = isPlayerWinning(board, 'O');
-    if (!computerMove) {
+    if (computerMove === null) {
       computerMove = isPlayerWinning(board, 'X');
     }
-    if (!computerMove) {
+    if (computerMove === null) {
       const rand = Math.floor(Math.random() * emptySquares.length);
       computerMove = emptySquares[rand];
     }
