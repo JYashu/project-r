@@ -20,6 +20,7 @@ import LoadingSpinner from '../../elements/loadingSpinner';
 import { ASSETS_BASE_URL } from '../../utils/assets';
 import ToggleBar from '../../elements/toggleBar';
 import { getUniqueId } from '../../utils/helpers';
+import { useHistory } from 'react-router-dom';
 
 interface Props {
   isSubmitting?: boolean;
@@ -317,6 +318,24 @@ const App = ({
   useSetGlobalHeader('Memory Game');
   useActiveSidebarItem(ActiveSidebarItem.Memory);
 
+  const history = useHistory();
+
+  useEffect(() => {
+    const handlePopstate = (e) => {
+      if (e.type === 'popstate') {
+        if (options) {
+          setOptions(null);
+        }
+      }
+    };
+
+    window.addEventListener('popstate', handlePopstate);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopstate);
+    };
+  }, [options]);
+
   return (
     <div className={`${scssObj.baseClass}`}>
       <div className={`${scssObj.baseClass}__container`}>
@@ -363,13 +382,14 @@ const App = ({
                     const cardTypes = Object.keys(IMAGES).filter((card) => card !== 'random');
 
                     const theme =
-                      values.theme === CardTheme.Random
+                      values.theme === CardTheme.Random || values.theme === 'custom'
                         ? (cardTypes[Math.floor(Math.random() * cardTypes.length)] as CardTheme)
                         : values.theme;
 
                     setChosenTheme(theme);
                     setName(values.name);
                     setOptions(values.options);
+                    history.push('/memory');
                   }
                 }}
               >
@@ -393,17 +413,17 @@ const App = ({
                     setFieldValue={(value: CardTheme) => {
                       setFieldValue('theme', value);
                       if (value === CardTheme.Solid) {
-                        setFieldTouched('theme', false);
                         setCustomCard(false);
                       } else setCustomCard(true);
+                      setFieldTouched('theme', false);
                     }}
                     options={[
                       { label: 'Solid', value: CardTheme.Solid, id: getUniqueId() },
-                      { label: 'Custom', value: '', id: getUniqueId() },
+                      { label: 'Custom', value: 'custom', id: getUniqueId() },
                     ]}
                     focusValues={[10, 130]}
                     focusWidth="100px"
-                    value={values.theme}
+                    value={values.theme === CardTheme.Solid ? values.theme : 'custom'}
                   />
                   <div
                     style={{

@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import scssObj from './_ToggleBar.scss';
@@ -75,9 +74,7 @@ const ToggleBar = ({
         return (
           <div
             className={`${scssObj.baseClass}__btn`}
-            onClick={() => {
-              setFieldValue(option.value);
-            }}
+            onClick={() => setFieldValue(option.value)}
             style={{
               width: focusWidth || '80px',
               height: focusHeight || '40px',
