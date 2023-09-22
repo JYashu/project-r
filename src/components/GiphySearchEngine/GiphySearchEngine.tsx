@@ -104,7 +104,7 @@ const GiphySearchEngine = ({
   handleSubmit,
 }: Props) => {
   useActiveSidebarItem(ActiveSidebarItem.GiphyEngine);
-  useSetGlobalHeader('Giphy Engine');
+  useSetGlobalHeader(Pages.GIPHY_ENGINE);
 
   return (
     <div className={`${scssObj.baseClass}`}>

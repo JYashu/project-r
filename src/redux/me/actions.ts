@@ -1,10 +1,11 @@
 import { createAction } from 'typesafe-actions';
 import { Config } from '../../types';
+import { Pages } from '../../utils/consts';
 import createAsyncActionWithMeta from '../utils/createAsyncActionWithMeta';
 
 export const setGlobalHeader = createAction(
   'SET_GLOBAL_HEADER',
-  (action) => (payload: { title: string }) => action(payload),
+  (action) => (payload: { title: Pages }) => action(payload),
 );
 
 export const setGlobalConfig = createAction(

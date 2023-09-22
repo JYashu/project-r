@@ -37,6 +37,7 @@ $base-class: global-header;
   }
 
   &__title {
+    color: map-get($colors, header-text) !important;
     @include type-style-heading;
   }
 

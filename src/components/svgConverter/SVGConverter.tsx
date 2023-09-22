@@ -12,10 +12,11 @@ import { ActiveSidebarItem, StyledElement } from '../../types';
 import scssObj from './_SVGConverter.scss';
 import useGetEnvironment from '../../hooks/useGetEnvironment';
 import useSetGlobalHeader from '../../hooks/useSetGlobalHeader';
+import { Pages } from '../../utils/consts';
 
 const SVGConverter = () => {
   useActiveSidebarItem(ActiveSidebarItem.SVGConverter);
-  useSetGlobalHeader('SVG To PNG Convertor');
+  useSetGlobalHeader(Pages.SVG_CONVERTER);
   const [height, setHeight] = useState<number>();
   const [width, setWidth] = useState<number>();
   const [svg, setSvg] = useState<string>('');

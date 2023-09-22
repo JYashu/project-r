@@ -11,6 +11,7 @@ import useActiveSidebarItem from '../../hooks/useActiveSidebarItem';
 import { ActiveSidebarItem, AIMode } from '../../types';
 import RadioButton from '../../elements/radioButton/RadioButton';
 import useOutsideClick from '../../hooks/useOutsideClick';
+import { Pages } from '../../utils/consts';
 
 interface Props {
   gameState: TicTacToeState;
@@ -224,7 +225,7 @@ const TicTacToe = ({
   const { board, history, vsAI, aiMode, xIsNext, open } = gameState;
   const currentHistory = history;
   const [showDifficulty, setShowDifficulty] = useState(false);
-  useSetGlobalHeader('Tic Tac Toe');
+  useSetGlobalHeader(Pages.TIC_TAC_TOE);
 
   useActiveSidebarItem(ActiveSidebarItem.TicTacToe);
 

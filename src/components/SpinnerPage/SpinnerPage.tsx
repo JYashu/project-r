@@ -5,6 +5,7 @@ import { ActiveSidebarItem, SpinnerType } from '../../types';
 import Button from '../../elements/button';
 import LoadingSpinner from '../../elements/loadingSpinner';
 import scssObj from './_SpinnerPage.scss';
+import { Pages } from '../../utils/consts';
 
 interface Props {
   copyText: (text: string) => void;
@@ -43,7 +44,7 @@ const smallSpinners = [
 
 const SpinnerPage = ({ copyText }: Props) => {
   useActiveSidebarItem(ActiveSidebarItem.SpinnerPage);
-  useSetGlobalHeader('Loading Spinners');
+  useSetGlobalHeader(Pages.LOADING_SPINNERS);
 
   return (
     <div className={`${scssObj.baseClass}`}>

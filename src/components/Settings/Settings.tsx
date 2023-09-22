@@ -8,7 +8,7 @@ import Button from '../../elements/button';
 import LoadingSpinner from '../../elements/loadingSpinner';
 import scssObj from './_Settings.scss';
 import Field from '../../elements/field';
-import { ACCESS_CODE, ACCESS_FIELD_TOKEN, ACCESS_TOKEN } from '../../utils/consts';
+import { ACCESS_CODE, ACCESS_FIELD_TOKEN, ACCESS_TOKEN, Pages } from '../../utils/consts';
 import { encryptString, decryptString } from '../../utils/encrypt';
 
 interface Props {
@@ -27,7 +27,7 @@ const Settings = ({ config, handleSettingsChange, handleAccessCode }: Props) => 
   useTimeout(() => setLoading(false), 1800);
 
   useActiveSidebarItem(ActiveSidebarItem.Settings);
-  useSetGlobalHeader('Settings');
+  useSetGlobalHeader(Pages.SETTINGS);
 
   const updateConfig = (newConfig: Config) => {
     handleSettingsChange(newConfig);

@@ -6,6 +6,7 @@ import useActiveSidebarItem from '../../hooks/useActiveSidebarItem';
 import useSetGlobalHeader from '../../hooks/useSetGlobalHeader';
 import { ActiveSidebarItem } from '../../types';
 import { ASSETS_BASE_URL } from '../../utils/assets';
+import { Pages } from '../../utils/consts';
 import { getUniqueId } from '../../utils/helpers';
 import { createBoard, revealed } from '../../utils/mineSweeperUtils';
 import Cell from './Cell';
@@ -25,7 +26,7 @@ const MineSweeper = () => {
   const [gameStarted, setGameStarted] = useState(false);
   const [primaryButton, setPrimaryButton] = useState('smile');
 
-  useSetGlobalHeader('MineSweeper');
+  useSetGlobalHeader(Pages.MINE_SWEEPER);
   useActiveSidebarItem(ActiveSidebarItem.MineSweeper);
 
   useEffect(() => {

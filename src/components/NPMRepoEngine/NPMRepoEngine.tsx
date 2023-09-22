@@ -43,7 +43,7 @@ const NPMRepoEngine = ({
 
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  useSetGlobalHeader('NPM Engine');
+  useSetGlobalHeader(Pages.NPM_ENGINE);
   useActiveSidebarItem(ActiveSidebarItem.NPMEngine);
 
   useEffect(() => {

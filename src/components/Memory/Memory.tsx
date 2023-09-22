@@ -21,6 +21,7 @@ import { ASSETS_BASE_URL } from '../../utils/assets';
 import ToggleBar from '../../elements/toggleBar';
 import { getUniqueId } from '../../utils/helpers';
 import { useHistory } from 'react-router-dom';
+import { Pages } from '../../utils/consts';
 
 interface Props {
   isSubmitting?: boolean;
@@ -315,7 +316,7 @@ const App = ({
   const [chosenTheme, setChosenTheme] = useState(values.theme);
   const [restart, setRestart] = useState(0);
 
-  useSetGlobalHeader('Memory Game');
+  useSetGlobalHeader(Pages.MEMORY);
   useActiveSidebarItem(ActiveSidebarItem.Memory);
 
   const history = useHistory();
