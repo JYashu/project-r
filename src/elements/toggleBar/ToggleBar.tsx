@@ -49,6 +49,7 @@ const ToggleBar = ({
       moveFocus(index);
       setCurrentValue(value);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
 
   const cls = classNames(`${scssObj.baseClass}__focus`, {

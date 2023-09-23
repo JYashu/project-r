@@ -11,11 +11,7 @@ const getCardTypeLabel = (card: string) => {
 };
 
 const mapCardTypesToOptions = () => {
-  const cardTypes = Object.keys(IMAGES).filter((card) => card !== 'solid');
-  const getRandomCardTheme = () => {
-    const cardTypesWithoutRandom = cardTypes.filter((card) => card !== 'random');
-    return cardTypesWithoutRandom[Math.floor(Math.random() * cardTypesWithoutRandom.length)];
-  };
+  const cardTypes = Object.keys(IMAGES).filter((card) => card !== 'solid' && card !== 'custom');
   return cardTypes.map((card) => {
     return {
       label: getCardTypeLabel(card),

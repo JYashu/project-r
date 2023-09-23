@@ -8,6 +8,7 @@ export enum CardTheme {
 }
 
 export const IMAGES = {
+  custom: ['placeholder'],
   [CardTheme.Random]: ['placeholder'],
   [CardTheme.Solid]: [
     '#ecdb54',

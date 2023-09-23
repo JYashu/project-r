@@ -1,10 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable react-hooks/exhaustive-deps */
 import classNames from 'classnames';
 import React, { useState, useEffect } from 'react';
 import { useSpring, animated as a } from 'react-spring';
+import { useHistory } from 'react-router-dom';
 import useActiveSidebarItem from '../../hooks/useActiveSidebarItem';
 import useSetGlobalHeader from '../../hooks/useSetGlobalHeader';
 import { ActiveSidebarItem, ClickActionType } from '../../types';
@@ -20,7 +21,6 @@ import LoadingSpinner from '../../elements/loadingSpinner';
 import { ASSETS_BASE_URL } from '../../utils/assets';
 import ToggleBar from '../../elements/toggleBar';
 import { getUniqueId } from '../../utils/helpers';
-import { useHistory } from 'react-router-dom';
 import { Pages } from '../../utils/consts';
 
 interface Props {
@@ -41,7 +41,7 @@ interface GameProps {
   name: string;
   options: number;
   setOptions: React.Dispatch<React.SetStateAction<number | null | undefined>>;
-  theme: CardTheme;
+  theme: CardTheme | 'custom';
   highScore: number;
   setHighScore: React.Dispatch<React.SetStateAction<number>>;
   openMessage: ({ name, score, handleReplay, handleReset }: MessageProps) => void;
@@ -53,7 +53,7 @@ interface CardProps {
   id: any;
   image: any;
   game: any;
-  theme: CardTheme;
+  theme: CardTheme | 'custom';
   flippedCount: number;
   setFlippedCount: React.Dispatch<React.SetStateAction<number>>;
   flippedIndexes: any;
@@ -322,7 +322,7 @@ const App = ({
   const history = useHistory();
 
   useEffect(() => {
-    const handlePopstate = (e) => {
+    const handlePopstate = (e: any) => {
       if (e.type === 'popstate') {
         if (options) {
           setOptions(null);
@@ -337,6 +337,17 @@ const App = ({
     };
   }, [options]);
 
+  const updateChosenTheme = () => {
+    const cardTypes = Object.keys(IMAGES).filter((card) => card !== 'random' && card !== 'custom');
+
+    const theme =
+      values.theme === CardTheme.Random || values.theme === 'custom'
+        ? (cardTypes[Math.floor(Math.random() * cardTypes.length)] as CardTheme)
+        : values.theme;
+
+    setChosenTheme(theme);
+  };
+
   return (
     <div className={`${scssObj.baseClass}`}>
       <div className={`${scssObj.baseClass}__container`}>
@@ -346,6 +357,7 @@ const App = ({
               buttonStyle="game"
               handWriting
               onClick={() => {
+                updateChosenTheme();
                 setRestart((prevValue) => prevValue + 1);
               }}
             >
@@ -380,14 +392,7 @@ const App = ({
                   e.preventDefault();
                   setFieldTouched('theme', true);
                   if (isValid) {
-                    const cardTypes = Object.keys(IMAGES).filter((card) => card !== 'random');
-
-                    const theme =
-                      values.theme === CardTheme.Random || values.theme === 'custom'
-                        ? (cardTypes[Math.floor(Math.random() * cardTypes.length)] as CardTheme)
-                        : values.theme;
-
-                    setChosenTheme(theme);
+                    updateChosenTheme();
                     setName(values.name);
                     setOptions(values.options);
                     history.push('/memory');
@@ -424,7 +429,7 @@ const App = ({
                     ]}
                     focusValues={[10, 130]}
                     focusWidth="100px"
-                    value={values.theme === CardTheme.Solid ? values.theme : 'custom'}
+                    value={values.theme === CardTheme.Solid ? CardTheme.Solid : 'custom'}
                   />
                   <div
                     style={{
