@@ -7,7 +7,7 @@ import useSetGlobalHeader from '../../hooks/useSetGlobalHeader';
 import { ActiveSidebarItem } from '../../types';
 import { ASSETS_BASE_URL } from '../../utils/assets';
 import { Pages } from '../../utils/consts';
-import { getUniqueId } from '../../utils/helpers';
+import { distance, getUniqueId } from '../../utils/helpers';
 import { createBoard, revealed } from '../../utils/mineSweeperUtils';
 import Cell from './Cell';
 import { CONFIG } from './const';
@@ -109,20 +109,66 @@ const MineSweeper = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nonMineCount]);
 
-  const handleRevealCell = (x: number, y: number, newGrid?: CellValues[][]) => {
-    const copyGrid = JSON.parse(JSON.stringify(newGrid));
-    if (copyGrid[x][y].value === -1 && mineLocation) {
-      setInPlay(false);
-      copyGrid[x][y].clickedMine = true;
-      // alert('you clicked mine');
-      for (let i = 0; i < mineLocation.length; i += 1) {
-        copyGrid[mineLocation[i][0]][mineLocation[i][1]].revealed = true;
+  const sortMineLocations = (x: number, y: number) => {
+    setMineLocation(
+      (prev) => prev && prev.sort((a, b) => distance(a, [x, y]) - distance(b, [x, y])),
+    );
+  };
+
+  const revealAllMines = (x: number, y: number, newGrid: CellValues[][]) => {
+    if (!mineLocation) return;
+    const copyGrid: CellValues[][] = JSON.parse(JSON.stringify(newGrid));
+    copyGrid[x][y].clickedMine = true;
+    copyGrid[x][y].revealed = true;
+    sortMineLocations(x, y);
+    let i = 0;
+    const revealMines = setInterval(() => {
+      if (i >= mineLocation.length - 2) {
+        clearInterval(revealMines);
       }
-      setGrid(copyGrid);
+      copyGrid[mineLocation[i][0]][mineLocation[i][1]].revealed = true;
+
+      if (i <= mineLocation.length - 2)
+        copyGrid[mineLocation[i + 1][0]][mineLocation[i + 1][1]].revealed = true;
+
+      setGrid(() => JSON.parse(JSON.stringify(copyGrid)));
+      i += 2;
+    }, 2);
+  };
+
+  const revealAllBlanks = (
+    newGrid: CellValues[][],
+    revealedBoard: { coords: number[][]; newNonMines: number },
+  ) => {
+    const copyGrid: CellValues[][] = JSON.parse(JSON.stringify(newGrid));
+    let i = 0;
+    const revealCells = setInterval(() => {
+      if (i >= revealedBoard.coords.length - 3) {
+        clearInterval(revealCells);
+      }
+      copyGrid[revealedBoard.coords[i][0]][revealedBoard.coords[i][1]].revealed = true;
+
+      if (i <= revealedBoard.coords.length - 2)
+        copyGrid[revealedBoard.coords[i + 1][0]][revealedBoard.coords[i + 1][1]].revealed = true;
+
+      if (i <= revealedBoard.coords.length - 3)
+        copyGrid[revealedBoard.coords[i + 2][0]][revealedBoard.coords[i + 2][1]].revealed = true;
+
+      setGrid(() => JSON.parse(JSON.stringify(copyGrid)));
+
+      i += 3;
+    }, 1);
+  };
+
+  const handleRevealCell = (x: number, y: number, newGrid?: CellValues[][]) => {
+    if (!newGrid) return;
+    if (newGrid[x][y].value === -1 && mineLocation) {
+      setInPlay(false);
       setPrimaryButton('dead');
+      revealAllMines(x, y, newGrid);
     } else {
-      const revealedBoard = revealed(copyGrid, x, y, nonMineCount);
-      setGrid(revealedBoard.newArr);
+      const revealedBoard = revealed(newGrid, x, y, nonMineCount);
+      revealAllBlanks(newGrid, revealedBoard);
       setNonMineCount(revealedBoard.newNonMines);
     }
   };
@@ -207,6 +253,7 @@ const MineSweeper = () => {
                       width={18}
                       alt="mine"
                       src={`${ASSETS_BASE_URL}/minesweeper/-1.png`}
+                      title="Reveal Cell (Press Space To Switch)"
                     />
                   ),
                   value: ActionType.REVEAL,
@@ -219,6 +266,7 @@ const MineSweeper = () => {
                       width={18}
                       alt="mine"
                       src={`${ASSETS_BASE_URL}/minesweeper/flag.png`}
+                      title="Flag Cell (Press Space To Switch)"
                     />
                   ),
                   value: ActionType.FLAG,
@@ -230,7 +278,7 @@ const MineSweeper = () => {
               focusHeight="30px"
               value={actionType}
               renderFocus={() => focus}
-              title="Switch Primary Action"
+              title="Shortcut: Space"
             />
           </div>
 

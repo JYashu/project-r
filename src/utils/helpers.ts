@@ -272,3 +272,16 @@ export const getHexCodeFromColorString = (color: string): string | undefined => 
 
   return undefined;
 };
+
+/**
+ * Calculate the distance of the given coordinate from the given origin.
+ *
+ * @param {number[]} coordinate Coordinate for which the distance from origin is to be calculated
+ * @param {number[]} origin Origin from which distance is to be calculated
+ * @returns {number}
+ */
+export const distance = (coordinate: number[], origin: number[]) => {
+  const dx = coordinate[0] - origin[0];
+  const dy = coordinate[1] - origin[1];
+  return Math.sqrt(dx * dx + dy * dy);
+};

@@ -1,5 +1,5 @@
 import { CellValues } from '../components/mineSweeper/types';
-import { getUniqueId } from './helpers';
+import { distance, getUniqueId } from './helpers';
 
 /**
  * Random function used for generating random value of x & y
@@ -143,6 +143,7 @@ export const revealed = (arr: any[][], x: number, y: number, nonMines: number) =
   const newArr = JSON.parse(JSON.stringify(arr));
   let newNonMines = nonMines;
 
+  const coords = [];
   const show = [];
   show.push(newArr[x][y]);
   while (show.length !== 0) {
@@ -151,6 +152,7 @@ export const revealed = (arr: any[][], x: number, y: number, nonMines: number) =
     const j = one.column;
     if (!one.revealed) {
       newNonMines -= 1;
+      coords.push([i, j]);
       one.revealed = true;
     }
     if (one.value !== 0) {
@@ -225,51 +227,59 @@ export const revealed = (arr: any[][], x: number, y: number, nonMines: number) =
       // Top Left Reveal
 
       newArr[i - 1][j - 1].revealed = true;
+      coords.push([i - 1, j - 1]);
       newNonMines -= 1;
     }
 
     if (j > 0 && !newArr[i][j - 1].revealed) {
       // Left Reveal
       newArr[i][j - 1].revealed = true;
+      coords.push([i, j - 1]);
       newNonMines -= 1;
     }
 
     if (i < newArr.length - 1 && j > 0 && !newArr[i + 1][j - 1].revealed) {
       // Bottom Left Reveal
       newArr[i + 1][j - 1].revealed = true;
+      coords.push([i + 1, j - 1]);
       newNonMines -= 1;
     }
 
     if (i > 0 && !newArr[i - 1][j].revealed) {
       // Top Reveal
       newArr[i - 1][j].revealed = true;
+      coords.push([i - 1, j]);
       newNonMines -= 1;
     }
 
     if (i < newArr.length - 1 && !newArr[i + 1][j].revealed) {
       // Bottom Reveal
       newArr[i + 1][j].revealed = true;
+      coords.push([i + 1, j]);
       newNonMines -= 1;
     }
 
     if (i > 0 && j < newArr[0].length - 1 && !newArr[i - 1][j + 1].revealed) {
       // Top Right Reveal
       newArr[i - 1][j + 1].revealed = true;
+      coords.push([i - 1, j + 1]);
       newNonMines -= 1;
     }
 
     if (j < newArr[0].length - 1 && !newArr[i][j + 1].revealed) {
       // Right Reveal
       newArr[i][j + 1].revealed = true;
+      coords.push([i, j + 1]);
       newNonMines -= 1;
     }
 
     if (i < newArr.length - 1 && j < newArr[0].length - 1 && !newArr[i + 1][j + 1].revealed) {
       // Bottom Right Reveal
       newArr[i + 1][j + 1].revealed = true;
+      coords.push([i + 1, j + 1]);
       newNonMines -= 1;
     }
   }
 
-  return { newArr, newNonMines };
+  return { coords: coords.sort((a, b) => distance(a, [x, y]) - distance(b, [x, y])), newNonMines };
 };
