@@ -1,7 +1,7 @@
 import { AIMode } from '../types';
 import { WINNING_LINES } from './consts';
 
-export function isPlayerWinning(board: any, player: any) {
+export const isPlayerWinning = (board: any, player: any) => {
   for (let i = 0; i < WINNING_LINES.length; i += 1) {
     const [a, b, c] = WINNING_LINES[i];
     if (board[a] === player && board[b] === player && !board[c]) {
@@ -16,9 +16,9 @@ export function isPlayerWinning(board: any, player: any) {
   }
 
   return null;
-}
+};
 
-export function getEmptySquares(board: any) {
+export const getEmptySquares = (board: any) => {
   const emptySquares = [];
   for (let i = 0; i < 9; i += 1) {
     if (board[i] === null) {
@@ -26,7 +26,7 @@ export function getEmptySquares(board: any) {
     }
   }
   return emptySquares;
-}
+};
 
 export const computerPlay = (board: any, mode: AIMode) => {
   // TODO: Code for difficult mode
@@ -34,19 +34,19 @@ export const computerPlay = (board: any, mode: AIMode) => {
   if (emptySquares.length < 2) {
     return board;
   }
-  let computerMove;
+  let computerMove = null;
   if (mode === AIMode.Easy) {
     computerMove = isPlayerWinning(board, 'O');
-    if (!computerMove) {
+    if (computerMove === null) {
       const rand = Math.floor(Math.random() * emptySquares.length);
       computerMove = emptySquares[rand];
     }
   } else {
     computerMove = isPlayerWinning(board, 'O');
-    if (!computerMove) {
+    if (computerMove === null) {
       computerMove = isPlayerWinning(board, 'X');
     }
-    if (!computerMove) {
+    if (computerMove === null) {
       const rand = Math.floor(Math.random() * emptySquares.length);
       computerMove = emptySquares[rand];
     }
@@ -55,7 +55,7 @@ export const computerPlay = (board: any, mode: AIMode) => {
   return board;
 };
 
-export function findWinner(board: any) {
+export const findWinner = (board: any) => {
   for (let i = 0; i < WINNING_LINES.length; i += 1) {
     const [a, b, c] = WINNING_LINES[i];
     if (board[a] && board[a] === board[b] && board[a] === board[c]) {
@@ -64,4 +64,4 @@ export function findWinner(board: any) {
   }
 
   return null;
-}
+};

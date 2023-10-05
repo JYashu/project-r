@@ -8,8 +8,66 @@ $colors: (
   info: #9a9a9a,
   sub-heading: #757474,
   default-bg: #efefef,
-  //,
-  lawyer: #097d88,
+  mine-sweeper: #7b7b7b,
+  mine-sweeper-bg: #bcbdbc,
+  mine-sweeper-border: #7a7b7a,
+
+  //RC
+  //blue
+  lavender: #e6e6fa,
+  lagoon: #72bcd2,
+  allure: #7291b4,
+  baltic: #6c969a,
+  periwinkle: #7c83bc,
+  cerulean: #007ba7,
+  palace: #346cb0,
+  ricer-side: #4c6a92,
+  hyacinth: #1e5da5,
+  imperial: #134c97,
+  lapis-lazuli: #303698,
+  bering-sea: #4b5b6e,
+  insignia: #32435a,
+  majolica-blue: #274357,
+  tuxedo: #3f3c43,
+  butler: #13294b,
+
+  //yellow
+  gardenia: #f1e8df,
+  sun-kiss: #ebd1bb,
+  sage: #b1bca0,
+  sunshine: #f4d772,
+  blazing: #ffa74f,
+
+  //green
+  seacrest: #bfd1b3,
+  margarita: #b5c38e,
+  shocking: #55ff33,
+  greenery: #88b04b,
+  viridian: #148e88,
+  rooftop: #6d726f,
+  chimera: #74626d,
+  palace-green: #426255,
+  scallion: #2a6735,
+  cilantro: #3e6646,
+  eden: #145555,
+
+  //red
+  wild-orchid: #d979a2,
+  majolica-mauve: #a08990,
+  fandango: #b53389,
+  willowherb: #8e4483,
+  melt: #ff5e24,
+  thrush: #936b4f,
+  boudoir: #bb365d,
+  hibiscus: #c52a41,
+  viva-magenta: #bb2649,
+  argon-oil: #8b593e,
+  goji-berry: #b91428,
+  cordovan: #702f3b,
+  pomegranate: #660c21,
+  chocolate-cosmos: #58111a,
+
+  //
   checking: #5450aa,
   personal: #3babc8,
   lawyer-dark: #095b67,
@@ -18,7 +76,7 @@ $colors: (
   associate-dark: #569c88,
   associate-light: #b8f2d8,
   suspect: #0a2837,
-  victim: #fff,
+  victim: #ffffff,
   prosecutor: #56656a,
   judge: #0c5e67,
   witness-1: #91c2ac,
@@ -52,7 +110,7 @@ $colors: (
 $intent-colors: (
   cancel: map-get($colors, juror-4),
   destructive: map-get($colors, rejected),
-  primary: map-get($colors, lawyer),
+  primary: map-get($colors, eden),
 );
 
 :export {

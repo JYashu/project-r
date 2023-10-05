@@ -27,7 +27,7 @@ export interface Props extends Pick<React.ComponentProps<'button'>, ButtonProps>
   ignoreChildren?: boolean;
   ariaExpanded?: boolean;
   ariaLabel?: string;
-  buttonStyle?: 'game' | 'normal' | 'glossy' | 'abstract' | 'blur' | 'minimal';
+  buttonStyle?: 'game' | 'normal' | 'glossy' | 'abstract' | 'blur' | 'minimal' | 'minesweeper';
   includeFocus?: boolean;
   rounded?: boolean;
   handWriting?: boolean;
@@ -35,6 +35,7 @@ export interface Props extends Pick<React.ComponentProps<'button'>, ButtonProps>
   title?: string;
   renderLoader?: () => React.ReactNode;
   spinnerType?: SpinnerType;
+  isActive?: boolean;
 }
 
 const Button = ({
@@ -67,25 +68,42 @@ const Button = ({
   title,
   renderLoader,
   spinnerType,
+  isActive,
 }: Props): React.ReactElement<'button'> => {
-  const buttonCls = classnames(scssObj.baseClass, className, {
-    [`${scssObj.baseClass}--empty`]: !React.Children.count(children) || !children || ignoreChildren,
-    [`${scssObj.baseClass}--has-icon`]: icon,
-    [`${scssObj.baseClass}--intent-${intent}`]: intent,
-    [`${scssObj.baseClass}--loading`]: loading,
-    [`${scssObj.baseClass}--right-icon`]: rightIcon,
-    [`${scssObj.baseClass}--size-${size}`]: size,
-    [`${scssObj.baseClass}--transparent`]: !intent && transparent,
-    [`${scssObj.baseClass}--solid`]: intent || !transparent || solid,
-    [`${scssObj.baseClass}--${buttonStyle}`]: buttonStyle,
-    [`${scssObj.baseClass}--include-focus`]: includeFocus,
-    [`${scssObj.baseClass}--rounded`]: rounded,
-    [`${scssObj.baseClass}--hand-writing`]: handWriting,
-  });
+  const buttonCls = classnames(
+    scssObj.baseClass,
+    className,
+    `${scssObj.baseClass}--${buttonStyle || 'normal'}${isActive ? '--active' : ''}`,
+    {
+      [`${scssObj.baseClass}--empty`]:
+        !React.Children.count(children) || !children || ignoreChildren,
+      [`${scssObj.baseClass}--has-icon`]: icon,
+      [`${scssObj.baseClass}--intent-${intent}`]: intent,
+      [`${scssObj.baseClass}--loading`]: loading,
+      [`${scssObj.baseClass}--right-icon`]: rightIcon,
+      [`${scssObj.baseClass}--size-${size}`]: size,
+      [`${scssObj.baseClass}--transparent`]: !intent && transparent,
+      [`${scssObj.baseClass}--solid`]: intent || !transparent || solid,
+      [`${scssObj.baseClass}--include-focus`]: includeFocus,
+      [`${scssObj.baseClass}--rounded`]: rounded,
+      [`${scssObj.baseClass}--hand-writing`]: handWriting,
+      [`${scssObj.baseClass}--${buttonStyle || 'normal'}--active`]: isActive,
+      [`${scssObj.baseClass}--${buttonStyle || 'normal'}`]: !isActive,
+    },
+  );
+
+  const buttonRef = React.useRef<HTMLButtonElement>(null);
+
+  React.useEffect(() => {
+    buttonRef.current?.addEventListener('click', () => buttonRef.current?.blur());
+
+    return buttonRef.current?.removeEventListener('click', () => buttonRef.current?.blur());
+  }, []);
 
   return (
     <button
       className={buttonCls}
+      ref={buttonRef}
       disabled={disabled}
       id={id}
       onClick={onClick}
@@ -94,6 +112,7 @@ const Button = ({
       tabIndex={tabIndex}
       type={type}
       aria-expanded={ariaExpanded}
+      onBlur={(e) => e.target.blur()}
       title={title || ''}
     >
       <span className="visually-hidden">{ariaLabel}</span>

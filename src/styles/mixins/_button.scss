@@ -1,4 +1,4 @@
-@mixin button-style($style: normal) {
+@mixin button-style($style: normal, $is-active: false) {
   $border-radius: 4px;
   $min-width: 80px;
 
@@ -239,11 +239,42 @@
       transform: translateX(15%);
     }
   }
+
+  @if $style == minesweeper {
+    & {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: solid 2px map-get($colors, mine-sweeper);
+      border-right: solid 2px map-get($colors, mine-sweeper);
+      border-top: solid 2px #fff;
+      border-left: solid 2px #fff;
+      background-color: map-get($colors, mine-sweeper-bg);
+      color: black;
+
+      @if $is-active {
+        border-bottom: solid 0.5px white;
+        border-right: solid 0.5px white;
+        border-left: solid 2px map-get($colors, mine-sweeper);
+        border-top: solid 2px map-get($colors, mine-sweeper);
+      }
+    }
+
+    &:active,
+    &--active {
+      border-bottom: solid 0.5px white;
+      border-right: solid 0.5px white;
+      border-left: solid 2px map-get($colors, mine-sweeper);
+      border-top: solid 2px map-get($colors, mine-sweeper);
+      background-color: map-get($colors, mine-sweeper-bg);
+      color: black;
+    }
+  }
 }
 
 @mixin button-colors($transparent: true) {
   background-color: transparent;
-  color: map-get($colors, lawyer);
+  color: map-get($colors, eden);
   box-shadow: none;
 
   &:active {
@@ -261,9 +292,8 @@
   }
 
   @if $transparent == false {
-    background-color: map-get($colors, juror-5);
-    color: map-get($colors, lawyer);
-    border: 1px solid map-get($colors, sub-heading);
+    background-color: map-get($colors, victim);
+    color: map-get($colors, eden);
 
     &:active {
       background-color: map-get($colors, juror-4);

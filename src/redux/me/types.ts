@@ -1,5 +1,6 @@
 import { ActionType } from 'typesafe-actions';
 import { Config } from '../../types';
+import { Pages } from '../../utils/consts';
 import {
   copyText,
   setGlobalConfig,
@@ -12,7 +13,7 @@ import {
 } from './actions';
 
 export interface MeState {
-  title: string;
+  title: Pages;
   setting: Config;
   clipboard: {
     isVisible: boolean;

@@ -2,7 +2,7 @@
 import produce from 'immer';
 import { createReducer } from 'typesafe-actions';
 import config from '../../assets/config.json';
-import { ACCESS_CODE } from '../../utils/consts';
+import { ACCESS_CODE, Pages } from '../../utils/consts';
 import {
   clearClipboard,
   copyText,
@@ -15,7 +15,7 @@ import {
 import { MeActions, MeState } from './types';
 
 const initialState: MeState = {
-  title: 'Global Header',
+  title: Pages.HOME,
   setting: localStorage.getItem('config')
     ? JSON.parse(localStorage.getItem('config') || '')
     : config,

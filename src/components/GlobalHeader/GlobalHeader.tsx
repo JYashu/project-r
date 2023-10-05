@@ -4,14 +4,15 @@ import Button from '../../elements/button';
 import Clock from '../clock';
 import scssObj from './_GlobalHeader.scss';
 import ENV from '../../utils/env';
-import { ASSIGNED_PATHS, BETA_ONLY_PATHS } from '../../utils/consts';
+import { ASSIGNED_PATHS, BETA_ONLY_PATHS, Pages, PageTitles } from '../../utils/consts';
+import Link from '../../elements/link';
 import useGetEnvironment from '../../hooks/useGetEnvironment';
 
 interface Props extends RouteComponentProps {
-  title: string;
+  title: Pages;
   isCollapsed: boolean;
   snakeScore: number;
-  setGlobalTitle: (title: string) => unknown;
+  setGlobalTitle: (title: Pages) => unknown;
   handleSideBarState: (isCollapsed: boolean) => void;
   handleStaticContent: (isStatic: boolean) => void;
 }
@@ -29,7 +30,7 @@ const GlobalHeader = withRouter(
     const { isProd } = useGetEnvironment();
 
     if (history.location.pathname === '/') {
-      setGlobalTitle('Global Header');
+      setGlobalTitle(Pages.HOME);
     }
 
     if (
@@ -68,10 +69,15 @@ const GlobalHeader = withRouter(
             />
           </Button>
         </div>
-        <div className={`${scssObj.baseClass}__title`}>{title}</div>
+        <Link className={`${scssObj.baseClass}__title`} to={title.toString()}>
+          {PageTitles[title]}
+        </Link>
         {history.location.pathname === '/snake' && (
           <div className={`${scssObj.baseClass}__score`}>Score: {snakeScore}</div>
         )}
+        <Link isNative target="new" to="https://github.com/jyashu">
+          <div className={`${scssObj.baseClass}__github`} />
+        </Link>
         <div className={`${scssObj.baseClass}__clock`}>
           <Clock />
         </div>

@@ -10,7 +10,7 @@ $base-class: link;
   $this: &;
   text-decoration: none;
 
-  color: map-get($colors, lawyer);
+  color: map-get($colors, eden);
 
   &--button {
     @include button-size;

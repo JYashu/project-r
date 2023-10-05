@@ -10,6 +10,7 @@ import useActiveSidebarItem from '../../hooks/useActiveSidebarItem';
 import LoadingSpinner from '../../elements/loadingSpinner';
 import Button from '../../elements/button';
 import PermissionsManager from '../../elements/permissionsManager';
+import { Pages } from '../../utils/consts';
 
 type State = {
   fetchState: 'loading' | 'error' | 'success';
@@ -115,7 +116,7 @@ const TodoPage = () => {
     getPageData();
   }, []);
 
-  useSetGlobalHeader('Todo');
+  useSetGlobalHeader(Pages.TODO);
   useActiveSidebarItem(ActiveSidebarItem.Todo);
 
   if (state.fetchState === 'loading' || !state.todo)

@@ -1,10 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable react-hooks/exhaustive-deps */
 import classNames from 'classnames';
 import React, { useState, useEffect } from 'react';
 import { useSpring, animated as a } from 'react-spring';
+import { useHistory } from 'react-router-dom';
 import useActiveSidebarItem from '../../hooks/useActiveSidebarItem';
 import useSetGlobalHeader from '../../hooks/useSetGlobalHeader';
 import { ActiveSidebarItem, ClickActionType } from '../../types';
@@ -18,6 +19,9 @@ import useLongPress from '../../hooks/useLongPress';
 import { CardThemeDropdown } from '../../elements/dropdown';
 import LoadingSpinner from '../../elements/loadingSpinner';
 import { ASSETS_BASE_URL } from '../../utils/assets';
+import ToggleBar from '../../elements/toggleBar';
+import { getUniqueId } from '../../utils/helpers';
+import { Pages } from '../../utils/consts';
 
 interface Props {
   isSubmitting?: boolean;
@@ -37,7 +41,7 @@ interface GameProps {
   name: string;
   options: number;
   setOptions: React.Dispatch<React.SetStateAction<number | null | undefined>>;
-  theme: CardTheme;
+  theme: CardTheme | 'custom';
   highScore: number;
   setHighScore: React.Dispatch<React.SetStateAction<number>>;
   openMessage: ({ name, score, handleReplay, handleReset }: MessageProps) => void;
@@ -49,7 +53,7 @@ interface CardProps {
   id: any;
   image: any;
   game: any;
-  theme: CardTheme;
+  theme: CardTheme | 'custom';
   flippedCount: number;
   setFlippedCount: React.Dispatch<React.SetStateAction<number>>;
   flippedIndexes: any;
@@ -308,32 +312,40 @@ const App = ({
   const [options, setOptions] = useState<number | null>();
   const [highScore, setHighScore] = useState(0);
   const [name, setName] = useState('');
-  const [optionCount, setOptionCount] = useState(values.options);
   const [customCard, setCustomCard] = useState(false);
   const [chosenTheme, setChosenTheme] = useState(values.theme);
   const [restart, setRestart] = useState(0);
 
-  const [scaleX, setScaleX] = useState(0.9);
-  const [scaleY, setScaleY] = useState(0.9);
-
-  const [x, setX] = useState(0);
-  const [y, setY] = useState(10);
-
-  useSetGlobalHeader('Memory Game');
+  useSetGlobalHeader(Pages.MEMORY);
   useActiveSidebarItem(ActiveSidebarItem.Memory);
 
-  const moveFocus = (tx: number, focusType: string) => {
-    if (focusType === 'option') {
-      setX(tx);
-      if (values.options > 0 && optionCount > 5) {
-        setScaleX(0.7);
-        setTimeout(() => setScaleX(0.9), 250);
-      } else setOptionCount(6);
-    } else if (focusType === 'theme') {
-      setY(tx);
-      setScaleY(0.7);
-      setTimeout(() => setScaleY(0.9), 250);
-    }
+  const history = useHistory();
+
+  useEffect(() => {
+    const handlePopstate = (e: any) => {
+      if (e.type === 'popstate') {
+        if (options) {
+          setOptions(null);
+        }
+      }
+    };
+
+    window.addEventListener('popstate', handlePopstate);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopstate);
+    };
+  }, [options]);
+
+  const updateChosenTheme = () => {
+    const cardTypes = Object.keys(IMAGES).filter((card) => card !== 'random' && card !== 'custom');
+
+    const theme =
+      values.theme === CardTheme.Random || values.theme === 'custom'
+        ? (cardTypes[Math.floor(Math.random() * cardTypes.length)] as CardTheme)
+        : values.theme;
+
+    setChosenTheme(theme);
   };
 
   return (
@@ -345,6 +357,7 @@ const App = ({
               buttonStyle="game"
               handWriting
               onClick={() => {
+                updateChosenTheme();
                 setRestart((prevValue) => prevValue + 1);
               }}
             >
@@ -379,91 +392,45 @@ const App = ({
                   e.preventDefault();
                   setFieldTouched('theme', true);
                   if (isValid) {
-                    const cardTypes = Object.keys(IMAGES).filter((card) => card !== 'random');
-
-                    const theme =
-                      values.theme === CardTheme.Random
-                        ? (cardTypes[Math.floor(Math.random() * cardTypes.length)] as CardTheme)
-                        : values.theme;
-
-                    setChosenTheme(theme);
+                    updateChosenTheme();
                     setName(values.name);
                     setOptions(values.options);
+                    history.push('/memory');
                   }
                 }}
               >
                 <div className={`${scssObj.baseClass}__form-group`}>
                   <div>Choose a difficulty to begin!</div>
-                  <div className={`${scssObj.baseClass}__btns`}>
-                    <div
-                      className={`${scssObj.baseClass}__focus`}
-                      style={{
-                        opacity: `${values.options < 12 ? 0 : 1}`,
-                        left: x,
-                        transform: `scale(${scaleX})`,
-                      }}
-                    />
-                    <div
-                      className={`${scssObj.baseClass}__btn`}
-                      onClick={() => {
-                        moveFocus(0, 'option');
-                        setFieldValue('options', 12);
-                      }}
-                    >
-                      Easy
-                    </div>
-                    <div
-                      className={`${scssObj.baseClass}__btn`}
-                      onClick={() => {
-                        moveFocus(80, 'option');
-                        setFieldValue('options', 18);
-                      }}
-                    >
-                      Medium
-                    </div>
-                    <div
-                      className={`${scssObj.baseClass}__btn`}
-                      onClick={() => {
-                        moveFocus(160, 'option');
-                        setFieldValue('options', 24);
-                      }}
-                    >
-                      Hard
-                    </div>
-                  </div>
+                  <ToggleBar
+                    className={`${scssObj.baseClass}__memory-toggle`}
+                    setFieldValue={(value: number) => setFieldValue('options', value)}
+                    options={[
+                      { label: 'Easy', value: 12, id: getUniqueId() },
+                      { label: 'Medium', value: 18, id: getUniqueId() },
+                      { label: 'Hard', value: 24, id: getUniqueId() },
+                    ]}
+                    value={values.options}
+                    focusValues={[0, 80, 160]}
+                    noFocusCondition={values.options < 12}
+                  />
                   <div>Choose card theme!</div>
-                  <div className={`${scssObj.baseClass}__btns`}>
-                    <div
-                      className={`${scssObj.baseClass}__focus`}
-                      style={{
-                        opacity: 1,
-                        left: y,
-                        transform: `scale(${scaleY})`,
-                        width: '100px',
-                      }}
-                    />
-                    <div
-                      className={`${scssObj.baseClass}__btn`}
-                      onClick={() => {
-                        setFieldValue('theme', CardTheme.Solid);
-                        setFieldTouched('theme', false);
+                  <ToggleBar
+                    className={`${scssObj.baseClass}__memory-toggle`}
+                    setFieldValue={(value: CardTheme) => {
+                      setFieldValue('theme', value);
+                      if (value === CardTheme.Solid) {
                         setCustomCard(false);
-                        moveFocus(10, 'theme');
-                      }}
-                    >
-                      Solid
-                    </div>
-                    <div
-                      className={`${scssObj.baseClass}__btn`}
-                      onClick={() => {
-                        setFieldValue('theme', '');
-                        setCustomCard(true);
-                        moveFocus(130, 'theme');
-                      }}
-                    >
-                      Custom
-                    </div>
-                  </div>
+                      } else setCustomCard(true);
+                      setFieldTouched('theme', false);
+                    }}
+                    options={[
+                      { label: 'Solid', value: CardTheme.Solid, id: getUniqueId() },
+                      { label: 'Custom', value: 'custom', id: getUniqueId() },
+                    ]}
+                    focusValues={[10, 130]}
+                    focusWidth="100px"
+                    value={values.theme === CardTheme.Solid ? CardTheme.Solid : 'custom'}
+                  />
                   <div
                     style={{
                       opacity: `${customCard ? '1' : '0'}`,

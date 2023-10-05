@@ -12,7 +12,7 @@ $base-class: global-header;
   color: map-get($colors, header-text);
   align-items: center;
   background-color: map-get($colors, header-bg);
-  // border-bottom: 1px solid map-get($colors, juror-4);
+  // background-color: map-get($colors, eden);
   display: flex;
   height: 64px;
   padding: 0 5px;
@@ -37,13 +37,28 @@ $base-class: global-header;
   }
 
   &__title {
+    color: map-get($colors, header-text) !important;
     @include type-style-heading;
   }
 
   &__score {
     @include type-style-heading;
 
-    margin-left: 39%;
+    margin-left: 9%;
+  }
+
+  &__github {
+    width: 60px;
+    height: 60px;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    background-image: url(https://public-assets-7588.s3.ap-south-1.amazonaws.com/icons/github-100.svg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    z-index: 1111;
+    border-radius: 50%;
+    overflow: hidden;
   }
 
   &__clock {

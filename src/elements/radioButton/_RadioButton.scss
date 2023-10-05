@@ -47,7 +47,7 @@ input[type='radio']:checked::before {
 }
 .#{$base-class} {
   .MuiRadio-colorSecondary.Mui-checked {
-    color: map-get($colors, lawyer);
+    color: map-get($colors, eden);
   }
 
   &__radio {

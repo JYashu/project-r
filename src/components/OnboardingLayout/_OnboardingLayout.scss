@@ -174,7 +174,7 @@ $medium: 1440px;
   &__link:visited,
   &__link:active {
     @include type-style-city;
-    color: map-get($colors, lawyer);
+    color: map-get($colors, eden);
     text-decoration: none;
   }
 

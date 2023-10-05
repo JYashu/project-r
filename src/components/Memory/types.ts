@@ -3,7 +3,7 @@ import { CardTheme } from './const';
 export interface Values {
   options: number;
   name: string;
-  theme: CardTheme;
+  theme: CardTheme | 'custom';
 }
 
 export interface MessageProps {

@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Helmet } from 'react-helmet';
 import useTimeout from '../../hooks/useTimeout';
 import { ActiveSidebarItem, SpinnerType } from '../../types';
-import { FULLSTORY_EXCLUDE_CLASS } from '../../utils/consts';
+import { FULLSTORY_EXCLUDE_CLASS, Pages } from '../../utils/consts';
 import { ErrorValues, TouchedValues } from '../../utils/typeHelpers';
 import Button from '../../elements/button';
 import { StateDropdown } from '../../elements/dropdown';
@@ -53,7 +53,7 @@ const TestApp = ({
   const { action, handlers } = useLongPress();
 
   useActiveSidebarItem(ActiveSidebarItem.Test);
-  useSetGlobalHeader('Test Page');
+  useSetGlobalHeader(Pages.TEST);
 
   useTimeout(() => setLoading(false), delay || 100); // 1800
 

@@ -29,6 +29,7 @@ import ENV from '../../utils/env';
 import CBook from '../cbook';
 import SVGConverter from '../svgConverter';
 import useGetEnvironment from '../../hooks/useGetEnvironment';
+import MineSweeper from '../mineSweeper';
 
 interface Props {
   isDictionaryVisible: boolean;
@@ -132,6 +133,7 @@ const App = ({
           <Route path="/memory" exact component={Memory} />
           <Route path="/mal" exact component={MALEngine} />
           <Route path="/svg-converter" exact component={SVGConverter} />
+          <Route path="/mine-sweeper" exact component={MineSweeper} />
           <Route component={NotFound} />
         </Switch>
       </div>

@@ -4,6 +4,7 @@ import useActiveSidebarItem from '../../hooks/useActiveSidebarItem';
 import useSetGlobalHeader from '../../hooks/useSetGlobalHeader';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 import { ActiveSidebarItem, Coordinates } from '../../types';
+import { Pages } from '../../utils/consts';
 import { isMobileOrTablet } from '../../utils/getMobileOrTabletInfo';
 import { clearBoard, drawObject, hasSnakeCollided } from '../../utils/snakeUtils';
 import scssObj from './_Snake.scss';
@@ -40,7 +41,7 @@ const Snake = ({
   setInPlay,
 }: Props) => {
   useActiveSidebarItem(ActiveSidebarItem.Snake);
-  useSetGlobalHeader('Snake');
+  useSetGlobalHeader(Pages.SNAKE);
 
   const [gameEnded, setGameEnded] = useState(false);
   const [isConsumed, setIsConsumed] = useState(false);

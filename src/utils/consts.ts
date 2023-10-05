@@ -110,20 +110,24 @@ export const ASSIGNED_PATHS = [
   '/memory',
   '/mal',
   '/svg-converter',
+  '/mine-sweeper',
 ];
 
 export enum Pages {
-  TODO = 'todo',
-  TEST = 'test',
-  MEMORY = 'memory',
-  SNAKE = 'snake',
-  TIC_TAC_TOE = 'tic-tac-toe',
-  CBOOK = 'cbook',
-  NPM_ENGINE = 'npm-engine',
-  GIPHY_ENGINE = 'giphy-engine',
-  SETTINGS = 'settings',
-  LOGIN = 'login',
-  SVGConverter = 'svg-converter',
+  HOME = '/',
+  TODO = '/todo',
+  TEST = '/test',
+  MEMORY = '/memory',
+  SNAKE = '/snake',
+  TIC_TAC_TOE = '/tic-tac-toe',
+  CBOOK = '/cbook',
+  NPM_ENGINE = '/npm-engine',
+  GIPHY_ENGINE = '/giphy-engine',
+  SETTINGS = '/settings',
+  LOGIN = '/login',
+  SVG_CONVERTER = '/svg-converter',
+  MINE_SWEEPER = '/mine-sweeper',
+  LOADING_SPINNERS = '/spinners',
 }
 
 export const BETA_ONLY_PAGES = [
@@ -172,3 +176,20 @@ export const PROXY_URLS = [
   'https://magnificent-brioche-204c18.netlify.app/',
   'https://angry-rose-coyote.cyclic.app/',
 ];
+
+export const PageTitles = {
+  [Pages.HOME]: 'Home',
+  [Pages.TIC_TAC_TOE]: 'Tic Tac Toe',
+  [Pages.MEMORY]: 'Memory Game',
+  [Pages.SNAKE]: 'Snake',
+  [Pages.MINE_SWEEPER]: 'MineSweeper',
+  [Pages.GIPHY_ENGINE]: 'Giphy Engine',
+  [Pages.NPM_ENGINE]: 'NPM Engine',
+  [Pages.LOADING_SPINNERS]: 'Loading Spinners',
+  [Pages.SVG_CONVERTER]: 'SVG To PNG Convertor',
+  [Pages.TEST]: 'Test Page',
+  [Pages.TODO]: 'ToDo',
+  [Pages.CBOOK]: 'CBook',
+  [Pages.SETTINGS]: 'Settings',
+  [Pages.LOGIN]: 'Login',
+};

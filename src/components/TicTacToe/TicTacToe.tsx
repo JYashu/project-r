@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet';
 import { v4 as uuidv4 } from 'uuid';
 import { useRef, useState } from 'react';
-import Board from '../board';
+import Board from './Board';
 import { findWinner, computerPlay } from '../../utils/tictactoeUtils';
 import { TicTacToeState } from '../../redux/tictactoe';
 import scssObj from './_TicTacToe.scss';
@@ -11,6 +11,7 @@ import useActiveSidebarItem from '../../hooks/useActiveSidebarItem';
 import { ActiveSidebarItem, AIMode } from '../../types';
 import RadioButton from '../../elements/radioButton/RadioButton';
 import useOutsideClick from '../../hooks/useOutsideClick';
+import { Pages } from '../../utils/consts';
 
 interface Props {
   gameState: TicTacToeState;
@@ -224,7 +225,7 @@ const TicTacToe = ({
   const { board, history, vsAI, aiMode, xIsNext, open } = gameState;
   const currentHistory = history;
   const [showDifficulty, setShowDifficulty] = useState(false);
-  useSetGlobalHeader('Tic Tac Toe');
+  useSetGlobalHeader(Pages.TIC_TAC_TOE);
 
   useActiveSidebarItem(ActiveSidebarItem.TicTacToe);
 

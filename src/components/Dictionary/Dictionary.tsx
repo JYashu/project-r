@@ -58,13 +58,12 @@ const Dictionary = ({
             name="word"
             value={value}
             onChange={(e) => setValue(e.target.value)}
-            noBorder
             hasButton
             ref={searchInput}
             renderButton={() => {
               return (
                 <div style={{ marginTop: '2px', marginRight: '-4px' }}>
-                  <Button onClick={() => hideDictionary()}>
+                  <Button transparent onClick={() => hideDictionary()}>
                     <Icon
                       className={`${scssObj.baseClass}__icon-close`}
                       icon="close"
@@ -97,7 +96,7 @@ const Dictionary = ({
       </div>
       {definitions.length > 0 && (
         <div className={`${scssObj.baseClass}__footer`}>
-          <Button disabled={i === 0} onClick={() => setI(i - 1)}>
+          <Button transparent disabled={i === 0} onClick={() => setI(i - 1)}>
             <Icon
               className={`${scssObj.baseClass}__left-arrow`}
               icon="arrow_right_alt"
@@ -105,7 +104,7 @@ const Dictionary = ({
               description="Previous"
             />
           </Button>
-          <Button disabled={i === definitions.length - 1} onClick={() => setI(i + 1)}>
+          <Button transparent disabled={i === definitions.length - 1} onClick={() => setI(i + 1)}>
             <Icon icon="arrow_right_alt" size="small" description="Next" />
           </Button>
         </div>
