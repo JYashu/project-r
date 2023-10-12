@@ -7,7 +7,7 @@ import useKeyboardShortcut from '../../hooks/useKeyboardShortcut';
 import useSetGlobalHeader from '../../hooks/useSetGlobalHeader';
 import { ActiveSidebarItem } from '../../types';
 import { ASSETS_BASE_URL } from '../../utils/assets';
-import { KeyCodes } from '../../utils/consts';
+import { KeyCodes, Pages } from '../../utils/consts';
 import { distance, getUniqueId } from '../../utils/helpers';
 import { createBoard, revealed } from '../../utils/mineSweeperUtils';
 import Cell from './Cell';
