@@ -1,6 +1,12 @@
 import { useCallback, useEffect, useLayoutEffect, useRef } from 'react';
+import { KeyCodes } from '../utils/consts';
 
-export default (keys: string[], callback: () => void, shortcutKey: string, node: any = null) => {
+export default (
+  callback: () => void,
+  shortcutKeyCode: KeyCodes,
+  keys: KeyCodes[] = [],
+  node: any = null,
+) => {
   // implement the callback ref pattern
   const callbackRef = useRef(callback);
   useLayoutEffect(() => {
@@ -8,16 +14,17 @@ export default (keys: string[], callback: () => void, shortcutKey: string, node:
   });
 
   const allKeysPressed = (event: any) => {
+    if (keys.length === 0) return true;
     let pressed = false;
     keys.every((key) => {
       switch (key) {
-        case 'shift':
+        case KeyCodes.SHIFT:
           pressed = event.shiftKey;
           break;
-        case 'ctrl':
+        case KeyCodes.CTRL:
           pressed = event.ctrlKey;
           break;
-        case 'alt':
+        case KeyCodes.ALT:
           pressed = event.altKey;
           break;
         default:
@@ -32,7 +39,7 @@ export default (keys: string[], callback: () => void, shortcutKey: string, node:
   const handleKeyPress = useCallback(
     (event) => {
       // check if one of the key is part of the ones we want
-      if (allKeysPressed(event) && event.code === `Key${shortcutKey.toUpperCase()}`) {
+      if (allKeysPressed(event) && event.keyCode === shortcutKeyCode) {
         callbackRef.current();
       }
     },

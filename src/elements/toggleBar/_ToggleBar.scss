@@ -13,7 +13,9 @@ $base-class: toggle-bar;
   height: fit-content;
 
   &__btn {
-    @include type-style-cali;
+    @include type-style-city;
+
+    font-size: 1.6rem;
 
     align-items: center;
     justify-content: center;
@@ -26,9 +28,12 @@ $base-class: toggle-bar;
     user-select: none;
     text-align: center;
     vertical-align: middle;
-    line-height: 40px;
     margin: 0 auto;
     position: relative;
+  }
+
+  &__btn-cali {
+    @include type-style-cali;
   }
 
   &__focus {

@@ -30,6 +30,7 @@ import CBook from '../cbook';
 import SVGConverter from '../svgConverter';
 import useGetEnvironment from '../../hooks/useGetEnvironment';
 import MineSweeper from '../mineSweeper';
+import { KeyCodes } from '../../utils/consts';
 
 interface Props {
   isDictionaryVisible: boolean;
@@ -44,8 +45,8 @@ const App = ({
   showClipboard,
   openDictionary,
 }: Props): React.ReactElement => {
-  useKeyboardShortcut(['shift', 'ctrl'], () => showClipboard(), 'c');
-  useKeyboardShortcut(['shift', 'ctrl'], () => openDictionary(), 'd');
+  useKeyboardShortcut(() => showClipboard(), KeyCodes.C, [KeyCodes.SHIFT, KeyCodes.CTRL]);
+  useKeyboardShortcut(() => openDictionary(), KeyCodes.D, [KeyCodes.SHIFT, KeyCodes.CTRL]);
 
   const cls = scssObj.baseClass;
 

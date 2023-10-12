@@ -14,6 +14,7 @@ interface Props {
   focusHeight?: string;
   noFocusCondition?: boolean;
   focusColor?: string;
+  font?: 'cali';
   renderFocus?: () => React.ReactNode;
 }
 
@@ -28,6 +29,7 @@ const ToggleBar = ({
   focusWidth,
   focusHeight,
   focusColor,
+  font,
   renderFocus,
 }: Props) => {
   const [x, setX] = useState(() => {
@@ -56,6 +58,10 @@ const ToggleBar = ({
     [`${scssObj.baseClass}__native`]: !renderFocus,
   });
 
+  const buttonCls = classNames(`${scssObj.baseClass}__btn`, {
+    [`${scssObj.baseClass}__btn-${font}`]: font,
+  });
+
   return (
     <div className={classNames(`${scssObj.baseClass}`, className)} title={title || ''}>
       <div
@@ -74,7 +80,7 @@ const ToggleBar = ({
       {options.map((option, index) => {
         return (
           <div
-            className={`${scssObj.baseClass}__btn`}
+            className={buttonCls}
             onClick={() => setFieldValue(option.value)}
             style={{
               width: focusWidth || '80px',

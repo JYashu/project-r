@@ -193,3 +193,21 @@ export const PageTitles = {
   [Pages.SETTINGS]: 'Settings',
   [Pages.LOGIN]: 'Login',
 };
+
+export enum KeyCodes {
+  TAB = 9,
+  ENTER = 13,
+  SHIFT = 16,
+  CTRL = 17,
+  ALT = 18,
+  ESC = 27,
+  SPACE = 32,
+  ARROW_LEFT = 37,
+  ARROW_UP = 38,
+  ARROW_RIGHT = 39,
+  ARROW_DOWN = 40,
+  C = 67,
+  D = 68,
+  META_LEFT = 91,
+  META_RIGHT = 93,
+}
