@@ -35,6 +35,7 @@ export interface Props
   noBorder?: boolean;
   fieldSize?: 'small';
   renderButton?: () => React.ReactNode;
+  popover?: string;
 }
 
 const Field: React.SFC<Props> = React.forwardRef((props: Props, ref: any) => {

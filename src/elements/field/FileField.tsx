@@ -17,11 +17,12 @@ import useGetUniqueId from '../../hooks/useGetUniqueId';
 import noop from '../../utils/noop';
 import { URL_REGEX } from '../../utils/regex';
 import { ELLIPSIS } from '../../utils/consts';
+import { FileType } from './types';
 
 interface Props {
   fieldId?: string;
   minimal?: boolean;
-  acceptedTypes?: string[];
+  acceptedTypes?: FileType[];
   className?: string;
   placeHolder?: string;
   errorMessage?: string;

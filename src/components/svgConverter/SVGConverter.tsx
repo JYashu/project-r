@@ -13,6 +13,7 @@ import scssObj from './_SVGConverter.scss';
 import useGetEnvironment from '../../hooks/useGetEnvironment';
 import useSetGlobalHeader from '../../hooks/useSetGlobalHeader';
 import { Pages } from '../../utils/consts';
+import { FileType } from '../../elements/field/types';
 
 const SVGConverter = () => {
   useActiveSidebarItem(ActiveSidebarItem.SVGConverter);
@@ -169,7 +170,7 @@ const SVGConverter = () => {
           >
             <FileField
               className={`${scssObj.baseClass}__file-input`}
-              acceptedTypes={['image/svg+xml']}
+              acceptedTypes={[FileType.SVG]}
               onFileUpload={(file: File | undefined) => onFileUpload(file)}
               placeHolder="Choose a SVG file or Drop it here"
               errorMessage="Upload SVG file"
@@ -225,7 +226,13 @@ const SVGConverter = () => {
             id="w"
             type="number"
             max="9999"
-            onChange={(e) => setWidth(parseNumber(e.target.value))}
+            min="0"
+            onChange={(e) =>
+              setWidth(() => {
+                if ((parseNumber(e.target.value) || 0) < 0) return 0;
+                return parseNumber(e.target.value);
+              })
+            }
             value={width}
           />
           <Field
@@ -236,7 +243,13 @@ const SVGConverter = () => {
             id="h"
             type="number"
             max="9999"
-            onChange={(e) => setHeight(parseNumber(e.target.value))}
+            min="0"
+            onChange={(e) =>
+              setHeight(() => {
+                if ((parseNumber(e.target.value) || 0) < 0) return 0;
+                return parseNumber(e.target.value);
+              })
+            }
             value={height}
           />
           <br />

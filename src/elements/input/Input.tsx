@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import scssObj from './_Input.scss';
 import Icon from '../icon';
 import Button from '../button';
+import DetailsPopover from '../detailsPopover';
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   hasError?: boolean;
@@ -17,6 +18,8 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   hasButton?: boolean;
   fieldSize?: 'small';
   renderButton?: () => React.ReactNode;
+  hiddenSpin?: boolean;
+  popover?: string;
 }
 
 const renderBackgroundIcon = (
@@ -55,6 +58,8 @@ const Input: React.SFC<Props> = React.forwardRef((props: Props, ref: any) => {
     hasButton,
     renderButton,
     fieldSize,
+    hiddenSpin,
+    popover,
     ...rest
   } = props;
 
@@ -69,6 +74,8 @@ const Input: React.SFC<Props> = React.forwardRef((props: Props, ref: any) => {
       [`${scssObj.baseClass}--rounded`]: rounded,
       [`${scssObj.baseClass}--solid`]: !isTransparent,
       [`${scssObj.baseClass}--transparent`]: isTransparent,
+      [`${scssObj.baseClass}--hidden-spin`]: hiddenSpin,
+      [`${scssObj.baseClass}--reposition-hidden-spin`]: popover,
     },
     `${scssObj.baseClass}--${fieldSize || 'default'}`,
   );
@@ -80,6 +87,19 @@ const Input: React.SFC<Props> = React.forwardRef((props: Props, ref: any) => {
         : null}
 
       <input ref={ref} className={cls} {...rest} />
+
+      {popover && (
+        <DetailsPopover
+          className={`${scssObj.baseClass}__info-icon`}
+          contentClassName={`${scssObj.baseClass}__popover-content`}
+          contentId="popover-details"
+          defaultPosition="BOTTOM_RIGHT"
+          iconType="info"
+          disabled={props.disabled}
+        >
+          {popover}
+        </DetailsPopover>
+      )}
       <div className={`${scssObj.baseClass}__btn`}>
         {hasButton && (renderButton ? renderButton() : <Button type="submit">Submit</Button>)}
       </div>

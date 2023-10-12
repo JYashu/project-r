@@ -1,0 +1,32 @@
+@import '../../styles/lib';
+
+$base-class: popover;
+
+/* stylelint-disable property-no-unknown */
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  display: inline-block;
+  padding-bottom: 4px;
+  padding-top: 4px;
+
+  &__content {
+    left: 30px !important;
+    position: absolute;
+    z-index: 10000;
+    &--hidden {
+      @include visually-hidden;
+    }
+
+    &--fixed {
+      position: fixed !important;
+    }
+  }
+  @media only screen and (max-width: 1024px) {
+    &__content {
+      left: -90px !important;
+    }
+  }
+}

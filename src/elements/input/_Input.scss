@@ -116,4 +116,27 @@ $base-class: input;
   &::placeholder {
     color: map-get($colors, prosecutor);
   }
+
+  &__info-icon {
+    position: absolute;
+    top: 11px;
+    right: 6px;
+  }
+}
+
+input.#{$base-class}--reposition-hidden-spin[type='number']::-webkit-inner-spin-button,
+input.#{$base-class}--reposition-hidden-spin[type='number']::-webkit-outer-spin-button {
+  position: relative;
+  margin-right: 20px;
+}
+
+input.#{$base-class}--reposition-hidden-spin[type='number']:hover::-webkit-inner-spin-button,
+input.#{$base-class}--reposition-hidden-spin[type='number']:hover::-webkit-outer-spin-button {
+  position: relative;
+  margin-right: 20px;
+}
+
+input.#{$base-class}--hidden-spin[type='number']::-webkit-inner-spin-button,
+input.#{$base-class}--hidden-spin[type='number']::-webkit-outer-spin-button {
+  display: none;
 }
