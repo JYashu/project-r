@@ -36,6 +36,7 @@ export interface Props extends Pick<React.ComponentProps<'button'>, ButtonProps>
   renderLoader?: () => React.ReactNode;
   spinnerType?: SpinnerType;
   isActive?: boolean;
+  hasBorder?: boolean;
 }
 
 const Button = ({
@@ -69,28 +70,24 @@ const Button = ({
   renderLoader,
   spinnerType,
   isActive,
+  hasBorder,
 }: Props): React.ReactElement<'button'> => {
-  const buttonCls = classnames(
-    scssObj.baseClass,
-    className,
-    `${scssObj.baseClass}--${buttonStyle || 'normal'}${isActive ? '--active' : ''}`,
-    {
-      [`${scssObj.baseClass}--empty`]:
-        !React.Children.count(children) || !children || ignoreChildren,
-      [`${scssObj.baseClass}--has-icon`]: icon,
-      [`${scssObj.baseClass}--intent-${intent}`]: intent,
-      [`${scssObj.baseClass}--loading`]: loading,
-      [`${scssObj.baseClass}--right-icon`]: rightIcon,
-      [`${scssObj.baseClass}--size-${size}`]: size,
-      [`${scssObj.baseClass}--transparent`]: !intent && transparent,
-      [`${scssObj.baseClass}--solid`]: intent || !transparent || solid,
-      [`${scssObj.baseClass}--include-focus`]: includeFocus,
-      [`${scssObj.baseClass}--rounded`]: rounded,
-      [`${scssObj.baseClass}--hand-writing`]: handWriting,
-      [`${scssObj.baseClass}--${buttonStyle || 'normal'}--active`]: isActive,
-      [`${scssObj.baseClass}--${buttonStyle || 'normal'}`]: !isActive,
-    },
-  );
+  const buttonCls = classnames(scssObj.baseClass, className, {
+    [`${scssObj.baseClass}--empty`]: !React.Children.count(children) || !children || ignoreChildren,
+    [`${scssObj.baseClass}--has-icon`]: icon,
+    [`${scssObj.baseClass}--intent-${intent}`]: intent,
+    [`${scssObj.baseClass}--loading`]: loading,
+    [`${scssObj.baseClass}--right-icon`]: rightIcon,
+    [`${scssObj.baseClass}--size-${size}`]: size,
+    [`${scssObj.baseClass}--transparent`]: !intent && transparent,
+    [`${scssObj.baseClass}--solid`]: intent || !transparent || solid,
+    [`${scssObj.baseClass}--include-focus`]: includeFocus,
+    [`${scssObj.baseClass}--rounded`]: rounded,
+    [`${scssObj.baseClass}--hand-writing`]: handWriting,
+    [`${scssObj.baseClass}--${buttonStyle || 'normal'}--active`]: isActive,
+    [`${scssObj.baseClass}--${buttonStyle || 'normal'}`]: !isActive,
+    [`${scssObj.baseClass}--border`]: hasBorder,
+  });
 
   const buttonRef = React.useRef<HTMLButtonElement>(null);
 

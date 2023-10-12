@@ -292,8 +292,8 @@
   }
 
   @if $transparent == false {
-    background-color: map-get($colors, victim);
-    color: map-get($colors, eden);
+    background-color: map-get($colors, baltic);
+    color: map-get($colors, victim);
 
     &:active {
       background-color: map-get($colors, juror-4);

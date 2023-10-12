@@ -101,7 +101,14 @@ const Input: React.SFC<Props> = React.forwardRef((props: Props, ref: any) => {
         </DetailsPopover>
       )}
       <div className={`${scssObj.baseClass}__btn`}>
-        {hasButton && (renderButton ? renderButton() : <Button type="submit">Submit</Button>)}
+        {hasButton &&
+          (renderButton ? (
+            renderButton()
+          ) : (
+            <Button transparent hasBorder rounded type="submit">
+              Submit
+            </Button>
+          ))}
       </div>
     </>
   );
