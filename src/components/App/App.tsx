@@ -1,6 +1,6 @@
 import QueryString from 'query-string';
 import React from 'react';
-import { Route, RouteComponentProps, Switch, withRouter } from 'react-router-dom';
+import { Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
 import TodoPage from '../todoPage';
 import Sidebar from '../sideBar';
@@ -25,12 +25,13 @@ import Home from '../home/Home';
 import Memory from '../memory';
 import Dictionary from '../dictionary';
 import NotFound from '../notFound';
-import ENV from '../../utils/env';
 import CBook from '../cbook';
 import SVGConverter from '../svgConverter';
 import useGetEnvironment from '../../hooks/useGetEnvironment';
 import MineSweeper from '../mineSweeper';
 import { KeyCodes } from '../../utils/consts';
+import SVGCreator from '../svgCreator';
+import IMGConverter from '../imgConverter';
 
 interface Props {
   isDictionaryVisible: boolean;
@@ -133,7 +134,9 @@ const App = ({
           <Route path="/snake" exact component={() => <Snake height={600} width={1000} />} />
           <Route path="/memory" exact component={Memory} />
           <Route path="/mal" exact component={MALEngine} />
-          <Route path="/svg-converter" exact component={SVGConverter} />
+          <Route path="/img-converter" exact component={IMGConverter} />
+          <Route path="/convert-to-svg" exact component={SVGCreator} />
+          <Route path="/convert-to-png" exact component={SVGConverter} />
           <Route path="/mine-sweeper" exact component={MineSweeper} />
           <Route component={NotFound} />
         </Switch>

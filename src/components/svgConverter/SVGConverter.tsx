@@ -16,7 +16,7 @@ import { Pages } from '../../utils/consts';
 import { FileType } from '../../elements/field/types';
 
 const SVGConverter = () => {
-  useActiveSidebarItem(ActiveSidebarItem.SVGConverter);
+  useActiveSidebarItem(ActiveSidebarItem.IMGConverter);
   useSetGlobalHeader(Pages.SVG_CONVERTER);
   const [height, setHeight] = useState<number>();
   const [width, setWidth] = useState<number>();

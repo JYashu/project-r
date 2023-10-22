@@ -52,7 +52,7 @@ export enum ActiveSidebarItem {
   Memory,
   Dictionary,
   CBook,
-  SVGConverter,
+  IMGConverter,
   MineSweeper,
 }
 

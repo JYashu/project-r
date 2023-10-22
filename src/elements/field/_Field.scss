@@ -158,7 +158,7 @@ $base-class: field;
     left: 0;
     height: auto;
     width: auto;
-    background-color: map-get($colors, prosecutor);
+    background-color: map-get($colors, disabled);
     opacity: 0.16;
     z-index: 9999999;
   }

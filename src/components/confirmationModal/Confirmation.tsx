@@ -63,10 +63,9 @@ const DoubleConfirmation = ({
         ) : (
           <Button onClick={handleCancel}>{cancelText || `Cancel`} </Button>
         )}
+        <br />
 
-        <Button onClick={handleContinue} intent="primary">
-          {continueText || `Continue`}
-        </Button>
+        <Button onClick={handleContinue}>{continueText || `Continue`}</Button>
       </footer>
     </div>
   );

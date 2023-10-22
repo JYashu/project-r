@@ -10,6 +10,7 @@ import { SnakeActions, SnakeState } from './snake/types';
 import { TicTacToeActions, TicTacToeState } from './tictactoe/types';
 import { CBookActions, CBookState } from './cbook/types';
 import { FileReaderActions, FileReaderState } from './fileReader/types';
+import { ConverterActions, ConverterState } from './converter/types';
 
 export interface State {
   me: MeState;
@@ -24,6 +25,7 @@ export interface State {
   dictionary: DictionaryState;
   cbook: CBookState;
   fileReader: FileReaderState;
+  converter: ConverterState;
 }
 
 export type Actions =
@@ -38,4 +40,5 @@ export type Actions =
   | MALActions
   | DictionaryActions
   | CBookActions
-  | FileReaderActions;
+  | FileReaderActions
+  | ConverterActions;

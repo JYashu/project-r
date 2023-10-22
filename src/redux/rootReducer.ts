@@ -13,6 +13,7 @@ import malReducer from './mal/reducer';
 import dictionaryReducer from './dictionary/reducer';
 import cbookReducer from './cbook/reducer';
 import fileReaderReducer from './fileReader/reducer';
+import converterReducer from './converter/reducer';
 
 export default combineReducers<State>({
   me: meReducer,
@@ -27,4 +28,5 @@ export default combineReducers<State>({
   dictionary: dictionaryReducer,
   cbook: cbookReducer,
   fileReader: fileReaderReducer,
+  converter: converterReducer,
 });

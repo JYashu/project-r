@@ -75,7 +75,8 @@
     "webpack-cli": "4.10.0",
     "webpack-dev-server": "4.9.0",
     "whatwg-fetch": "^3.6.2",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "potrace": "2.1.8"
   },
   "homepage": "https://jyashu.github.io/project-r/",
   "scripts": {
@@ -148,6 +149,7 @@
     "gh-pages": "^4.0.0",
     "jest-dom": "^4.0.0",
     "jest-environment-jsdom": "latest",
-    "npm-run-all": "4.1.5"
+    "npm-run-all": "4.1.5",
+    "@types/potrace": "2.1.2"
   }
 }

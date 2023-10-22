@@ -96,23 +96,6 @@ export const GAME_WON_MESSAGES = [
   { title: 'Way to go', message: 'That was lightening fast, Try again?' },
 ];
 
-export const ASSIGNED_PATHS = [
-  '/',
-  '/home',
-  'todo',
-  '/tic-tac-toe',
-  '/npm-engine',
-  '/test',
-  '/settings',
-  '/giphy-engine',
-  '/spinners',
-  '/snake',
-  '/memory',
-  '/mal',
-  '/svg-converter',
-  '/mine-sweeper',
-];
-
 export enum Pages {
   HOME = '/',
   TODO = '/todo',
@@ -125,10 +108,23 @@ export enum Pages {
   GIPHY_ENGINE = '/giphy-engine',
   SETTINGS = '/settings',
   LOGIN = '/login',
-  SVG_CONVERTER = '/svg-converter',
+  IMG_CONVERTER = '/img-converter',
+  SVG_CONVERTER = '/convert-to-png',
+  SVG_CREATOR = '/convert-to-svg',
   MINE_SWEEPER = '/mine-sweeper',
   LOADING_SPINNERS = '/spinners',
 }
+
+export const ASSIGNED_PATHS = [
+  ...Object.values(Pages).map((page) => {
+    if (page === Pages.CBOOK) {
+      return '';
+    }
+    return page.toString();
+  }),
+  '/home',
+  '/mal',
+];
 
 export const BETA_ONLY_PAGES = [
   Pages.TODO,
@@ -186,7 +182,9 @@ export const PageTitles = {
   [Pages.GIPHY_ENGINE]: 'Giphy Engine',
   [Pages.NPM_ENGINE]: 'NPM Engine',
   [Pages.LOADING_SPINNERS]: 'Loading Spinners',
+  [Pages.IMG_CONVERTER]: 'IMG Convertor',
   [Pages.SVG_CONVERTER]: 'SVG To PNG Convertor',
+  [Pages.SVG_CREATOR]: 'IMG To SVG Convertor',
   [Pages.TEST]: 'Test Page',
   [Pages.TODO]: 'ToDo',
   [Pages.CBOOK]: 'CBook',
