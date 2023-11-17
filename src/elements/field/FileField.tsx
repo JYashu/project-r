@@ -29,6 +29,7 @@ interface Props {
   persistData?: string;
   restrictURL?: boolean;
   charLength?: number;
+  renderButton?: () => React.ReactNode;
   onFileUpload?: (file: File | undefined) => void;
 }
 
@@ -43,6 +44,7 @@ const FileUpload = ({
   onFileUpload,
   charLength,
   restrictURL,
+  renderButton,
 }: Props) => {
   const [error, setError] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -211,12 +213,16 @@ const FileUpload = ({
     >
       {minimal ? (
         <div {...handlers}>
-          <Button
-            className={`${scssObj.baseClass}__upload-button`}
-            icon={fileData ? 'description' : 'upload'}
-            title={fileData?.file.name || placeHolder || 'Choose File'}
-            rounded
-          />
+          {renderButton ? (
+            renderButton()
+          ) : (
+            <Button
+              className={`${scssObj.baseClass}__upload-button`}
+              icon={fileData ? 'description' : 'upload'}
+              title={fileData?.file.name || placeHolder || 'Choose File'}
+              rounded
+            />
+          )}
         </div>
       ) : (
         <div>

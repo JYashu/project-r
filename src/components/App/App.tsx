@@ -1,6 +1,5 @@
-import QueryString from 'query-string';
 import React from 'react';
-import { Route, RouteComponentProps, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
 import TodoPage from '../todoPage';
 import Sidebar from '../sideBar';
@@ -18,9 +17,6 @@ import useKeyboardShortcut from '../../hooks/useKeyboardShortcut';
 import Clipboard from '../clipboard';
 import Snake from '../snake';
 import MALEngine from '../malEngine';
-import LoginPage from '../loginPage';
-import { getTokens } from '../../utils/requestTokens';
-import HandleLoginContainer from '../handleLogin/HandleLoginContainer';
 import Home from '../home/Home';
 import Memory from '../memory';
 import Dictionary from '../dictionary';
@@ -88,40 +84,6 @@ const App = ({
       >
         <Switch>
           <Route path="/cbook" exact component={CBook} />
-
-          <Route
-            path="/login"
-            exact
-            component={(props: RouteComponentProps) => {
-              const { location } = props;
-              const { accessToken } = getTokens();
-              const { email } = QueryString.parse(location.search, {
-                decode: false,
-              });
-
-              if (email) {
-                return <LoginPage email={decodeURIComponent(email)} />;
-              }
-
-              return <LoginPage />;
-            }}
-          />
-          <Route
-            path="/auth"
-            exact
-            component={(props: RouteComponentProps) => {
-              const { location } = props;
-              const { accessToken } = getTokens();
-              const searchParams = new URLSearchParams(location.search);
-              const authCode = searchParams.get('code');
-
-              if (!accessToken && !authCode) {
-                window.location.href = '/';
-              }
-
-              return <HandleLoginContainer />;
-            }}
-          />
           <Route path="/" exact component={Home} />
           <Route path="/home" exact component={Home} />
           <Route path="/todo" exact component={TodoPage} />

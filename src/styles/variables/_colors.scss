@@ -116,6 +116,6 @@ $intent-colors: (
 
 :export {
   @each $key, $value in $colors {
-    #{unquote($key)}: $value;
+    #{$key}: $value;
   }
 }

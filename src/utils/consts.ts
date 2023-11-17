@@ -126,13 +126,7 @@ export const ASSIGNED_PATHS = [
   '/mal',
 ];
 
-export const BETA_ONLY_PAGES = [
-  Pages.TODO,
-  Pages.TEST,
-  Pages.LOGIN,
-  Pages.NPM_ENGINE,
-  Pages.GIPHY_ENGINE,
-];
+export const BETA_ONLY_PAGES = [Pages.TODO, Pages.TEST, Pages.NPM_ENGINE, Pages.GIPHY_ENGINE];
 
 export const BETA_ONLY_PATHS = BETA_ONLY_PAGES.map((e) => e.toString());
 
@@ -189,7 +183,6 @@ export const PageTitles = {
   [Pages.TODO]: 'ToDo',
   [Pages.CBOOK]: 'CBook',
   [Pages.SETTINGS]: 'Settings',
-  [Pages.LOGIN]: 'Login',
 };
 
 export enum KeyCodes {

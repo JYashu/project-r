@@ -1,11 +1,9 @@
 import { SagaIterator } from 'redux-saga';
-import { call, getContext, put, SagaReturnType, takeEvery } from 'redux-saga/effects';
-import { completeSignIn, copyText } from './actions';
+import { put, takeEvery } from 'redux-saga/effects';
+import { copyText } from './actions';
 import getErrorFromCatch from '../utils/getErrorFromCatch';
 import { addSnack } from '../snackbar';
 import { SnackType } from '../../types';
-import requestTokens, { persistTokens } from '../../utils/requestTokens';
-import { SagaContext } from '../utils/sagaContext';
 
 export function* watchCopyText(
   { success, failure }: typeof copyText,
@@ -34,34 +32,6 @@ export function* watchCopyText(
   }
 }
 
-export function* watchCompleteSignInRequest(
-  { success, failure }: typeof completeSignIn,
-  { payload }: ReturnType<typeof completeSignIn.request>,
-): SagaIterator<void> {
-  try {
-    const { username, password } = payload;
-
-    const tokens: SagaReturnType<typeof requestTokens> = yield call(requestTokens, {
-      username,
-      password,
-    });
-
-    if (!tokens.accessToken || !tokens.refreshToken) {
-      throw new Error(`Invalid tokens: ${tokens}`);
-    }
-    persistTokens(tokens);
-
-    const routerHistory: SagaContext['routerHistory'] = yield getContext('routerHistory');
-
-    setTimeout(() => routerHistory.push(`/auth`), 4000);
-
-    yield put(success());
-  } catch (e) {
-    yield put(failure(getErrorFromCatch(e)));
-  }
-}
-
 export function* meSaga(): SagaIterator<void> {
   yield takeEvery(copyText.request, watchCopyText, copyText);
-  yield takeEvery(completeSignIn.request, watchCompleteSignInRequest, completeSignIn);
 }

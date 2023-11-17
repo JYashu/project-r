@@ -3,7 +3,6 @@ import { Provider } from 'react-redux';
 import { withRouter, RouteComponentProps } from 'react-router';
 import React from 'react';
 import store from '../../redux/store';
-import { getTokens } from '../../utils/requestTokens';
 
 type Props = RouteComponentProps;
 
@@ -12,8 +11,6 @@ class ProviderWithRouter extends React.Component<Props> {
 
   constructor(props: Props) {
     super(props);
-
-    const { accessToken } = getTokens();
 
     let lastLocation: any = null;
     props.history.listen((location) => {

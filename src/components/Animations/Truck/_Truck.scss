@@ -11,6 +11,15 @@ $base-class: truck;
   overflow: hidden;
   font-family: 'Open Sans', sans-serif;
   height: 100%;
+  position: relative;
+
+  &__credit {
+    @include type-style-game;
+
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+  }
 
   &__loop-wrapper {
     margin: 0 auto;

@@ -23,7 +23,7 @@ $base-class: cbook;
   &__add-cell {
     position: relative;
     opacity: 0;
-    transition: opacity 0.3s ease-in 0.2s;
+    transition: opacity 0.2s ease-in;
     margin: 10px 0;
   }
 

@@ -18,6 +18,7 @@ const mapState = (state: State, { id }: OwnProps) => ({
 const mapDispatch = (dispatch: Dispatch, { id }: OwnProps) => ({
   moveCell: (direction: Direction) => dispatch(moveCell({ id, direction })),
   togglePreview: () => dispatch(togglePreview({ id })),
+  deleteCell: () => dispatch(deleteCell({ id })),
   handleConfirmation: () =>
     dispatch(
       openModal({

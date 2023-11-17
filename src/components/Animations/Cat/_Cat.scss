@@ -16,6 +16,16 @@ $size: 170px; // (Fully responsive)
   align-items: center;
   justify-content: center;
   background: $color-black;
+  position: relative;
+
+  &__credit {
+    @include type-style-game;
+
+    color: white;
+    position: absolute;
+    top: 842px;
+    right: 20px;
+  }
 
   &__cat {
     position: relative;
