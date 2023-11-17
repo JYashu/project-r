@@ -107,7 +107,6 @@ export enum Pages {
   NPM_ENGINE = '/npm-engine',
   GIPHY_ENGINE = '/giphy-engine',
   SETTINGS = '/settings',
-  LOGIN = '/login',
   IMG_CONVERTER = '/img-converter',
   SVG_CONVERTER = '/convert-to-png',
   SVG_CREATOR = '/convert-to-svg',
