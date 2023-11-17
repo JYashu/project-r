@@ -1,10 +1,11 @@
 import classNames from 'classnames';
 import { useState } from 'react';
 import Draggable from 'react-draggable';
+import Link from '../../../elements/link';
 import scssObj from './_Submarine.scss';
 
 /*
- *https://github.com/data-pirates07/submarine-animation-using-pure-css
+ * CSS animations by @data._.pirates: https://github.com/data-pirates07/submarine-animation-using-pure-css
  */
 
 /* http://drbl.in/nOzJ
@@ -160,6 +161,16 @@ const Submarine = ({ animate }: Props) => {
           <span className={`${scssObj.baseClass}__up-19`} />
           <span className={`${scssObj.baseClass}__up-20`} />
         </div>
+      </div>
+      <div className={`${scssObj.baseClass}__credit`}>
+        by{' '}
+        <Link
+          externalLinkIcon
+          isExternal
+          to="https://github.com/data-pirates07/submarine-animation-using-pure-css"
+        >
+          @data._.pirates
+        </Link>
       </div>
     </div>
   );

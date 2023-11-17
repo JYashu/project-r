@@ -124,19 +124,12 @@ export enum Pages {
   NPM_ENGINE = '/npm-engine',
   GIPHY_ENGINE = '/giphy-engine',
   SETTINGS = '/settings',
-  LOGIN = '/login',
   SVG_CONVERTER = '/svg-converter',
   MINE_SWEEPER = '/mine-sweeper',
   LOADING_SPINNERS = '/spinners',
 }
 
-export const BETA_ONLY_PAGES = [
-  Pages.TODO,
-  Pages.TEST,
-  Pages.LOGIN,
-  Pages.NPM_ENGINE,
-  Pages.GIPHY_ENGINE,
-];
+export const BETA_ONLY_PAGES = [Pages.TODO, Pages.TEST, Pages.NPM_ENGINE, Pages.GIPHY_ENGINE];
 
 export const BETA_ONLY_PATHS = BETA_ONLY_PAGES.map((e) => e.toString());
 
@@ -191,5 +184,4 @@ export const PageTitles = {
   [Pages.TODO]: 'ToDo',
   [Pages.CBOOK]: 'CBook',
   [Pages.SETTINGS]: 'Settings',
-  [Pages.LOGIN]: 'Login',
 };

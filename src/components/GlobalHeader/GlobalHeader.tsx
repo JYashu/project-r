@@ -33,14 +33,6 @@ const GlobalHeader = withRouter(
       setGlobalTitle(Pages.HOME);
     }
 
-    if (
-      history.location.pathname === '/auth' ||
-      history.location.pathname === '/login' ||
-      history.location.pathname === '/login/'
-    ) {
-      return null;
-    }
-
     if (!ASSIGNED_PATHS.includes(history.location.pathname)) return null;
 
     if (isProd && BETA_ONLY_PATHS.includes(history.location.pathname)) return null;
@@ -75,7 +67,7 @@ const GlobalHeader = withRouter(
         {history.location.pathname === '/snake' && (
           <div className={`${scssObj.baseClass}__score`}>Score: {snakeScore}</div>
         )}
-        <Link isNative target="new" to="https://github.com/jyashu">
+        <Link isExternal target="new" to="https://github.com/jyashu">
           <div className={`${scssObj.baseClass}__github`} />
         </Link>
         <div className={`${scssObj.baseClass}__clock`}>

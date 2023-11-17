@@ -37,7 +37,7 @@ export const withState = withFormik<OuterProps, Values>({
       })
       .catch((e) => {
         setSubmitting(false);
-        console.warn('link account error', e);
+        console.warn(e);
       });
   },
   mapPropsToValues: () => initialValues(),

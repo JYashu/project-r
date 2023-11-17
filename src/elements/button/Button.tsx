@@ -27,7 +27,15 @@ export interface Props extends Pick<React.ComponentProps<'button'>, ButtonProps>
   ignoreChildren?: boolean;
   ariaExpanded?: boolean;
   ariaLabel?: string;
-  buttonStyle?: 'game' | 'normal' | 'glossy' | 'abstract' | 'blur' | 'minimal' | 'minesweeper';
+  buttonStyle?:
+    | 'game'
+    | 'basic'
+    | 'glossy'
+    | 'abstract'
+    | 'blur'
+    | 'minimal'
+    | 'minesweeper'
+    | 'default';
   includeFocus?: boolean;
   rounded?: boolean;
   handWriting?: boolean;
@@ -70,27 +78,21 @@ const Button = ({
   spinnerType,
   isActive,
 }: Props): React.ReactElement<'button'> => {
-  const buttonCls = classnames(
-    scssObj.baseClass,
-    className,
-    `${scssObj.baseClass}--${buttonStyle || 'normal'}${isActive ? '--active' : ''}`,
-    {
-      [`${scssObj.baseClass}--empty`]:
-        !React.Children.count(children) || !children || ignoreChildren,
-      [`${scssObj.baseClass}--has-icon`]: icon,
-      [`${scssObj.baseClass}--intent-${intent}`]: intent,
-      [`${scssObj.baseClass}--loading`]: loading,
-      [`${scssObj.baseClass}--right-icon`]: rightIcon,
-      [`${scssObj.baseClass}--size-${size}`]: size,
-      [`${scssObj.baseClass}--transparent`]: !intent && transparent,
-      [`${scssObj.baseClass}--solid`]: intent || !transparent || solid,
-      [`${scssObj.baseClass}--include-focus`]: includeFocus,
-      [`${scssObj.baseClass}--rounded`]: rounded,
-      [`${scssObj.baseClass}--hand-writing`]: handWriting,
-      [`${scssObj.baseClass}--${buttonStyle || 'normal'}--active`]: isActive,
-      [`${scssObj.baseClass}--${buttonStyle || 'normal'}`]: !isActive,
-    },
-  );
+  const buttonCls = classnames(scssObj.baseClass, className, {
+    [`${scssObj.baseClass}--empty`]: !React.Children.count(children) || !children || ignoreChildren,
+    [`${scssObj.baseClass}--has-icon`]: icon,
+    [`${scssObj.baseClass}--intent-${intent}`]: intent,
+    [`${scssObj.baseClass}--loading`]: loading,
+    [`${scssObj.baseClass}--right-icon`]: rightIcon,
+    [`${scssObj.baseClass}--size-${size}`]: size,
+    [`${scssObj.baseClass}--transparent`]: !intent && transparent,
+    [`${scssObj.baseClass}--solid`]: intent || !transparent || solid,
+    [`${scssObj.baseClass}--include-focus`]: includeFocus,
+    [`${scssObj.baseClass}--rounded`]: rounded,
+    [`${scssObj.baseClass}--hand-writing`]: handWriting,
+    [`${scssObj.baseClass}--${buttonStyle || 'default'}--active`]: isActive,
+    [`${scssObj.baseClass}--${buttonStyle || 'default'}`]: !isActive,
+  });
 
   const buttonRef = React.useRef<HTMLButtonElement>(null);
 

@@ -8,7 +8,7 @@ interface Props {
   data: NPMRepoData;
 }
 
-const MatterListItem = ({ data }: Props) => {
+const NPMRepoItem = ({ data }: Props) => {
   const { name, link, description, publisher, version, date } = data;
 
   const displayAge = () => {
@@ -26,7 +26,7 @@ const MatterListItem = ({ data }: Props) => {
     <div className={`${scssObj.baseClass}`}>
       <div className={`${scssObj.baseClass}__container`}>
         <div className={`${scssObj.baseClass}__item`}>
-          <Link linkStyle="container" to={link} target="new" isNative>
+          <Link linkStyle="container" to={link} target="new" isExternal>
             <div className={`${scssObj.baseClass}__details`}>
               <div className={`${scssObj.baseClass}__name`}>{name}</div>
               <div className={`${scssObj.baseClass}__info`}>
@@ -49,4 +49,4 @@ const MatterListItem = ({ data }: Props) => {
   );
 };
 
-export default MatterListItem;
+export default NPMRepoItem;

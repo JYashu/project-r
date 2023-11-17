@@ -1,7 +1,9 @@
+import Icon from '../../../elements/icon';
+import Link from '../../../elements/link';
 import scssObj from './_Truck.scss';
 
 /*
- * https://codepen.io/ChrisJohnson/pen/OyXWpr
+ * CSS animations by Chris Johnson: https://codepen.io/ChrisJohnson/pen/OyXWpr
  */
 
 const Truck = () => {
@@ -23,6 +25,12 @@ const Truck = () => {
         <div className={`${scssObj.baseClass}__rock`} />
         <div className={`${scssObj.baseClass}__truck`} />
         <div className={`${scssObj.baseClass}__wheels`} />
+      </div>
+      <div className={`${scssObj.baseClass}__credit`}>
+        by{' '}
+        <Link externalLinkIcon isExternal to="https://codepen.io/ChrisJohnson/pen/OyXWpr">
+          Chris Johnson
+        </Link>
       </div>
     </div>
   );

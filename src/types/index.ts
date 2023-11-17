@@ -108,23 +108,6 @@ export interface Snack {
   message: string;
   snackType: SnackType;
   img?: Img;
-  undo?: {
-    accountId: string;
-    transactionId: string;
-    prevAllocation?: { amount: number; matterId: string; notes: string | null };
-    unlink?: boolean;
-  };
-}
-
-export enum SuggestionOperationType {
-  CONFIRM,
-  DENY,
-  UNLINK,
-}
-
-export enum SuggestionType {
-  OUTSTANDING_CHECK,
-  PAYMENT_REQUEST,
 }
 
 export enum AIMode {

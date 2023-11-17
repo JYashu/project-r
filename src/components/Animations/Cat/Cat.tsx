@@ -1,8 +1,9 @@
 import classNames from 'classnames';
+import Link from '../../../elements/link';
 import scssObj from './_Cat.scss';
 
 /*
- * https://codepen.io/johanmouchet/pen/OXxvqr
+ * CSS animations by Johan Mouchet: https://codepen.io/johanmouchet/pen/OXxvqr
  */
 
 const Cat = () => {
@@ -38,6 +39,12 @@ const Cat = () => {
           </div>
           <div className={`${scssObj.baseClass}__muzzle`} />
         </div>
+      </div>
+      <div className={`${scssObj.baseClass}__credit`}>
+        by{' '}
+        <Link externalLinkIcon isExternal to="https://codepen.io/johanmouchet/pen/OXxvqr">
+          Johan Mouchet
+        </Link>
       </div>
     </div>
   );

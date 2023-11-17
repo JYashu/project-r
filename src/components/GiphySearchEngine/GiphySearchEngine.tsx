@@ -162,14 +162,14 @@ const GiphySearchEngine = ({
                       <div className="overlay" />
                       <div className="details">
                         <div className={`${scssObj.baseClass}__link-holder`}>
-                          <Link isNative to={element.url} target="_blank">
+                          <Link isExternal to={element.url} target="_blank">
                             <Button buttonStyle="abstract" rounded>
                               Giphy
                             </Button>
                           </Link>
                         </div>
                         <div className={`${scssObj.baseClass}__link-holder`}>
-                          <Link isNative to={element.source_post_url} target="_blank">
+                          <Link isExternal to={element.source_post_url} target="_blank">
                             <Button buttonStyle="abstract" rounded>
                               Original
                             </Button>
