@@ -13,6 +13,7 @@ import Resizable from '../../elements/resizable';
 import Icon from '../../elements/icon';
 import scssObj from './_CodeCell.scss';
 import { HTML } from '../../utils/consts';
+import { copyText } from '../../redux/me';
 
 interface Props {
   cell: Cell;
@@ -61,6 +62,7 @@ const Preview = ({ code, status }: PreviewProps) => {
 
 const CodeEditor = ({ initialValue, onChange, runCode }: CodeEditorProps) => {
   const editorRef = useRef<any>();
+  const dispatch = useDispatch();
 
   const onEditorDidMount: EditorDidMount = (getValue: any, editor: any) => {
     editorRef.current = editor;
@@ -86,6 +88,10 @@ const CodeEditor = ({ initialValue, onChange, runCode }: CodeEditorProps) => {
     editorRef.current.setValue(formatted);
   };
 
+  const onCopyClick = () => {
+    dispatch(copyText.request({ text: editorRef.current.getModel().getValue() }));
+  };
+
   return (
     <div className={`${scssObj.baseClass}__editor-wrapper`}>
       <div className={`${scssObj.baseClass}__action-buttons`}>
@@ -94,6 +100,7 @@ const CodeEditor = ({ initialValue, onChange, runCode }: CodeEditorProps) => {
           icon="play_arrow"
           size="small"
           onClickHandler={runCode}
+          title="Run Code"
           removeOutline
         />
         <Icon
@@ -101,6 +108,14 @@ const CodeEditor = ({ initialValue, onChange, runCode }: CodeEditorProps) => {
           icon="code"
           size="small"
           onClickHandler={onFormatClick}
+          title="Format Code"
+        />
+        <Icon
+          className={`${scssObj.baseClass}__icon`}
+          icon="copy"
+          size="small"
+          onClickHandler={onCopyClick}
+          title="Copy Code"
         />
       </div>
       <Editor

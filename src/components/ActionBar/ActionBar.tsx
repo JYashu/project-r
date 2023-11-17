@@ -1,7 +1,9 @@
 import classNames from 'classnames';
+import { useSelector } from 'react-redux';
 import { CellTypes, Direction } from '../../types';
 import Icon from '../../elements/icon';
 import scssObj from './_ActionBar.scss';
+import { selectCellContentById } from '../../redux/cbook';
 
 interface Props {
   id: string;
@@ -9,6 +11,7 @@ interface Props {
   visibilityIcon: string;
   moveCell: (direction: Direction) => void;
   togglePreview: () => void;
+  deleteCell: () => void;
   handleConfirmation: () => void;
 }
 
@@ -18,8 +21,16 @@ const ActionBar = ({
   visibilityIcon,
   moveCell,
   togglePreview,
+  deleteCell,
   handleConfirmation,
 }: Props) => {
+  const cellContent = useSelector(selectCellContentById({ id }));
+
+  const handleCloseClick = () => {
+    if (cellContent !== null && cellContent !== '') handleConfirmation();
+    else deleteCell();
+  };
+
   return (
     <div className={`${scssObj.baseClass}`}>
       <div
@@ -51,7 +62,7 @@ const ActionBar = ({
           className={`${scssObj.baseClass}__icon`}
           icon="close"
           size="small"
-          onClickHandler={() => handleConfirmation()}
+          onClickHandler={() => handleCloseClick()}
         />
       </div>
     </div>
