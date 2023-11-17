@@ -50,4 +50,18 @@ $base-class: link;
       text-decoration: inherit;
     }
   }
+
+  &--is-external {
+    position: relative;
+    margin-right: 10px;
+  }
+
+  &--link-external {
+    position: absolute;
+    bottom: 5%;
+    max-height: 30px;
+    height: 85%;
+    width: auto;
+    fill: map-get($colors, eden);
+  }
 }

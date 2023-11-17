@@ -1,6 +1,7 @@
 @import '../../styles/lib';
 
 $base-class: button;
+$style: default;
 
 :export {
   baseClass: $base-class;
@@ -15,7 +16,7 @@ $base-class: button;
     background-color: map-get($colors, eden);
   }
 
-  &--normal {
+  &--default {
     @include button-style;
   }
 
@@ -118,6 +119,10 @@ $base-class: button;
 
   &--minimal {
     @include button-style($style: minimal);
+  }
+
+  &--basic {
+    @include button-style($style: basic);
   }
 
   &--minesweeper {

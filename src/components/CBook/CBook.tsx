@@ -5,6 +5,7 @@ import Button from '../../elements/button';
 import CellItem from '../cellItem';
 
 import scssObj from './_CBook.scss';
+import { FileField } from '../../elements/field';
 
 interface Props {
   order: string[];

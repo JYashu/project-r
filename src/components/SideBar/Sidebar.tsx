@@ -4,8 +4,6 @@ import { ProSidebar, SidebarContent, Menu, MenuItem, SidebarFooter } from 'react
 import scssObj from './_Sidebar.scss';
 import { ActiveSidebarItem, Config } from '../../types';
 import Icon from '../../elements/icon';
-import logOut from '../../utils/logOut';
-import ENV from '../../utils/env';
 import { ASSIGNED_PATHS, BETA_ONLY_PAGES, BETA_ONLY_PATHS, Pages } from '../../utils/consts';
 import PermissionsManager from '../../elements/permissionsManager';
 import useGetEnvironment from '../../hooks/useGetEnvironment';
@@ -31,15 +29,7 @@ const Sidebar = withRouter(
     openDictionary,
   }: Props) => {
     const [isRecollapse, setRecollapse] = useState(true);
-    const { isDev, isProd } = useGetEnvironment();
-
-    if (
-      history.location.pathname === '/auth' ||
-      history.location.pathname === '/login' ||
-      history.location.pathname === '/login/'
-    ) {
-      return null;
-    }
+    const { isProd } = useGetEnvironment();
 
     if (!ASSIGNED_PATHS.includes(history.location.pathname)) return null;
 
@@ -102,15 +92,17 @@ const Sidebar = withRouter(
                 <Link tabIndex={-1} to="/todo" />
               </MenuItem>
             </PermissionsManager>
-            <MenuItem
-              className={itemClassName}
-              key={getUniqueId()}
-              active={activeSidebarItem === ActiveSidebarItem.SpinnerPage}
-              icon={<Icon removeOutline size="small" icon="restart_alt" />}
-            >
-              Spinners
-              <Link tabIndex={-1} to="/spinners" />
-            </MenuItem>
+            <PermissionsManager isHiddenForProd>
+              <MenuItem
+                className={itemClassName}
+                key={getUniqueId()}
+                active={activeSidebarItem === ActiveSidebarItem.SpinnerPage}
+                icon={<Icon removeOutline size="small" icon="restart_alt" />}
+              >
+                Spinners
+                <Link tabIndex={-1} to="/spinners" />
+              </MenuItem>
+            </PermissionsManager>
             <MenuItem
               className={itemClassName}
               key={getUniqueId()}
@@ -220,19 +212,10 @@ const Sidebar = withRouter(
               Settings
               <Link tabIndex={-1} to="/settings" />
             </MenuItem>
-            <PermissionsManager isHiddenForProd={BETA_ONLY_PAGES.includes(Pages.LOGIN)}>
+            <PermissionsManager isHiddenForProd>
               <MenuItem key={getUniqueId()} icon={<Icon removeOutline size="small" icon="login" />}>
-                Login {BETA_ONLY_PAGES.includes(Pages.LOGIN) ? '(Beta Only)' : ''}
+                Login (Beta Only)
                 <Link tabIndex={-1} to="/login" />
-              </MenuItem>
-            </PermissionsManager>
-            <PermissionsManager isLogout>
-              <MenuItem
-                key={getUniqueId()}
-                onClick={() => logOut()}
-                icon={<Icon removeOutline size="small" icon="logout" />}
-              >
-                Logout
               </MenuItem>
             </PermissionsManager>
           </Menu>

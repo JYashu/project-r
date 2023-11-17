@@ -1,12 +1,9 @@
 import { useEffect, useCallback, useRef } from 'react';
 import classnames from 'classnames';
-import { useDispatch } from 'react-redux';
 import scssObj from './_Snackbars.scss';
 import Button from '../../elements/button';
-import { FULLSTORY_EXCLUDE_CLASS } from '../../utils/consts';
-import { Img, Snack, SnackType, SuggestionOperationType, SuggestionType } from '../../types';
+import { Snack, SnackType } from '../../types';
 import images from '../../utils/images';
-// import { patchTransactionSuggestion, tagTransaction } from '../../redux/transactions';
 
 const { SUCCESS, FAILURE, DEFAULT } = SnackType;
 
@@ -25,16 +22,11 @@ const defaultProps = {
   snackType: DEFAULT,
 };
 
-const Snackbar = ({ id, duration, message, img, undo, removeSnack, snackType }: SnackbarProps) => {
+const Snackbar = ({ id, duration, message, img, removeSnack, snackType }: SnackbarProps) => {
   const timeout = useRef<number>();
   const handleClick = useCallback(() => {
     removeSnack({ id });
   }, [id, removeSnack]);
-  const handleUndo = useCallback(() => {
-    if (undo) {
-      removeSnack({ id });
-    }
-  }, [id, removeSnack, undo]);
 
   useEffect(() => {
     clearTimeout(timeout.current);
@@ -71,14 +63,6 @@ const Snackbar = ({ id, duration, message, img, undo, removeSnack, snackType }: 
           <div className={`${scssObj.baseClass}__img`}>{img && images.get(img)}</div>
         </div>
 
-        {undo && (
-          <Button
-            className={`${scssObj.baseClass}__undo`}
-            icon="undo"
-            iconDescription={`Undo tagged transaction. ${message}`}
-            onClick={handleUndo}
-          />
-        )}
         <Button
           className={`${scssObj.baseClass}__dismiss`}
           icon="close"

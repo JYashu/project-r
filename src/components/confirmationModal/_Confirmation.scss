@@ -18,6 +18,7 @@ $base-class: double-confirmation;
     align-items: center;
     display: flex;
     justify-content: flex-end;
+    gap: 10px;
   }
 
   &__content-dark {
@@ -31,6 +32,7 @@ $base-class: double-confirmation;
     align-items: center;
     display: flex;
     justify-content: flex-end;
+    gap: 10px;
   }
 
   &__header {

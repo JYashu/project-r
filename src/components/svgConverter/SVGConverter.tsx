@@ -194,16 +194,12 @@ const SVGConverter = () => {
         </div>
         <div className={`${scssObj.baseClass}__sandbox`}>
           <br />
-          <Button
-            className={`${scssObj.baseClass}__load-svg`}
-            buttonStyle="normal"
-            onClick={getSVG}
-          >
+          <Button className={`${scssObj.baseClass}__load-svg`} buttonStyle="basic" onClick={getSVG}>
             Load SVG
           </Button>
           <Button
             className={`${scssObj.baseClass}__download-svg`}
-            buttonStyle="normal"
+            buttonStyle="basic"
             onClick={downloadSVG}
           >
             Download SVG
@@ -240,16 +236,12 @@ const SVGConverter = () => {
             value={height}
           />
           <br />
-          <Button
-            className={`${scssObj.baseClass}__load-png`}
-            buttonStyle="normal"
-            onClick={getPNG}
-          >
+          <Button className={`${scssObj.baseClass}__load-png`} buttonStyle="basic" onClick={getPNG}>
             Load PNG
           </Button>
           <Button
             className={`${scssObj.baseClass}__download-png`}
-            buttonStyle="normal"
+            buttonStyle="basic"
             onClick={downloadPNG}
           >
             Download PNG

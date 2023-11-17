@@ -27,6 +27,15 @@ $seaGroundColor2: #08003b;
   position: relative;
   overflow: hidden;
 
+  &__credit {
+    @include type-style-game;
+
+    color: white;
+    position: absolute;
+    top: 842px;
+    right: 20px;
+  }
+
   &__seaContainer {
     position: absolute;
     top: 0%;
