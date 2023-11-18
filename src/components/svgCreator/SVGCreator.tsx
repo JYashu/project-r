@@ -11,7 +11,7 @@ import Button from '../../elements/button';
 import Field, { ColorField, FileField } from '../../elements/field';
 import TextArea from '../../elements/textArea';
 import useActiveSidebarItem from '../../hooks/useActiveSidebarItem';
-import { getFileAsText, getUniqueId, parseNumber } from '../../utils/helpers';
+import { downloadFile, getFileAsText, getUniqueId, parseNumber } from '../../utils/helpers';
 import { ActiveSidebarItem } from '../../types';
 import scssObj from './_SVGCreator.scss';
 import useGetEnvironment from '../../hooks/useGetEnvironment';
@@ -80,7 +80,6 @@ const SVGCreator = () => {
       });
     } else {
       // Posterization
-
       setSteps(steps || -1);
       setThreshold(threshold || 200);
       const posterizer = new potrace.Posterizer({
@@ -97,6 +96,23 @@ const SVGCreator = () => {
         setReset(true);
         setSvg(posterizer.getSVG());
       });
+    }
+  };
+
+  const downloadSVG = () => {
+    if (svgElement) {
+      const svgData = new XMLSerializer().serializeToString(svgElement);
+      const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+      const url = URL.createObjectURL(svgBlob);
+      downloadFile(
+        url,
+        `${
+          svgElement.id ||
+          svgElement.getAttribute('name') ||
+          svgElement.getAttribute('aria-label') ||
+          'untitled'
+        }.svg`,
+      );
     }
   };
 
@@ -147,13 +163,13 @@ const SVGCreator = () => {
   }, [svg, height, width]);
 
   return (
-    <div className={`${scssObj.baseClass}`}>
+    <div>
       <Helmet>
         <title>SVG Creator</title>
         <meta name="title" content="SVG Creator | JYashu" />
         <meta name="description" content="A simple tool to convert images to SVG format." />
       </Helmet>
-      <div>
+      <div className={`${scssObj.baseClass}`}>
         <div className={`${scssObj.baseClass}__file-upload`}>
           <div
             className={classNames(
@@ -207,7 +223,6 @@ const SVGCreator = () => {
           </div>
         </div>
         <div className={`${scssObj.baseClass}__sandbox`}>
-          {/* <div className={`${scssObj.baseClass}__row`}> */}
           {imageURL && (
             <img
               className={`${scssObj.baseClass}__canvas`}
@@ -242,13 +257,14 @@ const SVGCreator = () => {
           <Button
             className={`${scssObj.baseClass}__download-svg`}
             buttonStyle="skew"
-            onClick={() => {}}
+            onClick={downloadSVG}
+            title={!svgElement ? 'Load the SVG before downloading' : 'Download SVG'}
+            disabled={!svgElement}
           >
             Download SVG
           </Button>
           <br />
           <br />
-          {/* <div className={`${scssObj.baseClass}__row`}> */}
           <ColorField
             className={`${scssObj.baseClass}__color-input`}
             defaultColor="#9a4c4c"

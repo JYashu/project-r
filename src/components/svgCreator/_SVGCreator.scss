@@ -8,7 +8,7 @@ $base-class: svg-creator;
 
 .#{$base-class} {
   @include type-style-justice;
-  height: 100%;
+  height: fit-content;
   min-height: calc(100vh - 64px);
   background-color: map-get($colors, gardenia);
   padding-top: 5rem;

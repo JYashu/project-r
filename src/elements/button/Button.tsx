@@ -95,6 +95,7 @@ const Button = ({
     [`${scssObj.baseClass}--${buttonStyle || 'default'}--active`]: isActive,
     [`${scssObj.baseClass}--${buttonStyle || 'default'}`]: !isActive,
     [`${scssObj.baseClass}--border`]: hasBorder,
+    [`${scssObj.baseClass}--disabled`]: disabled,
   });
 
   const buttonRef = React.useRef<HTMLButtonElement>(null);

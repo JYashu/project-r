@@ -147,13 +147,13 @@ const SVGConverter = () => {
   };
 
   return (
-    <div className={`${scssObj.baseClass}`}>
+    <div>
       <Helmet>
         <title>SVG Converter</title>
         <meta name="title" content="SVG Converter | JYashu" />
         <meta name="description" content="A simple tool to convert SVG images to PNG format." />
       </Helmet>
-      <div>
+      <div className={`${scssObj.baseClass}`}>
         <div className={`${scssObj.baseClass}__file-upload`}>
           <div
             className={classNames(

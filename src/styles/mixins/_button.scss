@@ -71,6 +71,26 @@
       right: 0;
       top: 0;
     }
+
+    &[disabled] {
+      color: map-get($colors, juror-2);
+      cursor: not-allowed;
+
+      &:before {
+        background-color: map-get($colors, prosecutor) !important;
+        opacity: 0.16;
+        height: 100% !important;
+        right: 0 !important;
+        top: 0 !important;
+      }
+      &:hover:before {
+        background-color: map-get($colors, prosecutor) !important;
+        opacity: 0.16;
+        height: 100% !important;
+        right: 0 !important;
+        top: 0 !important;
+      }
+    }
   }
 
   @if $style == minimal {
