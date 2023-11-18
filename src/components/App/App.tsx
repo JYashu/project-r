@@ -25,6 +25,9 @@ import CBook from '../cbook';
 import SVGConverter from '../svgConverter';
 import useGetEnvironment from '../../hooks/useGetEnvironment';
 import MineSweeper from '../mineSweeper';
+import { KeyCodes } from '../../utils/consts';
+import SVGCreator from '../svgCreator';
+import IMGConverter from '../imgConverter';
 
 interface Props {
   isDictionaryVisible: boolean;
@@ -39,8 +42,8 @@ const App = ({
   showClipboard,
   openDictionary,
 }: Props): React.ReactElement => {
-  useKeyboardShortcut(['shift', 'ctrl'], () => showClipboard(), 'c');
-  useKeyboardShortcut(['shift', 'ctrl'], () => openDictionary(), 'd');
+  useKeyboardShortcut(() => showClipboard(), KeyCodes.C, [KeyCodes.SHIFT, KeyCodes.CTRL]);
+  useKeyboardShortcut(() => openDictionary(), KeyCodes.D, [KeyCodes.SHIFT, KeyCodes.CTRL]);
 
   const cls = scssObj.baseClass;
 
@@ -93,7 +96,9 @@ const App = ({
           <Route path="/snake" exact component={() => <Snake height={600} width={1000} />} />
           <Route path="/memory" exact component={Memory} />
           <Route path="/mal" exact component={MALEngine} />
-          <Route path="/svg-converter" exact component={SVGConverter} />
+          <Route path="/img-converter" exact component={IMGConverter} />
+          <Route path="/convert-to-svg" exact component={SVGCreator} />
+          <Route path="/convert-to-png" exact component={SVGConverter} />
           <Route path="/mine-sweeper" exact component={MineSweeper} />
           <Route component={NotFound} />
         </Switch>

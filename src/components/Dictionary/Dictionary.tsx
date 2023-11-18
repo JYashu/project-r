@@ -7,6 +7,8 @@ import Field from '../../elements/field';
 import Icon from '../../elements/icon';
 import LoadingSpinner from '../../elements/loadingSpinner';
 import scssObj from './_Dictionary.scss';
+import useKeyboardShortcut from '../../hooks/useKeyboardShortcut';
+import { KeyCodes } from '../../utils/consts';
 
 interface Props {
   isVisible: boolean;
@@ -31,6 +33,8 @@ const Dictionary = ({
   const [call, setCall] = useState(true);
   const [i, setI] = useState(0);
   const searchInput = useRef<HTMLInputElement>(null);
+
+  useKeyboardShortcut(() => hideDictionary(), KeyCodes.ESC);
 
   useEffect(() => {
     if (searchInput && searchInput.current) {

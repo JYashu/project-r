@@ -59,11 +59,12 @@ $style: default;
   }
 
   &--transparent {
-    @include button-colors($transparent: true);
+    @include transparent-button;
   }
 
-  &--solid {
-    @include button-colors($transparent: false);
+  &--border {
+    border: solid 1px map-get($colors, prosecutor);
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
   }
 
   &--size-large {
@@ -121,8 +122,8 @@ $style: default;
     @include button-style($style: minimal);
   }
 
-  &--basic {
-    @include button-style($style: basic);
+  &--skew {
+    @include button-style($style: skew);
   }
 
   &--minesweeper {
@@ -159,5 +160,9 @@ $style: default;
 
   .visually-hidden {
     @include visually-hidden;
+  }
+
+  &__icon {
+    margin-right: 5px !important;
   }
 }

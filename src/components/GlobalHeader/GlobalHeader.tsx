@@ -3,7 +3,6 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 import Button from '../../elements/button';
 import Clock from '../clock';
 import scssObj from './_GlobalHeader.scss';
-import ENV from '../../utils/env';
 import { ASSIGNED_PATHS, BETA_ONLY_PATHS, Pages, PageTitles } from '../../utils/consts';
 import Link from '../../elements/link';
 import useGetEnvironment from '../../hooks/useGetEnvironment';

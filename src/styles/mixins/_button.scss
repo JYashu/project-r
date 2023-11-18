@@ -25,11 +25,11 @@
     }
   }
 
-  @if $style == basic {
+  @if $style == skew {
     /*
     * by Wilmington and Beaches
     */
-    background-color: transparent;
+    background-color: map-get($colors, victim);
     border: 1px solid map-get($colors, header-bg);
     box-sizing: border-box;
     color: map-get($colors, header-bg);
@@ -41,6 +41,7 @@
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
+    z-index: 2;
 
     &:hover,
     &:active {
@@ -48,12 +49,12 @@
     }
 
     &:hover {
-      background-color: transparent;
+      background-color: map-get($colors, victim);
       cursor: pointer;
     }
 
     &:before {
-      background-color: map-get($colors, lavender);
+      background-color: map-get($colors, lavender) !important;
       content: '';
       height: calc(100% + 3px);
       position: absolute;
@@ -65,10 +66,30 @@
     }
 
     &:hover:before {
-      background-color: map-get($colors, header-text);
+      background-color: map-get($colors, header-text) !important;
       height: 100%;
       right: 0;
       top: 0;
+    }
+
+    &[disabled] {
+      color: map-get($colors, juror-2);
+      cursor: not-allowed;
+
+      &:before {
+        background-color: map-get($colors, prosecutor) !important;
+        opacity: 0.16;
+        height: 100% !important;
+        right: 0 !important;
+        top: 0 !important;
+      }
+      &:hover:before {
+        background-color: map-get($colors, prosecutor) !important;
+        opacity: 0.16;
+        height: 100% !important;
+        right: 0 !important;
+        top: 0 !important;
+      }
     }
   }
 
@@ -332,7 +353,7 @@
   }
 }
 
-@mixin button-colors($transparent: true) {
+@mixin transparent-button {
   background-color: transparent;
   color: map-get($colors, eden);
   box-shadow: none;
@@ -348,20 +369,6 @@
     &:hover {
       background-color: map-get($colors, juror-4);
       color: map-get($colors, juror-3);
-    }
-  }
-
-  @if $transparent == false {
-    background-color: map-get($colors, victim);
-    color: map-get($colors, eden);
-
-    &:active {
-      background-color: map-get($colors, juror-4);
-      color: map-get($colors, juror-1);
-    }
-
-    &[disabled] {
-      background-color: map-get($colors, juror-4);
     }
   }
 }

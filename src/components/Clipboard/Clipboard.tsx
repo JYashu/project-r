@@ -3,6 +3,8 @@ import Draggable from 'react-draggable';
 import { isMobileOrTablet } from '../../utils/getMobileOrTabletInfo';
 import Icon from '../../elements/icon';
 import scssObj from './_Clipboard.scss';
+import useKeyboardShortcut from '../../hooks/useKeyboardShortcut';
+import { KeyCodes } from '../../utils/consts';
 
 interface Props {
   isVisible: boolean;
@@ -24,6 +26,8 @@ const ClipboardView = ({
   const [cleared, setCleared] = useState(false);
   const timeout = useRef<number>();
   const duration = 10000;
+
+  useKeyboardShortcut(() => hideClipboard(), KeyCodes.ESC);
 
   useEffect(() => {
     if (hideItself) {

@@ -30,7 +30,6 @@ const Sidebar = withRouter(
   }: Props) => {
     const [isRecollapse, setRecollapse] = useState(true);
     const { isProd } = useGetEnvironment();
-
     if (!ASSIGNED_PATHS.includes(history.location.pathname)) return null;
 
     if (isProd && BETA_ONLY_PATHS.includes(history.location.pathname)) return null;
@@ -115,11 +114,11 @@ const Sidebar = withRouter(
             <MenuItem
               className={itemClassName}
               key={getUniqueId()}
-              active={activeSidebarItem === ActiveSidebarItem.SVGConverter}
+              active={activeSidebarItem === ActiveSidebarItem.IMGConverter}
               icon={<Icon removeOutline size="small" icon="style" />}
             >
-              SVG Converter
-              <Link tabIndex={-1} to="/svg-converter" />
+              IMG Converter
+              <Link tabIndex={-1} to="/img-converter" />
             </MenuItem>
           </Menu>
           <SidebarFooter className={`${scssObj.baseClass}__games`}>

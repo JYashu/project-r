@@ -9,13 +9,23 @@ interface Props {
   className?: string;
   placeHolder?: string;
   errorMessage?: string;
+  defaultColor?: string;
+  disabled?: boolean;
   onChange?: (color: string) => void;
 }
 
-const ColorField = ({ minimal, className, placeHolder, errorMessage, onChange }: Props) => {
+const ColorField = ({
+  minimal,
+  className,
+  placeHolder,
+  errorMessage,
+  defaultColor,
+  disabled,
+  onChange,
+}: Props) => {
   const [error, setError] = useState('');
   const colorInputRef = useRef<HTMLInputElement>(null);
-  const [color, setColor] = useState<string>('#000000');
+  const [color, setColor] = useState<string>(defaultColor || '#000000');
   const [displayColor, setDisplayColor] = useState<string>();
 
   const handleColorChange = (e: any) => {
@@ -78,6 +88,7 @@ const ColorField = ({ minimal, className, placeHolder, errorMessage, onChange }:
           value={displayColor}
           touched
           errorMessage={error}
+          disabled={disabled}
         />
       )}
 
@@ -88,6 +99,7 @@ const ColorField = ({ minimal, className, placeHolder, errorMessage, onChange }:
         id="colorPicker"
         onChange={handleColorChange}
         value={color}
+        disabled={disabled}
       />
     </div>
   );

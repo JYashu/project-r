@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import classNames from 'classnames';
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { storeFileData, scrapFileDataById } from '../../redux/fileReader';
-import { selectFileDataById, selectFilesById } from '../../redux/fileReader/selectors';
+import { selectFileDataById } from '../../redux/fileReader/selectors';
 import { ModalTypes, openModal } from '../../redux/modal';
 import Button from '../button';
 import Field from './Field';
@@ -17,19 +17,20 @@ import useGetUniqueId from '../../hooks/useGetUniqueId';
 import noop from '../../utils/noop';
 import { URL_REGEX } from '../../utils/regex';
 import { ELLIPSIS } from '../../utils/consts';
+import { FileType } from './types';
 
 interface Props {
   fieldId?: string;
   minimal?: boolean;
-  acceptedTypes?: string[];
+  acceptedTypes?: FileType[];
   className?: string;
   placeHolder?: string;
   errorMessage?: string;
-  persistData?: string;
+  persistData?: boolean;
   restrictURL?: boolean;
   charLength?: number;
   renderButton?: () => React.ReactNode;
-  onFileUpload?: (file: File | undefined) => void;
+  onFileUpload?: (fileObj: { file: File; type: string } | undefined) => void;
 }
 
 const FileUpload = ({
@@ -54,6 +55,7 @@ const FileUpload = ({
   const [isLoading, setIsLoading] = useState(false);
   const [fileObj, setFileObj] = useState<{ file: File; type: string }>();
   const { id: generatedId } = useGetUniqueId();
+  const uniqueId = fieldId || generatedId;
   const [fieldValue, setFieldValue] = useState<string>();
   const [url, setURL] = useState<string>();
   const [urlLoaded, setURLLoaded] = useState(false);
@@ -83,7 +85,7 @@ const FileUpload = ({
 
   // Create id and scrap data after unmount
   useEffect(() => {
-    const ID = fieldId || generatedId;
+    const ID = uniqueId;
     setId(ID);
     return () => {
       if (!persistData) dispatch(scrapFileDataById({ id: ID }));
@@ -103,7 +105,7 @@ const FileUpload = ({
     }
 
     dispatch(storeFileData({ fileData: fileObj, id }));
-    if (onFileUpload) onFileUpload(fileObj.file);
+    if (onFileUpload) onFileUpload(fileObj);
   }, [fileObj]);
 
   const handleFileChange = async (e: any) => {
@@ -219,6 +221,7 @@ const FileUpload = ({
               className={`${scssObj.baseClass}__upload-button`}
               icon={fileData ? 'description' : 'upload'}
               title={fileData?.file.name || placeHolder || 'Choose File'}
+              buttonStyle="default"
               rounded
             />
           )}

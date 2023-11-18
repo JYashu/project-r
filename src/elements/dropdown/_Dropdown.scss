@@ -10,6 +10,10 @@ $base-class: dropdown;
   padding-left: 0.5rem;
 }
 
+.css-otjhg0-menu {
+  z-index: 100 !important;
+}
+
 .#{$base-class} {
   @include type-style-city;
 

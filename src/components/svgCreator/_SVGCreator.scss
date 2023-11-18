@@ -1,0 +1,197 @@
+@import '../../styles/lib';
+
+$base-class: svg-creator;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  @include type-style-justice;
+  height: fit-content;
+  min-height: calc(100vh - 64px);
+  background-color: map-get($colors, gardenia);
+  padding-top: 5rem;
+
+  &__dimensions {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  &__svg {
+    height: fit-content;
+    width: fit-content;
+  }
+
+  &__file-input {
+    width: 30rem;
+  }
+
+  &__file-upload-title {
+    @include type-style-mono;
+
+    font-size: 2.5rem;
+    font-weight: 500;
+    padding-bottom: 30px;
+  }
+
+  &__file-upload {
+    display: grid;
+    grid-template-columns: 48% 4% 48%;
+    width: 100%;
+  }
+
+  &__file-input-title {
+    grid-row: 1;
+    grid-column: 1;
+    justify-self: end;
+    align-self: center;
+  }
+
+  &__file-input-field {
+    height: fit-content;
+    grid-row: 2;
+    grid-column: 1;
+    justify-self: end;
+    align-self: center;
+  }
+
+  &__file-separator-title {
+    grid-row: 1;
+    grid-column: 2;
+    justify-self: center;
+  }
+
+  &__file-upload-divider {
+    grid-row: 2;
+    justify-self: center;
+    width: 0;
+    border: 1px dashed #d3d3d3;
+  }
+
+  &__file-text-title {
+    grid-row: 1;
+    grid-column: 3;
+  }
+
+  &__file-text-field {
+    grid-column: 3;
+    grid-row: 2;
+  }
+
+  &__sandbox {
+    margin-top: 2rem;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  &__color-input {
+    width: 20em;
+    grid-row: 3;
+    justify-self: end;
+  }
+
+  &__color-input-bg {
+    width: 20em;
+    grid-row: 3;
+  }
+
+  &__canvas {
+    grid-row: 1;
+    grid-column: span 2;
+    justify-self: center;
+  }
+
+  &__toggle {
+    grid-row: 2;
+    grid-column: span 2;
+    justify-self: center;
+  }
+
+  &__steps {
+    width: 20rem;
+    grid-row: 4;
+    justify-self: end;
+  }
+
+  &__threshold {
+    width: 20em;
+    grid-row: 4;
+  }
+
+  &__load-svg {
+    grid-row: 6;
+    width: 150px;
+    justify-self: end;
+  }
+
+  &__download-svg {
+    grid-row: 6;
+    width: 150px;
+  }
+
+  &__svg {
+    grid-row: 7;
+    grid-column: span 2;
+    justify-self: center;
+  }
+
+  &__dimensions-width {
+    grid-row: 5;
+    width: 150px;
+    justify-self: end;
+  }
+
+  &__dimensions-height {
+    grid-row: 5;
+    width: 150px;
+  }
+
+  &__focus {
+    width: 100px;
+    height: 45px;
+    border-radius: 10px;
+    background-color: map-get($colors, header-text);
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  }
+
+  @media only screen and (max-width: 1111px) {
+    &__file-upload-title {
+      display: none;
+    }
+
+    &__file-upload {
+      display: grid;
+      grid-template-columns: 100%;
+      width: 100%;
+    }
+
+    &__file-input-field {
+      grid-row: 1;
+      grid-column: 1;
+      justify-self: center;
+    }
+
+    &__file-upload-divider {
+      &:after {
+        @include type-style-city;
+        content: 'OR';
+        font-size: 1.8rem;
+        color: map-get($colors, sub-heading);
+      }
+      transform: translateY(-6px);
+      border: none;
+      grid-row: 2;
+      grid-column: 1;
+    }
+
+    &__file-text-field {
+      grid-row: 3;
+      grid-column: 1;
+      justify-self: center;
+    }
+  }
+}

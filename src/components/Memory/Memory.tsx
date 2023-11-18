@@ -412,6 +412,7 @@ const App = ({
                     value={values.options}
                     focusValues={[0, 80, 160]}
                     noFocusCondition={values.options < 12}
+                    font="cali"
                   />
                   <div>Choose card theme!</div>
                   <ToggleBar
@@ -430,6 +431,7 @@ const App = ({
                     focusValues={[10, 130]}
                     focusWidth="100px"
                     value={values.theme === CardTheme.Solid ? CardTheme.Solid : 'custom'}
+                    font="cali"
                   />
                   <div
                     style={{

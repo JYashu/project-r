@@ -29,7 +29,7 @@ export interface Props extends Pick<React.ComponentProps<'button'>, ButtonProps>
   ariaLabel?: string;
   buttonStyle?:
     | 'game'
-    | 'basic'
+    | 'skew'
     | 'glossy'
     | 'abstract'
     | 'blur'
@@ -44,6 +44,7 @@ export interface Props extends Pick<React.ComponentProps<'button'>, ButtonProps>
   renderLoader?: () => React.ReactNode;
   spinnerType?: SpinnerType;
   isActive?: boolean;
+  hasBorder?: boolean;
 }
 
 const Button = ({
@@ -77,6 +78,7 @@ const Button = ({
   renderLoader,
   spinnerType,
   isActive,
+  hasBorder,
 }: Props): React.ReactElement<'button'> => {
   const buttonCls = classnames(scssObj.baseClass, className, {
     [`${scssObj.baseClass}--empty`]: !React.Children.count(children) || !children || ignoreChildren,
@@ -92,6 +94,8 @@ const Button = ({
     [`${scssObj.baseClass}--hand-writing`]: handWriting,
     [`${scssObj.baseClass}--${buttonStyle || 'default'}--active`]: isActive,
     [`${scssObj.baseClass}--${buttonStyle || 'default'}`]: !isActive,
+    [`${scssObj.baseClass}--border`]: hasBorder,
+    [`${scssObj.baseClass}--disabled`]: disabled,
   });
 
   const buttonRef = React.useRef<HTMLButtonElement>(null);
@@ -121,6 +125,7 @@ const Button = ({
       <div className={`${scssObj.baseClass}__content-wrapper`}>
         {icon && (
           <Icon
+            className={`${children ? `${scssObj.baseClass}__icon` : ''}`}
             icon={icon}
             description={iconDescription}
             size={iconSize}

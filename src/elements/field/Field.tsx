@@ -35,6 +35,7 @@ export interface Props
   noBorder?: boolean;
   fieldSize?: 'small';
   renderButton?: () => React.ReactNode;
+  popover?: string;
 }
 
 const Field: React.SFC<Props> = React.forwardRef((props: Props, ref: any) => {
@@ -60,6 +61,7 @@ const Field: React.SFC<Props> = React.forwardRef((props: Props, ref: any) => {
     renderButton,
     noBorder,
     fieldSize,
+    disabled,
     ...rest
   } = props;
   const hasValue = value !== null && value !== undefined && value !== '';
@@ -99,6 +101,7 @@ const Field: React.SFC<Props> = React.forwardRef((props: Props, ref: any) => {
     hasButton,
     renderButton,
     fieldSize,
+    disabled,
   };
 
   const textInput = textArea ? (
@@ -120,6 +123,8 @@ const Field: React.SFC<Props> = React.forwardRef((props: Props, ref: any) => {
       {description && !hasError && <p className={descriptionClassNames}>{description}</p>}
 
       {hasError && <FieldError className={errorCls}>{errorMessage}</FieldError>}
+
+      {disabled && <div className={`${scssObj.baseClass}__label--disabled`} title="Disabled" />}
     </label>
   );
 });

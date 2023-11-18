@@ -80,10 +80,10 @@ const NPMRepoEngine = ({
           hasButton
           renderButton={() => (
             <Button
-              type="submit"
               disabled={isSubmitDisabled}
               loading={isSubmitting}
-              buttonStyle="minimal"
+              transparent
+              hasBorder
               size="small"
             >
               Search

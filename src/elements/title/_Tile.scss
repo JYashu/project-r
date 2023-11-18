@@ -1,0 +1,33 @@
+@import '../../styles/lib';
+
+$base-class: tile;
+
+/* stylelint-disable property-no-unknown */
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  $this: &;
+  @include box-level-2;
+
+  background-color: map-get($colors, victim);
+  border-radius: 4px;
+  padding: 18px 16px;
+
+  &[role] {
+    cursor: pointer;
+
+    &:hover {
+      @include box-level-3;
+    }
+  }
+
+  &--small {
+    padding: 8px 9px;
+  }
+
+  &--flat {
+    box-shadow: none;
+  }
+}

@@ -3,10 +3,11 @@ import { Helmet } from 'react-helmet';
 import Button from '../../elements/button';
 import ToggleBar from '../../elements/toggleBar';
 import useActiveSidebarItem from '../../hooks/useActiveSidebarItem';
+import useKeyboardShortcut from '../../hooks/useKeyboardShortcut';
 import useSetGlobalHeader from '../../hooks/useSetGlobalHeader';
 import { ActiveSidebarItem } from '../../types';
 import { ASSETS_BASE_URL } from '../../utils/assets';
-import { Pages } from '../../utils/consts';
+import { KeyCodes, Pages } from '../../utils/consts';
 import { distance, getUniqueId } from '../../utils/helpers';
 import { createBoard, revealed } from '../../utils/mineSweeperUtils';
 import Cell from './Cell';
@@ -33,19 +34,10 @@ const MineSweeper = () => {
     setConfig(CONFIG[difficulty]);
   }, [difficulty]);
 
-  useEffect(() => {
-    const handleKeyEvents = (event: any) => {
-      if (event.key === ' ') {
-        if (actionType === ActionType.REVEAL) setActionType(ActionType.FLAG);
-        else setActionType(ActionType.REVEAL);
-      }
-    };
-    window.addEventListener('keypress', handleKeyEvents);
-
-    return () => {
-      window.removeEventListener('keypress', handleKeyEvents);
-    };
-  }, [actionType]);
+  useKeyboardShortcut(() => {
+    if (actionType === ActionType.REVEAL) setActionType(ActionType.FLAG);
+    else setActionType(ActionType.REVEAL);
+  }, KeyCodes.SPACE);
 
   useEffect(() => {
     for (let i = -1; i < 9; i += 1) {
@@ -223,7 +215,7 @@ const MineSweeper = () => {
     }
   };
 
-  const focus = <div className={`${scssObj.baseClass}__focus`} />;
+  const renderFocus = () => <div className={`${scssObj.baseClass}__focus`} />;
 
   return (
     <div className={scssObj.baseClass}>
@@ -277,7 +269,7 @@ const MineSweeper = () => {
               focusWidth="30px"
               focusHeight="30px"
               value={actionType}
-              renderFocus={() => focus}
+              renderFocus={renderFocus}
               title="Shortcut: Space"
             />
           </div>

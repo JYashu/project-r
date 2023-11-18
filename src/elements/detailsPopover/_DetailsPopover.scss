@@ -1,0 +1,22 @@
+@import '../../styles/lib';
+
+$base-class: details-popover;
+
+/* stylelint-disable property-no-unknown */
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  color: map-get($colors, juror-2);
+
+  &__content-tile {
+    min-width: 283px;
+  }
+
+  &__icon {
+    cursor: default;
+    display: inline-flex;
+    vertical-align: sub;
+  }
+}
