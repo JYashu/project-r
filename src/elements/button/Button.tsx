@@ -29,7 +29,7 @@ export interface Props extends Pick<React.ComponentProps<'button'>, ButtonProps>
   ariaLabel?: string;
   buttonStyle?:
     | 'game'
-    | 'basic'
+    | 'skew'
     | 'glossy'
     | 'abstract'
     | 'blur'
@@ -92,8 +92,8 @@ const Button = ({
     [`${scssObj.baseClass}--include-focus`]: includeFocus,
     [`${scssObj.baseClass}--rounded`]: rounded,
     [`${scssObj.baseClass}--hand-writing`]: handWriting,
-    [`${scssObj.baseClass}--${buttonStyle || 'normal'}--active`]: isActive,
-    [`${scssObj.baseClass}--${buttonStyle || 'normal'}`]: !isActive,
+    [`${scssObj.baseClass}--${buttonStyle || 'default'}--active`]: isActive,
+    [`${scssObj.baseClass}--${buttonStyle || 'default'}`]: !isActive,
     [`${scssObj.baseClass}--border`]: hasBorder,
   });
 
@@ -124,6 +124,7 @@ const Button = ({
       <div className={`${scssObj.baseClass}__content-wrapper`}>
         {icon && (
           <Icon
+            className={`${children ? `${scssObj.baseClass}__icon` : ''}`}
             icon={icon}
             description={iconDescription}
             size={iconSize}

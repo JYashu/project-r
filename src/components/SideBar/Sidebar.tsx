@@ -30,7 +30,6 @@ const Sidebar = withRouter(
   }: Props) => {
     const [isRecollapse, setRecollapse] = useState(true);
     const { isProd } = useGetEnvironment();
-
     if (!ASSIGNED_PATHS.includes(history.location.pathname)) return null;
 
     if (isProd && BETA_ONLY_PATHS.includes(history.location.pathname)) return null;

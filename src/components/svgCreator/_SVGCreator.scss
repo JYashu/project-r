@@ -8,6 +8,9 @@ $base-class: svg-creator;
 
 .#{$base-class} {
   @include type-style-justice;
+  height: 100%;
+  min-height: calc(100vh - 64px);
+  background-color: map-get($colors, gardenia);
   padding-top: 5rem;
 
   &__dimensions {
@@ -151,11 +154,7 @@ $base-class: svg-creator;
     width: 100px;
     height: 45px;
     border-radius: 10px;
-    // border-bottom: solid 2px map-get($colors, mine-sweeper);
-    // border-right: solid 2px map-get($colors, mine-sweeper);
-    // border-top: solid 2px map-get($colors, victim);
-    // border-left: solid 2px map-get($colors, victim);
-    background-color: map-get($colors, sun-kiss);
+    background-color: map-get($colors, header-text);
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
   }
 

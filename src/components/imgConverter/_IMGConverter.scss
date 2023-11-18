@@ -8,41 +8,67 @@ $base-class: img-converter;
 
 .#{$base-class} {
   @include type-style-jd;
-  padding-top: 5rem;
   height: 100vh;
+  background-color: map-get($colors, gardenia);
+
+  &__title {
+    text-align: center;
+  }
+
+  &__form {
+    padding: 5rem 0;
+    background-color: map-get($colors, sun-kiss);
+  }
 
   &__convert {
     margin: auto;
 
     max-width: 600px;
     display: grid;
-    grid-template-columns: repeat(13, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     width: 100%;
     gap: 10px;
   }
 
   &__from-text {
-    grid-column: 1 / 4;
+    grid-column: 2 / 3;
 
     @include center-horizontally;
   }
 
   &__from-field {
-    grid-column: 4 / 8;
+    grid-column: 3 / 5;
   }
 
   &__to-text {
-    grid-column: 8 / 10;
+    grid-row: 2;
+    grid-column: 2 / 3;
 
     @include center-horizontally;
   }
 
   &__to-field {
-    grid-column: 10 / 14;
+    grid-row: 2;
+    grid-column: 3 / 5;
   }
 
   &__submit {
-    grid-row: 2;
-    grid-column: 6 / 9;
+    grid-row: 5;
+    grid-column: 3 / 4;
+  }
+
+  &__file-field-wrapper {
+    margin: auto;
+
+    max-width: 600px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    width: 100%;
+    gap: 10px;
+  }
+
+  &__file-field {
+    grid-row: 5;
+    grid-column: 3 / 5;
   }
 }

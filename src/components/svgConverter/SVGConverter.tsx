@@ -1,8 +1,10 @@
 /* eslint-disable no-param-reassign */
+import QueryString from 'query-string';
 import { useEffect, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import DOMPurify from 'dompurify';
 import classNames from 'classnames';
+import { useHistory } from 'react-router';
 import Button from '../../elements/button';
 import Field, { ColorField, FileField } from '../../elements/field';
 import TextArea from '../../elements/textArea';
@@ -14,6 +16,8 @@ import useGetEnvironment from '../../hooks/useGetEnvironment';
 import useSetGlobalHeader from '../../hooks/useSetGlobalHeader';
 import { Pages } from '../../utils/consts';
 import { FileType } from '../../elements/field/types';
+import useReselect from '../../hooks/useReselect';
+import { selectFileDataById } from '../../redux/fileReader';
 
 const SVGConverter = () => {
   useActiveSidebarItem(ActiveSidebarItem.IMGConverter);
@@ -27,6 +31,24 @@ const SVGConverter = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [color, setColor] = useState<string>();
   const { isProd } = useGetEnvironment();
+  const history = useHistory();
+
+  const { id } = QueryString.parse(history.location.search, {
+    decode: false,
+  });
+  const file = useReselect(selectFileDataById, { id: id || '' });
+
+  const onFileUpload = (fileObj: { file: File; type: string } | undefined) => {
+    if (fileObj && fileObj.file)
+      getFileAsText(fileObj.file).then((result) => setSvg(DOMPurify.sanitize(result as string)));
+    else setSvg('');
+  };
+
+  useEffect(() => {
+    if (id) {
+      onFileUpload(file);
+    }
+  }, [file, id]);
 
   useEffect(() => {
     if (svgElement && svgElementOg && color) {
@@ -124,11 +146,6 @@ const SVGConverter = () => {
     }
   };
 
-  const onFileUpload = (file: File | undefined) => {
-    if (file) getFileAsText(file).then((result) => setSvg(DOMPurify.sanitize(result as string)));
-    else setSvg('');
-  };
-
   return (
     <div className={`${scssObj.baseClass}`}>
       <Helmet>
@@ -171,11 +188,14 @@ const SVGConverter = () => {
             <FileField
               className={`${scssObj.baseClass}__file-input`}
               acceptedTypes={[FileType.SVG]}
-              onFileUpload={(file: File | undefined) => onFileUpload(file)}
+              onFileUpload={(fileObj: { file: File; type: string } | undefined) =>
+                onFileUpload(fileObj)
+              }
               placeHolder="Choose a SVG file or Drop it here"
               errorMessage="Upload SVG file"
               restrictURL={isProd}
               charLength={30}
+              fieldId={id || undefined}
             />
           </div>
           <div className={`${scssObj.baseClass}__file-upload-divider`} />
@@ -195,24 +215,20 @@ const SVGConverter = () => {
         </div>
         <div className={`${scssObj.baseClass}__sandbox`}>
           <br />
-          <Button className={`${scssObj.baseClass}__load-svg`} buttonStyle="basic" onClick={getSVG}>
+          <Button className={`${scssObj.baseClass}__load-svg`} buttonStyle="skew" onClick={getSVG}>
             Load SVG
           </Button>
           <Button
             className={`${scssObj.baseClass}__download-svg`}
-            buttonStyle="basic"
+            buttonStyle="skew"
             onClick={downloadSVG}
           >
             Download SVG
           </Button>
           <br />
           <br />
-          {/* <div className={`${scssObj.baseClass}__row`}> */}
           <ColorField className={`${scssObj.baseClass}__color-input`} onChange={setColor} />
-          {/* </div> */}
-          {/* <div className={`${scssObj.baseClass}__row`}> */}
           <div ref={svgRef} className={`${scssObj.baseClass}__svg`} />
-          {/* </div> */}
           <br />
           <Field
             className={`${scssObj.baseClass}__dimensions-width`}
@@ -249,21 +265,19 @@ const SVGConverter = () => {
             value={height}
           />
           <br />
-          <Button className={`${scssObj.baseClass}__load-png`} buttonStyle="basic" onClick={getPNG}>
+          <Button className={`${scssObj.baseClass}__load-png`} buttonStyle="skew" onClick={getPNG}>
             Load PNG
           </Button>
           <Button
             className={`${scssObj.baseClass}__download-png`}
-            buttonStyle="basic"
+            buttonStyle="skew"
             onClick={downloadPNG}
           >
             Download PNG
           </Button>
           <br />
           <br />
-          {/* <div className={`${scssObj.baseClass}__row`}> */}
           <canvas className={`${scssObj.baseClass}__canvas`} ref={canvasRef} />
-          {/* </div> */}
         </div>
       </div>
     </div>

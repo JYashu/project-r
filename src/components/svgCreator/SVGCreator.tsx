@@ -1,15 +1,17 @@
 /* eslint-disable no-param-reassign */
+import QueryString from 'query-string';
 import { useEffect, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import DOMPurify from 'dompurify';
 import classNames from 'classnames';
 import potrace from 'potrace';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import Button from '../../elements/button';
 import Field, { ColorField, FileField } from '../../elements/field';
 import TextArea from '../../elements/textArea';
 import useActiveSidebarItem from '../../hooks/useActiveSidebarItem';
-import { getFileAsText, getFileType, getUniqueId, parseNumber } from '../../utils/helpers';
+import { getFileAsText, getUniqueId, parseNumber } from '../../utils/helpers';
 import { ActiveSidebarItem } from '../../types';
 import scssObj from './_SVGCreator.scss';
 import useGetEnvironment from '../../hooks/useGetEnvironment';
@@ -17,6 +19,8 @@ import useSetGlobalHeader from '../../hooks/useSetGlobalHeader';
 import { Pages } from '../../utils/consts';
 import ToggleBar from '../../elements/toggleBar';
 import { selectConverterState } from '../../redux/converter';
+import { selectFileDataById } from '../../redux/fileReader';
+import useReselect from '../../hooks/useReselect';
 
 const SVGCreator = () => {
   useActiveSidebarItem(ActiveSidebarItem.IMGConverter);
@@ -37,16 +41,26 @@ const SVGCreator = () => {
   const [imageURL, setImageURL] = useState<string | null>(null);
   const [toggle, setToggle] = useState<'potrace' | 'posterized'>('potrace');
   const { fromField } = useSelector(selectConverterState);
+  const history = useHistory();
 
-  const onFileUpload = (file: File | undefined) => {
-    if (file) {
-      getFileType(file).then((result) => {
-        const fileBlob = new Blob([file], { type: result.type });
-        setImageBlob(fileBlob);
-        setImageURL(URL.createObjectURL(fileBlob));
-      });
+  const { id } = QueryString.parse(history.location.search, {
+    decode: false,
+  });
+  const file = useReselect(selectFileDataById, { id: id || '' });
+
+  const onFileUpload = (fileObj: { file: File; type: string } | undefined) => {
+    if (fileObj) {
+      const fileBlob = new Blob([fileObj.file], { type: fileObj.type });
+      setImageBlob(fileBlob);
+      setImageURL(URL.createObjectURL(fileBlob));
     }
   };
+
+  useEffect(() => {
+    if (id) {
+      onFileUpload(file);
+    }
+  }, [file, id]);
 
   const traceImage = () => {
     if (!imageURL) return;
@@ -158,11 +172,14 @@ const SVGCreator = () => {
             <FileField
               className={`${scssObj.baseClass}__file-input`}
               acceptedTypes={fromField ? [fromField] : fromField}
-              onFileUpload={(file: File | undefined) => onFileUpload(file)}
+              onFileUpload={(fileObj: { file: File; type: string } | undefined) =>
+                onFileUpload(fileObj)
+              }
               placeHolder="Choose an Image or Drop it here"
               errorMessage="Upload Image file"
               restrictURL={isProd}
               charLength={30}
+              fieldId={id || undefined}
             />
           </div>
           <div className={`${scssObj.baseClass}__file-upload-divider`} />
@@ -215,10 +232,18 @@ const SVGCreator = () => {
             value={toggle}
             renderFocus={renderFocus}
           />
-          <Button className={`${scssObj.baseClass}__load-svg`} onClick={traceImage}>
+          <Button
+            className={`${scssObj.baseClass}__load-svg`}
+            buttonStyle="skew"
+            onClick={traceImage}
+          >
             Load SVG
           </Button>
-          <Button className={`${scssObj.baseClass}__download-svg`} onClick={() => {}}>
+          <Button
+            className={`${scssObj.baseClass}__download-svg`}
+            buttonStyle="skew"
+            onClick={() => {}}
+          >
             Download SVG
           </Button>
           <br />
@@ -236,9 +261,6 @@ const SVGCreator = () => {
             placeHolder="Enter Background Color"
             disabled={toggle === 'potrace'}
           />
-          {/* </div> */}
-          {/* <div className={`${scssObj.baseClass}__row`}> */}
-          {/* </div> */}
           <Field
             className={`${scssObj.baseClass}__steps`}
             label="Steps"

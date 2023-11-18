@@ -59,11 +59,7 @@ $style: default;
   }
 
   &--transparent {
-    @include button-colors($transparent: true);
-  }
-
-  &--solid {
-    @include button-colors($transparent: false);
+    @include transparent-button;
   }
 
   &--border {
@@ -126,8 +122,8 @@ $style: default;
     @include button-style($style: minimal);
   }
 
-  &--basic {
-    @include button-style($style: basic);
+  &--skew {
+    @include button-style($style: skew);
   }
 
   &--minesweeper {
@@ -164,5 +160,9 @@ $style: default;
 
   .visually-hidden {
     @include visually-hidden;
+  }
+
+  &__icon {
+    margin-right: 5px !important;
   }
 }

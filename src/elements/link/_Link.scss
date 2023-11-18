@@ -20,16 +20,12 @@ $base-class: link;
     justify-content: center;
   }
 
-  &--button-colors {
-    @include button-colors;
-  }
-
   &--button-intent-primary {
     @include button-intent(primary);
   }
 
   &--button-transparent {
-    @include button-colors($transparent: true);
+    @include transparent-button;
   }
 
   &--icon {

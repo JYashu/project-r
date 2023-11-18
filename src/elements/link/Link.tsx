@@ -44,7 +44,6 @@ const Link = ({
     [`${scssObj.baseClass}--button`]: linkStyle === 'button' || buttonProps,
     [`${scssObj.baseClass}--button-intent-${buttonProps?.intent}`]: buttonProps?.intent,
     [`${scssObj.baseClass}--button-transparent`]: buttonProps?.transparent,
-    [`${scssObj.baseClass}--button-colors`]: buttonProps?.colors,
     [`${scssObj.baseClass}--container`]: linkStyle === 'container',
     [`${scssObj.baseClass}--icon`]: buttonProps?.icon,
     [`${scssObj.baseClass}--icon-only`]: buttonProps?.icon && !children,
@@ -73,12 +72,6 @@ const Link = ({
             <title>external link</title>
             <path d="M6 1h5v5L8.86 3.85 4.7 8 4 7.3l4.15-4.16L6 1ZM2 3h2v1H2v6h6V8h1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z" />
           </svg>
-          // <img
-          //   className={`${scssObj.baseClass}--link-external`}
-          //   src={`${ASSETS_BASE_URL}/assets/link-external.svg`}
-          //   width="140px"
-          //   alt="ext-link"
-          // />
         )}
       </a>
     );
