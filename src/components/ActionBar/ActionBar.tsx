@@ -33,19 +33,13 @@ const ActionBar = ({
 
   return (
     <div className={`${scssObj.baseClass}`}>
-      <div
-        className={classNames(`${scssObj.baseClass}__action-bar`, `${scssObj.baseClass}__right`)}
-      >
-        {cellType === 'code' && (
-          <div className={`${scssObj.baseClass}__icon-wrapper`}>
-            <Icon
-              className={`${scssObj.baseClass}__icon`}
-              icon={visibilityIcon}
-              size="small"
-              onClickHandler={() => togglePreview()}
-            />
-          </div>
-        )}
+      <div className={classNames(`${scssObj.baseClass}__action-bar`, `${scssObj.baseClass}__left`)}>
+        <Icon
+          className={`${scssObj.baseClass}__icon`}
+          icon="close"
+          size="small"
+          onClickHandler={() => handleCloseClick()}
+        />
         <Icon
           className={`${scssObj.baseClass}__icon`}
           icon="arrow_upward"
@@ -58,12 +52,16 @@ const ActionBar = ({
           size="small"
           onClickHandler={() => moveCell('down')}
         />
-        <Icon
-          className={`${scssObj.baseClass}__icon`}
-          icon="close"
-          size="small"
-          onClickHandler={() => handleCloseClick()}
-        />
+        {cellType === 'code' && (
+          <div className={`${scssObj.baseClass}__icon-wrapper`}>
+            <Icon
+              className={`${scssObj.baseClass}__icon`}
+              icon={visibilityIcon}
+              size="small"
+              onClickHandler={() => togglePreview()}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

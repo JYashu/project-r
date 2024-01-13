@@ -1,10 +1,10 @@
 import produce from 'immer';
 import { createReducer } from 'typesafe-actions';
-import { v4 as uuidv4 } from 'uuid';
 
 import { SnackbarState, SnackbarActions } from './types';
 import { addSnack, removeSnack } from './actions';
 import { Img, SnackType } from '../../types';
+import { getUniqueId } from '../../utils/helpers';
 
 export const defaultDuration = 3500; // milliseconds
 
@@ -20,7 +20,7 @@ export default createReducer<SnackbarState, SnackbarActions>(initialState)
     produce(state, (draft) => {
       const { duration, ...rest } = payload;
       draft.snacks.push({
-        id: uuidv4(),
+        id: getUniqueId(),
         duration: duration || defaultDuration,
         snackType: DEFAULT,
         ...rest,

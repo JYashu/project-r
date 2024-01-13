@@ -11,6 +11,7 @@ interface Props {
   errorMessage?: string;
   defaultColor?: string;
   disabled?: boolean;
+  title?: string;
   onChange?: (color: string) => void;
 }
 
@@ -21,6 +22,7 @@ const ColorField = ({
   errorMessage,
   defaultColor,
   disabled,
+  title,
   onChange,
 }: Props) => {
   const [error, setError] = useState('');
@@ -61,7 +63,7 @@ const ColorField = ({
         <div
           className={`${scssObj.baseClass}__picker-wrapper`}
           onClick={() => colorInputRef?.current?.click()}
-          title={displayColor || 'Pick Color'}
+          title={title || displayColor || 'Pick Color'}
           role="none"
         >
           <div className={`${scssObj.baseClass}__picker`} style={{ backgroundColor: color }} />
@@ -89,6 +91,7 @@ const ColorField = ({
           touched
           errorMessage={error}
           disabled={disabled}
+          title={title}
         />
       )}
 

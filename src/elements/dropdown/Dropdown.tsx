@@ -44,6 +44,7 @@ interface Props {
   handleBlur?: (e: React.FocusEvent) => void;
   isTransparent?: boolean;
   noBorder?: boolean;
+  dropdownStyle?: 'button';
 }
 
 interface MenuListAcc {
@@ -237,6 +238,7 @@ const Dropdown = ({
   noBorder,
   errorMessage,
   isTransparent,
+  dropdownStyle,
 }: Props) => {
   const optionBackgroundColor = (state: { isSelected: boolean; isFocused: boolean }) => {
     if (state.isFocused) {

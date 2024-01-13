@@ -1,8 +1,9 @@
 import { ActionType } from 'typesafe-actions';
+import { FileObj } from '../../elements/field/types';
 import { storeFileData, scrapFileDataById } from './actions';
 
 export interface FileReaderState {
-  filesById: { [id: string]: { file: File; type: string } };
+  filesById: { [id: string]: FileObj };
   ids: string[];
 }
 

@@ -158,26 +158,21 @@ export const getFileType = async (
     switch (extension) {
       case 'mov':
         return { type: 'video/quicktime', extension };
-        break;
       case 'svg':
         return { type: 'image/svg+xml', extension };
-        break;
       case 'png':
         return { type: 'image/png', extension };
-        break;
       case 'jpg':
       case 'jpeg':
         return { type: 'image/jpeg', extension };
-        break;
       case 'pdf':
         return { type: 'application/pdf', extension };
-        break;
       case 'mp3':
         return { type: 'audio/mpeg', extension };
-        break;
       case 'mp4':
         return { type: 'video/mp4', extension };
-        break;
+      case 'cbk':
+        return { type: 'text/cbook', extension };
       default:
         break;
     }

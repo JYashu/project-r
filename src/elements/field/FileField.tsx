@@ -17,7 +17,8 @@ import useGetUniqueId from '../../hooks/useGetUniqueId';
 import noop from '../../utils/noop';
 import { URL_REGEX } from '../../utils/regex';
 import { ELLIPSIS } from '../../utils/consts';
-import { FileType } from './types';
+import { FileObj, FileType } from './types';
+import { addSnack } from '../../redux/snackbar';
 
 interface Props {
   fieldId?: string;
@@ -29,8 +30,9 @@ interface Props {
   persistData?: boolean;
   restrictURL?: boolean;
   charLength?: number;
+  destroyDataPostLoad?: boolean;
   renderButton?: () => React.ReactNode;
-  onFileUpload?: (fileObj: { file: File; type: string } | undefined) => void;
+  onFileUpload?: (fileObj: FileObj | undefined) => void;
 }
 
 const FileUpload = ({
@@ -43,6 +45,7 @@ const FileUpload = ({
   persistData,
   onFileUpload,
   charLength,
+  destroyDataPostLoad,
   restrictURL,
   renderButton,
 }: Props) => {
@@ -53,7 +56,7 @@ const FileUpload = ({
   const fileData = useReselect(selectFileDataById, { id });
   const [dragged, setDragged] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [fileObj, setFileObj] = useState<{ file: File; type: string }>();
+  const [fileObj, setFileObj] = useState<FileObj>();
   const { id: generatedId } = useGetUniqueId();
   const uniqueId = fieldId || generatedId;
   const [fieldValue, setFieldValue] = useState<string>();
@@ -101,11 +104,14 @@ const FileUpload = ({
     ) {
       // scrapFileData();
       setError(errorMessage || 'Upload correct file type');
+      console.warn(errorMessage || 'Unsupported file type!');
+      dispatch(addSnack({ message: errorMessage || 'Unsupported file type!' }));
       return;
     }
 
     dispatch(storeFileData({ fileData: fileObj, id }));
     if (onFileUpload) onFileUpload(fileObj);
+    if (destroyDataPostLoad) scrapFileData();
   }, [fileObj]);
 
   const handleFileChange = async (e: any) => {
