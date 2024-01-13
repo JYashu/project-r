@@ -11,9 +11,11 @@ import {
   fetchCells,
   saveCells,
   togglePreview,
+  loadFileData,
 } from './actions';
 import { CBookState, CBookActions } from './types';
 import { getUniqueId } from '../../utils/helpers';
+import cat from '../../components/animations/cat';
 
 const initialState: CBookState = {
   loading: false,
@@ -126,5 +128,60 @@ export default createReducer<CBookState, CBookActions>(initialState)
       const { id } = payload;
 
       draft.data[id].showPreview = !state.data[id].showPreview;
+    }),
+  )
+  .handleAction(loadFileData, (state, { payload }) =>
+    produce(state, (draft) => {
+      let content;
+      let order: string[] | null = null;
+      let data: {
+        [key: string]: Cell;
+      } = {};
+      try {
+        content = JSON.parse(payload.content);
+        order = content.order;
+        data = content.data;
+      } catch (e) {
+        console.error('Error parsing file', e); // eslint-disable-line
+      }
+      if (payload.resetBook) {
+        draft.order = [];
+        draft.data = {};
+        if (!order || order === null) {
+          const cell: Cell = {
+            content: payload.content,
+            type: 'md',
+            id: getUniqueId(draft.order),
+            showPreview: undefined,
+          };
+
+          draft.data[cell.id] = cell;
+          draft.order.push(cell.id);
+        } else {
+          draft.order = [...order];
+          draft.data = { ...data };
+        }
+      } else if (!order || order === null) {
+        const cell: Cell = {
+          content: payload.content,
+          type: 'md',
+          id: getUniqueId(draft.order),
+          showPreview: undefined,
+        };
+
+        draft.data[cell.id] = cell;
+        draft.order.push(cell.id);
+      } else {
+        order.forEach((value: string) => {
+          if (draft.order.includes(value)) {
+            const newID = getUniqueId(draft.order);
+            draft.order.push(newID);
+            draft.data[newID] = data[value];
+          } else {
+            draft.order.push(value);
+            draft.data[value] = data[value];
+          }
+        });
+      }
     }),
   );

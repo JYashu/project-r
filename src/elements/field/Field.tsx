@@ -124,7 +124,12 @@ const Field: React.SFC<Props> = React.forwardRef((props: Props, ref: any) => {
 
       {hasError && <FieldError className={errorCls}>{errorMessage}</FieldError>}
 
-      {disabled && <div className={`${scssObj.baseClass}__label--disabled`} title="Disabled" />}
+      {disabled && (
+        <div
+          className={`${scssObj.baseClass}__label--disabled`}
+          title={restProps.title || 'Disabled'}
+        />
+      )}
     </label>
   );
 });

@@ -9,6 +9,7 @@ import {
   fetchCells,
   saveCells,
   togglePreview,
+  loadFileData,
 } from './actions';
 
 export interface CBookState {
@@ -37,4 +38,5 @@ export type CBookActions =
   | ActionType<typeof createBundle>
   | ActionType<typeof fetchCells>
   | ActionType<typeof saveCells>
-  | ActionType<typeof togglePreview>;
+  | ActionType<typeof togglePreview>
+  | ActionType<typeof loadFileData>;

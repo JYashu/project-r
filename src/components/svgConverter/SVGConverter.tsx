@@ -15,7 +15,7 @@ import scssObj from './_SVGConverter.scss';
 import useGetEnvironment from '../../hooks/useGetEnvironment';
 import useSetGlobalHeader from '../../hooks/useSetGlobalHeader';
 import { Pages } from '../../utils/consts';
-import { FileType } from '../../elements/field/types';
+import { FileObj, FileType } from '../../elements/field/types';
 import useReselect from '../../hooks/useReselect';
 import { selectFileDataById } from '../../redux/fileReader';
 
@@ -30,6 +30,7 @@ const SVGConverter = () => {
   const svgRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [color, setColor] = useState<string>();
+  const [isCanvasLoaded, setCanvasLoaded] = useState(false);
   const { isProd } = useGetEnvironment();
   const history = useHistory();
 
@@ -38,7 +39,7 @@ const SVGConverter = () => {
   });
   const file = useReselect(selectFileDataById, { id: id || '' });
 
-  const onFileUpload = (fileObj: { file: File; type: string } | undefined) => {
+  const onFileUpload = (fileObj: FileObj | undefined) => {
     if (fileObj && fileObj.file)
       getFileAsText(fileObj.file).then((result) => setSvg(DOMPurify.sanitize(result as string)));
     else setSvg('');
@@ -110,6 +111,7 @@ const SVGConverter = () => {
         };
       }
       img.src = url;
+      setCanvasLoaded(true);
     }
   };
 
@@ -188,9 +190,7 @@ const SVGConverter = () => {
             <FileField
               className={`${scssObj.baseClass}__file-input`}
               acceptedTypes={[FileType.SVG]}
-              onFileUpload={(fileObj: { file: File; type: string } | undefined) =>
-                onFileUpload(fileObj)
-              }
+              onFileUpload={(fileObj: FileObj | undefined) => onFileUpload(fileObj)}
               placeHolder="Choose a SVG file or Drop it here"
               errorMessage="Upload SVG file"
               restrictURL={isProd}
@@ -272,6 +272,8 @@ const SVGConverter = () => {
             className={`${scssObj.baseClass}__download-png`}
             buttonStyle="skew"
             onClick={downloadPNG}
+            disabled={!isCanvasLoaded}
+            title={!isCanvasLoaded ? 'Load the PNG before downloading' : 'Download PNG'}
           >
             Download PNG
           </Button>

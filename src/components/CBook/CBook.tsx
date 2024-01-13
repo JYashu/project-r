@@ -6,6 +6,8 @@ import CellItem from '../cellItem';
 
 import scssObj from './_CBook.scss';
 import { FileField } from '../../elements/field';
+import { FileType, FileObj } from '../../elements/field/types';
+import { getFileAsText } from '../../utils/helpers';
 
 interface Props {
   order: string[];
@@ -13,6 +15,8 @@ interface Props {
     [key: string]: Cell;
   };
   insertCellAfter: (id: string | null, cellType: CellTypes) => void;
+  loadFile: (content: string, resetBook: boolean) => void;
+  addSnackbar: (message: string) => void;
 }
 
 interface AddCellProps {
@@ -20,6 +24,80 @@ interface AddCellProps {
   forceVisible?: boolean;
   insertCellAfter: (id: string | null, cellType: CellTypes) => void;
 }
+
+const Toolbar = ({
+  order,
+  data,
+  loadFile,
+  addSnackbar,
+}: {
+  order: string[];
+  data: {};
+  loadFile: (content: string, resetBook: boolean) => void;
+  addSnackbar: (message: string) => void;
+}) => {
+  const onDownloadClick = () => {
+    if (order.length === 0) {
+      addSnackbar('No Cells to Download');
+      return;
+    }
+    const fileBlob = new Blob([JSON.stringify({ order, data })], {
+      type: 'text/plain;charset=utf-8',
+    });
+    const a = window.document.createElement('a');
+    a.href = window.URL.createObjectURL(fileBlob);
+    const fileName = 'untitled.cbk';
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
+
+  const onFileUpload = (fileObj?: FileObj, resetBook = true) => {
+    if (fileObj && fileObj.file) {
+      getFileAsText(fileObj.file).then((result) => loadFile(result, resetBook));
+    }
+  };
+
+  return (
+    <div className={`${scssObj.baseClass}__menu`}>
+      <FileField
+        minimal
+        destroyDataPostLoad
+        onFileUpload={onFileUpload}
+        acceptedTypes={[FileType.TEXT, FileType.CBOOK]}
+        renderButton={() => (
+          <Button className={`${scssObj.baseClass}__button`} buttonStyle="minimal" icon="terminal">
+            Load File
+          </Button>
+        )}
+      />
+      <FileField
+        minimal
+        destroyDataPostLoad
+        onFileUpload={(fileObj?: FileObj) => onFileUpload(fileObj, false)}
+        acceptedTypes={[FileType.TEXT, FileType.CBOOK]}
+        renderButton={() => (
+          <Button
+            className={`${scssObj.baseClass}__button`}
+            buttonStyle="minimal"
+            icon="data_object"
+          >
+            Load Cells
+          </Button>
+        )}
+      />
+      <Button
+        className={`${scssObj.baseClass}__button`}
+        buttonStyle="minimal"
+        icon="download"
+        onClick={onDownloadClick}
+      >
+        Download
+      </Button>
+    </div>
+  );
+};
 
 const AddCell = ({ forceVisible, prevCellId, insertCellAfter }: AddCellProps) => {
   return (
@@ -53,7 +131,7 @@ const AddCell = ({ forceVisible, prevCellId, insertCellAfter }: AddCellProps) =>
   );
 };
 
-const CBook = ({ order, data, insertCellAfter }: Props) => {
+const CBook = ({ order, data, insertCellAfter, loadFile, addSnackbar }: Props) => {
   const cells = order.map((id: string) => data[id]);
 
   useEffect(() => {
@@ -78,6 +156,7 @@ const CBook = ({ order, data, insertCellAfter }: Props) => {
 
   return (
     <div className={`${scssObj.baseClass}`}>
+      <Toolbar order={order} data={data} loadFile={loadFile} addSnackbar={addSnackbar} />
       <AddCell
         forceVisible={cells.length === 0}
         prevCellId={null}

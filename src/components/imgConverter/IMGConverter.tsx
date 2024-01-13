@@ -11,7 +11,7 @@ import useActiveSidebarItem from '../../hooks/useActiveSidebarItem';
 import { ActiveSidebarItem } from '../../types';
 import useSetGlobalHeader from '../../hooks/useSetGlobalHeader';
 import { Pages } from '../../utils/consts';
-import { FileType } from '../../elements/field/types';
+import { FileObj, FileType } from '../../elements/field/types';
 import useGetUniqueId from '../../hooks/useGetUniqueId';
 
 const dropdownOptions = [
@@ -57,7 +57,7 @@ const IMGConverter = ({
 
   const history = useHistory();
 
-  const onFileUpload = (fileObj: { file: File; type: string } | undefined) => {
+  const onFileUpload = (fileObj: FileObj | undefined) => {
     if (fileObj && fileObj.file) {
       setFieldId({ id: '' });
       if (fileObj.type === FileType.SVG) {

@@ -1,8 +1,9 @@
 import { createAction } from 'typesafe-actions';
+import { FileObj } from '../../elements/field/types';
 
 export const storeFileData = createAction(
   'STORE_FILE_DATA',
-  (action) => (payload: { fileData: { file: File; type: string }; id: string }) => action(payload),
+  (action) => (payload: { fileData: FileObj; id: string }) => action(payload),
 );
 
 export const scrapFileDataById = createAction(

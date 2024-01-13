@@ -28,6 +28,7 @@ interface Props {
 interface PreviewProps {
   code: string;
   status: string;
+  isResizing: boolean;
 }
 
 interface CodeEditorProps {
@@ -36,7 +37,7 @@ interface CodeEditorProps {
   runCode: () => void;
 }
 
-const Preview = ({ code, status }: PreviewProps) => {
+const Preview = ({ code, status, isResizing }: PreviewProps) => {
   const iframe = useRef<any>();
 
   useEffect(() => {
@@ -48,6 +49,7 @@ const Preview = ({ code, status }: PreviewProps) => {
 
   return (
     <div className={`${scssObj.baseClass}__preview-wrapper`}>
+      {isResizing && <div className={`${scssObj.baseClass}__iframe-overlay`} />}
       <iframe
         className={`${scssObj.baseClass}__preview-pane`}
         title={`${scssObj.baseClass}__code-preview`}
@@ -142,6 +144,7 @@ const CodeEditor = ({ initialValue, onChange, runCode }: CodeEditorProps) => {
 const CodeCell = ({ cell, bundle, updateCell }: Props) => {
   const cumulativeCode = useCumulativeCode(cell.id);
   const [runCode, setRunCode] = useState(false);
+  const [isResizing, setResizing] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -176,11 +179,19 @@ const CodeCell = ({ cell, bundle, updateCell }: Props) => {
   }, [cumulativeCode, cell.id]);
 
   return (
-    <Resizable direction="vertical">
+    <Resizable
+      onResizeStart={() => setResizing(true)}
+      onResizeStop={() => setResizing(false)}
+      direction="vertical"
+    >
       <div className={`${scssObj.baseClass}__code-cell`}>
         {cell.showPreview ? (
           <>
-            <Resizable direction="horizontal">
+            <Resizable
+              onResizeStart={() => setResizing(true)}
+              onResizeStop={() => setResizing(false)}
+              direction="horizontal"
+            >
               <CodeEditor
                 initialValue={cell.content}
                 runCode={() => setRunCode(true)}
@@ -193,7 +204,7 @@ const CodeCell = ({ cell, bundle, updateCell }: Props) => {
                   <LoadingSpinner type={SpinnerType.CubeFlipSpinner} />
                 </div>
               ) : (
-                <Preview code={bundle.code} status={bundle.error} />
+                <Preview isResizing={isResizing} code={bundle.code} status={bundle.error} />
               )}
             </div>
           </>
@@ -210,42 +221,3 @@ const CodeCell = ({ cell, bundle, updateCell }: Props) => {
 };
 
 export default CodeCell;
-
-// import React, { useState } from 'react';
-
-// const Component = () => {
-//   return <h1>Component</h1>;
-// };
-
-// show(<Component />);
-
-// const App = () => {
-//   const [list, setList] = useState([]);
-
-//   const addComponent = (action) => {
-//     if (action === 'add') {
-//       setList(list.concat(Math.random()));
-//     } else if (list.length > 0) {
-//       list.pop();
-//       setList([...list]);
-//     }
-//   };
-
-//   const moves = list.map((step, move) => {
-//     return (
-//       <div key={move}>
-//         <Component />
-//       </div>
-//     );
-//   });
-
-//   return (
-//     <div>
-//       {moves}
-//       <button onClick={() => addComponent('add')}>Add</button>
-//       <button onClick={() => addComponent('rmv')}>Remove</button>
-//     </div>
-//   );
-// };
-
-// show(<App />);

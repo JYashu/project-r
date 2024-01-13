@@ -21,6 +21,7 @@ import ToggleBar from '../../elements/toggleBar';
 import { selectConverterState } from '../../redux/converter';
 import { selectFileDataById } from '../../redux/fileReader';
 import useReselect from '../../hooks/useReselect';
+import { FileObj } from '../../elements/field/types';
 
 const SVGCreator = () => {
   useActiveSidebarItem(ActiveSidebarItem.IMGConverter);
@@ -48,7 +49,7 @@ const SVGCreator = () => {
   });
   const file = useReselect(selectFileDataById, { id: id || '' });
 
-  const onFileUpload = (fileObj: { file: File; type: string } | undefined) => {
+  const onFileUpload = (fileObj: FileObj | undefined) => {
     if (fileObj) {
       const fileBlob = new Blob([fileObj.file], { type: fileObj.type });
       setImageBlob(fileBlob);
@@ -188,9 +189,7 @@ const SVGCreator = () => {
             <FileField
               className={`${scssObj.baseClass}__file-input`}
               acceptedTypes={fromField ? [fromField] : fromField}
-              onFileUpload={(fileObj: { file: File; type: string } | undefined) =>
-                onFileUpload(fileObj)
-              }
+              onFileUpload={(fileObj: FileObj | undefined) => onFileUpload(fileObj)}
               placeHolder="Choose an Image or Drop it here"
               errorMessage="Upload Image file"
               restrictURL={isProd}

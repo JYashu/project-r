@@ -16,6 +16,18 @@ $base-class: cbook;
   top: 0;
   left: 0;
 
+  &__menu,
+  &__sub-menu {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+  }
+
+  &__menu {
+    gap: 24px;
+    padding: 20px 0;
+  }
+
   .react-draggable-transparent-selection &__cell-list {
     margin-bottom: 50vh;
   }
@@ -40,9 +52,7 @@ $base-class: cbook;
     top: 50%;
     bottom: 50%;
     border-bottom: 1px solid gray;
-    width: 96%;
-    right: 2%;
-    left: 2%;
+    width: 100%;
   }
 
   &__add-buttons {
@@ -55,6 +65,5 @@ $base-class: cbook;
   &__add-button {
     z-index: 5;
     color: white;
-    background-color: #df6a19;
   }
 }

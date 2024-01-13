@@ -18,6 +18,7 @@ $base-class: snackbars;
   z-index: 1001;
   display: flex;
   flex-direction: column;
+  margin-right: 0;
 
   &__content {
     display: flex;
@@ -26,7 +27,7 @@ $base-class: snackbars;
 
   &__dismiss {
     align-self: flex-start;
-    color: map-get($colors, victim);
+    color: map-get($colors, eden);
     flex-shrink: 0;
     margin-left: 16px;
     min-width: 23px;
@@ -41,9 +42,12 @@ $base-class: snackbars;
     bottom: 2px;
     width: 0;
     height: 6px;
-    background-image: linear-gradient(to right, #529dbd, #3250bf);
+    background-image: linear-gradient(
+      to right,
+      map-get($colors, thrush),
+      map-get($colors, chocolate-cosmos)
+    );
     animation: progress 3.25s 0.25s linear forwards;
-    border: 1px solid black;
 
     &--custom {
       display: none;
@@ -63,13 +67,14 @@ $base-class: snackbars;
     display: flex;
     flex-direction: row;
     flex: 1;
-    color: map-get($colors, victim);
+    color: map-get($colors, sunshine);
   }
 
   &__text {
     @include type-style-city;
 
-    color: map-get($colors, victim);
+    font-weight: 600;
+    color: map-get($colors, eden);
   }
 
   &__img {
@@ -83,11 +88,13 @@ $base-class: snackbars;
     animation-duration: 3500ms;
     animation-fill-mode: forwards;
     animation-iteration-count: 1;
-    animation-name: fade-in-and-out;
+    animation-name: notify;
     animation-timing-function: ease-in-out;
-    background-color: map-get($colors, suspect);
+    background-color: map-get($colors, gardenia);
     // display: flex;
     margin: auto;
+    margin-top: 12px;
+    margin-right: 0;
     min-width: 280px;
     padding: 14px 16px 14px 8px;
     pointer-events: auto;
@@ -106,7 +113,7 @@ $base-class: snackbars;
 
     &--custom {
       animation-duration: 333ms;
-      animation-name: fade-in-and-down;
+      animation-name: notify;
 
       > &__progress {
         display: none;

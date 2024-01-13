@@ -95,3 +95,28 @@
     transform: scale(0.95, 1.05);
   }
 }
+
+@include keyframes(notify) {
+  0% {
+    transform: scaleY(0);
+  }
+  3% {
+    transform: scaleY(1);
+  }
+  5% {
+    transform: scale(1.1);
+  }
+  6% {
+    transform: scale(1);
+  }
+  90% {
+    transform: scale(1);
+  }
+  97% {
+    transform: scaleX(1.1);
+    transform: scale(0.2);
+  }
+  100% {
+    transform: scaleY(0);
+  }
+}

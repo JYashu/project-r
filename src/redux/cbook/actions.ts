@@ -54,3 +54,8 @@ export const togglePreview = createAction(
   'TOGGLE_PREVIEW',
   (action) => (payload: { id: string }) => action(payload),
 );
+
+export const loadFileData = createAction(
+  'LOAD_FILE_DATA',
+  (action) => (payload: { content: string; resetBook: boolean }) => action(payload),
+);
