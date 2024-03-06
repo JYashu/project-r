@@ -36,9 +36,9 @@ export const parseNumber = (number: string): number | undefined => {
  * @example by5vv-tqrj-vf1w0zog
  */
 export const getUniqueId = (ids?: string[]): string => {
-  const id = `${Math.random().toString(36).substring(2, 7)}-${Date.now()
-    .toString(36)
-    .substring(2, 6)}-${Math.random().toString(36).substring(2, 10)}`;
+  const id = `${Math.random().toString(36).substring(2, 7)}-${Date.now().toString(
+    36,
+  )}-${Math.random().toString(36).substring(2, 10)}`;
   if (ids?.includes(id)) return getUniqueId(ids);
   return id;
 };
