@@ -7,7 +7,6 @@ import { ActiveSidebarItem, SpinnerType } from '../../types';
 import { FULLSTORY_EXCLUDE_CLASS, Pages } from '../../utils/consts';
 import { ErrorValues, TouchedValues } from '../../utils/typeHelpers';
 import Button from '../../elements/button';
-import { StateDropdown } from '../../elements/dropdown';
 import Field, { FileField } from '../../elements/field';
 import LoadingSpinner from '../../elements/loadingSpinner';
 import scssObj from './_TestPage.scss';
@@ -116,26 +115,7 @@ const TestApp = ({
               value={values.state}
               label="State"
             >
-              {(fieldName) => (
-                <StateDropdown
-                  className={`${scssObj.baseClass}__states-dropdown`}
-                  handleBlur={() => setState(fieldName)}
-                  handleChange={(option) => {
-                    if (!option) {
-                      setFieldValue(fieldName, '');
-                      return;
-                    }
-
-                    const { value } = option;
-                    setFieldValue(fieldName, value);
-                  }}
-                  name={fieldName}
-                  hasLabel={!!values.state}
-                  isClearable
-                  value={values.state}
-                  noBorder
-                />
-              )}
+              {(fieldName) => <></>}
             </Field>
             <FileField minimal />
             <FileField restrictURL />
