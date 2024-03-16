@@ -1,0 +1,12 @@
+@import '../../styles/lib';
+
+$base-class: cursor;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  @include glass-morph-cursor;
+  cursor: none;
+}

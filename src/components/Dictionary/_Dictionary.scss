@@ -1,0 +1,65 @@
+@import '../../styles/lib';
+
+$base-class: dictionary;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  @include box-level-4;
+
+  min-width: 320px;
+  max-width: 320px;
+  background-color: whitesmoke;
+  position: relative;
+  top: 2rem;
+
+  &__header {
+    padding: 1rem;
+    padding-bottom: 0;
+  }
+
+  &__content {
+    @include modal-section('content');
+
+    padding: map-get($spacing, s);
+    overflow: scroll;
+  }
+
+  &__result {
+    width: 100%;
+    max-height: 500px;
+    overflow: scroll;
+  }
+
+  &__search {
+    color: map-get($colors, info);
+    padding: 10px;
+  }
+
+  &__error {
+    color: map-get($colors, info);
+    padding: 10px;
+  }
+
+  &__spinner {
+    @include center-horizontally;
+
+    height: 100px;
+    transition: 0.2s ease-in-out;
+  }
+
+  &__left-arrow {
+    transform: rotate(180deg);
+  }
+
+  &__footer {
+    @include modal-section('footer');
+
+    padding-bottom: 10px;
+    padding-top: 10px;
+
+    text-align: right;
+  }
+}

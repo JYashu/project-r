@@ -1,0 +1,96 @@
+@import '../../styles/lib';
+@import '../../styles/global';
+
+$base-class: app;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  @media print {
+    padding: 0 0 0 0 !important;
+  }
+
+  height: 100%;
+  display: flex;
+  position: relative;
+  background-color: map-get($colors, sidebar-highlight);
+  height: 100vh;
+  padding-top: 64px;
+
+  &__global-header {
+    position: fixed;
+    width: 100vw;
+    top: 0;
+    z-index: 999;
+  }
+
+  &__sidebar {
+    position: fixed;
+    height: 100%;
+    z-index: 1000;
+  }
+
+  &__sidebar-static {
+    height: 100%;
+    z-index: 1000;
+  }
+
+  &__cbook {
+    width: 100vw;
+    position: fixed;
+    overflow: scroll;
+  }
+
+  &__content {
+    max-height: calc(100vh - 64px);
+    width: 100%;
+    overflow-y: auto;
+  }
+
+  // &__content-static {
+  //   top: 64px;
+  //   left: $collapsed-sidebar-width;
+  //   width: calc(100vw - 57.4px);
+  //   position: fixed;
+  //   max-height: calc(100vh - 64px);
+  //   flex-grow: 1;
+  //   display: flex;
+  //   flex-direction: column;
+  //   overflow-y: auto;
+  // }
+
+  &__container {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    position: fixed;
+    height: fit-content;
+    width: fit-content;
+    top: 6rem;
+    right: 2rem;
+    z-index: 999;
+  }
+
+  @media only screen and (max-width: 1024px) {
+    &__content {
+      min-width: 100vw;
+      position: fixed;
+    }
+
+    &__content-static {
+      left: 0;
+      width: 100vw;
+      position: fixed;
+    }
+  }
+
+  @media only screen and (max-width: 632px) {
+    &__container {
+      width: calc(100vw - 4rem);
+      margin-left: 2rem;
+      overflow-x: scroll;
+    }
+  }
+}

@@ -1,0 +1,114 @@
+@import '../../styles/lib';
+
+$base-class: snackbars;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  $this: &;
+
+  top: 0;
+  left: 0;
+  padding: 0 24px 24px;
+  pointer-events: none;
+  position: fixed;
+  width: 100vw;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  margin-right: 0;
+
+  &__content {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__dismiss {
+    align-self: flex-start;
+    color: map-get($colors, eden);
+    flex-shrink: 0;
+    margin-left: 16px;
+    min-width: 23px;
+    padding: 2px;
+  }
+
+  &__progress {
+    @include border-radius(4px);
+
+    position: absolute;
+    left: 5px;
+    bottom: 2px;
+    width: 0;
+    height: 6px;
+    background-image: linear-gradient(
+      to right,
+      map-get($colors, thrush),
+      map-get($colors, chocolate-cosmos)
+    );
+    animation: progress 3.25s 0.25s linear forwards;
+
+    &--custom {
+      display: none;
+    }
+  }
+
+  &__undo {
+    align-self: flex-start;
+    color: map-get($colors, snow);
+    flex-shrink: 0;
+    margin-left: 16px;
+    min-width: 23px;
+    padding: 2px;
+  }
+
+  &__message {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    color: map-get($colors, sunshine);
+  }
+
+  &__text {
+    @include type-style-city;
+
+    font-weight: 600;
+    color: map-get($colors, eden);
+  }
+
+  &__img {
+    top: -6px;
+    position: relative;
+  }
+
+  &__snack {
+    @include border-radius(4px);
+
+    animation-duration: 3500ms;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    animation-name: notify;
+    animation-timing-function: ease-in-out;
+    background-color: map-get($colors, gardenia);
+    margin: auto;
+    margin-top: 12px;
+    margin-right: 0;
+    min-width: 280px;
+    padding: 14px 16px 14px 8px;
+    pointer-events: auto;
+
+    + #{$this}__snack {
+      margin-top: 12px;
+    }
+
+    &--custom {
+      animation-duration: 333ms;
+      animation-name: notify;
+
+      > &__progress {
+        display: none;
+      }
+    }
+  }
+}

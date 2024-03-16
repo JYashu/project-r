@@ -1,0 +1,42 @@
+@import '../../styles/lib';
+
+$base-class: npm-repo;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  @include type-style-justice;
+
+  margin: 5em;
+
+  &__repo-list {
+    @include responsive-grid;
+    grid-gap: 24px;
+  }
+
+  // @media only screen and (max-width: 1024px) {
+  //   &__repo-list {
+  //     display: grid;
+  //     grid-gap: 24px;
+  //     grid-template-columns: repeat(2, 1fr);
+
+  //     // @include tablet {
+  //     //   grid-template-columns: 100%;
+  //     // }
+  //   }
+  // }
+
+  // @media only screen and (max-width: 764px) {
+  //   &__repo-list {
+  //     display: grid;
+  //     grid-gap: 24px;
+  //     grid-template-columns: repeat(2, 1fr);
+
+  //     @include tablet {
+  //       grid-template-columns: 40%;
+  //     }
+  //   }
+  // }
+}

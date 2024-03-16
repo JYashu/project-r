@@ -1,0 +1,78 @@
+@import '../../styles/lib';
+
+$base-class: clipboard;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  @include box-level-4;
+
+  z-index: 1001;
+  width: 250px;
+  background-color: whitesmoke;
+  position: relative;
+  top: 2rem;
+
+  &__header {
+    @include modal-section('header');
+
+    padding-top: 16px;
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__main {
+    @include modal-section('content');
+
+    padding: map-get($spacing, s);
+    max-height: 300px;
+    overflow: scroll;
+  }
+
+  &__item {
+    @include center-horizontally;
+
+    opacity: 0;
+    animation: new-item-animation 0.3s linear forwards;
+    display: flex;
+    flex-direction: row;
+    padding: 0.6rem;
+  }
+
+  &__text {
+    word-wrap: break-word;
+    width: fit-content;
+    max-width: 86%;
+  }
+
+  &__icon {
+    position: relative;
+    cursor: pointer;
+    left: 6px;
+    top: 3px;
+  }
+
+  &__icon-clear {
+    margin-left: 70px;
+    cursor: pointer;
+  }
+
+  &__icon-close {
+    margin-left: 10px;
+    cursor: pointer;
+  }
+}
+
+@keyframes new-item-animation {
+  from {
+    @include opacity(0);
+    @include transform(translateY(-400px));
+  }
+
+  to {
+    @include opacity(1);
+    @include transform(translateY(0));
+  }
+}

@@ -1,0 +1,64 @@
+@import '../../styles/lib';
+
+$base-class: npm-repo-item;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  $this: &;
+
+  @include box-level-2;
+
+  min-height: 160px;
+  min-width: 100%;
+  padding: 0;
+  position: relative;
+
+  &__container {
+    @include box-level-4;
+    @include efeito-div-hover;
+  }
+
+  &__item {
+    @include box-level-3;
+
+    min-height: 160px;
+    height: 100%;
+  }
+
+  &__details {
+    @include type-style-justice;
+    height: 100%;
+    padding: 2em;
+  }
+
+  &__name {
+    font-size: larger;
+    font-weight: 700;
+  }
+
+  &__info {
+    color: rgb(82, 92, 86);
+  }
+
+  &__description {
+    width: 40ch;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__install {
+    width: calc(100% - 4rem);
+    position: absolute;
+    bottom: 0.5rem;
+    // height: 2rem;
+    left: 2rem;
+    // width: calc(100% - 4rem);
+    // margin: 0 2em;
+    // padding: 0.5em;
+    // border: 1px solid black;
+  }
+}

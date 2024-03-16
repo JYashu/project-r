@@ -1,0 +1,28 @@
+// $type - Possible modal section types. header | content | footer
+@mixin modal-section($type: null) {
+  @include type-style-city;
+
+  padding: map-get($spacing, l);
+
+  @if $type == 'content' or $type == 'footer' {
+    border-top: 1px solid map-get($colors, frosted-glass);
+  }
+
+  @if $type == 'content-dark' or $type == 'footer-dark' {
+    border-top: 1px solid #423440;
+  }
+
+  @if $type == 'footer' {
+    padding-bottom: 16px;
+    padding-top: 16px;
+  }
+
+  @if $type == 'header' {
+    @include type-style-specialized;
+
+    margin: 0;
+    padding-bottom: 16px;
+    padding-right: calc(#{map-get($spacing, l)} + 24px);
+    padding-top: 24px;
+  }
+}

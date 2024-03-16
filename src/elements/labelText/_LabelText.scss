@@ -1,0 +1,14 @@
+@import '../../styles/lib';
+
+$base-class: label-text;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  @include type-style-justice;
+
+  color: map-get($colors, chimera);
+  display: inline-block;
+}

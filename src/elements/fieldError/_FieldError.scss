@@ -1,0 +1,13 @@
+@import '../../styles/lib';
+
+$base-class: field-error;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  @include type-style-justice;
+
+  color: map-get($intent-colors, destructive);
+}

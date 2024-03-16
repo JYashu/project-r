@@ -1,0 +1,38 @@
+@import '../../styles/lib';
+
+$base-class: tooltip;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  &__icon {
+    cursor: default;
+    display: inline-flex;
+    vertical-align: sub;
+  }
+
+  &__tooltip-text {
+    @include type-style-mono;
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+
+    visibility: hidden;
+
+    padding: 5px 0;
+    max-width: 540px;
+    min-width: 320px;
+    background-color: map-get($colors, snow);
+    color: map-get($colors, eden);
+    text-align: center;
+    border: 1px solid map-get($colors, baltic);
+    border-radius: 4px;
+    position: absolute;
+    z-index: 1;
+  }
+
+  &:hover &__tooltip-text {
+    visibility: visible;
+  }
+}

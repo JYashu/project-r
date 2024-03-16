@@ -1,0 +1,155 @@
+@import '../../styles/lib';
+
+$base-class: mine-sweeper;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  background:
+    // linear-gradient(
+    //   rgba(0, 0, 0, 0.5),
+    //   rgba(0, 0, 0, 0.5)
+    // ),
+    url(https://project-r-assets.s3.us-east-2.amazonaws.com/backgrounds/gray.jpeg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  height: 100vh;
+
+  &__container {
+    width: fit-content;
+    padding: 8px;
+    margin: 0 auto;
+    border-bottom: solid 2px map-get($colors, mine-sweeper);
+    border-right: solid 2px map-get($colors, mine-sweeper);
+    border-top: solid 2px map-get($colors, snow);
+    border-left: solid 2px map-get($colors, snow);
+    background-color: map-get($colors, mine-sweeper-bg);
+  }
+
+  &__wrapper {
+    width: fit-content;
+    // padding: 5px;
+    border-left: solid 2px map-get($colors, mine-sweeper);
+    border-top: solid 2px map-get($colors, mine-sweeper);
+    border-right: solid 2px map-get($colors, snow);
+    border-bottom: solid 2px map-get($colors, snow);
+    background-color: map-get($colors, mine-sweeper-bg);
+  }
+
+  &__menu,
+  &__footer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    padding: 5px;
+    border-left: solid 2px map-get($colors, mine-sweeper);
+    border-top: solid 2px map-get($colors, mine-sweeper);
+    border-right: solid 2px map-get($colors, snow);
+    border-bottom: solid 2px map-get($colors, snow);
+    background-color: map-get($colors, mine-sweeper-bg);
+  }
+
+  &__menu {
+    margin-bottom: 8px;
+  }
+
+  &__footer {
+    margin-top: 8px;
+    gap: 8px;
+  }
+
+  &__toggle {
+    width: 60px;
+  }
+
+  &__button-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__button {
+    padding-top: 13px;
+    width: 30px;
+    height: 30px;
+  }
+
+  &__footer-button {
+    height: 30px;
+    padding: 0;
+    min-width: 100px;
+  }
+
+  &__focus {
+    width: 30px;
+    height: 30px;
+    border-bottom: solid 2px map-get($colors, mine-sweeper);
+    border-right: solid 2px map-get($colors, mine-sweeper);
+    border-top: solid 2px map-get($colors, snow);
+    border-left: solid 2px map-get($colors, snow);
+    background-color: map-get($colors, mine-sweeper-bg);
+  }
+
+  &__row {
+    display: flex;
+    flex-direction: row;
+    max-width: fit-content;
+    color: map-get($colors, snow);
+  }
+
+  &__cell {
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+    display: flex;
+    background-color: map-get($colors, mine-sweeper-bg);
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__untouched-cell {
+    border-bottom: solid 3px map-get($colors, mine-sweeper);
+    border-right: solid 3px map-get($colors, mine-sweeper);
+    border-top: solid 3px map-get($colors, snow);
+    border-left: solid 3px map-get($colors, snow);
+  }
+
+  &__revealed-cell {
+    border: 0.1px solid map-get($colors, mine-sweeper-border);
+    cursor: pointer;
+  }
+
+  &__clicked-mine-cell {
+    background-color: red;
+    border: 0.1px solid map-get($colors, mine-sweeper-border);
+    cursor: pointer;
+    box-shadow: inset 1px 1px 2px 0px map-get($colors, mine-sweeper-border);
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media screen and (max-width: 900px) {
+    &__content {
+      max-width: 80vw;
+      overflow: scroll;
+    }
+  }
+
+  @media screen and (max-width: 458px) {
+    &__cell {
+      width: 20.8px;
+      height: 20.8px;
+    }
+
+    &__content {
+      max-width: 335px;
+      overflow: scroll;
+    }
+  }
+}

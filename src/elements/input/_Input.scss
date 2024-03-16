@@ -1,0 +1,142 @@
+@import '../../styles/lib';
+
+$base-class: input;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  @include type-style-city;
+  @include border-radius(3px);
+
+  border: 0.5px solid map-get($colors, lily-white);
+  caret-color: map-get($colors, bering-sea);
+  color: map-get($colors, bering-sea);
+
+  &--default {
+    padding: 13px 8px;
+  }
+
+  &--small {
+    padding: 5px 13px;
+  }
+
+  &--pointer i {
+    cursor: pointer;
+    color: #38838b !important;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  &--solid {
+    background-color: map-get($colors, snow);
+  }
+
+  &--transparent {
+    background-color: transparent;
+  }
+
+  &--error {
+    border-color: map-get($intent-colors, destructive);
+  }
+
+  &--rounded {
+    @include border-radius(25px);
+  }
+
+  &__btn {
+    top: 4px;
+    right: 10px;
+    position: absolute;
+  }
+
+  &:disabled {
+    color: map-get($colors, chimera);
+  }
+
+  &::placeholder {
+    color: map-get($colors, grey);
+  }
+
+  &:focus {
+    border-color: map-get($colors, eden);
+    outline: none;
+  }
+
+  &--labelled {
+    padding: 20px 8px 6px;
+
+    &::placeholder {
+      color: map-get($colors, butler);
+    }
+  }
+
+  &--with-left-icon {
+    padding-left: 36px;
+  }
+
+  &--with-right-icon {
+    padding-right: 36px;
+  }
+
+  &__icon-container {
+    display: flex;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+
+  &__left-background-icon {
+    background-color: transparent;
+    border-style: none;
+    flex-basis: 100%;
+    min-width: 50%;
+    text-align: start;
+    i {
+      color: map-get($colors, light-grey);
+    }
+  }
+
+  &__right-background-icon {
+    background-color: transparent;
+    border-style: none;
+    flex-basis: 100%;
+    min-width: 50%;
+    text-align: end;
+
+    i {
+      color: map-get($colors, light-grey);
+    }
+  }
+
+  &::placeholder {
+    color: map-get($colors, chimera);
+  }
+
+  &__info-icon {
+    position: absolute;
+    top: 14px;
+    right: 6px;
+  }
+}
+
+input.#{$base-class}--reposition-hidden-spin[type='number']::-webkit-inner-spin-button,
+input.#{$base-class}--reposition-hidden-spin[type='number']::-webkit-outer-spin-button {
+  position: relative;
+  margin-right: 20px;
+}
+
+input.#{$base-class}--reposition-hidden-spin[type='number']:hover::-webkit-inner-spin-button,
+input.#{$base-class}--reposition-hidden-spin[type='number']:hover::-webkit-outer-spin-button {
+  position: relative;
+  margin-right: 20px;
+}
+
+input.#{$base-class}--hidden-spin[type='number']::-webkit-inner-spin-button,
+input.#{$base-class}--hidden-spin[type='number']::-webkit-outer-spin-button {
+  display: none;
+}

@@ -1,0 +1,16 @@
+@import '../../styles/lib';
+
+$base-class: color-page;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  @include responsive-grid-large;
+
+  &__color-box {
+    width: 100%;
+    height: 200px;
+  }
+}

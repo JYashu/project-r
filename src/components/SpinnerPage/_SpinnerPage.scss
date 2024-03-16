@@ -1,0 +1,30 @@
+@import '../../styles/lib';
+
+$base-class: spinner-page;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  @include responsive-grid;
+
+  background-image: linear-gradient(45deg, #6f04d9, #d9048e);
+
+  &__container {
+    @include flip-div-hover;
+
+    width: 100%;
+    height: 200px;
+  }
+
+  &__back {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__button {
+    margin-top: 2rem;
+  }
+}

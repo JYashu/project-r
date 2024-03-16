@@ -1,0 +1,175 @@
+@import '../../styles/lib';
+
+$base-class: clock;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  @include border-radius(8px);
+
+  display: flex;
+  height: fit-content;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  width: 150px;
+  scroll-snap-type: x mandatory;
+  gap: 12px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  & .item {
+    @include border-radius(8px);
+
+    flex: 0 0 100%;
+    padding: 24px;
+    scroll-snap-align: start;
+  }
+
+  &__item {
+    @include type-style-clock;
+    @include border-radius(20px);
+
+    width: 112px;
+    color: map-get($colors, header-text);
+    padding: 1rem;
+    border: 1px solid map-get($colors, header-text);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  &__stopwatch {
+    width: 80px;
+  }
+
+  &__analog {
+    background-color: white;
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    @include border-radius(50%);
+    @include transform(translate(-50%, -50%));
+    @include transform(scale(0.5));
+    box-shadow: 0 2px 30px rgba(0, 0, 0, 0.2);
+    font-size: 24px;
+    color: #444;
+    text-align: center;
+    z-index: 10001;
+  }
+
+  &__analog::after {
+    background: #aaa;
+    content: '';
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    @include border-radius(50%);
+    @include transform(translate(-50%, -50%));
+    border: 2px solid #fff;
+  }
+
+  &__hour-hand {
+    position: absolute;
+    width: 6px;
+    height: 60px;
+    background: #222;
+    top: 30%;
+    left: 49%;
+    transform-origin: bottom;
+  }
+
+  &__min-hand {
+    position: absolute;
+    width: 4px;
+    height: 80px;
+    background: #444;
+    top: 22.5%;
+    left: 49%;
+    transform-origin: bottom;
+  }
+
+  &__sec-hand {
+    position: absolute;
+    width: 2px;
+    height: 118px;
+    background: red;
+    top: 10.5%;
+    left: 50%;
+    transform-origin: bottom;
+  }
+
+  &__analog span {
+    position: absolute;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 700;
+  }
+
+  &__twelve {
+    top: 10px;
+    left: 46%;
+  }
+
+  &__one {
+    top: 10%;
+    right: 26%;
+  }
+
+  &__eleven {
+    top: 10%;
+    left: 26%;
+  }
+
+  &__two {
+    top: 25%;
+    right: 10%;
+  }
+
+  &__three {
+    right: 10px;
+    top: 46%;
+  }
+
+  &__four {
+    right: 30px;
+    top: 67%;
+  }
+
+  &__five {
+    right: 78px;
+    top: 80%;
+  }
+
+  &__six {
+    bottom: 10px;
+    left: 50%;
+  }
+
+  &__seven {
+    left: 80px;
+    top: 82%;
+  }
+
+  &__eight {
+    left: 30px;
+    top: 67%;
+  }
+
+  &__nine {
+    left: 10px;
+    top: 46%;
+  }
+
+  &__ten {
+    top: 25%;
+    left: 10%;
+  }
+}

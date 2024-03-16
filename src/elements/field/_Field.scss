@@ -1,0 +1,165 @@
+@import '../../styles/lib';
+
+$base-class: field;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  @include border-radius(3px);
+
+  color: map-get($colors, eden);
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+  min-width: 0;
+  position: relative;
+
+  &--border {
+    border: 1px solid map-get($colors, sub-heading);
+  }
+
+  &--solid {
+    background-color: map-get($colors, snow);
+  }
+
+  &--transparent {
+    background-color: transparent;
+  }
+
+  &--has-children {
+    border-style: none;
+  }
+
+  &--has-error {
+    border-color: transparent;
+  }
+
+  &--text-area {
+    background-color: transparent;
+    border-style: none;
+  }
+
+  &--rounded {
+    @include border-radius(25px);
+
+    overflow: hidden;
+  }
+
+  &__description {
+    @include type-style-justice;
+
+    background-color: transparent;
+    color: map-get($colors, eden);
+    margin: 4px 0 0;
+    padding-left: 8px;
+    position: absolute;
+    top: 100%;
+  }
+
+  &__error {
+    margin: 4px 0 0;
+    padding-left: 8px;
+    position: absolute;
+    top: 100%;
+  }
+
+  &__error.field-error {
+    color: map-get($colors, goji-berry);
+  }
+
+  &__label {
+    left: 0;
+    padding: 0 8px;
+    position: absolute;
+    top: 6px;
+    width: fit-content;
+
+    &--with-left-icon {
+      padding-left: 36px;
+    }
+
+    &--with-right-icon {
+      padding-right: 36px;
+    }
+
+    &--hidden {
+      visibility: hidden;
+    }
+  }
+
+  &__file-field,
+  &__color-field {
+    position: relative;
+  }
+
+  &__file-input {
+    // flex-basis: 100%;
+
+    > input#fileUpload {
+      padding-left: 18px;
+      padding-right: 70px;
+    }
+  }
+
+  &__load-url-button {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &__preview-button {
+    position: absolute;
+    right: 70px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 1s ease-in-out;
+  }
+
+  &__clear-button {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &__input-button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: -100;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  &__picker-wrapper {
+    margin-top: 4px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid map-get($colors, sub-heading);
+  }
+
+  &__picker {
+    margin-top: 1.6px;
+    margin-left: 1.5px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+  }
+
+  &__label--disabled {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: auto;
+    width: auto;
+    background-color: map-get($colors, disabled);
+    opacity: 0.16;
+    z-index: 9999999;
+  }
+}

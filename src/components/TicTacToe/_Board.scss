@@ -1,0 +1,38 @@
+@import '../../styles/lib';
+
+$base-class: board;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  &__square {
+    background: #fff;
+    border: 1px solid #999;
+    float: left;
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 62px;
+    height: 80px;
+    margin-right: -1px;
+    margin-top: -1px;
+    padding: 0;
+    text-align: center;
+    width: 80px;
+  }
+
+  &__square:focus {
+    outline: none;
+  }
+
+  &__board-row {
+    height: 33%;
+  }
+
+  &__board-row:after {
+    clear: both;
+    content: '';
+    display: table;
+  }
+}

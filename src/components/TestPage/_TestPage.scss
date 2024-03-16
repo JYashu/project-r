@@ -1,0 +1,57 @@
+@import '../../styles/lib';
+
+$base-class: test-page;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  &__container {
+    @include center-on-screen;
+    @include background-image($width: 1478, $height: 733, $type: map-get($img-provider, picsum));
+  }
+
+  &__glass {
+    @include glass-effect;
+    @include center-horizontally;
+
+    min-width: 80%;
+    height: 600px;
+    overflow-y: scroll;
+  }
+
+  &__glitch {
+    @include glitch-effect;
+
+    margin: 10px;
+  }
+
+  &__head {
+    @include type-style-specialized;
+    // @include typing-effect;
+
+    width: fit-content;
+    max-width: fit-content;
+  }
+
+  &__field {
+    margin: 2rem;
+  }
+
+  &__spinner {
+    @include center-on-screen;
+  }
+
+  &__fields {
+    width: 40%;
+  }
+
+  &__state {
+    min-width: 200px;
+  }
+
+  &__empty {
+    @include cube-effect($size: small);
+  }
+}

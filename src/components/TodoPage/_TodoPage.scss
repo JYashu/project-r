@@ -1,0 +1,41 @@
+@import '../../styles/lib';
+
+$base-class: todo-page;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  // @include type-style-game;
+  margin: 5em;
+
+  &__spinner {
+    @include center-on-screen;
+  }
+
+  &__action-buttons {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+
+  &__label,
+  &__value {
+    @include type-style-district-light;
+  }
+
+  &__button {
+    @include box-level-4;
+  }
+
+  &__button:not(:nth-child(2n)) {
+    margin-right: 30px;
+  }
+
+  &__description {
+    @include type-style-city;
+    width: 100%;
+    text-align: center;
+  }
+}

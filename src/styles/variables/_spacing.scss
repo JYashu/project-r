@@ -1,0 +1,15 @@
+$spacing: (
+  xs: 4px,
+  s: 8px,
+  m: 16px,
+  l: 24px,
+  xl: 32px,
+  xx: 48px,
+  xxx: 64px,
+);
+
+:export {
+  @each $key, $value in $spacing {
+    #{unquote($key)}: $value;
+  }
+}

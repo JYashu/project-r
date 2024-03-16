@@ -1,0 +1,15 @@
+// Size mixin.
+// https://gist.github.com/brianmcallister/3659524
+//
+// $width  - Element width, with units.
+// $height - Optional height of the element. Expects units, ex: 5px.
+//           Defaults to null.
+@mixin size($width, $height: null) {
+  width: $width;
+
+  @if $height {
+    height: $height;
+  } @else {
+    height: $width;
+  }
+}

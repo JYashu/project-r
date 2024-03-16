@@ -1,0 +1,51 @@
+@import '../../styles/lib';
+
+$base-class: snake;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  @include center-on-screen;
+  background-image: url('https://project-r-assets.s3.us-east-2.amazonaws.com/backgrounds/inclined.webp');
+
+  &__content {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__canvas {
+    background-image: url('https://project-r-assets.s3.us-east-2.amazonaws.com/backgrounds/inclined.webp');
+  }
+
+  &__instructions {
+    @include type-style-city;
+
+    padding: map-get($spacing, l);
+    // border: 1px solid black;
+    max-width: 280px;
+  }
+
+  &__heading {
+    @include type-style-heading;
+    margin-bottom: 10px;
+  }
+
+  &__note {
+    @include border-radius(6px);
+    border: 1px solid map-get($colors, header-bg);
+    padding: 10px;
+    margin: 10px 0;
+  }
+
+  &__first-instruction {
+    margin-top: 10px;
+  }
+
+  &__message {
+    @include type-style-heading;
+    @include center-on-screen;
+    background-image: url('https://project-r-assets.s3.us-east-2.amazonaws.com/backgrounds/inclined.webp');
+  }
+}

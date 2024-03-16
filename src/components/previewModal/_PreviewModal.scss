@@ -1,0 +1,18 @@
+@import '../../styles/lib';
+
+$base-class: preview-modal;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  @include type-style-justice;
+  background: transparent;
+
+  &__image,
+  &__iframe,
+  &__video {
+    @include center-horizontally;
+  }
+}

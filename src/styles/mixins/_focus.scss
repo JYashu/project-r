@@ -1,0 +1,8 @@
+@mixin focus {
+  &:focus {
+    box-shadow: 0 0 0 2px map-get($colors, palace);
+    outline: none;
+
+    @content;
+  }
+}

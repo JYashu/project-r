@@ -1,0 +1,63 @@
+@import '../../styles/lib';
+
+$base-class: link;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  $this: &;
+  text-decoration: none;
+
+  color: map-get($colors, eden);
+
+  &--button {
+    @include button-size;
+    @include button-style;
+
+    display: inline-flex;
+    justify-content: center;
+  }
+
+  &--button-intent-primary {
+    @include button-intent(primary);
+  }
+
+  &--button-transparent {
+    @include transparent-button;
+  }
+
+  &--icon {
+    @include button-icon($right: false);
+  }
+
+  &--icon-only {
+    @include button-icon($empty: true, $right: true);
+
+    min-width: 0;
+  }
+
+  &--container {
+    color: inherit;
+    text-decoration: inherit;
+
+    &:hover {
+      text-decoration: inherit;
+    }
+  }
+
+  &--is-external {
+    position: relative;
+    margin-right: 10px;
+  }
+
+  &--link-external {
+    position: absolute;
+    bottom: 5%;
+    max-height: 30px;
+    height: 85%;
+    width: auto;
+    fill: map-get($colors, eden);
+  }
+}

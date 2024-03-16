@@ -1,0 +1,90 @@
+$colors: (
+  header-bg: #2a2961,
+  header-text: #d1d1ef,
+  nav-focus: #a0caca,
+  button-dark: #105e47,
+  sidebar-background: #2a2961,
+  nav-bg: #73e9a9,
+  nav-color: #1c1c1d,
+  sidebar-highlight: linear-gradient(90deg, #4d4d80 0%, #b6b4f400 100%),
+  info: #9a9a9a,
+  sub-heading: #757474,
+  default-bg: #efefef,
+  mine-sweeper: #7b7b7b,
+  mine-sweeper-bg: #bcbdbc,
+  mine-sweeper-border: #7a7b7a,
+  disabled: #3b3b3b,
+
+  //RC
+  //blue
+  lavender: #e6e6fa,
+  lagoon: #72bcd2,
+  allure: #7291b4,
+  periwinkle: #7c83bc,
+  cerulean: #007ba7,
+  palace: #346cb0,
+  ricer-side: #4c6a92,
+  hyacinth: #1e5da5,
+  imperial: #134c97,
+  lapis-lazuli: #303698,
+  bering-sea: #4b5b6e,
+  insignia: #32435a,
+  majolica-blue: #274357,
+  tuxedo: #3f3c43,
+  butler: #13294b,
+
+  //yellow
+  gardenia: #f1e8df,
+  sun-kiss: #ebd1bb,
+  sage: #b1bca0,
+  sunshine: #f4d772,
+  blazing: #ffa74f,
+
+  //green
+  seacrest: #bfd1b3,
+  margarita: #b5c38e,
+  shocking: #55ff33,
+  greenery: #88b04b,
+  baltic: #6c969a,
+  viridian: #148e88,
+  rooftop: #6d726f,
+  chimera: #74626d,
+  palace-green: #426255,
+  scallion: #2a6735,
+  cilantro: #3e6646,
+  eden: #145555,
+
+  //red
+  wild-orchid: #d979a2,
+  majolica-mauve: #a08990,
+  fandango: #b53389,
+  willowherb: #8e4483,
+  melt: #ff5e24,
+  thrush: #936b4f,
+  boudoir: #bb365d,
+  hibiscus: #c52a41,
+  viva-magenta: #bb2649,
+  argon-oil: #8b593e,
+  goji-berry: #b91428,
+  cordovan: #702f3b,
+  pomegranate: #660c21,
+  chocolate-cosmos: #58111a,
+
+  snow: #ffffff,
+  grey: #7e9095,
+  light-grey: #adbdbd,
+  frosted-glass: #eaefef,
+  lily-white: #eff3f3,
+);
+
+$intent-colors: (
+  cancel: map-get($colors, frosted-glass),
+  destructive: map-get($colors, melt),
+  primary: map-get($colors, eden),
+);
+
+:export {
+  @each $key, $value in $colors {
+    #{$key}: $value;
+  }
+}

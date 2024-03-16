@@ -1,0 +1,227 @@
+@mixin glass-effect {
+  @include border-radius(20px);
+
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+@mixin typing-effect {
+  // TODO: FOHTMIW
+  width: 9ch;
+  animation: typing 2s steps(9), blink 0.5s step-end infinite alternate;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid;
+
+  @keyframes typing {
+    0% {
+      width: 0;
+    }
+    40%,
+    60% {
+      left: calc(100% + 30px);
+    }
+    100% {
+      left: 0;
+    }
+  }
+
+  @keyframes type {
+    0% {
+      width: 0;
+    }
+  }
+
+  @keyframes blink {
+    50% {
+      border-color: transparent;
+    }
+  }
+}
+
+@mixin cube-effect($size: medium) {
+  // TODO: FOHTMIW with varying sizes
+  $imagesize: 200px;
+  @if $size == 'medium' {
+    $imagesize: 140px;
+  }
+  @if $size == 'small' {
+    $imagesize: 100px;
+  }
+  perspective: 800px;
+  transition: 0.4s;
+
+  > .cube {
+    transform-style: preserve-3d;
+    position: relative;
+    width: $imagesize;
+    height: $imagesize;
+    animation: rotate 10s ease-in-out infinite;
+    transform-origin: center center;
+
+    > .cube__side {
+      position: absolute;
+      width: inherit;
+      height: inherit;
+      background-color: #333;
+      opacity: 0.95;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    @if $size == 'medium' {
+      > .cube__back {
+        transform: translateZ(70px) rotateX(180deg);
+        // background-image: url('https://giphy.com/embed/ICOgUNjpvO0PC');
+      }
+
+      > .cube__front {
+        transform: translateZ(-70px);
+        // background-image: url('https://picsum.photos/180/180');
+      }
+    }
+
+    @if $size == 'small' {
+      > .cube__back {
+        transform: translateZ(50px) rotateX(180deg);
+        // background-image: url('https://giphy.com/embed/ICOgUNjpvO0PC');
+      }
+
+      > .cube__front {
+        transform: translateZ(-50px);
+        // background-image: url('https://picsum.photos/180/180');
+      }
+    }
+
+    > .cube__left {
+      transform: translateX(-50%) rotateY(270deg);
+      // background-image: url('http://placeimg.com/180/180');
+    }
+
+    > .cube__right {
+      transform: translateX(50%) rotateY(90deg);
+      // background-image: url('http://placeimg.com/180/180/nature');
+    }
+
+    > .cube__top {
+      transform: translateY(-50%) rotateX(90deg);
+      // background-image: url('http://placeimg.com/180/180/arch');
+    }
+
+    > .cube__bottom {
+      transform: translateY(50%) rotateX(270deg);
+      // background-image: url('http://placeimg.com/180/180/animals');
+    }
+  }
+
+  &:hover {
+    transition: 0.4s;
+    @include transform(scale(1.12));
+
+    > .cube {
+      > .cube__side {
+        opacity: 1;
+      }
+    }
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: rotateX(0);
+    }
+    12.5% {
+      transform: rotateY(90deg);
+    }
+    25% {
+      transform: rotateY(270deg);
+    }
+    37.5% {
+      transform: rotateY(270deg);
+    }
+    50% {
+      transform: rotateY(360deg);
+    }
+    62.5% {
+      transform: rotateX(90deg);
+    }
+    75% {
+      transform: rotateX(180deg);
+    }
+    87.5% {
+      transform: rotateX(270deg);
+    }
+    100% {
+      transform: rotateX(360deg);
+    }
+  }
+}
+
+@mixin glitch-effect {
+  & {
+    animation: glitch 1s linear infinite;
+  }
+
+  @keyframes glitch {
+    2%,
+    64% {
+      transform: translate(2px, 0) skew(0deg);
+    }
+    4%,
+    60% {
+      transform: translate(-2px, 0) skew(0deg);
+    }
+    62% {
+      transform: translate(0, 0) skew(5deg);
+    }
+  }
+
+  &:before,
+  &:after {
+    // content: attr(title);
+    position: absolute;
+    left: 0;
+  }
+
+  &:before {
+    animation: glitchTop 1s linear infinite;
+    clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+  }
+
+  @keyframes glitchTop {
+    2%,
+    64% {
+      transform: translate(2px, -2px);
+    }
+    4%,
+    60% {
+      transform: translate(-2px, 2px);
+    }
+    62% {
+      transform: translate(13px, -1px) skew(-13deg);
+    }
+  }
+
+  &:after {
+    animation: glitchBotom 1.5s linear infinite;
+    clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+    -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+  }
+
+  @keyframes glitchBotom {
+    2%,
+    64% {
+      transform: translate(-2px, 0);
+    }
+    4%,
+    60% {
+      transform: translate(-2px, 0);
+    }
+    62% {
+      transform: translate(-22px, 5px) skew(21deg);
+    }
+  }
+}

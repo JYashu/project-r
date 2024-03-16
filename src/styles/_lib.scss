@@ -1,0 +1,10 @@
+@import 'variables/consts';
+@import 'variables/colors';
+@import 'variables/spacing';
+@import 'variables/img-provider';
+@import 'variables/animations';
+
+@import 'mixins/background-image', 'mixins/button', 'mixins/center-on-screen', 'mixins/cursors',
+  'mixins/custom-mixins', 'mixins/drop-shadow', 'mixins/effects', 'mixins/ellipsis', 'mixins/focus',
+  'mixins/grid', 'mixins/hovers', 'mixins/modal-section', 'mixins/owl', 'mixins/responsive',
+  'mixins/size', 'mixins/spinner', 'mixins/typography', 'mixins/visually-hidden';

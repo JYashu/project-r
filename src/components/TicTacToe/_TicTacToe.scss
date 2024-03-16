@@ -1,0 +1,96 @@
+@import '../../styles/lib';
+
+$base-class: tic-tac-toe;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  @include type-style-game;
+  height: fit-content;
+  margin-top: 50px;
+  margin-bottom: 100px;
+
+  &__header {
+    margin: 50px 0px 50px 20px;
+  }
+
+  &__game {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    min-width: 332px;
+    transition: all 0.5s;
+  }
+
+  &__game-board {
+    min-width: 240px;
+  }
+
+  &__status-info {
+    display: flex;
+    flex-direction: row;
+    width: inherit;
+    justify-content: center;
+  }
+
+  &__mode-info {
+    display: flex;
+    flex-direction: column;
+    width: inherit;
+    justify-content: center;
+  }
+
+  &__info {
+    width: 360px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  &__status {
+    margin-bottom: 10px;
+  }
+
+  &__info-btn {
+    margin: 10px;
+  }
+
+  &__btn.move {
+    opacity: 1;
+  }
+
+  &__card {
+    @include card-div-hover;
+    @include type-style-city;
+
+    color: white;
+  }
+
+  &__secondary-actions-wrapper {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.626);
+    top: 64px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__secondary-actions {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.5s;
+  }
+
+  @media screen and (max-width: 496px) {
+    &__secondary-actions {
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+}

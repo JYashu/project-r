@@ -1,0 +1,129 @@
+@import '../../styles/lib';
+
+$base-class: giphy-search-engine;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  padding: 5em;
+  background: #360033; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #360033, #0b8793); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #360033,
+    #0b8793
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  height: $content-height;
+  overflow: auto;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    background-color: transparent;
+  }
+
+  &__main {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  &__info {
+    @include center-horizontally;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  &__head {
+    @include type-style-mega;
+
+    -webkit-text-stroke: 3px rgb(36, 32, 32);
+    -webkit-text-fill-color: transparent;
+    width: 260px;
+    z-index: 10;
+  }
+
+  &__cube {
+    @include cube-effect;
+
+    position: relative;
+    height: 0;
+    top: -150px;
+  }
+
+  &__form {
+    @include border-radius(24px);
+
+    width: 100%;
+    padding-top: 5px;
+    display: inline-block;
+    font-size: 16px;
+    font-family: Helvetica, sans-serif;
+  }
+
+  &__gif {
+    @include zoom-hover(1.08);
+
+    float: left;
+    padding: 1.6rem;
+    width: 16.66%;
+    overflow: hidden;
+    transition: all 0.5s;
+  }
+
+  &__gif-container {
+    @include overlay-div-hover;
+
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+  }
+
+  &__content img {
+    display: block;
+  }
+
+  &__link-holder {
+    margin: 1.2em;
+  }
+
+  &__spinner {
+    @include center-on-div;
+
+    margin-top: 10rem;
+  }
+
+  @media screen and (max-width: 1300px) {
+    &__gif {
+      width: 20%;
+    }
+  }
+
+  @media screen and (max-width: 1000px) {
+    &__gif {
+      width: 25%;
+    }
+  }
+
+  @media screen and (max-width: 850px) {
+    &__gif {
+      width: 33.33%;
+    }
+  }
+
+  @media screen and (max-width: 674px) {
+    &__gif {
+      width: 50%;
+    }
+  }
+
+  @media screen and (max-width: 440px) {
+    &__gif {
+      width: 100%;
+    }
+  }
+}

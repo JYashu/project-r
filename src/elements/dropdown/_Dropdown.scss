@@ -1,0 +1,91 @@
+@import '../../styles/lib';
+
+$base-class: dropdown;
+
+:export {
+  baseClass: $base-class;
+}
+
+.css-1wnqixv-singleValue {
+  padding-left: 0.5rem;
+}
+
+.css-otjhg0-menu {
+  z-index: 100 !important;
+}
+
+.#{$base-class} {
+  @include type-style-city;
+
+  height: 48px;
+
+  &__menu-list {
+    @include glass-effect;
+
+    border-radius: 4px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: absolute;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.4s;
+  }
+
+  &__menu-list-actions {
+    background-color: map-get($colors, snow);
+    border-top: 1px solid map-get($colors, light-grey);
+    bottom: 4px;
+    color: map-get($colors, eden);
+    left: 0;
+    position: absolute;
+    width: 100%;
+
+    &--solo {
+      border-top: 0;
+    }
+  }
+
+  &__menu-list-item {
+    @include box-level-3;
+
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0.5em 0 0.5em 1em;
+    text-decoration: none;
+    background: white;
+    margin: 0.8em;
+    padding: 0.3em 0 0.3em 1em;
+    color: rgb(36, 36, 36);
+    border-radius: 5px;
+    transition: background 0.2s;
+  }
+
+  &__menu-list-item:hover {
+    background: map-get($colors, seacrest);
+  }
+
+  &__menu-list-item:hover > div {
+    background: transparent;
+  }
+
+  &__menu-list-item:active {
+    background: map-get($colors, eden);
+  }
+
+  &__error {
+    margin: 0;
+    padding-left: 8px;
+    position: absolute;
+    top: 100%;
+  }
+
+  &__scrollable-icon-div {
+    animation: bounce2 2s ease infinite;
+  }
+
+  &__scrollable-icon {
+    animation: gelatine 1s infinite;
+  }
+}

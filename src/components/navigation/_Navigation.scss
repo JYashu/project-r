@@ -1,0 +1,66 @@
+@import '../../styles/lib';
+
+$base-class: navigation;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  @include type-style-clock;
+
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  gap: 80px;
+  width: 100%;
+  z-index: 1000;
+  background-color: map-get($colors, header-text);
+  overflow: hidden;
+  height: 0;
+
+  &--is-open {
+    padding: 30px 80px;
+    height: 240px;
+    animation: nav-open 0.25s ease-in-out;
+  }
+
+  &--is-collapsed {
+    height: 0;
+    animation: nav-close 0.25s ease-in-out;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    height: 45px;
+    color: map-get($colors, header-bg);
+    transition: transform 0.2s;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  &__icon,
+  &__child {
+    align-self: center;
+  }
+
+  &__item--is-active > &__child {
+    border-bottom: 1px solid map-get($colors, header-bg);
+    padding-bottom: 3px;
+  }
+
+  &__item:hover > &__icon,
+  &__item--is-active > &__icon {
+    text-shadow: 0 0 5px map-get($colors, lagoon), 0 0 15px map-get($colors, lagoon),
+      0 0 20px map-get($colors, lagoon), 0 0 40px map-get($colors, lagoon),
+      0 0 60px map-get($colors, lagoon), 0 0 10px map-get($colors, lagoon),
+      0 0 98px map-get($colors, lagoon);
+    color: map-get($colors, header-bg);
+    animation: wiggle 1s;
+  }
+}

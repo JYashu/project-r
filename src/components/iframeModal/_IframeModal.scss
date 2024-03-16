@@ -1,0 +1,18 @@
+@import '../../styles/lib';
+
+$base-class: iframe-modal;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  @include type-style-justice;
+  background: transparent;
+
+  &__iframe {
+    @include center-horizontally;
+    height: fit-content;
+    width: fit-content;
+  }
+}

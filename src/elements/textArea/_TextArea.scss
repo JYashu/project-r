@@ -1,0 +1,50 @@
+@import '../../styles/lib';
+
+$base-class: textarea;
+
+:export {
+  baseClass: $base-class;
+}
+
+.#{$base-class} {
+  @include type-style-city;
+  @include border-radius(3px);
+
+  background-color: map-get($colors, lily-white);
+  border: 1px solid map-get($colors, lily-white);
+  caret-color: map-get($colors, eden);
+  outline: none;
+  padding: 6px 8px;
+  resize: none;
+
+  &__wrapper {
+    position: relative;
+    max-width: min-content;
+    min-height: min-content;
+  }
+
+  &__handle {
+    position: absolute;
+    bottom: 6px;
+    right: 0;
+    transform: rotate(-45deg);
+    cursor: nwse-resize;
+    color: map-get($colors, lawyer);
+  }
+
+  &--error {
+    border: 1px solid map-get($intent-colors, destructive);
+  }
+
+  &--labelled {
+    padding: 22px 8px 6px;
+  }
+
+  &:focus {
+    border-color: map-get($colors, eden);
+  }
+
+  &::placeholder {
+    color: map-get($colors, chimera);
+  }
+}
