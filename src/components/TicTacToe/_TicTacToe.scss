@@ -63,7 +63,7 @@ $base-class: tic-tac-toe;
   }
 
   &__card {
-    @include card-div-hover;
+    @include card-div-hover(150px);
     @include type-style-city;
 
     color: white;

@@ -185,10 +185,10 @@ const SecondaryActions = ({
                     <div className="card one move">Mode: {aiMode}</div>
                     <div className="card two move">
                       <RadioButton
-                        label={AIMode.Hard}
-                        checked={aiMode === AIMode.Hard}
+                        label={AIMode.Moderate}
+                        checked={aiMode === AIMode.Moderate}
                         onChange={() => {
-                          setAIMode(AIMode.Hard);
+                          setAIMode(AIMode.Moderate);
                         }}
                       />
                     </div>
@@ -198,6 +198,15 @@ const SecondaryActions = ({
                         checked={aiMode === AIMode.Easy}
                         onChange={() => {
                           setAIMode(AIMode.Easy);
+                        }}
+                      />
+                    </div>
+                    <div className="card four move">
+                      <RadioButton
+                        label={AIMode.Hard}
+                        checked={aiMode === AIMode.Hard}
+                        onChange={() => {
+                          setAIMode(AIMode.Hard);
                         }}
                       />
                     </div>

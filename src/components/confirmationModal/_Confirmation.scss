@@ -48,32 +48,4 @@ $base-class: double-confirmation;
     display: inline-block;
     margin-right: 8px;
   }
-
-  .__check-printing {
-    color: map-get($colors, grey);
-
-    ul {
-      list-style-type: none;
-      display: table-row;
-    }
-
-    h3 {
-      @include type-style-district;
-      color: map-get($colors, butler);
-    }
-    h3:last-child {
-      padding-top: 12px;
-    }
-
-    a {
-      color: map-get($colors, viridian);
-    }
-
-    .icon {
-      display: inline;
-      padding-right: 6px;
-      color: map-get($colors, sage);
-      font-weight: bold;
-    }
-  }
 }
