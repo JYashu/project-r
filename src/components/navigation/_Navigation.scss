@@ -63,4 +63,22 @@ $base-class: navigation;
     color: map-get($colors, header-bg);
     animation: wiggle 1s;
   }
+
+  @media screen and (max-width: 600px) {
+    & {
+      gap: 50px;
+      overflow: scroll;
+    }
+    &__item {
+      min-width: 100px;
+    }
+    &--is-open {
+      padding: 30px;
+      animation: nav-open-mobile 0.25s ease-in-out;
+    }
+
+    &--is-collapsed {
+      animation: nav-close-mobile 0.25s ease-in-out;
+    }
+  }
 }

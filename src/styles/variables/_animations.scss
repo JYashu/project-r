@@ -143,6 +143,28 @@
   }
 }
 
+@include keyframes(nav-open-mobile) {
+  from {
+    height: 0px;
+    padding: 0px;
+  }
+  to {
+    height: 240px;
+    padding: 30px;
+  }
+}
+
+@include keyframes(nav-close-mobile) {
+  from {
+    height: 240px;
+    padding: 30px;
+  }
+  to {
+    height: 0px;
+    padding: 0px;
+  }
+}
+
 @include keyframes(wiggle) {
   0% {
     transform: skewX(9deg);

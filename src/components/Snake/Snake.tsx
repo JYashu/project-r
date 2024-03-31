@@ -54,13 +54,11 @@ const Snake = ({
   const width = isMobileOrTablet ? windowWidth - 64 - ((windowWidth - 64) % 16) : 1008;
   const height = isMobileOrTablet ? windowHeight - 128 - ((windowHeight - 128) % 16) : 608;
 
-  console.log(isMobileOrTablet);
-
   const { action, userAction, handlers } = useSwipeAction();
 
   useEffect(() => {
     resetGame(width, height);
-  }, []);
+  }, [height, resetGame, width]);
 
   const moveSnake = (dx = 0, dy = 0) => {
     if (dx > 0 && dy === 0 && disallowedDirection !== 'RIGHT') {

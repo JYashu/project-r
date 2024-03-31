@@ -83,7 +83,7 @@ const Toolbar = ({
             buttonStyle="minimal"
             icon="data_object"
           >
-            Load Cells
+            Load Cell
           </Button>
         )}
       />
