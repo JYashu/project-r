@@ -78,7 +78,7 @@ const App = ({
           <Route path="/giphy-engine" exact component={GiphySearchEngine} />
           <Route path="/spinners" exact component={SpinnerPage} />
           <Route path="/colors" exact component={ColorsPage} />
-          <Route path="/snake" exact component={() => <Snake height={600} width={1000} />} />
+          <Route path="/snake" exact component={Snake} />
           <Route path="/memory" exact component={Memory} />
           <Route path="/mal" exact component={MALEngine} />
           <Route path="/img-converter" exact component={IMGConverter} />

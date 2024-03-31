@@ -1,13 +1,14 @@
 import { ActionType } from 'typesafe-actions';
 import { Coordinates } from '../../types';
 import {
-  increaseSnake,
+  handleTreatConsumed,
   makeMove,
   scoreUpdates,
   setDisDirection,
   setInPlay,
-  setMock,
+  generateTreat,
   stopGame,
+  resetGame,
 } from './actions';
 
 export interface SnakeState {
@@ -15,15 +16,17 @@ export interface SnakeState {
   disallowedDirection: string;
   score: number;
   stopGame: boolean;
-  mock: Coordinates;
+  treat: Coordinates;
   inPlay: boolean;
+  consumedTreats: Coordinates[];
 }
 
 export type SnakeActions =
   | ActionType<typeof makeMove>
   | ActionType<typeof setDisDirection>
   | ActionType<typeof stopGame>
-  | ActionType<typeof increaseSnake>
+  | ActionType<typeof handleTreatConsumed>
   | ActionType<typeof scoreUpdates>
-  | ActionType<typeof setMock>
-  | ActionType<typeof setInPlay>;
+  | ActionType<typeof generateTreat>
+  | ActionType<typeof setInPlay>
+  | ActionType<typeof resetGame>;

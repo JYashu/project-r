@@ -152,3 +152,10 @@ export enum ClickActionType {
   CLICK = 'click',
   LONG_PRESS = 'longPress',
 }
+
+export enum SwipeActionType {
+  LEFT = 'left',
+  RIGHT = 'right',
+  UP = 'up',
+  DOWN = 'down',
+}
