@@ -52,7 +52,7 @@ const Snake = ({
   const { width: windowWidth, height: windowHeight } = useWindowDimensions();
 
   const width = isMobileOrTablet ? windowWidth - 64 - ((windowWidth - 64) % 16) : 1008;
-  const height = isMobileOrTablet ? windowHeight - 256 - ((windowHeight - 128) % 16) : 608;
+  const height = isMobileOrTablet ? windowHeight - 194 - ((windowHeight - 128) % 16) : 608;
 
   const { action, userAction, handlers } = useSwipeAction();
 
@@ -236,10 +236,7 @@ const Snake = ({
   }
 
   return (
-    <div
-      className={`${scssObj.baseClass}`}
-      style={{ marginTop: `${isMobileOrTablet ? '-64px' : '0px'}` }}
-    >
+    <div className={`${scssObj.baseClass}`}>
       <Cursor />
       <div className={`${scssObj.baseClass}__content`}>
         <div {...handlers}>
