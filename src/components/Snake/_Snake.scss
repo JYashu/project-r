@@ -16,6 +16,8 @@ $base-class: snake;
 
   &__canvas {
     background-image: url('https://project-r-assets.s3.us-east-2.amazonaws.com/backgrounds/inclined.webp');
+    overscroll-behavior-x: contain;
+    overscroll-behavior-y: contain;
   }
 
   &__instructions {

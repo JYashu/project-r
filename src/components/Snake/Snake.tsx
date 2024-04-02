@@ -237,7 +237,7 @@ const Snake = ({
 
   return (
     <div className={`${scssObj.baseClass}`}>
-      <Cursor />
+      {!isMobileOrTablet && <Cursor />}
       <div className={`${scssObj.baseClass}__content`}>
         <div {...handlers}>
           <canvas
