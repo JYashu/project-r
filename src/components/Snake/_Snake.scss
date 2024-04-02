@@ -50,6 +50,18 @@ $base-class: snake;
     background-image: url('https://project-r-assets.s3.us-east-2.amazonaws.com/backgrounds/inclined.webp');
   }
 
+  &__game-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 64px;
+    padding-bottom: 16px;
+  }
+
+  &__button {
+    color:  map-get($colors, header-bg );
+  }
+
   @media (min-width: 1080px) {
     @include center-on-screen;
   }
@@ -57,6 +69,7 @@ $base-class: snake;
   @media (max-width: 1080px) {
     &__content {
       padding: 32px;
+      padding-bottom: 16px;
     }
   }
 }

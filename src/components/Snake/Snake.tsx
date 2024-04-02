@@ -10,6 +10,7 @@ import { clearBoard, drawObject, hasSnakeCollided } from '../../utils/snakeUtils
 import scssObj from './_Snake.scss';
 import Cursor from '../cursor';
 import useSwipeAction from '../../hooks/useSwipeAction';
+import Icon from '../../elements/icon';
 
 interface Props {
   // height: number;
@@ -52,7 +53,7 @@ const Snake = ({
   const { width: windowWidth, height: windowHeight } = useWindowDimensions();
 
   const width = isMobileOrTablet ? windowWidth - 64 - ((windowWidth - 64) % 16) : 1008;
-  const height = isMobileOrTablet ? windowHeight - 194 - ((windowHeight - 128) % 16) : 608;
+  const height = isMobileOrTablet ? windowHeight - 176 - ((windowHeight - 128) % 16) : 608;
 
   const { action, userAction, handlers } = useSwipeAction();
 
@@ -277,6 +278,46 @@ const Snake = ({
           </div>
         )}
       </div>
+      {isMobileOrTablet && (
+        <div className={`${scssObj.baseClass}__game-bar`}>
+          {inPlay ? (
+            <Icon
+              className={`${scssObj.baseClass}__button`}
+              icon="pause"
+              removeOutline
+              size="large"
+              title="Pause / Play"
+              onClickHandler={() => {
+                setInPlay(!inPlay);
+                if (!disallowedDirection) moveSnake(16, 0);
+              }}
+            />
+          ) : (
+            <Icon
+              className={`${scssObj.baseClass}__button`}
+              icon="play_arrow"
+              removeOutline
+              size="large"
+              title="Pause / Play"
+              onClickHandler={() => {
+                setInPlay(!inPlay);
+                if (!disallowedDirection) moveSnake(16, 0);
+              }}
+            />
+          )}
+
+          <Icon
+            className={`${scssObj.baseClass}__button`}
+            icon="refresh"
+            removeOutline
+            size="large"
+            title="Restart"
+            onClickHandler={() => {
+              resetGame(width, height);
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 };
