@@ -28,6 +28,7 @@ interface MenuItemProps {
   link?: string;
   isHiddenForProd?: boolean;
   title: string;
+  newTarget: boolean;
   onClick?: () => void;
   collapseNavigation: () => void;
 }
@@ -39,6 +40,7 @@ const MenuItem = ({
   link,
   isHiddenForProd,
   title,
+  newTarget,
   onClick,
   collapseNavigation,
 }: MenuItemProps) => {
@@ -69,7 +71,13 @@ const MenuItem = ({
 
   return (
     <PermissionsManager isHiddenForProd={isHiddenForProd || false}>
-      {link ? <Link to={link}>{item}</Link> : item}
+      {link ? (
+        <Link to={link} target={newTarget ? '_blank' : '_self'}>
+          {item}
+        </Link>
+      ) : (
+        item
+      )}
     </PermissionsManager>
   );
 };
@@ -83,7 +91,7 @@ const MenuList = ({
 }) => {
   return (
     <div className={`${scssObj.baseClass}__column`}>
-      {[...menuList].map(({ link, icon, isActive, isHiddenForProd, title, onClick }) => {
+      {[...menuList].map(({ link, icon, isActive, isHiddenForProd, title, newTarget, onClick }) => {
         return (
           <MenuItem
             title={title}
@@ -93,6 +101,7 @@ const MenuList = ({
             isActive={isActive}
             isHiddenForProd={isHiddenForProd || false}
             collapseNavigation={collapseNavigation}
+            newTarget={newTarget || false}
           />
         );
       })}
