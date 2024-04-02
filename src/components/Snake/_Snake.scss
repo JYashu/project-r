@@ -7,7 +7,6 @@ $base-class: snake;
 }
 
 .#{$base-class} {
-  @include center-on-screen;
   background-image: url('https://project-r-assets.s3.us-east-2.amazonaws.com/backgrounds/inclined.webp');
 
   &__content {
@@ -47,5 +46,15 @@ $base-class: snake;
     @include type-style-heading;
     @include center-on-screen;
     background-image: url('https://project-r-assets.s3.us-east-2.amazonaws.com/backgrounds/inclined.webp');
+  }
+
+  @media (min-width: 1080px) {
+    @include center-on-screen;
+  }
+
+  @media (max-width: 1080px) {
+    &__content {
+      padding: 32px;
+    }
   }
 }
