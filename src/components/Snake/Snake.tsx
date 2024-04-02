@@ -52,7 +52,7 @@ const Snake = ({
   const { width: windowWidth, height: windowHeight } = useWindowDimensions();
 
   const width = isMobileOrTablet ? windowWidth - 64 - ((windowWidth - 64) % 16) : 1008;
-  const height = isMobileOrTablet ? windowHeight - 128 - ((windowHeight - 128) % 16) : 608;
+  const height = isMobileOrTablet ? windowHeight - 256 - ((windowHeight - 128) % 16) : 608;
 
   const { action, userAction, handlers } = useSwipeAction();
 
