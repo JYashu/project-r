@@ -236,7 +236,10 @@ const Snake = ({
   }
 
   return (
-    <div className={`${scssObj.baseClass}`}>
+    <div
+      className={`${scssObj.baseClass}`}
+      style={{ marginTop: `${isMobileOrTablet ? '-64px' : '0px'}` }}
+    >
       <Cursor />
       <div className={`${scssObj.baseClass}__content`}>
         <div {...handlers}>
