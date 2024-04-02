@@ -7,6 +7,7 @@ export interface Menu {
   link?: string;
   isHiddenForProd?: boolean;
   title: string;
+  newTarget?: boolean;
   onClick?: () => void;
 }
 
@@ -57,6 +58,7 @@ export const getMenuColumnOneItems = (activeNavigationItem: ActiveNavigationItem
       icon: 'developer_mode',
       link: '/cbook',
       title: 'CBook',
+      newTarget: true,
     },
     {
       isActive: activeNavigationItem === ActiveNavigationItem.IMGConverter,

@@ -24,8 +24,13 @@ $base-class: cbook;
   }
 
   &__menu {
-    gap: 24px;
-    padding: 20px 0;
+    gap: 12px;
+    display: flex;
+    padding: 10px 0;
+  }
+
+  &__button {
+    width: 124px;
   }
 
   .react-draggable-transparent-selection &__cell-list {

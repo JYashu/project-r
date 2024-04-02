@@ -196,14 +196,14 @@
       position: absolute;
       top: 0;
       left: 0;
-      z-index: 4;
+      z-index: 5;
     }
 
     > .two {
       background: #ee4266;
       position: absolute;
       right: 0;
-      z-index: 3;
+      z-index: 4;
       transform: rotate(-10deg) translate(8px, 8px);
     }
 
@@ -211,7 +211,7 @@
       background: #ffd23f;
       position: absolute;
       left: 0;
-      z-index: 2;
+      z-index: 3;
       transform: rotate(10deg) translate(-5px, 7px);
     }
 
@@ -219,8 +219,16 @@
       background: #00ffff;
       position: absolute;
       left: 0;
-      z-index: 1;
+      z-index: 2;
       transform: rotate(-15deg) translate(-5px, 7px);
+    }
+
+    > .five {
+      background: #67e89f;
+      position: absolute;
+      left: 0;
+      z-index: 1;
+      transform: rotate(15deg) translate(5px, -4px);
     }
 
     > .move {
@@ -233,10 +241,13 @@
       transform: rotate(-5deg) translateX($width) scale(0.9);
     }
     > .three {
-      transform: rotate(5deg) translateX(-$width) scale(0.9);
+      transform: rotate(-5deg) translateX(-$width) scale(0.9);
     }
     > .four {
       transform: rotate(-5deg) translateY($width) scale(0.9);
+    }
+    > .five {
+      transform: rotate(-5deg) translateY(-$width) scale(0.9);
     }
   }
 }

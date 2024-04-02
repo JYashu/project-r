@@ -3,51 +3,62 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import useSetActiveSidebarItem from '../../hooks/useSetActiveNavigationItem';
 import useSetGlobalHeader from '../../hooks/useSetGlobalHeader';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
-import { ActiveNavigationItem, Coordinates } from '../../types';
+import { ActiveNavigationItem, Coordinates, SwipeActionType } from '../../types';
 import { Pages } from '../../utils/consts';
 import { isMobileOrTablet } from '../../utils/getMobileOrTabletInfo';
 import { clearBoard, drawObject, hasSnakeCollided } from '../../utils/snakeUtils';
 import scssObj from './_Snake.scss';
 import Cursor from '../cursor';
+import useSwipeAction from '../../hooks/useSwipeAction';
 
 interface Props {
-  height: number;
-  width: number;
+  // height: number;
+  // width: number;
   score: number;
   snake: Coordinates[];
   disallowedDirection: string;
-  mock: Coordinates;
+  treat: Coordinates;
   inPlay: boolean;
+  consumedTreats: Coordinates[];
   updateScore: (reset?: boolean) => void;
   move: (direction: string, dx: number, dy: number) => void;
-  increaseSnake: () => void;
+  handleTreatConsumed: (treat: Coordinates) => void;
   stopGame: () => void;
-  setMock: () => void;
+  generateTreat: (width: number, height: number) => void;
   setInPlay: (inPlay: boolean) => void;
+  resetGame: (width: number, height: number) => void;
 }
 
 const Snake = ({
-  height,
-  width,
+  // height,
+  // width,
   score,
   snake,
   disallowedDirection,
-  mock,
+  treat,
   inPlay,
+  consumedTreats,
   updateScore,
   move,
-  increaseSnake,
+  handleTreatConsumed,
   stopGame,
-  setMock,
+  generateTreat,
   setInPlay,
+  resetGame,
 }: Props) => {
   useSetActiveSidebarItem(ActiveNavigationItem.Snake);
   useSetGlobalHeader(Pages.SNAKE);
 
-  const [gameEnded, setGameEnded] = useState(false);
-  const [isConsumed, setIsConsumed] = useState(false);
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const [context, setContext] = useState<CanvasRenderingContext2D | null>(null);
+  const { width: windowWidth, height: windowHeight } = useWindowDimensions();
+
+  const width = isMobileOrTablet ? windowWidth - 64 - ((windowWidth - 64) % 16) : 1008;
+  const height = isMobileOrTablet ? windowHeight - 128 - ((windowHeight - 128) % 16) : 608;
+
+  const { action, userAction, handlers } = useSwipeAction();
+
+  useEffect(() => {
+    resetGame(width, height);
+  }, [height, resetGame, width]);
 
   const moveSnake = (dx = 0, dy = 0) => {
     if (dx > 0 && dy === 0 && disallowedDirection !== 'RIGHT') {
@@ -71,32 +82,65 @@ const Snake = ({
     }
   };
 
+  useEffect(() => {
+    switch (userAction) {
+      case SwipeActionType.UP:
+        moveSnake(0, -16);
+        break;
+      case SwipeActionType.DOWN:
+        moveSnake(0, 16);
+        break;
+      case SwipeActionType.LEFT:
+        if (disallowedDirection) moveSnake(-16, 0);
+        break;
+      case SwipeActionType.RIGHT:
+        moveSnake(16, 0);
+        break;
+      default:
+        break;
+    }
+  }, [action]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const [gameEnded, setGameEnded] = useState(false);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const [context, setContext] = useState<CanvasRenderingContext2D | null>(null);
+
   const handleKeyEvents = useCallback(
     (event: any) => {
       switch (event.key) {
         case 'w':
         case 'i':
-          moveSnake(0, -20);
+        case 'W':
+        case 'I':
+          moveSnake(0, -16);
           break;
         case 's':
         case 'k':
-          moveSnake(0, 20);
+        case 'S':
+        case 'K':
+          moveSnake(0, 16);
           break;
         case 'a':
         case 'j':
-          if (disallowedDirection) moveSnake(-20, 0);
+        case 'A':
+        case 'J':
+          if (disallowedDirection) moveSnake(-16, 0);
           break;
         case 'd':
         case 'l':
+        case 'D':
+        case 'L':
           event.preventDefault();
-          moveSnake(20, 0);
+          moveSnake(16, 0);
           break;
         case 'q':
+        case 'Q':
           setInPlay(!inPlay);
-          if (!disallowedDirection) moveSnake(20, 0);
+          if (!disallowedDirection) moveSnake(16, 0);
           break;
         case 'r':
-          window.location.reload();
+        case 'R':
+          resetGame(width, height);
           break;
         default:
           break;
@@ -111,44 +155,37 @@ const Snake = ({
       const interval = setInterval(() => {
         switch (disallowedDirection) {
           case 'RIGHT':
-            moveSnake(-20, 0);
+            moveSnake(-16, 0);
             break;
           case 'LEFT':
-            moveSnake(20, 0);
+            moveSnake(16, 0);
             break;
           case 'UP':
-            moveSnake(0, 20);
+            moveSnake(0, 16);
             break;
           case 'DOWN':
-            moveSnake(0, -20);
+            moveSnake(0, -16);
             break;
           default:
             break;
         }
-      }, 100);
+      }, 150);
       return () => clearInterval(interval);
     }
   });
 
   useEffect(() => {
-    if (isConsumed) {
-      setMock();
-      setIsConsumed(false);
-
-      increaseSnake();
-
-      updateScore();
-    }
-  }, [isConsumed, mock, height, width]); // eslint-disable-line react-hooks/exhaustive-deps
+    setContext(canvasRef.current && canvasRef.current.getContext('2d'));
+    clearBoard(context, width, height);
+    drawObject(context, snake, '#91C483', consumedTreats);
+    drawObject(context, [treat], '#676FA3');
+  }, [context, treat, snake, consumedTreats, width, height]);
 
   useEffect(() => {
-    setContext(canvasRef.current && canvasRef.current.getContext('2d'));
-    clearBoard(context);
-    drawObject(context, snake, '#91C483');
-    drawObject(context, [mock], '#676FA3');
-
-    if (snake[0].x === mock?.x && snake[0].y === mock?.y) {
-      setIsConsumed(true);
+    if (snake[0].x === treat?.x && snake[0].y === treat?.y) {
+      handleTreatConsumed(treat);
+      updateScore(false);
+      generateTreat(width, height);
     }
 
     if (
@@ -162,7 +199,7 @@ const Snake = ({
       stopGame();
       window.removeEventListener('keypress', handleKeyEvents);
     } else setGameEnded(false);
-  }, [context, mock, snake, height, width, handleKeyEvents]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [snake, height, width, handleKeyEvents]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     window.addEventListener('keypress', handleKeyEvents);
@@ -172,80 +209,73 @@ const Snake = ({
     };
   }, [disallowedDirection, handleKeyEvents]);
 
-  const { width: windowWidth, height: windowHeight } = useWindowDimensions();
-
-  if (isMobileOrTablet) {
-    if (inPlay) {
-      setInPlay(false);
+  if (!isMobileOrTablet) {
+    if (windowWidth < 1321 && windowHeight < 672) {
+      return (
+        <div className={`${scssObj.baseClass}__message`}>
+          Increase the window width and height to continue playing.
+        </div>
+      );
     }
-    return (
-      <div className={`${scssObj.baseClass}__message`}>
-        Snake is not accessible on mobile use a laptop/desktop to continue playing.
-      </div>
-    );
-  }
 
-  if (windowWidth < 1321 && windowHeight < 672) {
-    return (
-      <div className={`${scssObj.baseClass}__message`}>
-        Increase the window width and height to continue playing.
-      </div>
-    );
-  }
+    if (windowWidth < 1321) {
+      return (
+        <div className={`${scssObj.baseClass}__message`}>
+          Increase the window width to continue playing.
+        </div>
+      );
+    }
 
-  if (windowWidth < 1321) {
-    return (
-      <div className={`${scssObj.baseClass}__message`}>
-        Increase the window width to continue playing.
-      </div>
-    );
-  }
-
-  if (windowHeight < 672) {
-    return (
-      <div className={`${scssObj.baseClass}__message`}>
-        Increase the window height to continue playing.
-      </div>
-    );
+    if (windowHeight < 672) {
+      return (
+        <div className={`${scssObj.baseClass}__message`}>
+          Increase the window height to continue playing.
+        </div>
+      );
+    }
   }
 
   return (
     <div className={`${scssObj.baseClass}`}>
       <Cursor />
       <div className={`${scssObj.baseClass}__content`}>
-        <canvas
-          className={`${scssObj.baseClass}__canvas`}
-          ref={canvasRef}
-          style={{
-            border: `3px solid ${gameEnded ? '#EA4435' : '#CA7D82'}`, // 8A463F, BB6B70
-          }}
-          width={width}
-          height={height}
-        />
-        <div className={`${scssObj.baseClass}__instructions`}>
-          <div className={`${scssObj.baseClass}__heading`}>How to Play</div>
-          <div className={`${scssObj.baseClass}__note`}>
-            NOTE: Start the game by pressing <strong>D</strong>
-          </div>
-          <div className={`${scssObj.baseClass}__first-instruction`}>
-            Press <strong>W or I</strong> to Move Up
-          </div>
-          <div>
-            Press <strong>A or J</strong> to Move Left
-          </div>
-          <div>
-            Press <strong>S or K</strong> to Move Down
-          </div>
-          <div>
-            Press <strong>D or L</strong> to Move Right
-          </div>
-          <div>
-            Press <strong>Q</strong> to Pause / Play and Start
-          </div>
-          <div className={`${scssObj.baseClass}__note`}>
-            Press <strong>R</strong> or Refresh the page to restart
-          </div>
+        <div {...handlers}>
+          <canvas
+            className={`${scssObj.baseClass}__canvas`}
+            ref={canvasRef}
+            style={{
+              border: `3px solid ${gameEnded ? '#EA4435' : '#CA7D82'}`, // 8A463F, BB6B70
+            }}
+            width={width}
+            height={height}
+          />
         </div>
+        {!isMobileOrTablet && (
+          <div className={`${scssObj.baseClass}__instructions`}>
+            <div className={`${scssObj.baseClass}__heading`}>How to Play</div>
+            <div className={`${scssObj.baseClass}__note`}>
+              NOTE: Start the game by pressing <strong>D</strong>
+            </div>
+            <div className={`${scssObj.baseClass}__first-instruction`}>
+              Press <strong>W or I</strong> to Move Up
+            </div>
+            <div>
+              Press <strong>A or J</strong> to Move Left
+            </div>
+            <div>
+              Press <strong>S or K</strong> to Move Down
+            </div>
+            <div>
+              Press <strong>D or L</strong> to Move Right
+            </div>
+            <div>
+              Press <strong>Q</strong> to Pause / Play and Start
+            </div>
+            <div className={`${scssObj.baseClass}__note`}>
+              Press <strong>R</strong> or Refresh the page to restart
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

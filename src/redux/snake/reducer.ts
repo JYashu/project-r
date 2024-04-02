@@ -1,37 +1,31 @@
 /* eslint-disable no-param-reassign */
 import produce from 'immer';
 import { createReducer } from 'typesafe-actions';
-import { generateRandomPosition } from '../../utils/snakeUtils';
 import {
-  increaseSnake,
+  findDigestedTreat,
+  generateNewSnake,
+  generateRandomPosition,
+} from '../../utils/snakeUtils';
+import {
+  generateTreat,
+  handleTreatConsumed,
   makeMove,
+  resetGame,
   scoreUpdates,
   setDisDirection,
   setInPlay,
-  setMock,
   stopGame,
 } from './actions';
 import { SnakeState, SnakeActions } from './types';
 
 const initialState: SnakeState = {
-  snake: [
-    { x: 580, y: 300 },
-    { x: 560, y: 300 },
-    { x: 540, y: 300 },
-    { x: 520, y: 300 },
-    { x: 500, y: 300 },
-  ],
+  snake: [{ x: 0, y: 0 }],
   disallowedDirection: '',
   score: 0,
   stopGame: false,
-  mock: generateRandomPosition(980, 580, [
-    { x: 580, y: 300 },
-    { x: 560, y: 300 },
-    { x: 540, y: 300 },
-    { x: 520, y: 300 },
-    { x: 500, y: 300 },
-  ]),
+  treat: generateRandomPosition(1008, 608, [{ x: 0, y: 0 }]),
   inPlay: false,
+  consumedTreats: [],
 };
 
 export default createReducer<SnakeState, SnakeActions>(initialState)
@@ -46,7 +40,14 @@ export default createReducer<SnakeState, SnakeActions>(initialState)
           },
           ...newSnake,
         ];
-        newSnake.pop();
+        const index = findDigestedTreat(newSnake[newSnake.length - 1], state.consumedTreats);
+        if (index !== -1) {
+          const newTreats = [...state.consumedTreats];
+          newTreats.splice(index, 1);
+          draft.consumedTreats = [...newTreats];
+        } else {
+          newSnake.pop();
+        }
 
         draft.snake = [...newSnake];
         switch (payload.direction) {
@@ -73,16 +74,9 @@ export default createReducer<SnakeState, SnakeActions>(initialState)
       draft.disallowedDirection = payload.direction;
     }),
   )
-  .handleAction(increaseSnake, (state) =>
+  .handleAction(handleTreatConsumed, (state, { payload }) =>
     produce(state, (draft) => {
-      const snakeLen = state.snake.length;
-      draft.snake = [
-        ...state.snake,
-        {
-          x: state.snake[snakeLen - 1].x - 20,
-          y: state.snake[snakeLen - 1].y - 20,
-        },
-      ];
+      draft.consumedTreats = [...state.consumedTreats, payload.treat];
     }),
   )
   .handleAction(scoreUpdates, (state, { payload }) =>
@@ -96,13 +90,24 @@ export default createReducer<SnakeState, SnakeActions>(initialState)
       draft.stopGame = true;
     }),
   )
-  .handleAction(setMock, (state) =>
+  .handleAction(generateTreat, (state, { payload }) =>
     produce(state, (draft) => {
-      draft.mock = generateRandomPosition(980, 580, draft.snake);
+      draft.treat = generateRandomPosition(payload.width, payload.height, draft.snake);
     }),
   )
   .handleAction(setInPlay, (state, { payload }) =>
     produce(state, (draft) => {
       draft.inPlay = payload.inPlay;
+    }),
+  )
+  .handleAction(resetGame, (state, { payload }) =>
+    produce(state, (draft) => {
+      draft.score = 0;
+      draft.stopGame = false;
+      draft.inPlay = false;
+      draft.snake = generateNewSnake(payload.width, payload.height);
+      draft.consumedTreats = [];
+      draft.treat = generateRandomPosition(payload.width, payload.height, draft.snake);
+      draft.disallowedDirection = '';
     }),
   );

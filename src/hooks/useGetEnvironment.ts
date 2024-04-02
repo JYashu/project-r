@@ -10,7 +10,7 @@ const useGetEnvironment = () => {
   const [isDev, setIsDev] = useState(isDevelopment || accessGranted.devAccess);
   const [isProd, setIsProd] = useState(isProduction && !accessGranted.devAccess);
 
-  return { isDev: false, isProd: true };
+  return { isDev, isProd };
 };
 
 export default useGetEnvironment;
