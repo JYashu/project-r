@@ -133,7 +133,7 @@ const CodeEditor = ({ initialValue, onChange, runCode }: CodeEditorProps) => {
           folding: false,
           lineNumbersMinChars: 3,
           fontSize: 12,
-          scrollBeyondLastLine: true,
+          scrollBeyondLastLine: false,
           automaticLayout: true,
         }}
       />

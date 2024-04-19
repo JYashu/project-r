@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import MUIDataTable, { MUIDataTableColumn, MUIDataTableOptions } from 'mui-datatables';
 import { ActiveNavigationItem, Todo } from '../../types';
@@ -15,6 +15,97 @@ import { Pages } from '../../utils/consts';
 type State = {
   fetchState: 'loading' | 'error' | 'success';
   todo: Todo[] | undefined;
+};
+
+const TodoTable = ({ data, count }: { data: Todo[]; count: number }) => {
+  const [sortOnTitle, setSortOnTitle] = useState('DESC');
+  const [sortOnId, setSortOnId] = useState('DESC');
+  const [sortOnStatus, setSortOnStatus] = useState('DESC');
+  const [sortedData, setSortedData] = useState([...data]);
+  const [displayData, setDisplayData] = useState<Todo[]>([]);
+
+  const sort = (columnName: 'title' | 'status' | 'id') => {
+    let sData;
+    if (columnName === 'title') {
+      if (sortOnTitle === 'DESC') {
+        sData = [...data];
+        sData.sort((a, b) => (a.title > b.title ? 1 : -1));
+        setSortOnTitle('ASC');
+      } else {
+        sData = [...data];
+        sData.sort((a, b) => (a.title > b.title ? -1 : 1));
+        setSortOnTitle('DESC');
+      }
+    } else if (columnName === 'id') {
+      if (sortOnId === 'DESC') {
+        sData = [...data];
+        sData.sort((a, b) => (a.id > b.id ? 1 : -1));
+        setSortOnId('ASC');
+      } else {
+        sData = [...data];
+        sData.sort((a, b) => (a.id > b.id ? -1 : 1));
+        setSortOnId('DESC');
+      }
+    } else if (sortOnStatus === 'DESC') {
+      sData = [...data];
+      sData.sort((a, b) => (a.completed ? 1 : -1));
+      setSortOnStatus('ASC');
+    } else {
+      sData = [...data];
+      sData.sort((a, b) => (a.completed ? -1 : 1));
+      setSortOnStatus('DESC');
+    }
+    setSortedData(sData);
+  };
+
+  useEffect(() => {
+    const dData = [...sortedData];
+    dData.splice(count);
+    setDisplayData(dData);
+  }, [count, sortedData]);
+
+  return (
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th
+              onClick={() => {
+                sort('id');
+              }}
+            >
+              ID
+            </th>
+            <th
+              onClick={() => {
+                sort('title');
+              }}
+            >
+              Title
+            </th>
+            <th
+              onClick={() => {
+                sort('status');
+              }}
+            >
+              Status
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {displayData.map((row) => {
+            return (
+              <tr>
+                <td>{row.id}</td>
+                <td>{row.title}</td>
+                <td>{row.completed ? 'Completed' : 'Not Completed'}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
 };
 
 const TodoMuiTable = (data: Todo[], count: number) => {
@@ -132,7 +223,7 @@ const TodoPage = () => {
       <Helmet>
         <title>To Do</title>
       </Helmet>
-      {TodoMuiTable(state.todo, count)}
+      <TodoTable data={state.todo} count={count} />
       <div className={`${scssObj.baseClass}__action-buttons`}>
         <div className={`${scssObj.baseClass}__button`}>
           <Button iconSize="small" icon="zoom_in" onClick={() => setCount(count + 10)}>
