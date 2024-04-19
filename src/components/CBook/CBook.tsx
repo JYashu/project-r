@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { Fragment, useEffect } from 'react';
+import { useLocation } from 'react-router';
 import { CellTypes, Cell } from '../../types';
 import Button from '../../elements/button';
 import CellItem from '../cellItem';
@@ -8,6 +9,7 @@ import scssObj from './_CBook.scss';
 import { FileField } from '../../elements/field';
 import { FileType, FileObj } from '../../elements/field/types';
 import { getFileAsText } from '../../utils/helpers';
+import { CBOOK_DEMO_DATA, CBOOK_DEMO_ORDER } from '../../utils/consts';
 
 interface Props {
   order: string[];
@@ -52,6 +54,14 @@ const Toolbar = ({
     a.click();
     document.body.removeChild(a);
   };
+
+  const { search } = useLocation();
+
+  useEffect(() => {
+    if (search.includes('demo')) {
+      loadFile(JSON.stringify({ order: CBOOK_DEMO_ORDER, data: CBOOK_DEMO_DATA }), true);
+    }
+  }, [loadFile, search]);
 
   const onFileUpload = (fileObj?: FileObj, resetBook = true) => {
     if (fileObj && fileObj.file) {

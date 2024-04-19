@@ -15,7 +15,6 @@ import {
 } from './actions';
 import { CBookState, CBookActions } from './types';
 import { getUniqueId } from '../../utils/helpers';
-import cat from '../../components/animations/cat';
 
 const initialState: CBookState = {
   loading: false,

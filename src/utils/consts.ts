@@ -1,3 +1,5 @@
+import { Cell } from '../types';
+
 export const FULLSTORY_EXCLUDE_CLASS = 'fs-exclude';
 
 export const ACCESS_CODE = 'JYashu';
@@ -141,3 +143,35 @@ export enum KeyCodes {
   META_LEFT = 91,
   META_RIGHT = 93,
 }
+
+export const CBOOK_DEMO_ORDER = [
+  'zwtci-lv2fwnc2-52i0fjoq',
+  'szqe4-lv2fx1t4-isj67l4m',
+  'go7hv-lv2fwyca-xcb3h2ca',
+];
+
+export const CBOOK_DEMO_DATA: {
+  [key: string]: Cell;
+} = {
+  'zwtci-lv2fwnc2-52i0fjoq': {
+    content:
+      "# Demo \nHere's a quick guide on how to use this tool effectively: \n* To display anything in the preview panel, simply utilize the built-in function show(). For instance, show('Hello World') will promptly showcase the text \"Hello World\" in the preview panel.\n* The code editor offers convenient action buttons for streamlined workflow:\n  1. Execute: Execute the code in the editor.\n  2. Format: Format the code for better readability.\n  3. Copy: Copy the code to your clipboard for easy sharing or storage.\n* The tool executes bundled code cumulatively, adhering to the order of the blocks. This ensures seamless execution and coherent results.\n* Effortlessly rearrange your code blocks using the toolbar provided on each cell. This feature allows you to move cells up or down, facilitating better organization and flow within your project.\n* Enhance the documentation of your code by using the markdown text editor. You can add detailed explanations, comments, and formatting to make your code more understandable.\n* Below is a demonstration code to illustrate the functionality of the tool. Feel free to modify and experiment with it!",
+    type: 'md',
+    id: 'zwtci-lv2fwnc2-52i0fjoq',
+  },
+  'go7hv-lv2fwyca-xcb3h2ca': {
+    content:
+      "import axios from 'axios';\nimport { useState, useEffect } from 'react';\nimport 'bulma/css/bulma.css';\n\nconst App = () => {\n  const [data, setData] = useState();\n  axios.get('https://jsonplaceholder.typicode.com/users').then(({ data }) => {\n    setData(data);\n  });\n\n  return (\n    <div>\n      {data ? (\n        <table>\n          <thead>\n            <tr><th>Name</th><th>Username</th><th>Website</th></tr>\n          </thead>\n          <tbody>\n            {data.map((row) => <tr><td>{row.name}</td><td>{row.username}</td><td>{row.website}</td></tr>)}\n          </tbody>\n        </table>\n      ) : (\n        <div>Loading...</div>\n      )}\n    </div>\n  );\n};\n\nshow(<App />);",
+    type: 'code',
+    id: 'go7hv-lv2fwyca-xcb3h2ca',
+    showPreview: true,
+  },
+  'szqe4-lv2fx1t4-isj67l4m': {
+    content:
+      // eslint-disable-next-line no-template-curly-in-string
+      "show('This is a demo code snippet.');\nconst result = 2 + 3;\nshow(`Result of 2 + 3 is: ${result}`);",
+    type: 'code',
+    id: 'szqe4-lv2fx1t4-isj67l4m',
+    showPreview: true,
+  },
+};

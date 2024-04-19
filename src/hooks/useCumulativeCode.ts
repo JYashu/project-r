@@ -12,17 +12,27 @@ export const useCumulativeCode = (cellId: string) => {
   const showFunction = `
       import _rct from 'react';
       import _rctDOM from 'react-dom';
+
+      const root = document.querySelector('#root');
+      let reactElements = [];
+      function renderReactElements() {
+        _rctDOM.render(_rct.createElement('div', {}, reactElements), root);
+      }
+
       var show = (value) => {
-        const root = document.querySelector('#root')
         if (typeof value === 'object') {
           if (value.$$typeof && value.props) {
-            _rctDOM.render(value, root);
+            reactElements.push(value);
+            reactElements.push(<br />);
           } else {
-            root.innerHTML = JSON.stringify(value);
+            reactElements.push(JSON.stringify(value));
+            reactElements.push(<br />);
           }
         } else {
-          root.innerHTML = value;
+          reactElements.push(value);
+          reactElements.push(<br />);
         }
+        renderReactElements();
       }
     `;
 
