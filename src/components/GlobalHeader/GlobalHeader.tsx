@@ -3,15 +3,15 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 import Button from '../../elements/button';
 import Clock from '../clock';
 import scssObj from './_GlobalHeader.scss';
-import { ASSIGNED_PATHS, BETA_ONLY_PATHS, Pages, PageTitles } from '../../utils/consts';
+import { ASSIGNED_PATHS, BETA_ONLY_PATHS, Pages, PagesType, PageTitles } from '../../utils/consts';
 import Link from '../../elements/link';
 import useGetEnvironment from '../../hooks/useGetEnvironment';
 
 interface Props extends RouteComponentProps {
-  title: Pages;
+  title: PagesType;
   isOpen: boolean;
   snakeScore: number;
-  setGlobalTitle: (title: Pages) => unknown;
+  setGlobalTitle: (title: PagesType) => unknown;
   handleNavigationState: (isOpen: boolean) => void;
   handleStaticContent: (isStatic: boolean) => void;
 }

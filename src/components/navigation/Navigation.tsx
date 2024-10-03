@@ -122,7 +122,7 @@ const Navigation = ({
   }, [isNavigationOpen]);
 
   return (
-    <div
+    <nav
       className={classNames(scssObj.baseClass, {
         [`${scssObj.baseClass}--is-open`]: isNavigationOpen,
         [`${scssObj.baseClass}--is-collapsed`]: loaded && !isNavigationOpen,
@@ -146,7 +146,7 @@ const Navigation = ({
         menuList={getMenuColumnThreeItems(activeNavigationItem, showClipboard, showDictionary)}
         collapseNavigation={collapseNavigation}
       />
-    </div>
+    </nav>
   );
 };
 

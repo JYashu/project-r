@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setGlobalHeader } from '../redux/me';
-import { Pages } from '../utils/consts';
+import { PagesType } from '../utils/consts';
 
-export default (title: Pages) => {
+export default (title: PagesType) => {
   const dispatch = useDispatch();
 
   useEffect(() => {

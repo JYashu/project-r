@@ -79,7 +79,7 @@ const isPlayerWinningNextMove = (
       linesCount = winningLinesCount;
     }
   });
-  return moves.length ? moves[Math.random() * moves.length] : null;
+  return moves.length ? moves[Math.floor(Math.random() * moves.length)] : null;
 };
 
 const getOpponent = (player: any) => {
