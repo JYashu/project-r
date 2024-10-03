@@ -28,6 +28,7 @@ import IMGConverter from '../imgConverter';
 import ColorsPage from '../colorPage/ColorPage';
 import ModalManager from '../modalManager';
 import Navigation from '../navigation';
+import Games from '../games';
 
 interface Props {
   isDictionaryVisible: boolean;
@@ -85,6 +86,7 @@ const App = ({
           <Route path="/convert-to-svg" exact component={SVGCreator} />
           <Route path="/convert-to-png" exact component={SVGConverter} />
           <Route path="/mine-sweeper" exact component={MineSweeper} />
+          <Route path="/games" exact component={Games} />
           <Route component={NotFound} />
         </Switch>
       </div>

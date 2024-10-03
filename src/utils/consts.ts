@@ -36,13 +36,17 @@ export const GAME_WON_MESSAGES = [
   { title: 'Way to go', message: 'That was lightening fast, Try again?' },
 ];
 
-export enum Pages {
+export enum GamePages {
+  TIC_TAC_TOE = '/tic-tac-toe',
+  MEMORY = '/memory',
+  MINE_SWEEPER = '/mine-sweeper',
+  SNAKE = '/snake',
+}
+
+export enum WebPages {
   HOME = '/',
   TODO = '/todo',
   TEST = '/test',
-  MEMORY = '/memory',
-  SNAKE = '/snake',
-  TIC_TAC_TOE = '/tic-tac-toe',
   CBOOK = '/cbook',
   NPM_ENGINE = '/npm-engine',
   GIPHY_ENGINE = '/giphy-engine',
@@ -50,10 +54,14 @@ export enum Pages {
   IMG_CONVERTER = '/img-converter',
   SVG_CONVERTER = '/convert-to-png',
   SVG_CREATOR = '/convert-to-svg',
-  MINE_SWEEPER = '/mine-sweeper',
   LOADING_SPINNERS = '/spinners',
   COLORS_PAGE = '/colors',
+  GAMES = '/games',
 }
+
+export type PagesType = GamePages | WebPages;
+
+export const Pages = { ...GamePages, ...WebPages };
 
 export const ASSIGNED_PATHS = [
   ...Object.values(Pages).map((page) => {
@@ -107,15 +115,19 @@ export const PROXY_URLS = [
   'https://angry-rose-coyote.cyclic.app/',
 ];
 
-export const PageTitles = {
-  [Pages.HOME]: 'Home',
+export const GamePageTitles = {
   [Pages.TIC_TAC_TOE]: 'Tic Tac Toe',
   [Pages.MEMORY]: 'Memory Game',
   [Pages.SNAKE]: 'Snake',
   [Pages.MINE_SWEEPER]: 'MineSweeper',
+};
+
+export const PageTitles = {
+  ...GamePageTitles,
+  [Pages.HOME]: 'Home',
   [Pages.GIPHY_ENGINE]: 'Giphy Engine',
   [Pages.NPM_ENGINE]: 'NPM Engine',
-  [Pages.LOADING_SPINNERS]: 'Loading Spinners',
+  [Pages.LOADING_SPINNERS]: 'Spinners',
   [Pages.IMG_CONVERTER]: 'IMG Convertor',
   [Pages.SVG_CONVERTER]: 'SVG To PNG Convertor',
   [Pages.SVG_CREATOR]: 'IMG To SVG Convertor',
@@ -124,6 +136,7 @@ export const PageTitles = {
   [Pages.CBOOK]: 'CBook',
   [Pages.SETTINGS]: 'Settings',
   [Pages.COLORS_PAGE]: 'Colors',
+  [Pages.GAMES]: 'Games',
 };
 
 export enum KeyCodes {

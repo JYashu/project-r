@@ -4,7 +4,7 @@ import { selectGlobalHeaderTitle, setGlobalHeader, setIsContentStatic } from '..
 import { selectIsNavOpen, setIsNavOpen } from '../../redux/navigation';
 import { selectSnakeState } from '../../redux/snake';
 import { State } from '../../redux/types';
-import { Pages } from '../../utils/consts';
+import { PagesType } from '../../utils/consts';
 import GlobalHeader from './GlobalHeader';
 
 const mapState = (state: State) => {
@@ -18,7 +18,7 @@ const mapState = (state: State) => {
 };
 
 const mapDispatch = (dispatch: Dispatch) => ({
-  setGlobalTitle: (title: Pages) => dispatch(setGlobalHeader({ title })),
+  setGlobalTitle: (title: PagesType) => dispatch(setGlobalHeader({ title })),
   handleNavigationState: (isOpen: boolean) => dispatch(setIsNavOpen({ isOpen })),
   handleStaticContent: (isStatic: boolean) => dispatch(setIsContentStatic({ isStatic })),
 });

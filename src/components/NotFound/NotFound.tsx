@@ -18,8 +18,10 @@ const NotFound = withRouter((history) => {
         <img src={`${ASSETS_BASE_URL}/404.png`} width="300px" />
         <div className={`${scssObj.baseClass}__msg`}>
           <div className={`${scssObj.baseClass}__title`}>Grats!</div>
-          <div className={`${scssObj.baseClass}__sub`}>You&apos;ve successfully gotten lost</div>
-          <div className={`${scssObj.baseClass}__sub`}>just like this astronaut</div>
+          <div className={`${scssObj.baseClass}__sub`}>You&apos;ve found our friend</div>
+          <div className={`${scssObj.baseClass}__sub`}>
+            who had gotten lost in the space years ago.
+          </div>
 
           <Link to={state.from || '/home'}>
             <Button buttonStyle="blur">Go back{!state.from && ' Home'}</Button>

@@ -1,5 +1,5 @@
 import { ActiveNavigationItem } from '../../types';
-import { BETA_ONLY_PAGES, Pages } from '../../utils/consts';
+import { BETA_ONLY_PAGES, PageTitles, Pages } from '../../utils/consts';
 
 export interface Menu {
   isActive: boolean;
@@ -44,27 +44,27 @@ export const getMenuColumnOneItems = (activeNavigationItem: ActiveNavigationItem
       icon: 'restart_alt',
       link: '/spinners',
       isHiddenForProd: true,
-      title: 'Spinners',
+      title: PageTitles[Pages.LOADING_SPINNERS],
     },
     {
       isActive: activeNavigationItem === ActiveNavigationItem.ColorsPage,
       icon: 'palette',
       link: '/colors',
       isHiddenForProd: true,
-      title: 'Colors',
+      title: PageTitles[Pages.COLORS_PAGE],
     },
     {
       isActive: activeNavigationItem === ActiveNavigationItem.CBook,
       icon: 'developer_mode',
       link: '/cbook',
-      title: 'CBook',
+      title: PageTitles[Pages.CBOOK],
       newTarget: true,
     },
     {
       isActive: activeNavigationItem === ActiveNavigationItem.IMGConverter,
       icon: 'style',
       link: '/img-converter',
-      title: 'IMG Converter',
+      title: PageTitles[Pages.IMG_CONVERTER],
     },
   ];
 };
@@ -75,25 +75,25 @@ export const getMenuColumnTwoItems = (activeNavigationItem: ActiveNavigationItem
       isActive: activeNavigationItem === ActiveNavigationItem.TicTacToe,
       icon: 'align_vertical_center',
       link: '/tic-tac-toe',
-      title: 'Tic Tac Toe',
+      title: PageTitles[Pages.TIC_TAC_TOE],
     },
     {
       isActive: activeNavigationItem === ActiveNavigationItem.Snake,
       icon: 'gesture',
       link: '/snake',
-      title: 'Snake',
+      title: PageTitles[Pages.SNAKE],
     },
     {
       isActive: activeNavigationItem === ActiveNavigationItem.Memory,
       icon: 'memory',
       link: '/memory',
-      title: 'Memory',
+      title: PageTitles[Pages.MEMORY],
     },
     {
       isActive: activeNavigationItem === ActiveNavigationItem.MineSweeper,
       icon: 'golf_course',
       link: '/mine-sweeper',
-      title: 'MineSweeper',
+      title: PageTitles[Pages.MINE_SWEEPER],
     },
   ];
 };
