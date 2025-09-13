@@ -17,11 +17,7 @@ import { copyText } from '../../redux/me';
 
 interface Props {
   cell: Cell;
-  bundle?: {
-    processing: boolean;
-    code: string;
-    error: string;
-  };
+  bundle?: { processing: boolean; code: string; error: string };
   updateCell: (id: string, content: string) => void;
 }
 
@@ -87,11 +83,9 @@ const CodeEditor = ({ initialValue, onChange, runCode }: CodeEditorProps) => {
 
   const onEditorDidMount: EditorDidMount = (getValue: any, editor: any) => {
     editorRef.current = editor;
-
     editor.onDidChangeModelContent(() => {
       onChange(getValue());
     });
-
     editor.getModel()?.updateOptions({ tabSize: 2 });
   };
 
@@ -151,11 +145,7 @@ const CodeEditor = ({ initialValue, onChange, runCode }: CodeEditorProps) => {
           showUnused: false,
           folding: false,
           lineNumbersMinChars: 3,
-          fontSize: 14,
-          lineHeight: 20,
-          fontFamily: "Consolas, 'Courier New', monospace",
-          cursorStyle: 'line',
-          cursorBlinking: 'blink',
+          fontSize: 12,
           scrollBeyondLastLine: false,
           automaticLayout: true,
         }}
@@ -168,14 +158,11 @@ const CodeCell = ({ cell, bundle, updateCell }: Props) => {
   const cumulativeCode = useCumulativeCode(cell.id);
   const [runCode, setRunCode] = useState(false);
   const [isResizing, setResizing] = useState(false);
-
   const dispatch = useDispatch();
 
   const bundler = async () => {
     dispatch(createBundle.request({ cellId: cell.id, input: cumulativeCode }));
-
     const result = await Bundle(cumulativeCode);
-
     dispatch(createBundle.success({ cellId: cell.id, bundle: result }));
   };
 
@@ -194,7 +181,6 @@ const CodeCell = ({ cell, bundle, updateCell }: Props) => {
     const timer = setTimeout(async () => {
       bundler();
     }, 750);
-
     // eslint-disable-next-line consistent-return
     return () => {
       clearTimeout(timer);
@@ -231,7 +217,6 @@ const CodeCell = ({ cell, bundle, updateCell }: Props) => {
                 status={bundle?.error || ''}
                 cellId={cell.id}
               />
-
               {(!bundle || bundle.processing) && (
                 <div
                   className={`${scssObj.baseClass}__progress-cover`}
@@ -249,21 +234,6 @@ const CodeCell = ({ cell, bundle, updateCell }: Props) => {
                 </div>
               )}
             </div>
-
-            {/* <div className={`${scssObj.baseClass}__progress-wrapper`}>
-              {!bundle || bundle.processing ? (
-                <div className={`${scssObj.baseClass}__progress-cover`}>
-                  <LoadingSpinner type={SpinnerType.CubeFlipSpinner} />
-                </div>
-              ) : (
-                <Preview
-                  isResizing={isResizing}
-                  code={bundle.code}
-                  status={bundle.error}
-                  cellId={cell.id}
-                />
-              )}
-            </div> */}
           </>
         ) : (
           <CodeEditor
