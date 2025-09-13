@@ -1,0 +1,2 @@
+(self.webpackChunkproject_r=self.webpackChunkproject_r||[]).push([[30633],{30633:()=>{Prism.languages.bnf={string:{pattern:/"[^\r\n"]*"|'[^\r\n']*'/},definition:{pattern:/<[^<>\r\n\t]+>(?=\s*::=)/,alias:["rule","keyword"],inside:{punctuation:/^<|>$/}},rule:{pattern:/<[^<>\r\n\t]+>/,inside:{punctuation:/^<|>$/}},operator:/::=|[|()[\]{}*+?]|\.{3}/},Prism.languages.rbnf=Prism.languages.bnf}}]);
+//# sourceMappingURL=30633.fb61a222.chunk.js.map

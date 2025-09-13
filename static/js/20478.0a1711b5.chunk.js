@@ -1,0 +1,2 @@
+(self.webpackChunkproject_r=self.webpackChunkproject_r||[]).push([[20478],{20478:()=>{Prism.languages.gcode={comment:/;.*|\B\(.*?\)\B/,string:{pattern:/"(?:""|[^"])*"/,greedy:!0},keyword:/\b[GM]\d+(?:\.\d+)?\b/,property:/\b[A-Z]/,checksum:{pattern:/\*\d+/,alias:"punctuation"},punctuation:/:/}}}]);
+//# sourceMappingURL=20478.0a1711b5.chunk.js.map

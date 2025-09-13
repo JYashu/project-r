@@ -1,0 +1,2 @@
+(self.webpackChunkproject_r=self.webpackChunkproject_r||[]).push([[51677],{51677:()=>{Prism.languages.hsts={directive:{pattern:/\b(?:max-age=|includeSubDomains|preload)/,alias:"keyword"},safe:{pattern:/\b\d{8,}\b/,alias:"selector"},unsafe:{pattern:/\b\d{1,7}\b/,alias:"function"}}}}]);
+//# sourceMappingURL=51677.3a6bce8b.chunk.js.map
