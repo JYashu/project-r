@@ -10,7 +10,7 @@ import useSetActiveSidebarItem from '../../hooks/useSetActiveNavigationItem';
 import LoadingSpinner from '../../elements/loadingSpinner';
 import Button from '../../elements/button';
 import PermissionsManager from '../../elements/permissionsManager';
-import { Pages } from '../../utils/consts';
+import { BETA_ONLY_PAGES, Pages } from '../../utils/consts';
 
 type State = {
   fetchState: 'loading' | 'error' | 'success';
@@ -249,7 +249,7 @@ const TodoPage = () => {
 
 const TodoPageWithPermissionsManager = () => {
   return (
-    <PermissionsManager isBetaOnly>
+    <PermissionsManager isBetaOnly={BETA_ONLY_PAGES.includes(Pages.TODO)}>
       <TodoPage />
     </PermissionsManager>
   );

@@ -74,7 +74,7 @@ export const ASSIGNED_PATHS = [
   '/mal',
 ];
 
-export const BETA_ONLY_PAGES = [Pages.TODO, Pages.TEST, Pages.NPM_ENGINE, Pages.GIPHY_ENGINE];
+export const BETA_ONLY_PAGES = [Pages.TODO, Pages.TEST];
 
 export const BETA_ONLY_PATHS = BETA_ONLY_PAGES.map((e) => e.toString());
 

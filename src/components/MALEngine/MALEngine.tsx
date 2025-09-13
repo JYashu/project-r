@@ -4,6 +4,7 @@ import Field from '../../elements/field';
 import { Values } from './types';
 import scssObj from './_MALEngine.scss';
 import PermissionsManager from '../../elements/permissionsManager';
+import { BETA_ONLY_PAGES, Pages } from '../../utils/consts';
 
 interface Props {
   isSubmitting?: boolean;
@@ -63,7 +64,7 @@ const MALEngine = ({
 
 const MALEngineWithPermissionsManager = (props: Props) => {
   return (
-    <PermissionsManager isBetaOnly>
+    <PermissionsManager isBetaOnly={BETA_ONLY_PAGES.includes(Pages.NPM_ENGINE)}>
       <MALEngine {...props} />
     </PermissionsManager>
   );
