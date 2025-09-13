@@ -31,8 +31,47 @@ const ActionBar = ({
     else deleteCell();
   };
 
+  const getScrollParent = (el: HTMLElement | null): HTMLElement | Window => {
+    if (!el) return window;
+    const style = getComputedStyle(el);
+    const { overflowY } = style;
+    if (overflowY === 'auto' || overflowY === 'scroll') {
+      return el;
+    }
+    return getScrollParent(el.parentElement);
+  };
+
+  const moveCellWithScroll = (direction: Direction, cursorY?: number, target?: HTMLElement) => {
+    moveCell(direction);
+
+    if (cursorY !== undefined && target) {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          const rect = target.getBoundingClientRect();
+          const buttonCenter = rect.top + rect.height / 2;
+
+          const deltaY = buttonCenter - cursorY;
+
+          const scrollParent = getScrollParent(target);
+
+          if (scrollParent instanceof Window) {
+            scrollParent.scrollBy({ top: deltaY, behavior: 'auto' });
+          } else {
+            scrollParent.scrollTop += deltaY;
+          }
+        });
+      });
+    }
+  };
+
+  const handleMoveClick = (direction: Direction, e: React.MouseEvent) => {
+    const cursorY = e.clientY;
+    const target = e.currentTarget as HTMLElement; // the clicked <Icon />
+    moveCellWithScroll(direction, cursorY, target);
+  };
+
   return (
-    <div className={`${scssObj.baseClass}`}>
+    <div className={`${scssObj.baseClass}`} data-cell-id={id}>
       <div className={classNames(`${scssObj.baseClass}__action-bar`, `${scssObj.baseClass}__left`)}>
         <Icon
           className={`${scssObj.baseClass}__icon`}
@@ -44,13 +83,15 @@ const ActionBar = ({
           className={`${scssObj.baseClass}__icon`}
           icon="arrow_upward"
           size="small"
-          onClickHandler={() => moveCell('up')}
+          dataRole="move-up"
+          onClickHandler={(e) => handleMoveClick('up', e)}
         />
         <Icon
           className={`${scssObj.baseClass}__icon`}
           icon="arrow_downward"
           size="small"
-          onClickHandler={() => moveCell('down')}
+          dataRole="move-down"
+          onClickHandler={(e) => handleMoveClick('down', e)}
         />
         {cellType === 'code' && (
           <div className={`${scssObj.baseClass}__icon-wrapper`}>

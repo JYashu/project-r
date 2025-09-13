@@ -45,7 +45,7 @@ const renderBackgroundIcon = (
   </div>
 );
 
-const Input: React.SFC<Props> = React.forwardRef((props: Props, ref: any) => {
+const Input: React.FC<Props> = React.forwardRef((props: Props, ref: any) => {
   const {
     className,
     hasError,

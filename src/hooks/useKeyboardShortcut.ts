@@ -37,7 +37,7 @@ export default (
 
   // handle what happens on key press
   const handleKeyPress = useCallback(
-    (event) => {
+    (event: any) => {
       // check if one of the key is part of the ones we want
       if (allKeysPressed(event) && event.keyCode === shortcutKeyCode) {
         callbackRef.current();

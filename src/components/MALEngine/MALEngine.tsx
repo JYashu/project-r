@@ -6,8 +6,6 @@ import scssObj from './_MALEngine.scss';
 import PermissionsManager from '../../elements/permissionsManager';
 
 interface Props {
-  isLoading: boolean;
-  error: string | null;
   isSubmitting?: boolean;
   isValid: boolean;
   values: Values;
@@ -19,8 +17,6 @@ interface Props {
 }
 
 const MALEngine = ({
-  isLoading,
-  error,
   isSubmitting,
   isValid,
   values,

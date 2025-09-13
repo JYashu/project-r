@@ -78,17 +78,21 @@ export const BETA_ONLY_PAGES = [Pages.TODO, Pages.TEST, Pages.NPM_ENGINE, Pages.
 
 export const BETA_ONLY_PATHS = BETA_ONLY_PAGES.map((e) => e.toString());
 
-export const HTML = `
+export const getHTML = (cellId: string) => `
 <html>
   <head>
-    <style>html { background-color: white; }</style>
+    <style>
+      html { background-color: white; }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root-cell-${cellId}"></div>
     <script>
       const handleError = (error) => {
-        const root = document.querySelector('#root');
-        root.innerHTML = '<div style="color: red;"><h4>Runtime Error</h4>' + error + '</div>';
+        const root = document.querySelector('#root-cell-${cellId}');
+        if (root) {
+          root.innerHTML = '<div style="color: red;"><h4>Runtime Error</h4>' + error + '</div>';
+        }
         console.error(error);
       };
 
@@ -96,6 +100,9 @@ export const HTML = `
         event.preventDefault();
         handleError(event.error);
       });
+
+      // 👇 tell parent we're ready
+      window.parent.postMessage({ type: 'ready', cellId: '${cellId}' }, '*');
 
       window.addEventListener('message', (event) => {
         try {
@@ -160,6 +167,7 @@ export enum KeyCodes {
 export const CBOOK_DEMO_ORDER = [
   'zwtci-lv2fwnc2-52i0fjoq',
   'szqe4-lv2fx1t4-isj67l4m',
+  '0x79b-mfh9yie9-cdlc0qlq',
   'go7hv-lv2fwyca-xcb3h2ca',
 ];
 
@@ -168,7 +176,7 @@ export const CBOOK_DEMO_DATA: {
 } = {
   'zwtci-lv2fwnc2-52i0fjoq': {
     content:
-      "# Demo \nHere's a quick guide on how to use this tool effectively: \n* To display anything in the preview panel, simply utilize the built-in function show(). For instance, show('Hello World') will promptly showcase the text \"Hello World\" in the preview panel.\n* The code editor offers convenient action buttons for streamlined workflow:\n  1. Execute: Execute the code in the editor.\n  2. Format: Format the code for better readability.\n  3. Copy: Copy the code to your clipboard for easy sharing or storage.\n* The tool executes bundled code cumulatively, adhering to the order of the blocks. This ensures seamless execution and coherent results.\n* Effortlessly rearrange your code blocks using the toolbar provided on each cell. This feature allows you to move cells up or down, facilitating better organization and flow within your project.\n* Enhance the documentation of your code by using the markdown text editor. You can add detailed explanations, comments, and formatting to make your code more understandable.\n* Below is a demonstration code to illustrate the functionality of the tool. Feel free to modify and experiment with it!",
+      "# 🚀 Demo Guide  \n\nWelcome! This quick guide will help you get the most out of the tool.\n### 📺 Displaying Output  \nUse the built-in **`show()`** function to render content in the preview panel.  \nFor example:  \n```js\nshow('Hello World');\n```\nThis will instantly display Hello World in the preview area.\n\n### ✨ Editor Actions\nThe code editor includes handy action buttons to streamline your workflow:\n1. Execute → Run the code currently in the editor.\n2. Format → Automatically tidy up your code for better readability.\n3. Copy → Copy the code to your clipboard for quick sharing or reuse.\n\n### 🔄 Code Execution\n* Code is bundled cumulatively, following the order of your cells.\n* This ensures that earlier definitions (like variables or functions) remain available in later cells.\n* You can write supporting code in one cell and use it seamlessly in another.\n\n### 📦 Organizing Cells\n* Use the toolbar on each cell to rearrange blocks (move them up or down).\n* This makes it simple to adjust the flow of your project as it evolves.\n* Combine code and markdown cells to create clean, well-structured projects.\n\n### 📝 Documenting with Markdown\nNot everything has to be code!\n* Use Markdown cells to add explanations, notes, and formatting.\n* Great for documentation, walkthroughs, or inline commentary alongside your code.\n* You can include headings, lists, code snippets, and links to make your notebook more readable.",
     type: 'md',
     id: 'zwtci-lv2fwnc2-52i0fjoq',
   },
@@ -180,11 +188,16 @@ export const CBOOK_DEMO_DATA: {
     showPreview: true,
   },
   'szqe4-lv2fx1t4-isj67l4m': {
-    content:
-      // eslint-disable-next-line no-template-curly-in-string
-      "show('This is a demo code snippet.');\nconst result = 2 + 3;\nshow(`Result of 2 + 3 is: ${result}`);",
+    content: "show('Hello World!');\nconst result = 2 + 3;",
     type: 'code',
     id: 'szqe4-lv2fx1t4-isj67l4m',
+    showPreview: true,
+  },
+  '0x79b-mfh9yie9-cdlc0qlq': {
+    // eslint-disable-next-line no-template-curly-in-string
+    content: 'show(`Result of 2 + 3 is: ${result}`);',
+    type: 'code',
+    id: '0x79b-mfh9yie9-cdlc0qlq',
     showPreview: true,
   },
 };

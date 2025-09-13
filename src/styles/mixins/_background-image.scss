@@ -28,7 +28,7 @@
     @if filter == grayscale&blur {
       background: url('https://picsum.photos/' + $width + '/' + $height + '?' + $filter + '=' + $blur);
     }
-    @if filter = grayscale {
+    @if filter == grayscale {
       background: url('https://picsum.photos/' + $width + '/' + $height + '?' + $filter);
     }
   }

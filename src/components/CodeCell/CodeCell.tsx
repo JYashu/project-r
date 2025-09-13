@@ -12,7 +12,7 @@ import LoadingSpinner from '../../elements/loadingSpinner';
 import Resizable from '../../elements/resizable';
 import Icon from '../../elements/icon';
 import scssObj from './_CodeCell.scss';
-import { HTML } from '../../utils/consts';
+import { getHTML } from '../../utils/consts';
 import { copyText } from '../../redux/me';
 
 interface Props {
@@ -29,6 +29,7 @@ interface PreviewProps {
   code: string;
   status: string;
   isResizing: boolean;
+  cellId: string;
 }
 
 interface CodeEditorProps {
@@ -37,15 +38,34 @@ interface CodeEditorProps {
   runCode: () => void;
 }
 
-const Preview = ({ code, status, isResizing }: PreviewProps) => {
-  const iframe = useRef<any>();
+const Preview = ({ code, status, isResizing, cellId }: PreviewProps) => {
+  const iframe = useRef<HTMLIFrameElement>(null);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    iframe.current.srcdoc = HTML;
-    setTimeout(() => {
-      iframe.current.contentWindow.postMessage(code, '*');
-    }, 50);
-  }, [code]);
+    const listener = (event: MessageEvent) => {
+      if (event.data?.type === 'ready' && event.data.cellId === cellId) {
+        setReady(true);
+      }
+    };
+    window.addEventListener('message', listener);
+    return () => window.removeEventListener('message', listener);
+  }, [cellId]);
+
+  // Reset iframe HTML whenever cell changes
+  useEffect(() => {
+    if (iframe.current) {
+      setReady(false);
+      iframe.current.srcdoc = getHTML(cellId);
+    }
+  }, [cellId]);
+
+  // Only send code once iframe is ready
+  useEffect(() => {
+    if (iframe.current && ready) {
+      iframe.current.contentWindow?.postMessage(code, '*');
+    }
+  }, [code, ready]);
 
   return (
     <div className={`${scssObj.baseClass}__preview-wrapper`}>
@@ -55,7 +75,6 @@ const Preview = ({ code, status, isResizing }: PreviewProps) => {
         title={`${scssObj.baseClass}__code-preview`}
         ref={iframe}
         sandbox="allow-scripts"
-        srcDoc={HTML}
       />
       {status && <div className={`${scssObj.baseClass}__preview-error`}>{status}</div>}
     </div>
@@ -132,7 +151,11 @@ const CodeEditor = ({ initialValue, onChange, runCode }: CodeEditorProps) => {
           showUnused: false,
           folding: false,
           lineNumbersMinChars: 3,
-          fontSize: 12,
+          fontSize: 14,
+          lineHeight: 20,
+          fontFamily: "Consolas, 'Courier New', monospace",
+          cursorStyle: 'line',
+          cursorBlinking: 'blink',
           scrollBeyondLastLine: false,
           automaticLayout: true,
         }}
@@ -198,15 +221,49 @@ const CodeCell = ({ cell, bundle, updateCell }: Props) => {
                 onChange={(value) => updateCell(cell.id, value)}
               />
             </Resizable>
-            <div className={`${scssObj.baseClass}__progress-wrapper`}>
+            <div
+              className={`${scssObj.baseClass}__progress-wrapper`}
+              style={{ position: 'relative' }}
+            >
+              <Preview
+                isResizing={isResizing}
+                code={bundle?.code || ''}
+                status={bundle?.error || ''}
+                cellId={cell.id}
+              />
+
+              {(!bundle || bundle.processing) && (
+                <div
+                  className={`${scssObj.baseClass}__progress-cover`}
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    background: 'rgba(255,255,255,0.7)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    zIndex: 10,
+                  }}
+                >
+                  <LoadingSpinner type={SpinnerType.CubeFlipSpinner} />
+                </div>
+              )}
+            </div>
+
+            {/* <div className={`${scssObj.baseClass}__progress-wrapper`}>
               {!bundle || bundle.processing ? (
                 <div className={`${scssObj.baseClass}__progress-cover`}>
                   <LoadingSpinner type={SpinnerType.CubeFlipSpinner} />
                 </div>
               ) : (
-                <Preview isResizing={isResizing} code={bundle.code} status={bundle.error} />
+                <Preview
+                  isResizing={isResizing}
+                  code={bundle.code}
+                  status={bundle.error}
+                  cellId={cell.id}
+                />
               )}
-            </div>
+            </div> */}
           </>
         ) : (
           <CodeEditor

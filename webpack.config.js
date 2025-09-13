@@ -45,19 +45,16 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        resolve: {
-          extensions: ['.css', '.scss', '.sass'],
-        },
         include: path.resolve(__dirname, 'src'),
         use: [
-          'style-loader',
+          'style-loader', // injects CSS into DOM
           {
             loader: 'css-loader',
             options: {
-              importLoaders: 2,
+              importLoaders: 2, // postcss-loader and sass-loader
               modules: {
-                localIdentName: '[path][name]__[local]--hash:base64:5]',
-                mode: 'icss',
+                auto: true, // only enable CSS modules for *.module.scss
+                localIdentName: '[path][name]__[local]--hash:base64:5',
               },
             },
           },
@@ -67,9 +64,15 @@ module.exports = {
               postcssOptions: {
                 config: path.resolve(__dirname, 'postcss.config.js'),
               },
+              sourceMap: true,
             },
           },
-          'sass-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true, // must be true for resolve-url-loader or proper source maps
+            },
+          },
         ],
       },
       { test: /\.(png|svg|jpg)$/, loader: 'file-loader' },

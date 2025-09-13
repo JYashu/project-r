@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { Fragment, useEffect } from 'react';
-import { useLocation } from 'react-router';
+import { useLocation } from 'react-router-dom';
 import { CellTypes, Cell } from '../../types';
 import Button from '../../elements/button';
 import CellItem from '../cellItem';

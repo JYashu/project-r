@@ -6,7 +6,7 @@ import DOMPurify from 'dompurify';
 import classNames from 'classnames';
 import potrace from 'potrace';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useLocation } from 'react-router-dom';
 import Button from '../../elements/button';
 import Field, { ColorField, FileField } from '../../elements/field';
 import TextArea from '../../elements/textArea';
@@ -42,9 +42,9 @@ const SVGCreator = () => {
   const [imageURL, setImageURL] = useState<string | null>(null);
   const [toggle, setToggle] = useState<'potrace' | 'posterized'>('potrace');
   const { fromField } = useSelector(selectConverterState);
-  const history = useHistory();
+  const location = useLocation();
 
-  const { id } = QueryString.parse(history.location.search, {
+  const { id } = QueryString.parse(location.search, {
     decode: false,
   });
   const file = useReselect(selectFileDataById, { id: id || '' });

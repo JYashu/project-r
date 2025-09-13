@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Button from '../../elements/button';
 import scssObj from './_IMGConverter.scss';
 import Dropdown from '../../elements/dropdown';
@@ -55,15 +55,15 @@ const IMGConverter = ({
   useSetActiveSidebarItem(ActiveNavigationItem.IMGConverter);
   useSetGlobalHeader(Pages.IMG_CONVERTER);
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const onFileUpload = (fileObj: FileObj | undefined) => {
     if (fileObj && fileObj.file) {
       setFieldId({ id: '' });
       if (fileObj.type === FileType.SVG) {
-        history.push(`/convert-to-png?id=${fieldId.id}`);
+        navigate(`/convert-to-png?id=${fieldId.id}`);
       } else {
-        history.push(`/convert-to-svg?id=${fieldId.id}`);
+        navigate(`/convert-to-svg?id=${fieldId.id}`);
       }
     }
   };
@@ -81,9 +81,9 @@ const IMGConverter = ({
           e.preventDefault();
           handleSubmit();
           if (values.fromField !== '' && values.toField === FileType.SVG) {
-            history.push('/convert-to-svg');
+            navigate('/convert-to-svg');
           } else if (values.fromField !== '' && values.toField === FileType.PNG) {
-            history.push('/convert-to-png');
+            navigate('/convert-to-png');
           }
         }}
       >

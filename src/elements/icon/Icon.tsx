@@ -7,9 +7,10 @@ interface Props {
   description?: string;
   icon: any;
   title?: string;
-  onClickHandler?: () => void;
+  onClickHandler?: (e?: any) => void;
   size?: 'extra-small' | 'small' | 'medium' | 'large' | 'extra-large' | 'extra-extra-large';
   removeOutline?: boolean | undefined;
+  dataRole?: string;
 }
 
 /**
@@ -25,6 +26,7 @@ const Icon = ({
   size,
   description,
   removeOutline,
+  dataRole,
 }: Props) => {
   const cls = classnames(scssObj.baseClass, className, {
     [`${scssObj.baseClass}--size-${size}`]: size,
@@ -33,7 +35,7 @@ const Icon = ({
   const iconCls = classnames('material-icons', { 'material-icons-outlined': !removeOutline });
 
   return (
-    <div className={cls}>
+    <div className={cls} data-role={dataRole}>
       <i aria-hidden="true" className={iconCls} onClick={onClickHandler} title={title || ''}>
         {icon}
 

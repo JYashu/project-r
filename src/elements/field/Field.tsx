@@ -11,7 +11,10 @@ import LabelText from '../labelText';
 import TextArea from '../textArea';
 
 export interface Props
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement>, 'ref'> {
+  extends Omit<
+    React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement>,
+    'ref' | 'children'
+  > {
   children?: (
     name: string,
     props: Omit<React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement>, 'ref'>,
@@ -38,7 +41,7 @@ export interface Props
   popover?: React.ReactNode;
 }
 
-const Field: React.SFC<Props> = React.forwardRef((props: Props, ref: any) => {
+const Field: React.FC<Props> = React.forwardRef((props: Props, ref: any) => {
   const {
     children,
     className,
