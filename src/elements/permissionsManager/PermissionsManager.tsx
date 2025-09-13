@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router';
+import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import useGetEnvironment from '../../hooks/useGetEnvironment';
 import { selectAccessGranted } from '../../redux/me';
@@ -21,7 +21,7 @@ export const PermissionsManager = ({
   const accessGranted = useSelector(selectAccessGranted);
 
   if (isBetaOnly && isProd) {
-    return <Redirect to="/404" />;
+    return <Navigate to="/404" />;
   }
   if (isHiddenForProd && isProd) {
     return null;

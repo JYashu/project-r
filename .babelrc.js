@@ -10,10 +10,9 @@ module.exports = {
     ['@babel/preset-react', { runtime: 'automatic' }],
   ],
   plugins: [
-    '@babel/proposal-class-properties',
-    '@babel/proposal-object-rest-spread',
-    '@babel/proposal-optional-chaining',
-    '@babel/proposal-nullish-coalescing-operator',
-    'react-hot-loader/babel',
+    '@babel/plugin-transform-class-properties',
+    '@babel/plugin-transform-object-rest-spread',
+    '@babel/plugin-transform-optional-chaining',
+    '@babel/plugin-transform-nullish-coalescing-operator',
   ],
 };

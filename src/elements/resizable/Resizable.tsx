@@ -12,7 +12,7 @@ interface ResizableProps {
 const Resizable = ({ direction, children, onResizeStart, onResizeStop }: ResizableProps) => {
   const [innerHeight, setInnerHeight] = useState(window.innerHeight);
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
-  const [width, setWidth] = useState(window.innerWidth * 0.75);
+  const [width, setWidth] = useState(window.innerWidth * 0.6);
 
   let props: ResizableBoxProps;
 
@@ -25,8 +25,8 @@ const Resizable = ({ direction, children, onResizeStart, onResizeStop }: Resizab
       timer = setTimeout(() => {
         setInnerHeight(window.innerHeight);
         setInnerWidth(window.innerWidth);
-        if (window.innerWidth * 0.75 < width) {
-          setWidth(window.innerWidth * 0.75);
+        if (window.innerWidth * 0.6 < width) {
+          setWidth(window.innerWidth * 0.6);
         }
       }, 100);
     };

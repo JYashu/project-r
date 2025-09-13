@@ -1,43 +1,71 @@
 /* eslint-disable no-param-reassign */
 import { Provider } from 'react-redux';
-import { withRouter, RouteComponentProps } from 'react-router';
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import store from '../../redux/store';
+import { SagaContext } from '../../redux/utils/sagaContext';
 
-type Props = RouteComponentProps;
+interface Props {
+  children?: React.ReactNode;
+}
 
-class ProviderWithRouter extends React.Component<Props> {
+interface RouterProps {
+  navigate: any;
+  location: any;
+  children?: React.ReactNode;
+}
+
+class ProviderWithRouterClass extends React.Component<RouterProps> {
   store: ReturnType<typeof store>;
 
-  constructor(props: Props) {
+  constructor(props: RouterProps) {
     super(props);
 
-    let lastLocation: any = null;
-    props.history.listen((location) => {
-      lastLocation = location;
-    });
-    const prevHistoryPush = props.history.push;
-    props.history.push = (pathname: any, state?: any) => {
-      const newState = { ...state, from: lastLocation?.pathname };
+    const lastLocationRef: any = props.location;
+
+    const enhancedNavigate = (pathname: string, state?: any) => {
+      const newState = { ...state, from: lastLocationRef?.pathname };
       if (
-        lastLocation === null ||
-        pathname !== lastLocation.pathname + lastLocation.search + lastLocation.hash ||
-        JSON.stringify(newState) !== JSON.stringify(lastLocation.newState)
+        lastLocationRef === null ||
+        pathname !== lastLocationRef.pathname + lastLocationRef.search + lastLocationRef.hash ||
+        JSON.stringify(newState) !== JSON.stringify(lastLocationRef.newState)
       ) {
-        prevHistoryPush(pathname, { ...newState });
+        props.navigate(pathname, { ...newState });
       }
     };
 
-    this.store = store({
-      routerHistory: props.history,
-    });
+    const sagaContext: SagaContext = {
+      routerHistory: {
+        push: enhancedNavigate,
+        replace: enhancedNavigate,
+        location: props.location,
+      } as any,
+    };
+
+    this.store = store(sagaContext);
   }
 
   render() {
     const { children } = this.props;
-
     return <Provider store={this.store}>{children}</Provider>;
   }
 }
 
-export default withRouter(ProviderWithRouter);
+// Functional wrapper to inject React Router v6 hooks
+const ProviderWithRouter: React.FC<Props> = ({ children }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const lastLocationRef = useRef(location);
+
+  useEffect(() => {
+    lastLocationRef.current = location;
+  }, [location]);
+
+  return (
+    <ProviderWithRouterClass navigate={navigate} location={lastLocationRef.current}>
+      {children}
+    </ProviderWithRouterClass>
+  );
+};
+
+export default ProviderWithRouter;

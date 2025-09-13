@@ -11,7 +11,7 @@ interface Props extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   hasLabel?: boolean;
 }
 
-const TextArea: React.SFC<Props> = ({
+const TextArea: React.FC<Props> = ({
   className,
   hasError,
   hasLabel,

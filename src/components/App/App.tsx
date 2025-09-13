@@ -1,6 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { hot } from 'react-hot-loader/root';
+import { Route, Routes } from 'react-router-dom';
 import TodoPage from '../todoPage';
 import scssObj from './_App.scss';
 import GlobalHeader from '../globalHeader';
@@ -61,37 +60,39 @@ const App = ({
       </div>
 
       <div className={`${cls}__global-header`} role="navigation" aria-label="global-header">
-        <Route component={GlobalHeader} />
+        <Routes>
+          <Route path="*" element={<GlobalHeader />} />
+        </Routes>
       </div>
 
       <Navigation />
 
       <div role="main" className={`${cls}__content`} id="main-content" aria-label="main-content">
-        <Switch>
-          <Route path="/cbook" exact component={CBook} />
-          <Route path="/" exact component={Home} />
-          <Route path="/home" exact component={Home} />
-          <Route path="/todo" exact component={TodoPage} />
-          <Route path="/tic-tac-toe" exact component={TicTacToe} />
-          <Route path="/npm-engine" exact component={NPMRepoEngine} />
-          <Route path="/test" exact component={TestPage} />
-          <Route path="/settings" exact component={Settings} />
-          <Route path="/giphy-engine" exact component={GiphySearchEngine} />
-          <Route path="/spinners" exact component={SpinnerPage} />
-          <Route path="/colors" exact component={ColorsPage} />
-          <Route path="/snake" exact component={Snake} />
-          <Route path="/memory" exact component={Memory} />
-          <Route path="/mal" exact component={MALEngine} />
-          <Route path="/img-converter" exact component={IMGConverter} />
-          <Route path="/convert-to-svg" exact component={SVGCreator} />
-          <Route path="/convert-to-png" exact component={SVGConverter} />
-          <Route path="/mine-sweeper" exact component={MineSweeper} />
-          <Route path="/games" exact component={Games} />
-          <Route component={NotFound} />
-        </Switch>
+        <Routes>
+          <Route path="/cbook" element={<CBook />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/todo" element={<TodoPage />} />
+          <Route path="/tic-tac-toe" element={<TicTacToe />} />
+          <Route path="/npm-engine" element={<NPMRepoEngine />} />
+          <Route path="/test" element={<TestPage />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/giphy-engine" element={<GiphySearchEngine />} />
+          <Route path="/spinners" element={<SpinnerPage />} />
+          <Route path="/colors" element={<ColorsPage />} />
+          <Route path="/snake" element={<Snake />} />
+          <Route path="/memory" element={<Memory />} />
+          {/* <Route path="/mal" element={<MALEngine />} /> */}
+          <Route path="/img-converter" element={<IMGConverter />} />
+          <Route path="/convert-to-svg" element={<SVGCreator />} />
+          <Route path="/convert-to-png" element={<SVGConverter />} />
+          <Route path="/mine-sweeper" element={<MineSweeper />} />
+          <Route path="/games" element={<Games />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </div>
     </div>
   );
 };
 
-export default hot(App);
+export default App;

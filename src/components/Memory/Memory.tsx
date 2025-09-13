@@ -5,7 +5,7 @@
 import classNames from 'classnames';
 import React, { useState, useEffect } from 'react';
 import { useSpring, animated as a } from 'react-spring';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import useSetActiveSidebarItem from '../../hooks/useSetActiveNavigationItem';
 import useSetGlobalHeader from '../../hooks/useSetGlobalHeader';
 import { ActiveNavigationItem, ClickActionType } from '../../types';
@@ -319,7 +319,7 @@ const App = ({
   useSetGlobalHeader(Pages.MEMORY);
   useSetActiveSidebarItem(ActiveNavigationItem.Memory);
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handlePopstate = (e: any) => {
@@ -395,7 +395,7 @@ const App = ({
                     updateChosenTheme();
                     setName(values.name);
                     setOptions(values.options);
-                    history.push('/memory');
+                    navigate('/memory');
                   }
                 }}
               >

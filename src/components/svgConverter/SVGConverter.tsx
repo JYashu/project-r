@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import DOMPurify from 'dompurify';
 import classNames from 'classnames';
-import { useHistory } from 'react-router';
+import { useLocation } from 'react-router-dom';
 import Button from '../../elements/button';
 import Field, { ColorField, FileField } from '../../elements/field';
 import TextArea from '../../elements/textArea';
@@ -32,9 +32,9 @@ const SVGConverter = () => {
   const [color, setColor] = useState<string>();
   const [isCanvasLoaded, setCanvasLoaded] = useState(false);
   const { isProd } = useGetEnvironment();
-  const history = useHistory();
+  const location = useLocation();
 
-  const { id } = QueryString.parse(history.location.search, {
+  const { id } = QueryString.parse(location.search, {
     decode: false,
   });
   const file = useReselect(selectFileDataById, { id: id || '' });

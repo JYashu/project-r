@@ -12,7 +12,7 @@ export const unpkgPathPlugin = () => {
       });
 
       /**
-       * Handle relative paths of module
+       * Handle relative paths inside a package
        */
       build.onResolve({ filter: /^\.+\// }, (args: any) => {
         return {
@@ -22,9 +22,24 @@ export const unpkgPathPlugin = () => {
       });
 
       /**
-       * Handle main file of module
+       * Handle package imports
        */
       build.onResolve({ filter: /.*/ }, async (args: any) => {
+        if (args.path === 'react') {
+          return {
+            path: 'https://unpkg.com/react@17.0.2/index.js',
+            namespace: 'a',
+          };
+        }
+
+        if (args.path === 'react-dom') {
+          return {
+            path: 'https://unpkg.com/react-dom@17.0.2/index.js',
+            namespace: 'a',
+          };
+        }
+
+        // all other packages → latest
         return {
           path: `https://unpkg.com/${args.path}`,
           namespace: 'a',
