@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import Editor, { EditorDidMount } from '@monaco-editor/react';
+import Editor, { OnMount } from '@monaco-editor/react';
 import prettier from 'prettier';
 import parser from 'prettier/parser-babel';
 import { useCumulativeCode } from '../../hooks/useCumulativeCode';
@@ -81,16 +81,18 @@ const CodeEditor = ({ initialValue, onChange, runCode }: CodeEditorProps) => {
   const editorRef = useRef<any>();
   const dispatch = useDispatch();
 
-  const onEditorDidMount: EditorDidMount = (getValue: any, editor: any) => {
+  const handleEditorMount: OnMount = (editor, monaco) => {
     editorRef.current = editor;
+
     editor.onDidChangeModelContent(() => {
-      onChange(getValue());
+      onChange(editor.getValue());
     });
+
     editor.getModel()?.updateOptions({ tabSize: 2 });
   };
 
   const onFormatClick = () => {
-    const unFormatted = editorRef.current.getModel().getValue();
+    const unFormatted = editorRef.current.getValue();
     const formatted = prettier
       .format(unFormatted, {
         parser: 'babel',
@@ -104,7 +106,7 @@ const CodeEditor = ({ initialValue, onChange, runCode }: CodeEditorProps) => {
   };
 
   const onCopyClick = () => {
-    dispatch(copyText.request({ text: editorRef.current.getModel().getValue() }));
+    dispatch(copyText.request({ text: editorRef.current.getValue() }));
   };
 
   return (
@@ -134,11 +136,11 @@ const CodeEditor = ({ initialValue, onChange, runCode }: CodeEditorProps) => {
         />
       </div>
       <Editor
-        editorDidMount={onEditorDidMount}
+        onMount={handleEditorMount}
         value={initialValue}
         height="100%"
         language="javascript"
-        theme="dark"
+        theme="vs-dark"
         options={{
           wordWrap: 'on',
           minimap: { enabled: false },
