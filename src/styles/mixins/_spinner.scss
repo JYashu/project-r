@@ -15,13 +15,13 @@
       @include border-radius(0%);
 
       transform: rotate(180deg);
-      background-color: map-get($colors, header-bg);
+      background-color: map-get($colors, nav-bg);
     }
   }
 }
 
 @mixin dots-bars-spinner {
-  color: #2a2961;
+  color: map-get($colors, nav-bg);
   width: 40px;
   height: 20px;
   --c: radial-gradient(farthest-side, currentColor 93%, #0000);
@@ -108,7 +108,7 @@
 }
 
 @mixin bounce-spinner {
-  --color: #2a2961;
+  --color: map-get($colors, nav-bg);
   --size-mid: 6vmin;
   --size-dot: 1.5vmin;
   --size-bar: 0.4vmin;

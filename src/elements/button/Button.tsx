@@ -147,7 +147,7 @@ const Button = ({
         ) : (
           <LoadingSpinner
             intent={intent}
-            type={spinnerType || SpinnerType.ScaleLoader}
+            type={spinnerType || SpinnerType.HashLoader}
             size="small"
           />
         )}

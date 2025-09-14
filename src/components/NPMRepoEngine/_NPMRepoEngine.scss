@@ -9,11 +9,24 @@ $base-class: npm-repo;
 .#{$base-class} {
   @include type-style-justice;
 
-  margin: 5em;
+  background-color: map-get($colors, 'ice-blue');
+  height: 100%;
+  padding: 2em 5em;
 
   &__repo-list {
     @include responsive-grid;
     grid-gap: 24px;
+  }
+
+  &__form {
+    @include border-radius(24px);
+
+    width: 40%;
+    padding-top: 5px;
+    padding-bottom: 1.5em;
+    font-size: 16px;
+    justify-self: center;
+    font-family: Helvetica, sans-serif;
   }
 
   // @media only screen and (max-width: 1024px) {

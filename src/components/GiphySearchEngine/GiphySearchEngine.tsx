@@ -105,6 +105,7 @@ const GiphySearchEngine = ({
 }: Props) => {
   useSetActiveSidebarItem(ActiveNavigationItem.GiphyEngine);
   useSetGlobalHeader(Pages.GIPHY_ENGINE);
+  const isSubmitDisabled = !isValid || isSubmitting;
 
   return (
     <div className={`${scssObj.baseClass}`}>
@@ -115,8 +116,8 @@ const GiphySearchEngine = ({
       </Helmet>
       <div className={`${scssObj.baseClass}__main`}>
         <div className={`${scssObj.baseClass}__info`}>
-          <div className={`${scssObj.baseClass}__head`}>Giphy Search</div>
           <Cube />
+          <div className={`${scssObj.baseClass}__head`}>Giphy Search</div>
         </div>
         <form
           className={`${scssObj.baseClass}__form`}
@@ -135,6 +136,19 @@ const GiphySearchEngine = ({
             touched={touched.query}
             rounded
             hasButton
+            renderButton={() => (
+              <Button
+                disabled={isSubmitDisabled}
+                loading={isSubmitting}
+                transparent
+                hasBorder
+                rounded
+                size="small"
+                type="submit"
+              >
+                Search
+              </Button>
+            )}
           />
         </form>
       </div>

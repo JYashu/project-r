@@ -18,7 +18,7 @@ const CopyField = ({ className, value, name }: Props) => {
       <Field
         name={name}
         className={className}
-        disabled
+        readOnly
         value={value}
         icon="copy"
         iconPosition="RIGHT"

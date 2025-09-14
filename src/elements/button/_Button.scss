@@ -9,7 +9,7 @@ $style: default;
 
 .#{$base-class} {
   $this: &;
-
+  position: relative;
   @include button-icon;
   @include button-size(medium);
   @include loading-spinner-internal {
@@ -29,30 +29,35 @@ $style: default;
     width: 100%;
   }
 
-  &__loader-wrapper-with-children {
-    $loader-height: 30px;
-    $loader-width: 90px;
 
+  &__loader-wrapper-with-children {
     opacity: 0;
     position: absolute;
-    right: calc(50% - #{$loader-width / 2});
-    top: calc(50% - #{$loader-height / 2});
-    @include transform(scale(0));
+    top: 50%;
+    left: 50%;
+    width: 100%;
+
+    transform: translate(-50%, -50%) scale(0.8) !important;
     transition: 0.2s ease-in-out;
     transition-property: opacity, transform;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   &__loader-wrapper-without-children {
-    $loader-height: 30px;
-
     opacity: 0;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    display: grid;
-    place-items: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     @include transform(scale(0));
     transition: 0.2s ease-in-out;
     transition-property: opacity, transform;

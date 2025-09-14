@@ -35,7 +35,7 @@ $base-class: snake;
 
   &__note {
     @include border-radius(6px);
-    border: 1px solid map-get($colors, header-bg);
+    border: 1px solid map-get($colors, nav-bg);
     padding: 10px;
     margin: 10px 0;
   }
@@ -59,7 +59,7 @@ $base-class: snake;
   }
 
   &__button {
-    color:  map-get($colors, header-bg );
+    color:  map-get($colors, nav-bg );
   }
 
   @media (min-width: 1080px) {

@@ -6,6 +6,7 @@ import Scape from '../animations/scape';
 import Submarine from '../animations/submarine';
 import Truck from '../animations/truck';
 import scssObj from './_Home.scss';
+import Game from '../animations/submarine/Game';
 
 const clsRelative = `${scssObj.baseClass}__panel-relative`;
 const clsSticky = `${scssObj.baseClass}__panel-sticky`;
@@ -67,28 +68,45 @@ const Home = () => {
   if (!sessionStorage.getItem('scapeKey')) {
     sessionStorage.setItem('scapeKey', Math.round(Math.random()).toString());
   }
+  if (!sessionStorage.getItem('animationOrder')) {
+    sessionStorage.setItem(
+      'animationOrder',
+      JSON.stringify(['submarine', 'cat', 'truck'].sort(() => Math.random() - 0.5)),
+    );
+  }
+
+  const animations: { [id: string]: JSX.Element } = {
+    scape: <Scape />,
+    submarine: <Submarine animate />,
+    cat: <Cat />,
+    truck: <Truck />,
+  };
+
+  const animationOrder = [
+    'scape',
+    ...JSON.parse(
+      sessionStorage.getItem('animationOrder') || JSON.stringify(['submarine', 'cat', 'truck']),
+    ),
+  ];
 
   window.onunload = () => {
     sessionStorage.removeItem('subKey');
     sessionStorage.removeItem('scapeKey');
+    sessionStorage.removeItem('animationOrder');
   };
 
   return (
     <div className={`${scssObj.baseClass}`}>
       <div className={`${scssObj.baseClass}__wrapper`}>
         <div className={`${scssObj.baseClass}__base-panel`} ref={firstRef}>
-          <Scape />
+          {animations[animationOrder[0]]}
         </div>
-
         <div className={firstCls} ref={secondRef}>
-          <Submarine animate />
+          {animations[animationOrder[1]]}
         </div>
-
-        <div className={secondCls}>
-          <Cat />
-        </div>
+        <div className={secondCls}>{animations[animationOrder[2]]}</div>
         <div className={`${scssObj.baseClass}__panel-relative`}>
-          <Truck />
+          {animations[animationOrder[3]]}
         </div>
       </div>
     </div>

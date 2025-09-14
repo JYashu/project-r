@@ -18,6 +18,7 @@ import {
   SyncLoader,
 } from 'react-spinners';
 import classNames from 'classnames';
+import colors from '../../styles/variables/_colors.scss';
 import scssObj from './_LoadingSpinner.scss';
 import { SpinnerType } from '../../types';
 
@@ -46,7 +47,7 @@ const LoadingSpinner = ({ text, size, intent, className, type, color }: Props) =
     [`${scssObj.baseClass}--has-text`]: text,
   });
 
-  const clr = color || '#2A2961';
+  const clr = color || colors['nav-bg'];
   return (
     <div className={cls}>
       {!type && <PulseLoader color={clr} size={loaderSize} margin="10px" />}
@@ -61,7 +62,9 @@ const LoadingSpinner = ({ text, size, intent, className, type, color }: Props) =
 
       {type === SpinnerType.GridLoader && <GridLoader color={clr} size={loaderSize} />}
 
-      {type === SpinnerType.HashLoader && <HashLoader color={clr} size={loaderSize} />}
+      {type === SpinnerType.HashLoader && (
+        <HashLoader color={clr} size={loaderSize === 8 ? 16 : loaderSize} />
+      )}
 
       {type === SpinnerType.PacmanLoader && <PacmanLoader color={clr} size={loaderSize} />}
 

@@ -262,7 +262,7 @@ const Dropdown = ({
       paddingTop: hasLabel && value ? 12 : 0,
       backgroundColor: isTransparent ? 'transparent' : colors['lily-white'],
       boxShadow: 'none',
-      borderColor: noBorder ? `transparent !important` : `${colors['header-bg']} !important`,
+      borderColor: noBorder ? `transparent !important` : `${colors['nav-bg']} !important`,
     }),
     menu: (base: React.CSSProperties) => ({
       ...base,

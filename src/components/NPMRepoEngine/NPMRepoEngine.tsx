@@ -64,6 +64,7 @@ const NPMRepoEngine = ({
         />
       </Helmet>
       <form
+        className={`${scssObj.baseClass}__form`}
         onSubmit={(e) => {
           e.preventDefault();
           handleSubmit();
@@ -85,6 +86,7 @@ const NPMRepoEngine = ({
               transparent
               hasBorder
               size="small"
+              type="submit"
             >
               Search
             </Button>

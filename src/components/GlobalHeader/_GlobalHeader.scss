@@ -7,9 +7,9 @@ $base-class: global-header;
 }
 
 .#{$base-class} {
-  color: map-get($colors, header-text);
+  color: map-get($colors, nav-text);
   align-items: center;
-  background-color: map-get($colors, header-bg);
+  background-color: map-get($colors, nav-bg);
   // background-color: map-get($colors, eden);
   display: flex;
   height: 64px;
@@ -24,7 +24,7 @@ $base-class: global-header;
   }
 
   &__collapse {
-    color: map-get($colors, header-text);
+    color: map-get($colors, nav-text);
     margin-right: 7px;
     margin-left: -15px;
     border: none;
@@ -35,7 +35,7 @@ $base-class: global-header;
   }
 
   &__title {
-    color: map-get($colors, header-text) !important;
+    color: map-get($colors, nav-text) !important;
     @include type-style-heading;
   }
 
