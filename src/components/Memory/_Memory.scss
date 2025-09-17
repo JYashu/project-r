@@ -7,11 +7,12 @@ $base-class: memory;
 }
 
 .#{$base-class} {
-  height: 100vh;
+  height: 100%;
   z-index: -200;
   background-image: url('https://project-r-assets.s3.us-east-2.amazonaws.com/backgrounds/cubic.webp');
   background-repeat: no-repeat;
   background-size: 100% 100%;
+  height: calc(100vh - 64px);
 
   &__dropdown {
     font-family: $cali !important;
@@ -43,7 +44,7 @@ $base-class: memory;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 20px 0;
+    padding: 20px 0;
   }
 
   &__action-buttons {

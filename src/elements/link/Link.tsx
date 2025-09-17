@@ -57,7 +57,7 @@ const Link = ({
         href={to}
         onClick={onClick}
         rel={rel}
-        target={target}
+        target={target || '_blank'}
         data-test-id={dataTestId}
       >
         {children}

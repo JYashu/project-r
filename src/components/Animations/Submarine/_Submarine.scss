@@ -49,8 +49,8 @@ $seaGroundColor2: #08003b;
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 400px;
-    height: 200px;
+    width: clamp(200px, 25vw, 400px);
+    height: clamp(100px, 12vw, 200px);
     @include transform(translate(-50%, -50%));
   }
   &__submarine__body {
@@ -81,7 +81,13 @@ $seaGroundColor2: #08003b;
     transform-style: preserve-3d;
     @include animation(rotateInfinite 1s linear infinite);
     cursor: pointer;
+    // animation-play-state: paused;
+
+    // &:hover {
+    //   animation-play-state: running;
+    // }
   }
+
   &__submarine__propeller-parts {
     position: absolute;
     left: 0%;
@@ -217,10 +223,52 @@ $seaGroundColor2: #08003b;
     left: 0%;
     width: 500px;
     height: 100px;
-    background: linear-gradient(to left, $lightColor, $bgColor);
-    clip-path: polygon(0% 0%, 50% 45%, 50% 55%, 0% 100%);
-
+    pointer-events: none;
+    background: transparent;
     @include transform(translate(-18%, -45%));
+    z-index: 2;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+
+      background: linear-gradient(
+        to left,
+        rgba(255, 255, 200, 0.36) 0%,
+        rgba(255, 255, 180, 0.20) 35%,
+        rgba(255, 255, 150, 0.08) 60%,
+        transparent 100%
+      );
+
+      clip-path: polygon(0% 0%, 50% 45%, 50% 55%, 0% 100%);
+
+      filter: blur(10px) drop-shadow(0 0 20px rgba(255, 255, 180, 0.32));
+      opacity: 0.96;
+      mix-blend-mode: screen;
+      z-index: 0;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+
+      background: linear-gradient(
+        to left,
+        rgba(255, 255, 220, 0.62) 0%,
+        rgba(255, 255, 200, 0.20) 30%,
+        transparent 70%
+      );
+
+      clip-path: polygon(0% 0%, 50% 45%, 50% 55%, 0% 100%);
+      filter: blur(3px);
+      opacity: 0.9;
+      mix-blend-mode: screen;
+      z-index: 1;
+    }
   }
   &__bubbles__container {
     position: absolute;
@@ -306,6 +354,10 @@ $seaGroundColor2: #08003b;
     position: relative;
     top: 50%;
     height: 0;
+  }
+
+  &__cont-2 {
+    transform: scaleX(-1);
   }
   //animation
 
@@ -412,9 +464,12 @@ $seaGroundColor2: #08003b;
     }
   }
   @include keyframes(moveThegroundRight) {
+    0% {
+      left: 100%;
+    }
     90% {
       opacity: 1;
-      left: 100%;
+      left: 0%;
     }
     95%,
     100% {
@@ -561,24 +616,53 @@ $seaGroundColor2: #08003b;
 
   &__light-a {
     position: absolute;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 0 40px 150px 40px;
-    border-color: transparent transparent lighten(#306d85, 5%) transparent;
-    @include transform(rotate(-50deg));
     top: 40px;
     left: 99%;
+    pointer-events: none;
 
-    &:after {
-      @include border-radius(5px);
+    // beam cone (separate element, not affecting ::after)
+    .beam {
+      position: absolute;
+      top: -3px;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 40px 150px 40px;
+      border-color: transparent transparent rgba(255, 255, 200, 0.15) transparent;
+      transform: rotate(-51deg);
+      filter: blur(4px) drop-shadow(0 0 12px rgba(255, 255, 180, 0.3));
+      z-index: 0;
+    }
 
+    .beam::before {
       content: '';
       position: absolute;
+      top: 0;
+      left: -40px;
+      width: 80px;
+      height: 150px;
+      background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 180, 0.25) 0%,
+        rgba(255, 255, 150, 0.1) 50%,
+        transparent 100%
+      );
+      clip-path: polygon(50% 0, 0% 100%, 100% 100%);
+      filter: blur(10px);
+    }
+
+    // fixture bulb, unaffected by blur
+    &::after {
+      content: '';
+      position: absolute;
+      top: 25px;
+      left: -10px;
+      transform: translateX(-50%) rotate(-46.5deg);
       width: 20px;
       height: 13px;
       background-color: darken(#d93a54, 5%);
-      margin-left: -10px;
+      border-radius: 5px;
+      z-index: 2;
     }
   }
 
@@ -691,6 +775,139 @@ $seaGroundColor2: #08003b;
       margin-left: 34px;
     }
   }
+
+  /* HUD styles */
+  &__hud {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    z-index: 50;
+    color: white;
+  }
+
+  &__score {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+
+  &__restartBtn {
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: #dc2626; // red-600
+    border-radius: 0.25rem;
+    cursor: pointer;
+    color: white;
+  }
+
+  &__submarine {
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    z-index: 50;
+  }
+
+  /* Fish */
+&__fish {
+  position: absolute;
+  width: 70px;
+  height: 40px;
+  background: linear-gradient(135deg, #ff914d 20%, #ff6347 60%, #e63b3b 90%);
+  border-radius: 60% 40% 40% 60% / 50% 50% 50% 50%;
+  transform: scaleX(-1); // Flip horizontally to face left
+  animation: swimAnim 2s infinite ease-in-out alternate, shimmer 4s infinite ease-in-out;
+
+  // Tail fin
+  &::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 30px;
+    background: linear-gradient(135deg, #ff6347, #e63b3b 80%);
+    top: 5px;
+    left: -15px; // Adjusted to left side for flipped fish
+    clip-path: path('M 0 0 C 10 5, 20 15, 10 25 S 0 30, 0 30 V 0 Z');
+    transform-origin: right center; // Adjusted origin for left-facing tail
+    animation: tailWag 0.4s infinite ease-in-out alternate;
+  }
+
+  // Eye
+  &::after {
+    content: '';
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    background: radial-gradient(circle, white 60%, #ddd 100%);
+    border-radius: 50%;
+    top: 12px;
+    right: 12px; // Adjusted for left-facing fish
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: radial-gradient(circle, #1a1a1a 50%, #333 100%);
+      border-radius: 50%;
+      top: 2px;
+      left: 2px;
+      animation: eyeBlink 3s infinite ease-in-out;
+    }
+  }
+
+  // Top fin
+  .top-fin {
+    position: absolute;
+    width: 15px;
+    height: 10px;
+    background: linear-gradient(135deg, #ff6347, #e63b3b 80%);
+    top: -6px;
+    right: 25px; // Moved to right side for flipped fish
+    clip-path: path('M 0 0 C 5 2, 10 8, 15 8 S 15 2, 10 0 Z');
+    transform: rotate(15deg); // Adjusted rotation for left-facing
+    animation: finWiggle 1s infinite ease-in-out alternate;
+  }
+
+  // Bottom fin
+  .bottom-fin {
+    position: absolute;
+    width: 15px;
+    height: 8px;
+    background: linear-gradient(135deg, #ff6347, #e63b3b 80%);
+    bottom: -5px;
+    right: 27px; // Moved to right side for flipped fish
+    clip-path: path('M 0 8 C 5 6, 10 0, 15 0 S 15 6, 10 8 Z');
+    transform: rotate(-15deg); // Adjusted rotation for left-facing
+    animation: finWiggle 1s infinite ease-in-out alternate;
+  }
+}
+}
+
+@keyframes swimAnim {
+  0% { transform: translateY(0) rotate(0deg) scaleX(-1); }
+  50% { transform: translateY(-8px) rotate(5deg) scaleX(-1); }
+  100% { transform: translateY(0) rotate(0deg) scaleX(-1); }
+}
+
+@keyframes tailWag {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-25deg); }
+}
+
+@keyframes finWiggle {
+  0% { transform: rotate(-15deg); }
+  100% { transform: rotate(-10deg); }
+}
+
+@keyframes eyeBlink {
+  0%, 95% { transform: scaleY(1); }
+  97% { transform: scaleY(0.2); }
+  100% { transform: scaleY(1); }
+}
+
+@keyframes shimmer {
+  0% { filter: brightness(100%); }
+  50% { filter: brightness(120%); }
+  100% { filter: brightness(100%); }
 }
 
 @include keyframes(spin) {
@@ -802,4 +1019,3 @@ $seaGroundColor2: #08003b;
     @include transform(rotate(-40deg));
   }
 }
-// }

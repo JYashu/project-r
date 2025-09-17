@@ -34,9 +34,9 @@ $base-class: clock;
     @include border-radius(20px);
 
     width: 112px;
-    color: map-get($colors, header-text);
+    color: map-get($colors, nav-text);
     padding: 1rem;
-    border: 1px solid map-get($colors, header-text);
+    border: 1px solid map-get($colors, nav-text);
     display: flex;
     flex-direction: row;
     justify-content: center;

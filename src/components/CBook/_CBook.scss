@@ -8,7 +8,7 @@ $base-class: cbook;
 
 .#{$base-class} {
   padding: 10px 50px 25vh;
-  height: 100vh;
+  height: 100%;
   background-color: #1f2d3b;
   overflow-y: scroll;
   position: fixed;

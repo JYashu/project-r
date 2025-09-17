@@ -210,6 +210,18 @@ const Snake = ({
     };
   }, [disallowedDirection, handleKeyEvents]);
 
+  useEffect(() => {
+    const preventDefault = (e: TouchEvent) => {
+      if (e.cancelable) e.preventDefault();
+    };
+
+    document.addEventListener('touchmove', preventDefault, { passive: false });
+
+    return () => {
+      document.removeEventListener('touchmove', preventDefault);
+    };
+  }, []);
+
   if (!isMobileOrTablet) {
     if (windowWidth < 1321 && windowHeight < 672) {
       return (
@@ -240,7 +252,7 @@ const Snake = ({
     <div className={`${scssObj.baseClass}`}>
       {!isMobileOrTablet && <Cursor />}
       <div className={`${scssObj.baseClass}__content`}>
-        <div {...handlers}>
+        <div {...handlers} style={{ overflow: 'hidden', touchAction: 'none' }}>
           <canvas
             className={`${scssObj.baseClass}__canvas`}
             ref={canvasRef}

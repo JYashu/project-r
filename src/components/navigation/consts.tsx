@@ -14,32 +14,6 @@ export interface Menu {
 export const getHiddenColumnItems = (activeNavigationItem: ActiveNavigationItem): Menu[] => {
   return [
     {
-      isActive: activeNavigationItem === ActiveNavigationItem.NPMEngine,
-      icon: 'search',
-      link: '/npm-engine',
-      isHiddenForProd: BETA_ONLY_PAGES.includes(Pages.NPM_ENGINE),
-      title: `NPM Engine ${BETA_ONLY_PAGES.includes(Pages.NPM_ENGINE) ? '(Beta Only)' : ''}`,
-    },
-    {
-      isActive: activeNavigationItem === ActiveNavigationItem.GiphyEngine,
-      icon: 'gif',
-      link: '/giphy-engine',
-      isHiddenForProd: BETA_ONLY_PAGES.includes(Pages.GIPHY_ENGINE),
-      title: `Giphy Finder ${BETA_ONLY_PAGES.includes(Pages.GIPHY_ENGINE) ? '(Beta Only)' : ''}`,
-    },
-    {
-      isActive: activeNavigationItem === ActiveNavigationItem.Todo,
-      icon: 'playlist_add_check',
-      link: '/todo',
-      isHiddenForProd: BETA_ONLY_PAGES.includes(Pages.TODO),
-      title: `Todo ${BETA_ONLY_PAGES.includes(Pages.TODO) ? '(Beta Only)' : ''}`,
-    },
-  ];
-};
-
-export const getMenuColumnOneItems = (activeNavigationItem: ActiveNavigationItem): Menu[] => {
-  return [
-    {
       isActive: activeNavigationItem === ActiveNavigationItem.SpinnerPage,
       icon: 'restart_alt',
       link: '/spinners',
@@ -54,6 +28,18 @@ export const getMenuColumnOneItems = (activeNavigationItem: ActiveNavigationItem
       title: PageTitles[Pages.COLORS_PAGE],
     },
     {
+      isActive: activeNavigationItem === ActiveNavigationItem.Todo,
+      icon: 'playlist_add_check',
+      link: '/todo',
+      isHiddenForProd: BETA_ONLY_PAGES.includes(Pages.TODO),
+      title: `Todo ${BETA_ONLY_PAGES.includes(Pages.TODO) ? '(Beta Only)' : ''}`,
+    },
+  ];
+};
+
+export const getMenuColumnOneItems = (activeNavigationItem: ActiveNavigationItem): Menu[] => {
+  return [
+    {
       isActive: activeNavigationItem === ActiveNavigationItem.CBook,
       icon: 'developer_mode',
       link: '/cbook',
@@ -65,6 +51,20 @@ export const getMenuColumnOneItems = (activeNavigationItem: ActiveNavigationItem
       icon: 'style',
       link: '/img-converter',
       title: PageTitles[Pages.IMG_CONVERTER],
+    },
+    {
+      isActive: activeNavigationItem === ActiveNavigationItem.NPMEngine,
+      icon: 'search',
+      link: '/npm-engine',
+      isHiddenForProd: BETA_ONLY_PAGES.includes(Pages.NPM_ENGINE),
+      title: `NPM Engine ${BETA_ONLY_PAGES.includes(Pages.NPM_ENGINE) ? '(Beta Only)' : ''}`,
+    },
+    {
+      isActive: activeNavigationItem === ActiveNavigationItem.GiphyEngine,
+      icon: 'gif',
+      link: '/giphy-engine',
+      isHiddenForProd: BETA_ONLY_PAGES.includes(Pages.GIPHY_ENGINE),
+      title: `Giphy Finder ${BETA_ONLY_PAGES.includes(Pages.GIPHY_ENGINE) ? '(Beta Only)' : ''}`,
     },
   ];
 };

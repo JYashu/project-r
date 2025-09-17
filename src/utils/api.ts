@@ -122,9 +122,9 @@ function HtmlApi<Body = void, AdditionalHeaders = void>() {
 const URLS = {
   GET_TODOS: () => 'https://jsonplaceholder.typicode.com/todos',
   GET_MODULES: ({ query }: { query: string }) =>
-    `${BASE_URL}https://registry.npmjs.org/-/v1/search?text=${query}`,
+    `https://proxy-alpha-ivory.vercel.app/api/proxy?target=https://registry.npmjs.org/-/v1/search&text=${query}`,
   GET_GIFS: ({ query }: { query: string }) =>
-    `${BASE_URL}https://api.giphy.com/v1/gifs/search?api_key=SDEsWMHoj4DO7LFMxWFHlVJVkElcDm8h&q=${query}`,
+    `https://proxy-alpha-ivory.vercel.app/api/proxy?target=https://api.giphy.com/v1/gifs/search?api_key=SDEsWMHoj4DO7LFMxWFHlVJVkElcDm8h&q=${query}`,
   GET_ANIME: ({ query }: { query: string }) =>
     `https://jikan1.p.rapidapi.com/search/anime?q=${encodeURIComponent(query)}`,
   GET_DEFINITIONS: ({ word }: { word: string }) =>

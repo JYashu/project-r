@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Helmet } from 'react-helmet';
 import useTimeout from '../../hooks/useTimeout';
 import { ActiveNavigationItem, SpinnerType } from '../../types';
-import { FULLSTORY_EXCLUDE_CLASS, Pages } from '../../utils/consts';
+import { BETA_ONLY_PAGES, FULLSTORY_EXCLUDE_CLASS, Pages } from '../../utils/consts';
 import { ErrorValues, TouchedValues } from '../../utils/typeHelpers';
 import Button from '../../elements/button';
 import Field, { FileField } from '../../elements/field';
@@ -128,7 +128,7 @@ const TestApp = ({
 
 const TestAppWithPermissionsManager = (props: Props) => {
   return (
-    <PermissionsManager isBetaOnly>
+    <PermissionsManager isBetaOnly={BETA_ONLY_PAGES.includes(Pages.TEST)}>
       <TestApp {...props} />
     </PermissionsManager>
   );

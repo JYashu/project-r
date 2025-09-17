@@ -15,7 +15,7 @@ $base-class: navigation;
   gap: 80px;
   width: 100%;
   z-index: 1000;
-  background-color: map-get($colors, header-text);
+  background-color: map-get($colors, nav-text);
   overflow: hidden;
   height: 0;
 
@@ -35,7 +35,7 @@ $base-class: navigation;
     flex-direction: row;
     gap: 5px;
     height: 45px;
-    color: map-get($colors, header-bg);
+    color: map-get($colors, nav-bg);
     transition: transform 0.2s;
     cursor: pointer;
 
@@ -50,7 +50,7 @@ $base-class: navigation;
   }
 
   &__item--is-active > &__child {
-    border-bottom: 1px solid map-get($colors, header-bg);
+    border-bottom: 1px solid map-get($colors, nav-bg);
     padding-bottom: 3px;
   }
 
@@ -60,7 +60,7 @@ $base-class: navigation;
       0 0 20px map-get($colors, lagoon), 0 0 40px map-get($colors, lagoon),
       0 0 60px map-get($colors, lagoon), 0 0 10px map-get($colors, lagoon),
       0 0 98px map-get($colors, lagoon);
-    color: map-get($colors, header-bg);
+    color: map-get($colors, nav-bg);
     animation: wiggle 1s;
   }
 
