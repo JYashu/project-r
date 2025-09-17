@@ -1,10 +1,11 @@
 import classNames from 'classnames';
+import { forwardRef } from 'react';
 import scssObj from './_Submarine.scss';
 import Link from '../../../elements/link';
 
-const Ocean = ({ children }: { children?: React.ReactNode }) => {
+const Ocean = forwardRef<HTMLDivElement, { children?: React.ReactNode }>(({ children }, ref) => {
   return (
-    <div className={`${scssObj.baseClass}__seaContainer`}>
+    <div ref={ref} className={`${scssObj.baseClass}__seaContainer`}>
       {children} {/* we’ll inject submarine here */}
       <div className={`${scssObj.baseClass}__ground__container`}>
         <div
@@ -51,13 +52,13 @@ const Ocean = ({ children }: { children?: React.ReactNode }) => {
         <Link
           externalLinkIcon
           isExternal
-          to="https://github.com/data-pirates07/submarine-animation-using-pure-css"
+          to="https://github.com/amrlhqqis/submarine-animation-using-pure-css"
         >
           @data._.pirates
         </Link>
       </div>
     </div>
   );
-};
+});
 
 export default Ocean;

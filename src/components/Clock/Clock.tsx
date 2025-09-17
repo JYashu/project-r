@@ -13,7 +13,7 @@ const Clock = ({ is12H }: Props) => {
   const [stopwatchStart, setStopwatchStart] = useState<Date | null>(null);
   const [stopwatchPauseStart, setStopwatchPauseStart] = useState<Date | null>(null);
   const [stopwatchPauseTime, setStopwatchPauseTime] = useState(0);
-  const [sms, setStopwatchMiliSeconds] = useState(0);
+  const [sms, setStopwatchMilliSeconds] = useState(0);
   const [sss, setStopwatchSeconds] = useState(0);
   const [smm, setStopwatchMinutes] = useState(0);
   const [date, setDate] = useState(new Date());
@@ -46,10 +46,10 @@ const Clock = ({ is12H }: Props) => {
     return Math.floor(sms);
   };
 
-  const { displayMinutes, displaySeconds, displayMiliSeconds } = {
+  const { displayMinutes, displaySeconds, displayMilliSeconds } = {
     displayMinutes: smm < 10 ? `0${smm}` : `${smm}`,
     displaySeconds: sss < 10 ? `0${sss}` : `${sss}`,
-    displayMiliSeconds: displayMS(),
+    displayMilliSeconds: displayMS(),
   };
 
   const updateStopwatch = () => {
@@ -57,11 +57,11 @@ const Clock = ({ is12H }: Props) => {
     const timePassed = date.getTime() - stopwatchStart.getTime() - stopwatchPauseTime;
     const minutes = Math.floor(timePassed / (1000 * 60));
     const seconds = Math.floor((timePassed - minutes * 1000 * 60) / 1000);
-    const miliSeconds = Math.floor(timePassed - minutes * 60 * 1000 - seconds * 1000);
+    const milliSeconds = Math.floor(timePassed - minutes * 60 * 1000 - seconds * 1000);
 
     setStopwatchMinutes(minutes);
     setStopwatchSeconds(seconds);
-    setStopwatchMiliSeconds(miliSeconds);
+    setStopwatchMilliSeconds(milliSeconds);
   };
 
   const resetStopwatch = () => {
@@ -69,7 +69,7 @@ const Clock = ({ is12H }: Props) => {
     setStopwatchStart(null);
     setStopwatchPauseStart(null);
     setStopwatchPauseTime(0);
-    setStopwatchMiliSeconds(0);
+    setStopwatchMilliSeconds(0);
     setStopwatchSeconds(0);
     setStopwatchMinutes(0);
   };
@@ -108,7 +108,7 @@ const Clock = ({ is12H }: Props) => {
             className={`${scssObj.baseClass}__stopwatch`}
             onClick={onClick}
             onKeyDown={onClick}
-          >{`${displayMinutes}:${displaySeconds}:${displayMiliSeconds}`}</div>
+          >{`${displayMinutes}:${displaySeconds}:${displayMilliSeconds}`}</div>
           <Icon icon="restart_alt" size="small" removeOutline onClickHandler={resetStopwatch} />
         </div>
       </div>

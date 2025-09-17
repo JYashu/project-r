@@ -6,7 +6,6 @@ import Scape from '../animations/scape';
 import Submarine from '../animations/submarine';
 import Truck from '../animations/truck';
 import scssObj from './_Home.scss';
-import Game from '../animations/submarine/Game';
 
 const clsRelative = `${scssObj.baseClass}__panel-relative`;
 const clsSticky = `${scssObj.baseClass}__panel-sticky`;
@@ -77,7 +76,7 @@ const Home = () => {
 
   const animations: { [id: string]: JSX.Element } = {
     scape: <Scape />,
-    submarine: <Submarine animate />,
+    submarine: <Submarine />,
     cat: <Cat />,
     truck: <Truck />,
   };

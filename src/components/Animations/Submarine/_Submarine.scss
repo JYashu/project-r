@@ -223,10 +223,52 @@ $seaGroundColor2: #08003b;
     left: 0%;
     width: 500px;
     height: 100px;
-    background: linear-gradient(to left, $lightColor, $bgColor);
-    clip-path: polygon(0% 0%, 50% 45%, 50% 55%, 0% 100%);
-
+    pointer-events: none;
+    background: transparent;
     @include transform(translate(-18%, -45%));
+    z-index: 2;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+
+      background: linear-gradient(
+        to left,
+        rgba(255, 255, 200, 0.36) 0%,
+        rgba(255, 255, 180, 0.20) 35%,
+        rgba(255, 255, 150, 0.08) 60%,
+        transparent 100%
+      );
+
+      clip-path: polygon(0% 0%, 50% 45%, 50% 55%, 0% 100%);
+
+      filter: blur(10px) drop-shadow(0 0 20px rgba(255, 255, 180, 0.32));
+      opacity: 0.96;
+      mix-blend-mode: screen;
+      z-index: 0;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+
+      background: linear-gradient(
+        to left,
+        rgba(255, 255, 220, 0.62) 0%,
+        rgba(255, 255, 200, 0.20) 30%,
+        transparent 70%
+      );
+
+      clip-path: polygon(0% 0%, 50% 45%, 50% 55%, 0% 100%);
+      filter: blur(3px);
+      opacity: 0.9;
+      mix-blend-mode: screen;
+      z-index: 1;
+    }
   }
   &__bubbles__container {
     position: absolute;
@@ -312,6 +354,10 @@ $seaGroundColor2: #08003b;
     position: relative;
     top: 50%;
     height: 0;
+  }
+
+  &__cont-2 {
+    transform: scaleX(-1);
   }
   //animation
 
@@ -418,9 +464,12 @@ $seaGroundColor2: #08003b;
     }
   }
   @include keyframes(moveThegroundRight) {
+    0% {
+      left: 100%;
+    }
     90% {
       opacity: 1;
-      left: 100%;
+      left: 0%;
     }
     95%,
     100% {
@@ -567,24 +616,53 @@ $seaGroundColor2: #08003b;
 
   &__light-a {
     position: absolute;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 0 40px 150px 40px;
-    border-color: transparent transparent lighten(#306d85, 5%) transparent;
-    @include transform(rotate(-50deg));
     top: 40px;
     left: 99%;
+    pointer-events: none;
 
-    &:after {
-      @include border-radius(5px);
+    // beam cone (separate element, not affecting ::after)
+    .beam {
+      position: absolute;
+      top: -3px;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 40px 150px 40px;
+      border-color: transparent transparent rgba(255, 255, 200, 0.15) transparent;
+      transform: rotate(-51deg);
+      filter: blur(4px) drop-shadow(0 0 12px rgba(255, 255, 180, 0.3));
+      z-index: 0;
+    }
 
+    .beam::before {
       content: '';
       position: absolute;
+      top: 0;
+      left: -40px;
+      width: 80px;
+      height: 150px;
+      background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 180, 0.25) 0%,
+        rgba(255, 255, 150, 0.1) 50%,
+        transparent 100%
+      );
+      clip-path: polygon(50% 0, 0% 100%, 100% 100%);
+      filter: blur(10px);
+    }
+
+    // fixture bulb, unaffected by blur
+    &::after {
+      content: '';
+      position: absolute;
+      top: 25px;
+      left: -10px;
+      transform: translateX(-50%) rotate(-46.5deg);
       width: 20px;
       height: 13px;
       background-color: darken(#d93a54, 5%);
-      margin-left: -10px;
+      border-radius: 5px;
+      z-index: 2;
     }
   }
 

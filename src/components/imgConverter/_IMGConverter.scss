@@ -8,7 +8,7 @@ $base-class: img-converter;
 
 .#{$base-class} {
   @include type-style-jd;
-  height: 100%;
+  height: calc(100vh - 64px);
   background-color: map-get($colors, gardenia);
 
   &__title {

@@ -11,9 +11,10 @@ $base-class: dictionary;
 
   min-width: 320px;
   max-width: 320px;
+  min-height: 320px;
   background-color: whitesmoke;
   position: relative;
-  top: 2rem;
+  margin-top: 2rem;
 
   &__header {
     padding: 1rem;

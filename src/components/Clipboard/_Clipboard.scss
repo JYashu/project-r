@@ -13,7 +13,7 @@ $base-class: clipboard;
   width: 250px;
   background-color: whitesmoke;
   position: relative;
-  top: 2rem;
+  margin-top: 2rem;
 
   &__header {
     @include modal-section('header');
@@ -27,7 +27,7 @@ $base-class: clipboard;
     @include modal-section('content');
 
     padding: map-get($spacing, s);
-    max-height: 300px;
+    height: 300px;
     overflow: scroll;
   }
 
